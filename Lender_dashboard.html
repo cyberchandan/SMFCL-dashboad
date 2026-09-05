@@ -704,7 +704,7 @@
                                 <div id="pendingCardsList" class="overflow-y-auto pr-1" style="max-height: 450px;">
 
                                     <!-- Application Card 1: Cochin Maritime Yards (Waiting 4 days, URGENT) -->
-                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="application">
+                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="application" data-waiting-days="4">
                                         <div class="flex items-center justify-between gap-2 mb-2">
                                             <div class="flex items-center gap-2">
                                                 <span class="card-ref-badge">
@@ -740,110 +740,8 @@
                                         </div>
                                     </div>
 
-                                    <!-- Application Card 2: Goa Shipbuilding Co. (Waiting 2 days) -->
-                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="application">
-                                        <div class="flex items-center justify-between gap-2 mb-2">
-                                            <span class="card-ref-badge">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-                                                IIF-BRW-2026-00163
-                                            </span>
-                                            <span class="waiting-pill waiting-pill-amber">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                                                Waiting 2 days
-                                            </span>
-                                        </div>
-                                        <div class="flex items-center justify-between gap-3">
-                                            <div class="flex items-center gap-2.5 min-w-0 flex-1">
-                                                <div class="card-avatar-box avatar-application">GS</div>
-                                                <div class="min-w-0 flex-1">
-                                                    <div class="card-company-title" title="M/s Goa Shipbuilding Co.">
-                                                        M/s Goa Shipbuilding Co.
-                                                    </div>
-                                                    <div class="card-action-sub">
-                                                        <span class="status-indicator-dot dot-application"></span>
-                                                        <span>Confirm Acceptance (Step 3) · Due: 30 Jun 2026</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="flex-shrink-0">
-                                                <button type="button" class="btn-card-review" onclick="openReviewModal('IIF-BRW-2026-00163', 'M/s Goa Shipbuilding Co.', 'Application', '2 days', '₹ 32.50 Lakhs', 'State Bank of India', 'Confirm Acceptance (Step 3)')">
-                                                    <span>Review</span>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Application Card 3: Vizag Marine Works Ltd. (Waiting 3 days) -->
-                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="application">
-                                        <div class="flex items-center justify-between gap-2 mb-2">
-                                            <span class="card-ref-badge">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-                                                IIF-BRW-2026-00178
-                                            </span>
-                                            <span class="waiting-pill waiting-pill-amber">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                                                Waiting 3 days
-                                            </span>
-                                        </div>
-                                        <div class="flex items-center justify-between gap-3">
-                                            <div class="flex items-center gap-2.5 min-w-0 flex-1">
-                                                <div class="card-avatar-box avatar-application">VM</div>
-                                                <div class="min-w-0 flex-1">
-                                                    <div class="card-company-title" title="M/s Vizag Marine Works Ltd.">
-                                                        M/s Vizag Marine Works Ltd.
-                                                    </div>
-                                                    <div class="card-action-sub">
-                                                        <span class="status-indicator-dot dot-application"></span>
-                                                        <span>Validate Borrower Eligibility &amp; Security Documents · Due: 01 Jul 2026</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="flex-shrink-0">
-                                                <button type="button" class="btn-card-review" onclick="openReviewModal('IIF-BRW-2026-00178', 'M/s Vizag Marine Works Ltd.', 'Application', '3 days', '₹ 55.00 Lakhs', 'State Bank of India', 'Validate Borrower Eligibility & Security Documents')">
-                                                    <span>Review</span>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Application Card 4: Mumbai Offshore Fabricators (Waiting 1 day) -->
-                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="application">
-                                        <div class="flex items-center justify-between gap-2 mb-2">
-                                            <span class="card-ref-badge">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-                                                IIF-BRW-2026-00185
-                                            </span>
-                                            <span class="waiting-pill waiting-pill-emerald">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                                                Waiting 1 day
-                                            </span>
-                                        </div>
-                                        <div class="flex items-center justify-between gap-3">
-                                            <div class="flex items-center gap-2.5 min-w-0 flex-1">
-                                                <div class="card-avatar-box avatar-application">MO</div>
-                                                <div class="min-w-0 flex-1">
-                                                    <div class="card-company-title" title="M/s Mumbai Offshore Fabricators">
-                                                        M/s Mumbai Offshore Fabricators
-                                                    </div>
-                                                    <div class="card-action-sub">
-                                                        <span class="status-indicator-dot dot-application"></span>
-                                                        <span>Appraise Credit Sanction &amp; Project Viability (Step 4) · Due: 03 Jul 2026</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="flex-shrink-0">
-                                                <button type="button" class="btn-card-review" onclick="openReviewModal('IIF-BRW-2026-00185', 'M/s Mumbai Offshore Fabricators', 'Application', '1 day', '₹ 70.00 Lakhs', 'State Bank of India', 'Appraise Credit Sanction & Project Viability (Step 4)')">
-                                                    <span>Review</span>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Application Card 5: Hindustan Shipyard Ltd. (Waiting 4 days, URGENT) -->
-                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="application">
+                                    <!-- Application Card 2: Hindustan Shipyard Ltd. (Waiting 4 days, URGENT) -->
+                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="application" data-waiting-days="4">
                                         <div class="flex items-center justify-between gap-2 mb-2">
                                             <div class="flex items-center gap-2">
                                                 <span class="card-ref-badge">
@@ -879,8 +777,42 @@
                                         </div>
                                     </div>
 
-                                    <!-- Application Card 6: Pipavav Marine & Offshore Ltd. (Waiting 3 days) -->
-                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="application">
+                                    <!-- Application Card 3: Vizag Marine Works Ltd. (Waiting 3 days) -->
+                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="application" data-waiting-days="3">
+                                        <div class="flex items-center justify-between gap-2 mb-2">
+                                            <span class="card-ref-badge">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                                IIF-BRW-2026-00178
+                                            </span>
+                                            <span class="waiting-pill waiting-pill-amber">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                Waiting 3 days
+                                            </span>
+                                        </div>
+                                        <div class="flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                                                <div class="card-avatar-box avatar-application">VM</div>
+                                                <div class="min-w-0 flex-1">
+                                                    <div class="card-company-title" title="M/s Vizag Marine Works Ltd.">
+                                                        M/s Vizag Marine Works Ltd.
+                                                    </div>
+                                                    <div class="card-action-sub">
+                                                        <span class="status-indicator-dot dot-application"></span>
+                                                        <span>Validate Borrower Eligibility &amp; Security Documents · Due: 01 Jul 2026</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex-shrink-0">
+                                                <button type="button" class="btn-card-review" onclick="openReviewModal('IIF-BRW-2026-00178', 'M/s Vizag Marine Works Ltd.', 'Application', '3 days', '₹ 55.00 Lakhs', 'State Bank of India', 'Validate Borrower Eligibility & Security Documents')">
+                                                    <span>Review</span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Application Card 4: Pipavav Marine & Offshore Ltd. (Waiting 3 days) -->
+                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="application" data-waiting-days="3">
                                         <div class="flex items-center justify-between gap-2 mb-2">
                                             <span class="card-ref-badge">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
@@ -913,8 +845,42 @@
                                         </div>
                                     </div>
 
-                                    <!-- Application Card 7: Tuticorin Marine Terminal Ltd. (Waiting 2 days) -->
-                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="application">
+                                    <!-- Application Card 5: Goa Shipbuilding Co. (Waiting 2 days) -->
+                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="application" data-waiting-days="2">
+                                        <div class="flex items-center justify-between gap-2 mb-2">
+                                            <span class="card-ref-badge">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                                IIF-BRW-2026-00163
+                                            </span>
+                                            <span class="waiting-pill waiting-pill-amber">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                Waiting 2 days
+                                            </span>
+                                        </div>
+                                        <div class="flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                                                <div class="card-avatar-box avatar-application">GS</div>
+                                                <div class="min-w-0 flex-1">
+                                                    <div class="card-company-title" title="M/s Goa Shipbuilding Co.">
+                                                        M/s Goa Shipbuilding Co.
+                                                    </div>
+                                                    <div class="card-action-sub">
+                                                        <span class="status-indicator-dot dot-application"></span>
+                                                        <span>Confirm Acceptance (Step 3) · Due: 30 Jun 2026</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex-shrink-0">
+                                                <button type="button" class="btn-card-review" onclick="openReviewModal('IIF-BRW-2026-00163', 'M/s Goa Shipbuilding Co.', 'Application', '2 days', '₹ 32.50 Lakhs', 'State Bank of India', 'Confirm Acceptance (Step 3)')">
+                                                    <span>Review</span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Application Card 6: Tuticorin Marine Terminal Ltd. (Waiting 2 days) -->
+                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="application" data-waiting-days="2">
                                         <div class="flex items-center justify-between gap-2 mb-2">
                                             <span class="card-ref-badge">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
@@ -947,8 +913,42 @@
                                         </div>
                                     </div>
 
+                                    <!-- Application Card 7: Mumbai Offshore Fabricators (Waiting 1 day) -->
+                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="application" data-waiting-days="1">
+                                        <div class="flex items-center justify-between gap-2 mb-2">
+                                            <span class="card-ref-badge">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                                IIF-BRW-2026-00185
+                                            </span>
+                                            <span class="waiting-pill waiting-pill-emerald">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                Waiting 1 day
+                                            </span>
+                                        </div>
+                                        <div class="flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                                                <div class="card-avatar-box avatar-application">MO</div>
+                                                <div class="min-w-0 flex-1">
+                                                    <div class="card-company-title" title="M/s Mumbai Offshore Fabricators">
+                                                        M/s Mumbai Offshore Fabricators
+                                                    </div>
+                                                    <div class="card-action-sub">
+                                                        <span class="status-indicator-dot dot-application"></span>
+                                                        <span>Appraise Credit Sanction &amp; Project Viability (Step 4) · Due: 03 Jul 2026</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex-shrink-0">
+                                                <button type="button" class="btn-card-review" onclick="openReviewModal('IIF-BRW-2026-00185', 'M/s Mumbai Offshore Fabricators', 'Application', '1 day', '₹ 70.00 Lakhs', 'State Bank of India', 'Appraise Credit Sanction & Project Viability (Step 4)')">
+                                                    <span>Review</span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <!-- Application Card 8: Deendayal Port Logix Pvt. Ltd. (Waiting 1 day) -->
-                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="application">
+                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="application" data-waiting-days="1">
                                         <div class="flex items-center justify-between gap-2 mb-2">
                                             <span class="card-ref-badge">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
@@ -982,7 +982,7 @@
                                     </div>
 
                                     <!-- Compliance Card 1: Garden Reach Shipbuilders Ltd. (Waiting 5 days, URGENT) -->
-                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="compliance" style="display: none;">
+                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="compliance" data-waiting-days="5" style="display: none;">
                                         <div class="flex items-center justify-between gap-2 mb-2">
                                             <div class="flex items-center gap-2">
                                                 <span class="card-ref-badge">
@@ -1019,7 +1019,7 @@
                                     </div>
 
                                     <!-- Compliance Card 2: Mazagon Dock Shipbuilders Ltd. (Waiting 3 days) -->
-                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="compliance" style="display: none;">
+                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="compliance" data-waiting-days="3" style="display: none;">
                                         <div class="flex items-center justify-between gap-2 mb-2">
                                             <span class="card-ref-badge">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
@@ -1053,7 +1053,7 @@
                                     </div>
 
                                     <!-- Compliance Card 3: Paradip Shipping Yards Ltd. (Waiting 2 days) -->
-                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="compliance" style="display: none;">
+                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="compliance" data-waiting-days="2" style="display: none;">
                                         <div class="flex items-center justify-between gap-2 mb-2">
                                             <span class="card-ref-badge">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
@@ -1087,7 +1087,7 @@
                                     </div>
 
                                     <!-- Compliance Card 4: Kandla Maritime Infrastructure Ltd. (Waiting 1 day) -->
-                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="compliance" style="display: none;">
+                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="compliance" data-waiting-days="1" style="display: none;">
                                         <div class="flex items-center justify-between gap-2 mb-2">
                                             <span class="card-ref-badge">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
@@ -1121,7 +1121,7 @@
                                     </div>
 
                                     <!-- Claim Card 1: Gujarat Maritime Board Ltd. (Waiting 6 days, URGENT) -->
-                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="claim" style="display: none;">
+                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="claim" data-waiting-days="6" style="display: none;">
                                         <div class="flex items-center justify-between gap-2 mb-2">
                                             <div class="flex items-center gap-2">
                                                 <span class="card-ref-badge">
@@ -1157,113 +1157,8 @@
                                         </div>
                                     </div>
 
-                                    <!-- Claim Card 2: Indian Shipbuilders Pvt. Ltd. (Waiting 4 days, URGENT) -->
-                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="claim" style="display: none;">
-                                        <div class="flex items-center justify-between gap-2 mb-2">
-                                            <div class="flex items-center gap-2">
-                                                <span class="card-ref-badge">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-                                                    IIF-BRW-2026-00142
-                                                </span>
-                                                <span class="text-[10px] font-bold bg-red-500 text-white px-1.5 py-0.5 rounded leading-none">URGENT</span>
-                                            </div>
-                                            <span class="waiting-pill waiting-pill-orange">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                                                Waiting 4 days
-                                            </span>
-                                        </div>
-                                        <div class="flex items-center justify-between gap-3">
-                                            <div class="flex items-center gap-2.5 min-w-0 flex-1">
-                                                <div class="card-avatar-box avatar-claim">IS</div>
-                                                <div class="min-w-0 flex-1">
-                                                    <div class="card-company-title" title="M/s Indian Shipbuilders Pvt. Ltd.">
-                                                        M/s Indian Shipbuilders Pvt. Ltd.
-                                                    </div>
-                                                    <div class="card-action-sub">
-                                                        <span class="status-indicator-dot dot-claim"></span>
-                                                        <span>Validate 3rd Claim · Due: 25 Jun 2026</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="flex-shrink-0">
-                                                <button type="button" class="btn-card-review" onclick="openReviewModal('IIF-BRW-2026-00142', 'M/s Indian Shipbuilders Pvt. Ltd.', 'Claim', '4 days', '₹ 58.00 Lakhs', 'State Bank of India', 'Validate 3rd Claim')">
-                                                    <span>Review</span>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Claim Card 3: Kolkata Dry Dock Ltd. (Waiting 2 days) -->
-                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="claim" style="display: none;">
-                                        <div class="flex items-center justify-between gap-2 mb-2">
-                                            <span class="card-ref-badge">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-                                                IIF-BRW-2026-00171
-                                            </span>
-                                            <span class="waiting-pill waiting-pill-amber">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                                                Waiting 2 days
-                                            </span>
-                                        </div>
-                                        <div class="flex items-center justify-between gap-3">
-                                            <div class="flex items-center gap-2.5 min-w-0 flex-1">
-                                                <div class="card-avatar-box avatar-claim">KD</div>
-                                                <div class="min-w-0 flex-1">
-                                                    <div class="card-company-title" title="M/s Kolkata Dry Dock Ltd.">
-                                                        M/s Kolkata Dry Dock Ltd.
-                                                    </div>
-                                                    <div class="card-action-sub">
-                                                        <span class="status-indicator-dot dot-claim"></span>
-                                                        <span>Validate 1st Claim · Due: 28 Jun 2026</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="flex-shrink-0">
-                                                <button type="button" class="btn-card-review" onclick="openReviewModal('IIF-BRW-2026-00171', 'M/s Kolkata Dry Dock Ltd.', 'Claim', '2 days', '₹ 21.00 Lakhs', 'State Bank of India', 'Validate 1st Claim')">
-                                                    <span>Review</span>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Claim Card 4: Chennai Naval Works (Waiting 1 day) -->
-                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="claim" style="display: none;">
-                                        <div class="flex items-center justify-between gap-2 mb-2">
-                                            <span class="card-ref-badge">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-                                                IIF-CLM-2026-00195
-                                            </span>
-                                            <span class="waiting-pill waiting-pill-emerald">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                                                Waiting 1 day
-                                            </span>
-                                        </div>
-                                        <div class="flex items-center justify-between gap-3">
-                                            <div class="flex items-center gap-2.5 min-w-0 flex-1">
-                                                <div class="card-avatar-box avatar-claim">CN</div>
-                                                <div class="min-w-0 flex-1">
-                                                    <div class="card-company-title" title="M/s Chennai Naval Works">
-                                                        M/s Chennai Naval Works
-                                                    </div>
-                                                    <div class="card-action-sub">
-                                                        <span class="status-indicator-dot dot-claim"></span>
-                                                        <span>Validate 2nd Interest Subvention Claim · Due: 01 Jul 2026</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="flex-shrink-0">
-                                                <button type="button" class="btn-card-review" onclick="openReviewModal('IIF-CLM-2026-00195', 'M/s Chennai Naval Works', 'Claim', '1 day', '₹ 18.50 Lakhs', 'State Bank of India', 'Validate 2nd Interest Subvention Claim')">
-                                                    <span>Review</span>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Claim Card 5: Cochin Shipyard Ltd. (Waiting 5 days, URGENT) -->
-                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="claim" style="display: none;">
+                                    <!-- Claim Card 2: Cochin Shipyard Ltd. (Waiting 5 days, URGENT) -->
+                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="claim" data-waiting-days="5" style="display: none;">
                                         <div class="flex items-center justify-between gap-2 mb-2">
                                             <div class="flex items-center gap-2">
                                                 <span class="card-ref-badge">
@@ -1299,8 +1194,45 @@
                                         </div>
                                     </div>
 
-                                    <!-- Claim Card 6: Mormugao Marine Dredging Ltd. (Waiting 3 days, URGENT) -->
-                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="claim" style="display: none;">
+                                    <!-- Claim Card 3: Indian Shipbuilders Pvt. Ltd. (Waiting 4 days, URGENT) -->
+                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="claim" data-waiting-days="4" style="display: none;">
+                                        <div class="flex items-center justify-between gap-2 mb-2">
+                                            <div class="flex items-center gap-2">
+                                                <span class="card-ref-badge">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                                    IIF-BRW-2026-00142
+                                                </span>
+                                                <span class="text-[10px] font-bold bg-red-500 text-white px-1.5 py-0.5 rounded leading-none">URGENT</span>
+                                            </div>
+                                            <span class="waiting-pill waiting-pill-orange">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                Waiting 4 days
+                                            </span>
+                                        </div>
+                                        <div class="flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                                                <div class="card-avatar-box avatar-claim">IS</div>
+                                                <div class="min-w-0 flex-1">
+                                                    <div class="card-company-title" title="M/s Indian Shipbuilders Pvt. Ltd.">
+                                                        M/s Indian Shipbuilders Pvt. Ltd.
+                                                    </div>
+                                                    <div class="card-action-sub">
+                                                        <span class="status-indicator-dot dot-claim"></span>
+                                                        <span>Validate 3rd Claim · Due: 25 Jun 2026</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex-shrink-0">
+                                                <button type="button" class="btn-card-review" onclick="openReviewModal('IIF-BRW-2026-00142', 'M/s Indian Shipbuilders Pvt. Ltd.', 'Claim', '4 days', '₹ 58.00 Lakhs', 'State Bank of India', 'Validate 3rd Claim')">
+                                                    <span>Review</span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Claim Card 4: Mormugao Marine Dredging Ltd. (Waiting 3 days, URGENT) -->
+                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="claim" data-waiting-days="3" style="display: none;">
                                         <div class="flex items-center justify-between gap-2 mb-2">
                                             <div class="flex items-center gap-2">
                                                 <span class="card-ref-badge">
@@ -1336,8 +1268,42 @@
                                         </div>
                                     </div>
 
-                                    <!-- Claim Card 7: Ennore Fleet Logistics Pvt. Ltd. (Waiting 2 days) -->
-                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="claim" style="display: none;">
+                                    <!-- Claim Card 5: Kolkata Dry Dock Ltd. (Waiting 2 days) -->
+                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="claim" data-waiting-days="2" style="display: none;">
+                                        <div class="flex items-center justify-between gap-2 mb-2">
+                                            <span class="card-ref-badge">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                                IIF-BRW-2026-00171
+                                            </span>
+                                            <span class="waiting-pill waiting-pill-amber">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                Waiting 2 days
+                                            </span>
+                                        </div>
+                                        <div class="flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                                                <div class="card-avatar-box avatar-claim">KD</div>
+                                                <div class="min-w-0 flex-1">
+                                                    <div class="card-company-title" title="M/s Kolkata Dry Dock Ltd.">
+                                                        M/s Kolkata Dry Dock Ltd.
+                                                    </div>
+                                                    <div class="card-action-sub">
+                                                        <span class="status-indicator-dot dot-claim"></span>
+                                                        <span>Validate 1st Claim · Due: 28 Jun 2026</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex-shrink-0">
+                                                <button type="button" class="btn-card-review" onclick="openReviewModal('IIF-BRW-2026-00171', 'M/s Kolkata Dry Dock Ltd.', 'Claim', '2 days', '₹ 21.00 Lakhs', 'State Bank of India', 'Validate 1st Claim')">
+                                                    <span>Review</span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Claim Card 6: Ennore Fleet Logistics Pvt. Ltd. (Waiting 2 days) -->
+                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="claim" data-waiting-days="2" style="display: none;">
                                         <div class="flex items-center justify-between gap-2 mb-2">
                                             <span class="card-ref-badge">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
@@ -1370,8 +1336,42 @@
                                         </div>
                                     </div>
 
+                                    <!-- Claim Card 7: Chennai Naval Works (Waiting 1 day) -->
+                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="claim" data-waiting-days="1" style="display: none;">
+                                        <div class="flex items-center justify-between gap-2 mb-2">
+                                            <span class="card-ref-badge">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                                IIF-CLM-2026-00195
+                                            </span>
+                                            <span class="waiting-pill waiting-pill-emerald">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                Waiting 1 day
+                                            </span>
+                                        </div>
+                                        <div class="flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                                                <div class="card-avatar-box avatar-claim">CN</div>
+                                                <div class="min-w-0 flex-1">
+                                                    <div class="card-company-title" title="M/s Chennai Naval Works">
+                                                        M/s Chennai Naval Works
+                                                    </div>
+                                                    <div class="card-action-sub">
+                                                        <span class="status-indicator-dot dot-claim"></span>
+                                                        <span>Validate 2nd Interest Subvention Claim · Due: 01 Jul 2026</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex-shrink-0">
+                                                <button type="button" class="btn-card-review" onclick="openReviewModal('IIF-CLM-2026-00195', 'M/s Chennai Naval Works', 'Claim', '1 day', '₹ 18.50 Lakhs', 'State Bank of India', 'Validate 2nd Interest Subvention Claim')">
+                                                    <span>Review</span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <!-- Claim Card 8: Paradip Heavy Riggers Ltd. (Waiting 1 day) -->
-                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="claim" style="display: none;">
+                                    <div class="pending-item-card animate-tabCardFadeIn" data-category="claim" data-waiting-days="1" style="display: none;">
                                         <div class="flex items-center justify-between gap-2 mb-2">
                                             <span class="card-ref-badge">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
@@ -1473,21 +1473,46 @@
             }
         });
 
-        // Pending Action Tab Switcher
+        // Pending Action Tab Switcher & Dynamic Priority Sorter
         (function () {
             const tabBtns = document.querySelectorAll('.pending-tab-btn');
             const cards = document.querySelectorAll('.pending-item-card');
             const statusText = document.getElementById('pendingFilterStatus');
             const emptyState = document.getElementById('pendingEmptyState');
+            const cardsList = document.getElementById('pendingCardsList');
 
             const totalBadge = document.getElementById('pendingTotalBadge');
             if (totalBadge) totalBadge.textContent = `${cards.length} pending`;
 
             if (!tabBtns.length || !cards.length) return;
 
+            // Sort cards strictly by waiting days descending (highest waiting days at top)
+            function sortCardsByWaiting() {
+                if (!cardsList) return;
+                const cardArray = Array.from(document.querySelectorAll('.pending-item-card'));
+                cardArray.sort((a, b) => {
+                    const daysA = parseInt(a.getAttribute('data-waiting-days') || '0', 10);
+                    const daysB = parseInt(b.getAttribute('data-waiting-days') || '0', 10);
+                    return daysB - daysA;
+                });
+                cardArray.forEach((card) => {
+                    if (emptyState) {
+                        cardsList.insertBefore(card, emptyState);
+                    } else {
+                        cardsList.appendChild(card);
+                    }
+                });
+            }
+
+            // Perform initial sort on page load
+            sortCardsByWaiting();
+
             tabBtns.forEach((btn) => {
                 btn.addEventListener('click', function () {
                     const target = this.getAttribute('data-target');
+
+                    // Ensure cards are sorted descending
+                    sortCardsByWaiting();
 
                     // Update Tab Buttons UI
                     tabBtns.forEach((b) => {
@@ -1504,7 +1529,8 @@
 
                     // Show/Hide Cards with smooth animation
                     let visibleCount = 0;
-                    cards.forEach((card) => {
+                    const allCards = document.querySelectorAll('.pending-item-card');
+                    allCards.forEach((card) => {
                         const category = card.getAttribute('data-category');
                         if (target === 'all' || category === target) {
                             card.style.display = 'block';
