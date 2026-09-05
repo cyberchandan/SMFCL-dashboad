@@ -260,6 +260,47 @@
             overflow: hidden;
             animation: tabCardFadeIn 0.2s ease-out;
         }
+
+        /* KPI Centered Data Modal Styles */
+        .kpi-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(3px);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .kpi-modal-container {
+            background: #ffffff;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 1060px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.28), 0 0 0 1px rgba(15, 23, 42, 0.06);
+            border: 1px solid #cbd5e1;
+            overflow: hidden;
+            animation: modalScaleUp 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes modalScaleUp {
+            from { opacity: 0; transform: scale(0.96) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .kpi-interactive-card {
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+        .kpi-interactive-card:hover {
+            border-color: #0d2b55 !important;
+            box-shadow: 0 10px 25px -5px rgba(13, 43, 85, 0.12), 0 8px 10px -6px rgba(13, 43, 85, 0.08) !important;
+            transform: translateY(-2px);
+        }
+        .kpi-interactive-card:active {
+            transform: translateY(0) scale(0.99);
+        }
     </style>
 </head>
 
@@ -599,9 +640,10 @@
                             <p class="text-gray-500 text-sm mt-1">IIF Portal — Lender View</p>
                         </div>
                         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                            <div class="bg-white rounded-xl border border-gray-200 p-5">
-                                <div class="flex items-start justify-between mb-3">
-                                    <div class="w-10 h-10 rounded-lg flex items-center justify-center"
+                            <!-- Card 1: Total Borrowers -->
+                            <div onclick="openKpiModal('borrowers')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view full Borrowers Table">
+                                <div>
+                                    <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform group-hover:scale-110"
                                         style="background: rgba(30, 107, 184, 0.125); color: rgb(30, 107, 184);"><svg
                                             xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -615,29 +657,41 @@
                                             <path d="M10 14h4"></path>
                                             <path d="M10 18h4"></path>
                                         </svg></div>
+                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">4</div>
+                                    <div class="text-sm font-medium text-gray-700">Total Borrowers</div>
                                 </div>
-                                <div class="text-2xl font-bold text-gray-900 mb-0.5">4</div>
-                                <div class="text-sm font-medium text-gray-700">Total Borrowers</div>
+                                <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-[#0d2b55] group-hover:text-blue-700">
+                                    <span>View borrowers table</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                </div>
                             </div>
-                            <div class="bg-white rounded-xl border border-gray-200 p-5">
-                                <div class="flex items-start justify-between mb-3">
-                                    <div class="w-10 h-10 rounded-lg flex items-center justify-center"
+
+                            <!-- Card 2: Pending Validations -->
+                            <div onclick="openKpiModal('pending')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view full Pending Validations Table">
+                                <div>
+                                    <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform group-hover:scale-110"
                                         style="background: rgba(230, 81, 0, 0.125); color: rgb(230, 81, 0);"><svg
                                             xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round"
                                             class="lucide lucide-circle-alert">
                                             <circle cx="12" cy="12" r="10"></circle>
-                                            <line x1="12" x2="12" y1="8" y2="12"></line>
+                                            <line x1="12" y1="8" x2="12"></line>
                                             <line x1="12" x2="12.01" y1="16" y2="16"></line>
                                         </svg></div>
+                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">2</div>
+                                    <div class="text-sm font-medium text-gray-700">Pending Validations</div>
                                 </div>
-                                <div class="text-2xl font-bold text-gray-900 mb-0.5">2</div>
-                                <div class="text-sm font-medium text-gray-700">Pending Validations</div>
+                                <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-orange-700 group-hover:text-orange-800">
+                                    <span>Review pending list</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                </div>
                             </div>
-                            <div class="bg-white rounded-xl border border-gray-200 p-5">
-                                <div class="flex items-start justify-between mb-3">
-                                    <div class="w-10 h-10 rounded-lg flex items-center justify-center"
+
+                            <!-- Card 3: Claims Validated -->
+                            <div onclick="openKpiModal('claims')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view full Claims Register Table">
+                                <div>
+                                    <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform group-hover:scale-110"
                                         style="background: rgba(46, 125, 50, 0.125); color: rgb(46, 125, 50);"><svg
                                             xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -646,13 +700,19 @@
                                             <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
                                             <path d="m9 11 3 3L22 4"></path>
                                         </svg></div>
+                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">12</div>
+                                    <div class="text-sm font-medium text-gray-700">Claims Validated</div>
                                 </div>
-                                <div class="text-2xl font-bold text-gray-900 mb-0.5">12</div>
-                                <div class="text-sm font-medium text-gray-700">Claims Validated</div>
+                                <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-emerald-700 group-hover:text-emerald-800">
+                                    <span>View claims register</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                </div>
                             </div>
-                            <div class="bg-white rounded-xl border border-gray-200 p-5">
-                                <div class="flex items-start justify-between mb-3">
-                                    <div class="w-10 h-10 rounded-lg flex items-center justify-center"
+
+                            <!-- Card 4: Total Loan Exposure -->
+                            <div onclick="openKpiModal('exposure')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view full Loan Exposure Portfolio Table">
+                                <div>
+                                    <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform group-hover:scale-110"
                                         style="background: rgba(123, 31, 162, 0.125); color: rgb(123, 31, 162);"><svg
                                             xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -665,9 +725,13 @@
                                             <line x1="18" x2="18" y1="18" y2="11"></line>
                                             <polygon points="12 2 20 7 4 7"></polygon>
                                         </svg></div>
+                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">Rs. 48,500 L</div>
+                                    <div class="text-sm font-medium text-gray-700">Total Loan Exposure</div>
                                 </div>
-                                <div class="text-2xl font-bold text-gray-900 mb-0.5">Rs. 48,500 L</div>
-                                <div class="text-sm font-medium text-gray-700">Total Loan Exposure</div>
+                                <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-purple-700 group-hover:text-purple-800">
+                                    <span>View loan breakdown</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                </div>
                             </div>
                         </div>
                         <div class="bg-white rounded-xl border border-gray-200 p-5">
@@ -1600,6 +1664,157 @@
             window.closeReviewModal();
             alert('Opening detailed verification workflow for ' + ref);
         };
+
+        // KPI Centered Popup Table Modal Controller
+        (function () {
+            const kpiDataConfigs = {
+                borrowers: {
+                    title: 'Total Borrowers',
+                    badge: '4 Active Borrowers',
+                    subtitle: 'State Bank of India · Maritime Infrastructure & Shipyard Credit Portfolio',
+                    iconBg: 'rgba(30, 107, 184, 0.2)',
+                    iconColor: '#93c5fd',
+                    iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg>',
+                    footer: 'Total Sanctioned: <span class="font-bold text-gray-900">₹ 48,500.00 L</span> | Total Disbursed: <span class="font-bold text-emerald-700">₹ 38,500.00 L</span> | Portfolio Quality: <span class="font-bold text-emerald-700">100% Standard Assets</span>'
+                },
+                pending: {
+                    title: 'Pending Validations',
+                    badge: '2 Actions Required',
+                    subtitle: 'Lender Verification Desk · Immediate Turnaround Due within 48 Hours',
+                    iconBg: 'rgba(230, 81, 0, 0.2)',
+                    iconColor: '#fdba74',
+                    iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>',
+                    footer: 'Pending Value Under Review: <span class="font-bold text-gray-900">₹ 120.00 L</span> | Average Waiting: <span class="font-bold text-rose-600">5 Days</span> | Escalation Status: <span class="font-bold text-amber-600">High Priority</span>'
+                },
+                claims: {
+                    title: 'Claims Validated',
+                    badge: '12 Claims Verified',
+                    subtitle: 'Interest Equalisation & Capital Subsidy Claims Approved by State Bank of India',
+                    iconBg: 'rgba(46, 125, 50, 0.2)',
+                    iconColor: '#86efac',
+                    iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>',
+                    footer: 'Total Validated Volume: <span class="font-bold text-emerald-800">₹ 381.55 L</span> | Released by SMFCL: <span class="font-bold text-gray-900">6 Claims (₹ 227.75 L)</span> | In SMFCL Process: <span class="font-bold text-blue-700">6 Claims (₹ 153.80 L)</span>'
+                },
+                exposure: {
+                    title: 'Total Loan Exposure',
+                    badge: '₹ 48,500 Lakhs Total Facility',
+                    subtitle: 'Consolidated Maritime Infrastructure Credit Lines & Exposure Distribution',
+                    iconBg: 'rgba(123, 31, 162, 0.2)',
+                    iconColor: '#d8b4fe',
+                    iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="22" y2="22"></line><line x1="6" x2="6" y1="18" y2="11"></line><line x1="10" x2="10" y1="18" y2="11"></line><line x1="14" x2="14" y1="18" y2="11"></line><line x1="18" x2="18" y1="18" y2="11"></line><polygon points="12 2 20 7 4 7"></polygon></svg>',
+                    footer: 'Sanctioned Limit: <span class="font-bold text-blue-900">₹ 48,500.00 L</span> | Current Outstanding: <span class="font-bold text-purple-900">₹ 38,500.00 L</span> | Undrawn Headroom: <span class="font-bold text-slate-700">₹ 10,000.00 L</span>'
+                }
+            };
+
+            let currentActiveKpiTab = 'borrowers';
+
+            window.openKpiModal = function (tabKey) {
+                const modal = document.getElementById('kpiDetailsModal');
+                if (!modal) return;
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                window.switchKpiTab(tabKey || 'borrowers');
+            };
+
+            window.closeKpiModal = function () {
+                const modal = document.getElementById('kpiDetailsModal');
+                if (modal) modal.style.display = 'none';
+                document.body.style.overflow = '';
+            };
+
+            window.switchKpiTab = function (tabKey) {
+                if (!kpiDataConfigs[tabKey]) tabKey = 'borrowers';
+                currentActiveKpiTab = tabKey;
+
+                const cfg = kpiDataConfigs[tabKey];
+                const titleEl = document.getElementById('kpiModalTitle');
+                const badgeEl = document.getElementById('kpiModalBadge');
+                const subtitleEl = document.getElementById('kpiModalSubtitle');
+                const iconBox = document.getElementById('kpiModalIconBox');
+                const footerEl = document.getElementById('kpiModalFooterStats');
+                const searchInput = document.getElementById('kpiTableSearch');
+
+                if (titleEl) titleEl.textContent = cfg.title;
+                if (badgeEl) badgeEl.textContent = cfg.badge;
+                if (subtitleEl) subtitleEl.textContent = cfg.subtitle;
+                if (iconBox) {
+                    iconBox.style.background = cfg.iconBg;
+                    iconBox.style.color = cfg.iconColor;
+                    iconBox.innerHTML = cfg.iconSvg;
+                }
+                if (footerEl) footerEl.innerHTML = cfg.footer;
+                if (searchInput) searchInput.value = '';
+
+                // Toggle tabs buttons UI
+                ['borrowers', 'pending', 'claims', 'exposure'].forEach((k) => {
+                    const btn = document.getElementById(`kpiTabBtn_${k}`);
+                    const content = document.getElementById(`kpiContent_${k}`);
+                    if (btn) {
+                        if (k === tabKey) {
+                            btn.classList.remove('text-gray-600', 'font-medium', 'hover:text-gray-900');
+                            btn.classList.add('bg-white', 'font-semibold', 'shadow-xs');
+                            btn.style.color = '#0D2B55';
+                        } else {
+                            btn.style.color = '';
+                            btn.classList.remove('bg-white', 'font-semibold', 'shadow-xs');
+                            btn.classList.add('text-gray-600', 'font-medium', 'hover:text-gray-900');
+                        }
+                    }
+                    if (content) {
+                        content.style.display = k === tabKey ? 'block' : 'none';
+                    }
+                });
+
+                window.filterKpiTable();
+            };
+
+            window.filterKpiTable = function () {
+                const searchInput = document.getElementById('kpiTableSearch');
+                const q = searchInput ? searchInput.value.toLowerCase().trim() : '';
+                const activeContainer = document.getElementById(`kpiContent_${currentActiveKpiTab}`);
+                if (!activeContainer) return;
+
+                const rows = activeContainer.querySelectorAll('tbody tr');
+                rows.forEach((row) => {
+                    const text = row.textContent.toLowerCase();
+                    row.style.display = (!q || text.includes(q)) ? '' : 'none';
+                });
+            };
+
+            window.exportKpiTable = function () {
+                const activeContainer = document.getElementById(`kpiContent_${currentActiveKpiTab}`);
+                if (!activeContainer) return;
+                const table = activeContainer.querySelector('table');
+                if (!table) return;
+
+                let csv = [];
+                const rows = table.querySelectorAll('tr');
+                rows.forEach((row) => {
+                    if (row.style.display === 'none') return;
+                    const cols = row.querySelectorAll('th, td');
+                    let rowData = [];
+                    cols.forEach((col) => {
+                        let text = col.innerText.replace(/(\r\n|\n|\r)/gm, ' ').replace(/"/g, '""').trim();
+                        rowData.push(`"${text}"`);
+                    });
+                    if (rowData.length) csv.push(rowData.join(','));
+                });
+
+                const csvString = csv.join('\n');
+                const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = `sbi_lender_${currentActiveKpiTab}_data.csv`;
+                link.click();
+            };
+
+            // ESC key closes modal
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    window.closeKpiModal();
+                }
+            });
+        })();
     </script>
 
     <!-- Quick Review Modal for Pending Action Cards -->
@@ -1661,6 +1876,539 @@
                 </button>
                 <button type="button" onclick="window.confirmReviewAction()" class="px-4 py-1.5 rounded-md text-xs font-semibold text-white bg-[#0d2b55] hover:bg-[#163a6e] transition-colors cursor-pointer shadow-xs">
                     Open Action Desk
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- KPI Details Centered Popup Modal -->
+    <div id="kpiDetailsModal" class="kpi-modal-backdrop" onclick="if(event.target === this) window.closeKpiModal()">
+        <div class="kpi-modal-container">
+            <!-- Modal Header -->
+            <div class="px-6 py-4 bg-[#0d2b55] text-white flex items-center justify-between border-b border-[#1b3d6f] flex-shrink-0">
+                <div class="flex items-center gap-3.5">
+                    <div id="kpiModalIconBox" class="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 shadow-inner" style="background: rgba(30, 107, 184, 0.2); color: #93c5fd;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2.5">
+                            <h3 id="kpiModalTitle" class="text-base font-bold text-white tracking-tight">Total Borrowers</h3>
+                            <span id="kpiModalBadge" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-white/15 text-blue-100 border border-white/20">4 Active Borrowers</span>
+                        </div>
+                        <p id="kpiModalSubtitle" class="text-xs text-blue-200 mt-0.5">State Bank of India · Maritime Infrastructure &amp; Shipyard Credit Portfolio</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button type="button" onclick="window.exportKpiTable()" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg text-xs font-semibold border border-white/20 transition-colors cursor-pointer shadow-xs">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        Export CSV
+                    </button>
+                    <button type="button" onclick="window.closeKpiModal()" class="text-white/80 hover:text-white p-1.5 rounded-lg hover:bg-white/15 transition-colors cursor-pointer" aria-label="Close modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab Switcher & Search Bar -->
+            <div class="px-6 py-3 bg-gray-50 border-b border-gray-200 flex flex-wrap items-center justify-between gap-3 flex-shrink-0">
+                <!-- Tabs -->
+                <div class="inline-flex p-1 bg-gray-200/70 rounded-lg text-xs">
+                    <button id="kpiTabBtn_borrowers" type="button" onclick="window.switchKpiTab('borrowers')" class="px-3 py-1.5 rounded-md font-semibold text-[#0d2b55] bg-white shadow-xs transition-all cursor-pointer">
+                        Total Borrowers (4)
+                    </button>
+                    <button id="kpiTabBtn_pending" type="button" onclick="window.switchKpiTab('pending')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer">
+                        Pending Validations (2)
+                    </button>
+                    <button id="kpiTabBtn_claims" type="button" onclick="window.switchKpiTab('claims')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer">
+                        Claims Validated (12)
+                    </button>
+                    <button id="kpiTabBtn_exposure" type="button" onclick="window.switchKpiTab('exposure')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer">
+                        Loan Exposure (₹ 48,500 L)
+                    </button>
+                </div>
+
+                <!-- Search Filter Input -->
+                <div class="relative w-64 md:w-72">
+                    <svg class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <input id="kpiTableSearch" type="text" oninput="window.filterKpiTable()" placeholder="Search in active table..." class="w-full pl-9 pr-3 py-1.5 bg-white border border-gray-300 rounded-lg text-xs text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#0d2b55] focus:border-[#0d2b55]" />
+                </div>
+            </div>
+
+            <!-- Scrollable Table Content Body -->
+            <div class="flex-1 overflow-y-auto overflow-x-auto p-6 bg-white min-h-[340px]">
+                <!-- Table 1: Borrowers -->
+                <div id="kpiContent_borrowers">
+                    <div class="overflow-x-auto border border-gray-200 rounded-xl">
+                        <table class="min-w-full divide-y divide-gray-200 text-left text-xs">
+                            <thead class="bg-gray-50 text-gray-600 font-semibold uppercase tracking-wider text-[11px]">
+                                <tr>
+                                    <th class="px-4 py-3">Borrower / Enterprise</th>
+                                    <th class="px-4 py-3">Reference ID</th>
+                                    <th class="px-4 py-3">Credit Facility Type</th>
+                                    <th class="px-4 py-3 text-right">Sanctioned Limit</th>
+                                    <th class="px-4 py-3 text-right">Disbursed Outstanding</th>
+                                    <th class="px-4 py-3 text-center">Subvention Rate</th>
+                                    <th class="px-4 py-3 text-center">Operational Status</th>
+                                    <th class="px-4 py-3 text-center">Asset Class</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 text-gray-700">
+                                <tr class="hover:bg-blue-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-bold text-gray-900">
+                                        M/s Cochin Maritime Yards Pvt. Ltd.
+                                        <span class="block text-[11px] font-normal text-gray-500">Cochin Port Terminal, Kerala</span>
+                                    </td>
+                                    <td class="px-4 py-3 font-mono text-gray-600 text-xs">IIF-BRW-2026-00156</td>
+                                    <td class="px-4 py-3 font-medium text-gray-800">Term Loan (Drydock Expansion)</td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 14,500.00 L</td>
+                                    <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 11,200.00 L</td>
+                                    <td class="px-4 py-3 text-center font-semibold text-blue-900">3.00% p.a.</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">Active / Operational</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-100 text-blue-800">Standard (Pass)</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-blue-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-bold text-gray-900">
+                                        M/s Goa Shipbuilding Co.
+                                        <span class="block text-[11px] font-normal text-gray-500">Mormugao Harbour, Goa</span>
+                                    </td>
+                                    <td class="px-4 py-3 font-mono text-gray-600 text-xs">IIF-BRW-2026-00163</td>
+                                    <td class="px-4 py-3 font-medium text-gray-800">Capex + Working Capital</td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 9,800.00 L</td>
+                                    <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 8,400.00 L</td>
+                                    <td class="px-4 py-3 text-center font-semibold text-blue-900">3.00% p.a.</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">Active / Operational</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-100 text-blue-800">Standard (Pass)</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-blue-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-bold text-gray-900">
+                                        M/s Vizag Marine Works Ltd.
+                                        <span class="block text-[11px] font-normal text-gray-500">Visakhapatnam Port, Andhra Pradesh</span>
+                                    </td>
+                                    <td class="px-4 py-3 font-mono text-gray-600 text-xs">IIF-BRW-2026-00178</td>
+                                    <td class="px-4 py-3 font-medium text-gray-800">Project Finance (Floating Dock)</td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 12,200.00 L</td>
+                                    <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 9,500.00 L</td>
+                                    <td class="px-4 py-3 text-center font-semibold text-blue-900">3.00% p.a.</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">Active / Operational</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-100 text-blue-800">Standard (Pass)</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-blue-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-bold text-gray-900">
+                                        M/s Mumbai Offshore Fabricators
+                                        <span class="block text-[11px] font-normal text-gray-500">Mazagon Dock Cluster, Maharashtra</span>
+                                    </td>
+                                    <td class="px-4 py-3 font-mono text-gray-600 text-xs">IIF-BRW-2026-00185</td>
+                                    <td class="px-4 py-3 font-medium text-gray-800">Green Tug Retrofitting Facility</td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 12,000.00 L</td>
+                                    <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 9,400.00 L</td>
+                                    <td class="px-4 py-3 text-center font-semibold text-blue-900">3.00% p.a.</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">Active / Operational</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-100 text-blue-800">Standard (Pass)</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot class="bg-gray-50 font-semibold text-gray-800 border-t border-gray-200">
+                                <tr>
+                                    <td colspan="3" class="px-4 py-3 text-gray-900 font-bold">Total Portfolio (4 Active Borrowers)</td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 48,500.00 L</td>
+                                    <td class="px-4 py-3 text-right font-bold text-emerald-800">₹ 38,500.00 L</td>
+                                    <td colspan="3" class="px-4 py-3 text-center text-xs text-gray-500">100% Verified Standard Credit Lines</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Table 2: Pending Validations -->
+                <div id="kpiContent_pending" style="display: none;">
+                    <div class="overflow-x-auto border border-gray-200 rounded-xl">
+                        <table class="min-w-full divide-y divide-gray-200 text-left text-xs">
+                            <thead class="bg-gray-50 text-gray-600 font-semibold uppercase tracking-wider text-[11px]">
+                                <tr>
+                                    <th class="px-4 py-3">Reference ID</th>
+                                    <th class="px-4 py-3">Borrower / Beneficiary</th>
+                                    <th class="px-4 py-3">Validation Stage / Purpose</th>
+                                    <th class="px-4 py-3 text-right">Amount Under Desk</th>
+                                    <th class="px-4 py-3 text-center">Turnaround Waiting</th>
+                                    <th class="px-4 py-3 text-center">Target Due</th>
+                                    <th class="px-4 py-3 text-center">Desk Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 text-gray-700">
+                                <tr class="hover:bg-amber-50/30 transition-colors bg-amber-50/10">
+                                    <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">IIF-CLM-2026-00182</td>
+                                    <td class="px-4 py-3 font-bold text-gray-900">
+                                        M/s Gujarat Maritime Board Ltd.
+                                        <span class="block text-[11px] font-normal text-gray-500">Kandla Regional Shipyard</span>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <span class="font-semibold text-gray-900">Claim Validation (Tranche 4)</span>
+                                        <span class="block text-[11px] text-gray-500">Capital Grant Subvention verification</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 75.00 Lakhs</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center gap-1 font-bold text-rose-700 bg-rose-50 px-2.5 py-1 rounded-full border border-rose-200">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-rose-600 animate-pulse"></span>
+                                            Waiting 6 days
+                                        </span>
+                                    </td>
+                                    <td class="px-4 py-3 text-center font-medium text-gray-700">23 Jun 2026</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <button type="button" onclick="window.closeKpiModal(); window.openReviewModal('IIF-CLM-2026-00182', 'M/s Gujarat Maritime Board Ltd.', 'Claim Validation (Tranche 4)', '₹ 75.00 Lakhs', 'Waiting 6 days', 'State Bank of India')" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-[#0d2b55] hover:bg-[#163a6e] transition-colors cursor-pointer shadow-xs inline-flex items-center gap-1">
+                                            Review Desk
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-amber-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">IIF-BRW-2026-00156</td>
+                                    <td class="px-4 py-3 font-bold text-gray-900">
+                                        M/s Cochin Maritime Yards
+                                        <span class="block text-[11px] font-normal text-gray-500">Cochin Ship Repair Complex</span>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <span class="font-semibold text-gray-900">Validate Loan Details (Step 6)</span>
+                                        <span class="block text-[11px] text-gray-500">Initial loan verification &amp; interest schedule</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 45.00 Lakhs</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center gap-1 font-bold text-rose-600 bg-rose-50 px-2.5 py-1 rounded-full border border-rose-200">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+                                            Waiting 4 days
+                                        </span>
+                                    </td>
+                                    <td class="px-4 py-3 text-center font-medium text-gray-700">22 Jun 2026</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <button type="button" onclick="window.closeKpiModal(); window.openReviewModal('IIF-BRW-2026-00156', 'M/s Cochin Maritime Yards', 'Validate Loan Details (Step 6)', '₹ 45.00 Lakhs', 'Waiting 4 days', 'State Bank of India')" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-[#0d2b55] hover:bg-[#163a6e] transition-colors cursor-pointer shadow-xs inline-flex items-center gap-1">
+                                            Review Desk
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot class="bg-gray-50 font-semibold text-gray-800 border-t border-gray-200">
+                                <tr>
+                                    <td colspan="3" class="px-4 py-3 text-gray-900 font-bold">Total Pending Desk Items (2 Urgent Tasks)</td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 120.00 Lakhs</td>
+                                    <td colspan="3" class="px-4 py-3 text-center text-xs text-amber-700 font-medium">Turnaround Target: 48 Hours strictly adhered under SMFCL SLA</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Table 3: Claims Validated -->
+                <div id="kpiContent_claims" style="display: none;">
+                    <div class="overflow-x-auto border border-gray-200 rounded-xl">
+                        <table class="min-w-full divide-y divide-gray-200 text-left text-xs">
+                            <thead class="bg-gray-50 text-gray-600 font-semibold uppercase tracking-wider text-[11px]">
+                                <tr>
+                                    <th class="px-4 py-3">Claim Reference</th>
+                                    <th class="px-4 py-3">Shipyard / Beneficiary</th>
+                                    <th class="px-4 py-3">Scheme / Purpose</th>
+                                    <th class="px-4 py-3 text-right">Validated Amount</th>
+                                    <th class="px-4 py-3 text-center">Validation Date</th>
+                                    <th class="px-4 py-3 text-center">Lender Desk Sign-off</th>
+                                    <th class="px-4 py-3 text-center">SMFCL Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 text-gray-700">
+                                <tr class="hover:bg-blue-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0091</td>
+                                    <td class="px-4 py-3 font-bold text-gray-900">Cochin Shipyard Limited</td>
+                                    <td class="px-4 py-3 font-medium text-gray-700">Interest Equalisation (Q1)</td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 42.50 L</td>
+                                    <td class="px-4 py-3 text-center text-gray-600">02 May 2026</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Disbursed (₹ 42.50 L)</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-blue-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0094</td>
+                                    <td class="px-4 py-3 font-bold text-gray-900">Garden Reach Shipbuilders</td>
+                                    <td class="px-4 py-3 font-medium text-gray-700">Modernisation Capex Subsidy</td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 38.20 L</td>
+                                    <td class="px-4 py-3 text-center text-gray-600">08 May 2026</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Disbursed (₹ 38.20 L)</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-blue-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0102</td>
+                                    <td class="px-4 py-3 font-bold text-gray-900">Mazagon Dock Shipbuilders</td>
+                                    <td class="px-4 py-3 font-medium text-gray-700">Green Tug Interest Subvention</td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 29.75 L</td>
+                                    <td class="px-4 py-3 text-center text-gray-600">14 May 2026</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Disbursed (₹ 29.75 L)</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-blue-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0109</td>
+                                    <td class="px-4 py-3 font-bold text-gray-900">Goa Shipyard Limited</td>
+                                    <td class="px-4 py-3 font-medium text-gray-700">Interest Subvention (Tranche 2)</td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 34.10 L</td>
+                                    <td class="px-4 py-3 text-center text-gray-600">19 May 2026</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Disbursed (₹ 34.10 L)</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-blue-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0115</td>
+                                    <td class="px-4 py-3 font-bold text-gray-900">Hindustan Shipyard Ltd.</td>
+                                    <td class="px-4 py-3 font-medium text-gray-700">Slipway Automation Claim</td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 45.00 L</td>
+                                    <td class="px-4 py-3 text-center text-gray-600">25 May 2026</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Disbursed (₹ 45.00 L)</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-blue-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0122</td>
+                                    <td class="px-4 py-3 font-bold text-gray-900">Kolkata Dry Dock Yard</td>
+                                    <td class="px-4 py-3 font-medium text-gray-700">Subvention Claim (Q4 FY25)</td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 38.20 L</td>
+                                    <td class="px-4 py-3 text-center text-gray-600">01 Jun 2026</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Disbursed (₹ 38.20 L)</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-blue-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0130</td>
+                                    <td class="px-4 py-3 font-bold text-gray-900">Vizag Marine Works Ltd.</td>
+                                    <td class="px-4 py-3 font-medium text-gray-700">Floating Crane Loan Subvention</td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 26.80 L</td>
+                                    <td class="px-4 py-3 text-center text-gray-600">05 Jun 2026</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-800 border border-amber-200">SMFCL Technical Audit</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-blue-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0136</td>
+                                    <td class="px-4 py-3 font-bold text-gray-900">Mumbai Offshore Fabricators</td>
+                                    <td class="px-4 py-3 font-medium text-gray-700">Yard Modernisation Interest</td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 31.50 L</td>
+                                    <td class="px-4 py-3 text-center text-gray-600">09 Jun 2026</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-800 border border-blue-200">Pending SMFCL Sanction</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-blue-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0141</td>
+                                    <td class="px-4 py-3 font-bold text-gray-900">Chennai Naval Fabricators</td>
+                                    <td class="px-4 py-3 font-medium text-gray-700">Interest Equalisation (Q2)</td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 22.40 L</td>
+                                    <td class="px-4 py-3 text-center text-gray-600">12 Jun 2026</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-800 border border-blue-200">SMFCL Finance Desk</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-blue-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0148</td>
+                                    <td class="px-4 py-3 font-bold text-gray-900">Paradip Marine Services</td>
+                                    <td class="px-4 py-3 font-medium text-gray-700">Vessel Construction Interest</td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 28.90 L</td>
+                                    <td class="px-4 py-3 text-center text-gray-600">15 Jun 2026</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-800 border border-blue-200">Verification Underway</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-blue-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0153</td>
+                                    <td class="px-4 py-3 font-bold text-gray-900">Pipavav Offshore Yard</td>
+                                    <td class="px-4 py-3 font-medium text-gray-700">Drydock Deepening Support</td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 24.60 L</td>
+                                    <td class="px-4 py-3 text-center text-gray-600">16 Jun 2026</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-purple-50 text-purple-800 border border-purple-200">Sanction Issued (Pending Credit)</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-blue-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0159</td>
+                                    <td class="px-4 py-3 font-bold text-gray-900">Tuticorin Shipping Works</td>
+                                    <td class="px-4 py-3 font-medium text-gray-700">Equipment Subvention Claim</td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 19.60 L</td>
+                                    <td class="px-4 py-3 text-center text-gray-600">18 Jun 2026</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-800 border border-blue-200">Under SMFCL Review</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot class="bg-gray-50 font-semibold text-gray-800 border-t border-gray-200">
+                                <tr>
+                                    <td colspan="3" class="px-4 py-3 text-gray-900 font-bold">Total Validated Claims (12 Completed Validations)</td>
+                                    <td class="px-4 py-3 text-right font-bold text-emerald-800">₹ 381.55 L</td>
+                                    <td colspan="3" class="px-4 py-3 text-center text-xs text-gray-600">6 Released by SMFCL (₹ 227.75 L) · 6 in Process (₹ 153.80 L)</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Table 4: Loan Exposure -->
+                <div id="kpiContent_exposure" style="display: none;">
+                    <div class="overflow-x-auto border border-gray-200 rounded-xl">
+                        <table class="min-w-full divide-y divide-gray-200 text-left text-xs">
+                            <thead class="bg-gray-50 text-gray-600 font-semibold uppercase tracking-wider text-[11px]">
+                                <tr>
+                                    <th class="px-4 py-3">Borrower / Enterprise</th>
+                                    <th class="px-4 py-3">Loan Facility &amp; Account</th>
+                                    <th class="px-4 py-3 text-right">Sanctioned Limit</th>
+                                    <th class="px-4 py-3 text-right">Outstanding Balance</th>
+                                    <th class="px-4 py-3 text-right">Undrawn Headroom</th>
+                                    <th class="px-4 py-3 text-center">Subvention</th>
+                                    <th class="px-4 py-3 text-center">Collateral Coverage</th>
+                                    <th class="px-4 py-3 text-center">Asset Class</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 text-gray-700">
+                                <tr class="hover:bg-blue-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-bold text-gray-900">
+                                        M/s Cochin Maritime Yards Pvt. Ltd.
+                                        <span class="block text-[11px] font-normal text-gray-500">Kochi Cluster · SBI Commercial Branch</span>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <span class="font-medium text-gray-800">Term Loan (Capex Drydock)</span>
+                                        <span class="block text-[11px] font-mono text-gray-500">TL-SBI-98442</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 14,500.00 L</td>
+                                    <td class="px-4 py-3 text-right font-bold text-purple-900">₹ 11,200.00 L</td>
+                                    <td class="px-4 py-3 text-right font-semibold text-gray-700">₹ 3,300.00 L</td>
+                                    <td class="px-4 py-3 text-center font-bold text-blue-900">3.00% p.a.</td>
+                                    <td class="px-4 py-3 text-center font-semibold text-emerald-800">135% Coverage</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Standard (SMA-0)</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-blue-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-bold text-gray-900">
+                                        M/s Goa Shipbuilding Co.
+                                        <span class="block text-[11px] font-normal text-gray-500">Mormugao Cluster · SBI Panaji Large Corp</span>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <span class="font-medium text-gray-800">Term + Working Capital Line</span>
+                                        <span class="block text-[11px] font-mono text-gray-500">CF-SBI-55418</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 9,800.00 L</td>
+                                    <td class="px-4 py-3 text-right font-bold text-purple-900">₹ 8,400.00 L</td>
+                                    <td class="px-4 py-3 text-right font-semibold text-gray-700">₹ 1,400.00 L</td>
+                                    <td class="px-4 py-3 text-center font-bold text-blue-900">3.00% p.a.</td>
+                                    <td class="px-4 py-3 text-center font-semibold text-emerald-800">142% Coverage</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Standard (SMA-0)</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-blue-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-bold text-gray-900">
+                                        M/s Vizag Marine Works Ltd.
+                                        <span class="block text-[11px] font-normal text-gray-500">Vizag Port Cluster · SBI Overseas Branch</span>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <span class="font-medium text-gray-800">Project Finance Loan</span>
+                                        <span class="block text-[11px] font-mono text-gray-500">PL-SBI-77291</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 12,200.00 L</td>
+                                    <td class="px-4 py-3 text-right font-bold text-purple-900">₹ 9,500.00 L</td>
+                                    <td class="px-4 py-3 text-right font-semibold text-gray-700">₹ 2,700.00 L</td>
+                                    <td class="px-4 py-3 text-center font-bold text-blue-900">3.00% p.a.</td>
+                                    <td class="px-4 py-3 text-center font-semibold text-emerald-800">128% Coverage</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Standard (SMA-0)</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-blue-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-bold text-gray-900">
+                                        M/s Mumbai Offshore Fabricators
+                                        <span class="block text-[11px] font-normal text-gray-500">Mumbai Harbour · SBI Corporate Accounts</span>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <span class="font-medium text-gray-800">Green Tug Retrofit Capex</span>
+                                        <span class="block text-[11px] font-mono text-gray-500">TL-SBI-33214</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 12,000.00 L</td>
+                                    <td class="px-4 py-3 text-right font-bold text-purple-900">₹ 9,400.00 L</td>
+                                    <td class="px-4 py-3 text-right font-semibold text-gray-700">₹ 2,600.00 L</td>
+                                    <td class="px-4 py-3 text-center font-bold text-blue-900">3.00% p.a.</td>
+                                    <td class="px-4 py-3 text-center font-semibold text-emerald-800">130% Coverage</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Standard (SMA-0)</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot class="bg-gray-50 font-semibold text-gray-800 border-t border-gray-200">
+                                <tr>
+                                    <td colspan="2" class="px-4 py-3 text-gray-900 font-bold">Consolidated Portfolio Totals</td>
+                                    <td class="px-4 py-3 text-right font-bold text-blue-950">₹ 48,500.00 L</td>
+                                    <td class="px-4 py-3 text-right font-bold text-purple-950">₹ 38,500.00 L</td>
+                                    <td class="px-4 py-3 text-right font-bold text-slate-800">₹ 10,000.00 L</td>
+                                    <td colspan="3" class="px-4 py-3 text-center text-xs text-emerald-700 font-bold">100% Satisfactory / Zero Delinquencies</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="px-6 py-3.5 bg-gray-50 border-t border-gray-200 flex flex-wrap items-center justify-between gap-3 text-xs text-gray-600 flex-shrink-0">
+                <div id="kpiModalFooterStats" class="flex-1 font-medium">
+                    Total Sanctioned: <span class="font-bold text-gray-900">₹ 48,500.00 L</span> | Total Disbursed: <span class="font-bold text-emerald-700">₹ 38,500.00 L</span> | Portfolio Quality: <span class="font-bold text-emerald-700">100% Standard Assets</span>
+                </div>
+                <button type="button" onclick="window.closeKpiModal()" class="px-4 py-1.5 rounded-md text-xs font-semibold text-gray-700 hover:text-gray-900 bg-white hover:bg-gray-100 border border-gray-300 shadow-2xs transition-colors cursor-pointer">
+                    Close
                 </button>
             </div>
         </div>

@@ -270,6 +270,47 @@
                 overflow: hidden;
                 animation: tabCardFadeIn 0.2s ease-out;
             }
+
+            /* KPI Centered Data Modal Styles */
+            .kpi-modal-backdrop {
+                position: fixed;
+                inset: 0;
+                background-color: rgba(15, 23, 42, 0.65);
+                backdrop-filter: blur(3px);
+                z-index: 9999;
+                display: none;
+                align-items: center;
+                justify-content: center;
+                padding: 16px;
+            }
+            .kpi-modal-container {
+                background: #ffffff;
+                border-radius: 16px;
+                width: 100%;
+                max-width: 1120px;
+                max-height: 90vh;
+                display: flex;
+                flex-direction: column;
+                box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.28), 0 0 0 1px rgba(15, 23, 42, 0.06);
+                border: 1px solid #cbd5e1;
+                overflow: hidden;
+                animation: modalScaleUp 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+            @keyframes modalScaleUp {
+                from { opacity: 0; transform: scale(0.96) translateY(10px); }
+                to { opacity: 1; transform: scale(1) translateY(0); }
+            }
+            .kpi-interactive-card {
+                transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            }
+            .kpi-interactive-card:hover {
+                border-color: #0d2b55 !important;
+                box-shadow: 0 10px 25px -5px rgba(13, 43, 85, 0.12), 0 8px 10px -6px rgba(13, 43, 85, 0.08) !important;
+                transform: translateY(-2px);
+            }
+            .kpi-interactive-card:active {
+                transform: translateY(0) scale(0.99);
+            }
         </style>
     </head>
 
@@ -859,12 +900,11 @@
                                 
                             </div>
                             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                                <div class="bg-white rounded-xl border border-gray-200 p-5">
-                                    <div class="flex items-start justify-between mb-3">
-                                        <div
-                                            class="w-10 h-10 rounded-lg flex items-center justify-center"
-                                            style="background: rgba(30, 107, 184, 0.125); color: rgb(30, 107, 184)"
-                                        >
+                                <!-- Card 1: Total Applications -->
+                                <div onclick="openKpiModal('applications')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view full Applications Register">
+                                    <div>
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform group-hover:scale-110"
+                                            style="background: rgba(30, 107, 184, 0.125); color: rgb(30, 107, 184)">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="20"
@@ -886,19 +926,21 @@
                                                 <path d="M16 17H8"></path>
                                             </svg>
                                         </div>
-                                       
-                                        
+                                        <div class="text-2xl font-bold text-gray-900 mb-0.5">47</div>
+                                        <div class="text-sm font-medium text-gray-700">Total Applications</div>
+                                        <div class="text-xs text-gray-400 mt-0.5">This financial year</div>
                                     </div>
-                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">47</div>
-                                    <div class="text-sm font-medium text-gray-700">Total Applications</div>
-                                    <div class="text-xs text-gray-400 mt-0.5">This financial year</div>
+                                    <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-[#0d2b55] group-hover:text-blue-700">
+                                        <span>View applications table</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                    </div>
                                 </div>
-                                <div class="bg-white rounded-xl border border-gray-200 p-5">
-                                    <div class="flex items-start justify-between mb-3">
-                                        <div
-                                            class="w-10 h-10 rounded-lg flex items-center justify-center"
-                                            style="background: rgba(46, 125, 50, 0.125); color: rgb(46, 125, 50)"
-                                        >
+
+                                <!-- Card 2: Approved Projects -->
+                                <div onclick="openKpiModal('projects')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Approved Projects Register">
+                                    <div>
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform group-hover:scale-110"
+                                            style="background: rgba(46, 125, 50, 0.125); color: rgb(46, 125, 50)">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="20"
@@ -915,17 +957,21 @@
                                                 <path d="m9 11 3 3L22 4"></path>
                                             </svg>
                                         </div>
+                                        <div class="text-2xl font-bold text-gray-900 mb-0.5">31</div>
+                                        <div class="text-sm font-medium text-gray-700">Approved Projects</div>
+                                        <div class="text-xs text-gray-400 mt-0.5">Active under IIF</div>
                                     </div>
-                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">31</div>
-                                    <div class="text-sm font-medium text-gray-700">Approved Projects</div>
-                                    <div class="text-xs text-gray-400 mt-0.5">Active under IIF</div>
+                                    <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-emerald-700 group-hover:text-emerald-800">
+                                        <span>View projects table</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                    </div>
                                 </div>
-                                <div class="bg-white rounded-xl border border-gray-200 p-5">
-                                    <div class="flex items-start justify-between mb-3">
-                                        <div
-                                            class="w-10 h-10 rounded-lg flex items-center justify-center"
-                                            style="background: rgba(230, 81, 0, 0.125); color: rgb(230, 81, 0)"
-                                        >
+
+                                <!-- Card 3: Pending Review -->
+                                <div onclick="openKpiModal('pending')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Pending Review Items">
+                                    <div>
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform group-hover:scale-110"
+                                            style="background: rgba(230, 81, 0, 0.125); color: rgb(230, 81, 0)">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="20"
@@ -942,17 +988,21 @@
                                                 <polyline points="12 6 12 12 16 14"></polyline>
                                             </svg>
                                         </div>
+                                        <div class="text-2xl font-bold text-gray-900 mb-0.5">7</div>
+                                        <div class="text-sm font-medium text-gray-700">Pending Review</div>
+                                        <div class="text-xs text-gray-400 mt-0.5">Action required</div>
                                     </div>
-                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">7</div>
-                                    <div class="text-sm font-medium text-gray-700">Pending Review</div>
-                                    <div class="text-xs text-gray-400 mt-0.5">Action required</div>
+                                    <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-orange-700 group-hover:text-orange-800">
+                                        <span>Review pending list</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                    </div>
                                 </div>
-                                <div class="bg-white rounded-xl border border-gray-200 p-5">
-                                    <div class="flex items-start justify-between mb-3">
-                                        <div
-                                            class="w-10 h-10 rounded-lg flex items-center justify-center"
-                                            style="background: rgba(123, 31, 162, 0.125); color: rgb(123, 31, 162)"
-                                        >
+
+                                <!-- Card 4: Total Subvention Released -->
+                                <div onclick="openKpiModal('subvention')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Subvention Release Breakdown">
+                                    <div>
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform group-hover:scale-110"
+                                            style="background: rgba(123, 31, 162, 0.125); color: rgb(123, 31, 162)">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="20"
@@ -969,20 +1019,22 @@
                                                 <polyline points="16 7 22 7 22 13"></polyline>
                                             </svg>
                                         </div>
-                                 
+                                        <div class="text-2xl font-bold text-gray-900 mb-0.5">Rs. 1,840 L</div>
+                                        <div class="text-sm font-medium text-gray-700">Total Subvention Released</div>
+                                        <div class="text-xs text-gray-400 mt-0.5">FY 2026-27</div>
                                     </div>
-                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">Rs. 1,840 L</div>
-                                    <div class="text-sm font-medium text-gray-700">Total Subvention Released</div>
-                                    <div class="text-xs text-gray-400 mt-0.5">FY 2026-27</div>
+                                    <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-purple-700 group-hover:text-purple-800">
+                                        <span>View subvention release</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                    </div>
                                 </div>
                             </div>
                             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                                <div class="bg-white rounded-xl border border-gray-200 p-5">
-                                    <div class="flex items-start justify-between mb-3">
-                                        <div
-                                            class="w-10 h-10 rounded-lg flex items-center justify-center"
-                                            style="background: rgba(0, 121, 107, 0.125); color: rgb(0, 121, 107)"
-                                        >
+                                <!-- Card 5: Claims Processed -->
+                                <div onclick="openKpiModal('claims')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Processed Claims Register">
+                                    <div>
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform group-hover:scale-110"
+                                            style="background: rgba(0, 121, 107, 0.125); color: rgb(0, 121, 107)">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="20"
@@ -1001,17 +1053,21 @@
                                                 <path d="m21.854 2.147-10.94 10.939"></path>
                                             </svg>
                                         </div>
+                                        <div class="text-2xl font-bold text-gray-900 mb-0.5">89</div>
+                                        <div class="text-sm font-medium text-gray-700">Claims Processed</div>
+                                        <div class="text-xs text-gray-400 mt-0.5">Across All Loan Applications</div>
                                     </div>
-                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">89</div>
-                                    <div class="text-sm font-medium text-gray-700">Claims Processed</div>
-                                    <div class="text-xs text-gray-400 mt-0.5">Across All Loan Applications</div>
+                                    <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-teal-700 group-hover:text-teal-800">
+                                        <span>View claims register</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                    </div>
                                 </div>
-                                <div class="bg-white rounded-xl border border-gray-200 p-5">
-                                    <div class="flex items-start justify-between mb-3">
-                                        <div
-                                            class="w-10 h-10 rounded-lg flex items-center justify-center"
-                                            style="background: rgba(92, 107, 192, 0.125); color: rgb(92, 107, 192)"
-                                        >
+
+                                <!-- Card 6: Borrowers Onboarded -->
+                                <div onclick="openKpiModal('borrowers')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Onboarded Borrowers Directory">
+                                    <div>
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform group-hover:scale-110"
+                                            style="background: rgba(92, 107, 192, 0.125); color: rgb(92, 107, 192)">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="20"
@@ -1032,10 +1088,14 @@
                                                 <polygon points="12 2 20 7 4 7"></polygon>
                                             </svg>
                                         </div>
+                                        <div class="text-2xl font-bold text-gray-900 mb-0.5">12</div>
+                                        <div class="text-sm font-medium text-gray-700">Borrowers Onboarded</div>
+                                        <div class="text-xs text-gray-400 mt-0.5">Active participants</div>
                                     </div>
-                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">12</div>
-                                    <div class="text-sm font-medium text-gray-700">Borrowers Onboarded</div>
-                                    <div class="text-xs text-gray-400 mt-0.5">Active participants</div>
+                                    <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-indigo-700 group-hover:text-indigo-800">
+                                        <span>View borrowers directory</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                    </div>
                                 </div>
                                 <!-- <div class="bg-white rounded-xl border border-gray-200 p-5">
                                     <div class="flex items-start justify-between mb-3">
@@ -2140,6 +2200,175 @@
                 window.closeReviewModal();
                 alert('Opening detailed verification workflow for ' + ref);
             };
+
+            // KPI Centered Popup Table Modal Controller for SMFCL Dashboard
+            (function () {
+                const kpiDataConfigs = {
+                    applications: {
+                        title: 'Total Applications',
+                        badge: '47 Applications (FY 2026-27)',
+                        subtitle: 'Sagarmala Maritime Development Fund · Infrastructure & Shipbuilding Proposals',
+                        iconBg: 'rgba(30, 107, 184, 0.2)',
+                        iconColor: '#93c5fd',
+                        iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>',
+                        footer: 'Total Applications: <span class="font-bold text-gray-900">47</span> | Project Outlay: <span class="font-bold text-blue-900">₹ 4,280.00 Cr</span> | Requested Subvention: <span class="font-bold text-emerald-700">₹ 918.50 Cr</span>'
+                    },
+                    projects: {
+                        title: 'Approved Projects',
+                        badge: '31 Active Projects',
+                        subtitle: 'Sanctioned Maritime Infrastructure & Modernization Projects Under IIF Scheme',
+                        iconBg: 'rgba(46, 125, 50, 0.2)',
+                        iconColor: '#86efac',
+                        iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>',
+                        footer: 'Active Sanctioned Projects: <span class="font-bold text-emerald-800">31</span> | Total Project Outlay: <span class="font-bold text-gray-900">₹ 2,860.50 Cr</span> | Sanctioned Subvention: <span class="font-bold text-blue-900">₹ 612.40 Cr</span>'
+                    },
+                    pending: {
+                        title: 'Pending Review',
+                        badge: '7 Action Required',
+                        subtitle: 'SMFCL Secretariat & Verification Desk Queue · Turnaround Priority Order',
+                        iconBg: 'rgba(230, 81, 0, 0.2)',
+                        iconColor: '#fdba74',
+                        iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>',
+                        footer: 'Pending Review Items: <span class="font-bold text-rose-600">7</span> | Value Under Desk: <span class="font-bold text-gray-900">₹ 248.50 Lakhs</span> | Longest Waiting: <span class="font-bold text-rose-700">8 Days</span>'
+                    },
+                    subvention: {
+                        title: 'Total Subvention Released',
+                        badge: '₹ 1,840 Lakhs Released',
+                        subtitle: 'Interest Equalisation & Capital Subsidy Disbursements for FY 2026-27',
+                        iconBg: 'rgba(123, 31, 162, 0.2)',
+                        iconColor: '#d8b4fe',
+                        iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>',
+                        footer: 'FY 2026-27 Released: <span class="font-bold text-purple-900">₹ 1,840.00 Lakhs</span> | Budget Allocation: <span class="font-bold text-gray-900">₹ 3,500.00 Lakhs</span> | Subvention Utilization: <span class="font-bold text-emerald-700">52.57%</span>'
+                    },
+                    claims: {
+                        title: 'Claims Processed',
+                        badge: '89 Claims Settled',
+                        subtitle: 'Direct Benefit Transfer & Subvention Settlements Across All Loan Applications',
+                        iconBg: 'rgba(0, 121, 107, 0.2)',
+                        iconColor: '#80cbc4',
+                        iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path><path d="m21.854 2.147-10.94 10.939"></path></svg>',
+                        footer: 'Total Claims Settled: <span class="font-bold text-teal-800">89</span> | Total Value Processed: <span class="font-bold text-gray-900">₹ 3,420.75 L</span> | Average Processing Turnaround: <span class="font-bold text-emerald-700">3.2 Days</span>'
+                    },
+                    borrowers: {
+                        title: 'Borrowers Onboarded',
+                        badge: '12 Active Participants',
+                        subtitle: 'Registered Shipbuilders, Shiprepairers & Coastal Infrastructure Enterprises',
+                        iconBg: 'rgba(92, 107, 192, 0.2)',
+                        iconColor: '#c5cae9',
+                        iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="22" y2="22"></line><line x1="6" x2="6" y1="18" y2="11"></line><line x1="10" x2="10" y1="18" y2="11"></line><line x1="14" x2="14" y1="18" y2="11"></line><line x1="18" x2="18" y1="18" y2="11"></line><polygon points="12 2 20 7 4 7"></polygon></svg>',
+                        footer: 'Total Onboarded Entities: <span class="font-bold text-indigo-900">12</span> | Sanctioned Credit Exposure: <span class="font-bold text-gray-900">₹ 5,640.00 Cr</span> | Compliance Status: <span class="font-bold text-emerald-700">100% Active</span>'
+                    }
+                };
+
+                let currentActiveKpiTab = 'applications';
+
+                window.openKpiModal = function (tabKey) {
+                    const modal = document.getElementById('kpiDetailsModal');
+                    if (!modal) return;
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                    window.switchKpiTab(tabKey || 'applications');
+                };
+
+                window.closeKpiModal = function () {
+                    const modal = document.getElementById('kpiDetailsModal');
+                    if (modal) modal.style.display = 'none';
+                    document.body.style.overflow = '';
+                };
+
+                window.switchKpiTab = function (tabKey) {
+                    if (!kpiDataConfigs[tabKey]) tabKey = 'applications';
+                    currentActiveKpiTab = tabKey;
+
+                    const cfg = kpiDataConfigs[tabKey];
+                    const titleEl = document.getElementById('kpiModalTitle');
+                    const badgeEl = document.getElementById('kpiModalBadge');
+                    const subtitleEl = document.getElementById('kpiModalSubtitle');
+                    const iconBox = document.getElementById('kpiModalIconBox');
+                    const footerEl = document.getElementById('kpiModalFooterStats');
+                    const searchInput = document.getElementById('kpiTableSearch');
+
+                    if (titleEl) titleEl.textContent = cfg.title;
+                    if (badgeEl) badgeEl.textContent = cfg.badge;
+                    if (subtitleEl) subtitleEl.textContent = cfg.subtitle;
+                    if (iconBox) {
+                        iconBox.style.background = cfg.iconBg;
+                        iconBox.style.color = cfg.iconColor;
+                        iconBox.innerHTML = cfg.iconSvg;
+                    }
+                    if (footerEl) footerEl.innerHTML = cfg.footer;
+                    if (searchInput) searchInput.value = '';
+
+                    // Toggle tabs buttons UI
+                    ['applications', 'projects', 'pending', 'subvention', 'claims', 'borrowers'].forEach((k) => {
+                        const btn = document.getElementById(`kpiTabBtn_${k}`);
+                        const content = document.getElementById(`kpiContent_${k}`);
+                        if (btn) {
+                            if (k === tabKey) {
+                                btn.classList.remove('text-gray-600', 'font-medium', 'hover:text-gray-900');
+                                btn.classList.add('bg-white', 'font-semibold', 'shadow-xs');
+                                btn.style.color = '#0D2B55';
+                            } else {
+                                btn.style.color = '';
+                                btn.classList.remove('bg-white', 'font-semibold', 'shadow-xs');
+                                btn.classList.add('text-gray-600', 'font-medium', 'hover:text-gray-900');
+                            }
+                        }
+                        if (content) {
+                            content.style.display = k === tabKey ? 'block' : 'none';
+                        }
+                    });
+
+                    window.filterKpiTable();
+                };
+
+                window.filterKpiTable = function () {
+                    const searchInput = document.getElementById('kpiTableSearch');
+                    const q = searchInput ? searchInput.value.toLowerCase().trim() : '';
+                    const activeContainer = document.getElementById(`kpiContent_${currentActiveKpiTab}`);
+                    if (!activeContainer) return;
+
+                    const rows = activeContainer.querySelectorAll('tbody tr');
+                    rows.forEach((row) => {
+                        const text = row.textContent.toLowerCase();
+                        row.style.display = (!q || text.includes(q)) ? '' : 'none';
+                    });
+                };
+
+                window.exportKpiTable = function () {
+                    const activeContainer = document.getElementById(`kpiContent_${currentActiveKpiTab}`);
+                    if (!activeContainer) return;
+                    const table = activeContainer.querySelector('table');
+                    if (!table) return;
+
+                    let csv = [];
+                    const rows = table.querySelectorAll('tr');
+                    rows.forEach((row) => {
+                        if (row.style.display === 'none') return;
+                        const cols = row.querySelectorAll('th, td');
+                        let rowData = [];
+                        cols.forEach((col) => {
+                            let text = col.innerText.replace(/(\r\n|\n|\r)/gm, ' ').replace(/"/g, '""').trim();
+                            rowData.push(`"${text}"`);
+                        });
+                        if (rowData.length) csv.push(rowData.join(','));
+                    });
+
+                    const csvString = csv.join('\n');
+                    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = `smfcl_${currentActiveKpiTab}_data.csv`;
+                    link.click();
+                };
+
+                // ESC key closes modal
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        window.closeKpiModal();
+                    }
+                });
+            })();
         </script>
 
         <!-- Quick Review Modal for Pending Action Cards -->
@@ -2201,6 +2430,995 @@
                     </button>
                     <button type="button" onclick="window.confirmReviewAction()" class="px-4 py-1.5 rounded-md text-xs font-semibold text-white bg-[#0d2b55] hover:bg-[#163a6e] transition-colors cursor-pointer shadow-xs">
                         Open Action Desk
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- KPI Details Centered Popup Modal for SMFCL Dashboard -->
+        <div id="kpiDetailsModal" class="kpi-modal-backdrop" onclick="if(event.target === this) window.closeKpiModal()">
+            <div class="kpi-modal-container">
+                <!-- Modal Header -->
+                <div class="px-6 py-4 bg-[#0d2b55] text-white flex items-center justify-between border-b border-[#1b3d6f] flex-shrink-0">
+                    <div class="flex items-center gap-3.5">
+                        <div id="kpiModalIconBox" class="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 shadow-inner" style="background: rgba(30, 107, 184, 0.2); color: #93c5fd;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2.5">
+                                <h3 id="kpiModalTitle" class="text-base font-bold text-white tracking-tight">Total Applications</h3>
+                                <span id="kpiModalBadge" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-white/15 text-blue-100 border border-white/20">47 Applications (FY 2026-27)</span>
+                            </div>
+                            <p id="kpiModalSubtitle" class="text-xs text-blue-200 mt-0.5">Sagarmala Maritime Development Fund · Infrastructure &amp; Shipbuilding Proposals</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <button type="button" onclick="window.exportKpiTable()" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg text-xs font-semibold border border-white/20 transition-colors cursor-pointer shadow-xs">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            Export CSV
+                        </button>
+                        <button type="button" onclick="window.closeKpiModal()" class="text-white/80 hover:text-white p-1.5 rounded-lg hover:bg-white/15 transition-colors cursor-pointer" aria-label="Close modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tab Switcher & Search Bar -->
+                <div class="px-6 py-3 bg-gray-50 border-b border-gray-200 flex flex-wrap items-center justify-between gap-3 flex-shrink-0">
+                    <!-- 6 Tabs -->
+                    <div class="inline-flex p-1 bg-gray-200/70 rounded-lg text-xs overflow-x-auto max-w-full">
+                        <button id="kpiTabBtn_applications" type="button" onclick="window.switchKpiTab('applications')" class="px-3 py-1.5 rounded-md font-semibold text-[#0d2b55] bg-white shadow-xs transition-all cursor-pointer whitespace-nowrap">
+                            Applications (47)
+                        </button>
+                        <button id="kpiTabBtn_projects" type="button" onclick="window.switchKpiTab('projects')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer whitespace-nowrap">
+                            Projects (31)
+                        </button>
+                        <button id="kpiTabBtn_pending" type="button" onclick="window.switchKpiTab('pending')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer whitespace-nowrap">
+                            Pending (7)
+                        </button>
+                        <button id="kpiTabBtn_subvention" type="button" onclick="window.switchKpiTab('subvention')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer whitespace-nowrap">
+                            Subvention Released (₹ 1,840 L)
+                        </button>
+                        <button id="kpiTabBtn_claims" type="button" onclick="window.switchKpiTab('claims')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer whitespace-nowrap">
+                            Claims (89)
+                        </button>
+                        <button id="kpiTabBtn_borrowers" type="button" onclick="window.switchKpiTab('borrowers')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer whitespace-nowrap">
+                            Borrowers (12)
+                        </button>
+                    </div>
+
+                    <!-- Search Filter Input -->
+                    <div class="relative w-64 md:w-72">
+                        <svg class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        <input id="kpiTableSearch" type="text" oninput="window.filterKpiTable()" placeholder="Search in active table..." class="w-full pl-9 pr-3 py-1.5 bg-white border border-gray-300 rounded-lg text-xs text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#0d2b55] focus:border-[#0d2b55]" />
+                    </div>
+                </div>
+
+                <!-- Scrollable Table Content Body -->
+                <div class="flex-1 overflow-y-auto overflow-x-auto p-6 bg-white min-h-[340px]">
+                    <!-- Table 1: Applications -->
+                    <div id="kpiContent_applications">
+                        <div class="overflow-x-auto border border-gray-200 rounded-xl">
+                            <table class="min-w-full divide-y divide-gray-200 text-left text-xs">
+                                <thead class="bg-gray-50 text-gray-600 font-semibold uppercase tracking-wider text-[11px]">
+                                    <tr>
+                                        <th class="px-4 py-3">Application ID</th>
+                                        <th class="px-4 py-3">Applicant / Enterprise</th>
+                                        <th class="px-4 py-3">Project Scheme &amp; Title</th>
+                                        <th class="px-4 py-3 text-right">Project Outlay</th>
+                                        <th class="px-4 py-3 text-right">Requested Subvention</th>
+                                        <th class="px-4 py-3 text-center">Lender Bank</th>
+                                        <th class="px-4 py-3 text-center">Submission Date</th>
+                                        <th class="px-4 py-3 text-center">Appraisal Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100 text-gray-700">
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">APP-2026-0047</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            Cochin Shipyard Limited
+                                            <span class="block text-[11px] font-normal text-gray-500">Kochi Cluster, Kerala</span>
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Drydock Extension &amp; Modernisation</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 340.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 72.50 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">State Bank of India</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">02 Jun 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-100 text-blue-800">Technical Appraisal</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">APP-2026-0046</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            Garden Reach Shipbuilders
+                                            <span class="block text-[11px] font-normal text-gray-500">Kolkata, West Bengal</span>
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Green Tug &amp; Electric Propulsion</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 185.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 39.20 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Punjab National Bank</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">28 May 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-800">Inter-Ministerial Scrutiny</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">APP-2026-0045</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            Mazagon Dock Shipbuilders
+                                            <span class="block text-[11px] font-normal text-gray-500">Mumbai, Maharashtra</span>
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Shiprepair Infrastructure Upgrade</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 290.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 62.00 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Bank of Baroda</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">25 May 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">Sanction In-Principle</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">APP-2026-0044</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            Goa Shipyard Limited
+                                            <span class="block text-[11px] font-normal text-gray-500">Mormugao, Goa</span>
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Slipway Mechanisation &amp; Automation</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 145.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 31.00 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">State Bank of India</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">19 May 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-purple-100 text-purple-800">Lender Due Diligence</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">APP-2026-0043</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            Hindustan Shipyard Ltd.
+                                            <span class="block text-[11px] font-normal text-gray-500">Visakhapatnam, Andhra Pradesh</span>
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Floating Drydock Facility (Vizag)</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 410.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 88.00 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Canara Bank</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">14 May 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">SMFCL Board Sanctioned</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">APP-2026-0042</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            Gujarat Maritime Board Ltd.
+                                            <span class="block text-[11px] font-normal text-gray-500">Bhavnagar Cluster, Gujarat</span>
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Ship Recycling Modernisation Capex</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 220.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 47.00 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">State Bank of India</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">08 May 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-800">Documentation Clearance</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">APP-2026-0041</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            Vizag Marine Works Ltd.
+                                            <span class="block text-[11px] font-normal text-gray-500">Visakhapatnam, Andhra Pradesh</span>
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Heavy Lift Floating Crane Facility</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 115.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 24.50 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">State Bank of India</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">02 May 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-100 text-blue-800">Appraisal Completed</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">APP-2026-0040</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            Syama Prasad Mookerjee Port
+                                            <span class="block text-[11px] font-normal text-gray-500">Kolkata, West Bengal</span>
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Kolkata Dock Slipway Modernisation</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 160.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 34.00 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Bank of Baroda</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">26 Apr 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-purple-100 text-purple-800">Secretariat Audit</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">APP-2026-0039</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            Pipavav Offshore Yard Ltd.
+                                            <span class="block text-[11px] font-normal text-gray-500">Amreli, Gujarat</span>
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Deepwater Drydock Extension Phase 3</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 520.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 112.00 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Union Bank of India</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">21 Apr 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">Committee Sanctioned</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">APP-2026-0038</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            Mumbai Offshore Fabricators
+                                            <span class="block text-[11px] font-normal text-gray-500">Mazagon Dock Cluster, Maharashtra</span>
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Retrofitting Workshop Yard</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 135.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 28.50 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">State Bank of India</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">15 Apr 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">Approved / Sanction Issued</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot class="bg-gray-50 font-semibold text-gray-800 border-t border-gray-200">
+                                    <tr>
+                                        <td colspan="3" class="px-4 py-3 text-gray-900 font-bold">Total Portfolios (47 Applications across 8 Maritime States)</td>
+                                        <td class="px-4 py-3 text-right font-bold text-blue-900">₹ 4,280.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-800">₹ 918.50 Cr</td>
+                                        <td colspan="3" class="px-4 py-3 text-center text-xs text-gray-600">31 Approved · 7 In Review · 9 Processed</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Table 2: Projects -->
+                    <div id="kpiContent_projects" style="display: none;">
+                        <div class="overflow-x-auto border border-gray-200 rounded-xl">
+                            <table class="min-w-full divide-y divide-gray-200 text-left text-xs">
+                                <thead class="bg-gray-50 text-gray-600 font-semibold uppercase tracking-wider text-[11px]">
+                                    <tr>
+                                        <th class="px-4 py-3">Project Code</th>
+                                        <th class="px-4 py-3">Beneficiary Shipyard</th>
+                                        <th class="px-4 py-3">Project Title</th>
+                                        <th class="px-4 py-3">Location / Port Cluster</th>
+                                        <th class="px-4 py-3 text-right">Approved Outlay</th>
+                                        <th class="px-4 py-3 text-right">Sanctioned Subvention</th>
+                                        <th class="px-4 py-3 text-center">Sanction Date</th>
+                                        <th class="px-4 py-3 text-center">Execution Progress</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100 text-gray-700">
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">IIF-PRJ-2026-01</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Cochin Shipyard Limited</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">International Shiprepair Complex (ISRF)</td>
+                                        <td class="px-4 py-3 text-gray-600">Kochi Port, Kerala</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 450.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 96.00 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">12 Jan 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">82% (Commissioning)</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">IIF-PRJ-2026-02</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Mazagon Dock Shipbuilders</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Green Tug Retrofit &amp; Hydrogen Propulsion</td>
+                                        <td class="px-4 py-3 text-gray-600">Mumbai Harbour, Maharashtra</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 320.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 68.50 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">18 Jan 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-100 text-blue-800">75% (Machinery Install)</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">IIF-PRJ-2026-03</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Garden Reach Shipbuilders</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Modernised Building Berth &amp; Goliath Crane</td>
+                                        <td class="px-4 py-3 text-gray-600">Kolkata Port, West Bengal</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 280.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 60.00 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">05 Feb 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">90% (Trial Runs)</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">IIF-PRJ-2026-04</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Goa Shipyard Limited</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Composite Material Ship Construction Yard</td>
+                                        <td class="px-4 py-3 text-gray-600">Mormugao, Goa</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 195.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 41.50 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">14 Feb 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-100 text-blue-800">68% (Civil Structure)</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">IIF-PRJ-2026-05</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Hindustan Shipyard Ltd.</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Slipway Automation &amp; Outfitting Jetty</td>
+                                        <td class="px-4 py-3 text-gray-600">Visakhapatnam, Andhra Pradesh</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 360.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 77.00 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">22 Feb 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">88% (Testing Phase)</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">IIF-PRJ-2026-06</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Gujarat Maritime Board Ltd.</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Alang Green Ship Recycling Modernisation</td>
+                                        <td class="px-4 py-3 text-gray-600">Alang-Sosiya, Gujarat</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 240.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 51.40 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">03 Mar 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">95% (Operational)</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">IIF-PRJ-2026-07</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Tuticorin Shipping Works Ltd.</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Coastal Vessel Fabrication Slipway</td>
+                                        <td class="px-4 py-3 text-gray-600">V.O. Chidambaranar Port, TN</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 135.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 28.80 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">16 Mar 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-100 text-blue-800">60% (Civil Works)</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">IIF-PRJ-2026-08</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Vizag Marine Works Ltd.</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Floating Drydock Expansion (Phase 2)</td>
+                                        <td class="px-4 py-3 text-gray-600">Visakhapatnam Port, AP</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 175.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 37.50 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">29 Mar 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-100 text-blue-800">72% (Fabrication)</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot class="bg-gray-50 font-semibold text-gray-800 border-t border-gray-200">
+                                    <tr>
+                                        <td colspan="4" class="px-4 py-3 text-gray-900 font-bold">Total Active Projects (31 Projects Sanctioned)</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 2,860.50 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-800">₹ 612.40 Cr</td>
+                                        <td colspan="2" class="px-4 py-3 text-center text-xs text-gray-600">18 Operational · 13 Under Execution</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Table 3: Pending Review -->
+                    <div id="kpiContent_pending" style="display: none;">
+                        <div class="overflow-x-auto border border-gray-200 rounded-xl">
+                            <table class="min-w-full divide-y divide-gray-200 text-left text-xs">
+                                <thead class="bg-gray-50 text-gray-600 font-semibold uppercase tracking-wider text-[11px]">
+                                    <tr>
+                                        <th class="px-4 py-3">Reference ID</th>
+                                        <th class="px-4 py-3">Beneficiary Enterprise</th>
+                                        <th class="px-4 py-3">Action Stage &amp; Purpose</th>
+                                        <th class="px-4 py-3 text-right">Amount Under Desk</th>
+                                        <th class="px-4 py-3 text-center">Turnaround Waiting</th>
+                                        <th class="px-4 py-3 text-center">Lender Bank</th>
+                                        <th class="px-4 py-3 text-center">Desk Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100 text-gray-700">
+                                    <tr class="hover:bg-rose-50/30 transition-colors bg-rose-50/10">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">CMP-SMP-BOB-TL-2026-01-011</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            M/s Syama Prasad Mookerjee Port Trust
+                                            <span class="block text-[11px] font-normal text-gray-500">Kolkata Port</span>
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Compliance / Environmental Audit Overdue</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 30.00 Lakhs</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center gap-1 font-bold text-rose-700 bg-rose-50 px-2.5 py-1 rounded-full border border-rose-200">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-rose-600 animate-pulse"></span>
+                                                Waiting 8 days
+                                            </span>
+                                        </td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Bank of Baroda</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <button type="button" onclick="window.closeKpiModal(); window.openReviewModal('CMP-SMP-BOB-TL-2026-01-011', 'M/s Syama Prasad Mookerjee Port Trust', 'Compliance Audit', '8 days', '₹ 30.00 Lakhs', 'Bank of Baroda')" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-[#0d2b55] hover:bg-[#163a6e] transition-colors cursor-pointer shadow-xs inline-flex items-center gap-1">
+                                                Review Desk
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-rose-50/30 transition-colors bg-rose-50/10">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">CLM-CSL-SBI-WCDL-2026-01-008</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            M/s Cochin Shipyard Limited
+                                            <span class="block text-[11px] font-normal text-gray-500">Kochi Shiprepair Yard</span>
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Claim Release / Interest Subvention</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 42.50 Lakhs</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center gap-1 font-bold text-rose-700 bg-rose-50 px-2.5 py-1 rounded-full border border-rose-200">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-rose-600 animate-pulse"></span>
+                                                Waiting 7 days
+                                            </span>
+                                        </td>
+                                        <td class="px-4 py-3 text-center text-gray-700">State Bank of India</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <button type="button" onclick="window.closeKpiModal(); window.openReviewModal('CLM-CSL-SBI-WCDL-2026-01-008', 'M/s Cochin Shipyard Limited', 'Claim Release', '7 days', '₹ 42.50 Lakhs', 'State Bank of India')" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-[#0d2b55] hover:bg-[#163a6e] transition-colors cursor-pointer shadow-xs inline-flex items-center gap-1">
+                                                Review Desk
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-rose-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">IIF-CLM-2026-00182</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            M/s Gujarat Maritime Board Ltd.
+                                            <span class="block text-[11px] font-normal text-gray-500">Kandla Regional Shipyard</span>
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Claim Validation (Tranche 4)</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 75.00 Lakhs</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center gap-1 font-bold text-rose-700 bg-rose-50 px-2.5 py-1 rounded-full border border-rose-200">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-rose-600"></span>
+                                                Waiting 6 days
+                                            </span>
+                                        </td>
+                                        <td class="px-4 py-3 text-center text-gray-700">State Bank of India</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <button type="button" onclick="window.closeKpiModal(); window.openReviewModal('IIF-CLM-2026-00182', 'M/s Gujarat Maritime Board Ltd.', 'Claim Validation (Tranche 4)', '6 days', '₹ 75.00 Lakhs', 'State Bank of India')" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-[#0d2b55] hover:bg-[#163a6e] transition-colors cursor-pointer shadow-xs inline-flex items-center gap-1">
+                                                Review Desk
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-amber-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">APP-GRS-PNB-TL-2026-01-005</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            M/s Garden Reach Shipbuilders
+                                            <span class="block text-[11px] font-normal text-gray-500">Hooghly Cluster</span>
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Application Appraisal / Capex Subsidy</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 38.20 Lakhs</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center gap-1 font-bold text-orange-700 bg-orange-50 px-2.5 py-1 rounded-full border border-orange-200">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
+                                                Waiting 5 days
+                                            </span>
+                                        </td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Punjab National Bank</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <button type="button" onclick="window.closeKpiModal(); window.openReviewModal('APP-GRS-PNB-TL-2026-01-005', 'M/s Garden Reach Shipbuilders', 'Application Appraisal', '5 days', '₹ 38.20 Lakhs', 'Punjab National Bank')" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-[#0d2b55] hover:bg-[#163a6e] transition-colors cursor-pointer shadow-xs inline-flex items-center gap-1">
+                                                Review Desk
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-amber-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">IIF-BRW-2026-00156</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            M/s Cochin Maritime Yards
+                                            <span class="block text-[11px] font-normal text-gray-500">Cochin Ship Repair</span>
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Validate Loan Details (Step 6)</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 45.00 Lakhs</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center gap-1 font-bold text-orange-700 bg-orange-50 px-2.5 py-1 rounded-full border border-orange-200">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
+                                                Waiting 4 days
+                                            </span>
+                                        </td>
+                                        <td class="px-4 py-3 text-center text-gray-700">State Bank of India</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <button type="button" onclick="window.closeKpiModal(); window.openReviewModal('IIF-BRW-2026-00156', 'M/s Cochin Maritime Yards', 'Validate Loan Details', '4 days', '₹ 45.00 Lakhs', 'State Bank of India')" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-[#0d2b55] hover:bg-[#163a6e] transition-colors cursor-pointer shadow-xs inline-flex items-center gap-1">
+                                                Review Desk
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-amber-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">APP-HSL-CNR-TL-2026-01-003</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            M/s Hindustan Shipyard Ltd.
+                                            <span class="block text-[11px] font-normal text-gray-500">Vizag Port</span>
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Technical Vetting / Berth Extension</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 10.00 Lakhs</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center gap-1 font-bold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                                                Waiting 3 days
+                                            </span>
+                                        </td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Canara Bank</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <button type="button" onclick="window.closeKpiModal(); window.openReviewModal('APP-HSL-CNR-TL-2026-01-003', 'M/s Hindustan Shipyard Ltd.', 'Technical Vetting', '3 days', '₹ 10.00 Lakhs', 'Canara Bank')" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-[#0d2b55] hover:bg-[#163a6e] transition-colors cursor-pointer shadow-xs inline-flex items-center gap-1">
+                                                Review Desk
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-emerald-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">CMP-MDL-BOB-TL-2026-01-009</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            M/s Mazagon Dock Shipbuilders
+                                            <span class="block text-[11px] font-normal text-gray-500">Mumbai Cluster</span>
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Compliance Clearance / Annual Return</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 7.80 Lakhs</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center gap-1 font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                                                Waiting 2 days
+                                            </span>
+                                        </td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Bank of Baroda</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <button type="button" onclick="window.closeKpiModal(); window.openReviewModal('CMP-MDL-BOB-TL-2026-01-009', 'M/s Mazagon Dock Shipbuilders', 'Compliance Clearance', '2 days', '₹ 7.80 Lakhs', 'Bank of Baroda')" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-[#0d2b55] hover:bg-[#163a6e] transition-colors cursor-pointer shadow-xs inline-flex items-center gap-1">
+                                                Review Desk
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot class="bg-gray-50 font-semibold text-gray-800 border-t border-gray-200">
+                                    <tr>
+                                        <td colspan="3" class="px-4 py-3 text-gray-900 font-bold">Total Pending Desk Items (7 Urgent Tasks)</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 248.50 Lakhs</td>
+                                        <td colspan="3" class="px-4 py-3 text-center text-xs text-amber-700 font-medium">Turnaround Target: Strict 48 Hours SLA Queue</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Table 4: Subvention Released -->
+                    <div id="kpiContent_subvention" style="display: none;">
+                        <div class="overflow-x-auto border border-gray-200 rounded-xl">
+                            <table class="min-w-full divide-y divide-gray-200 text-left text-xs">
+                                <thead class="bg-gray-50 text-gray-600 font-semibold uppercase tracking-wider text-[11px]">
+                                    <tr>
+                                        <th class="px-4 py-3">Disbursement ID</th>
+                                        <th class="px-4 py-3">Beneficiary Shipyard</th>
+                                        <th class="px-4 py-3">Scheme Category</th>
+                                        <th class="px-4 py-3">Credit Facility / Account</th>
+                                        <th class="px-4 py-3 text-center">Lender Bank</th>
+                                        <th class="px-4 py-3 text-right">Disbursed Amount</th>
+                                        <th class="px-4 py-3 text-center">Release Date</th>
+                                        <th class="px-4 py-3 text-center">Settlement Mode</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100 text-gray-700">
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">MDF-DISB-2026-081</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Cochin Shipyard Limited</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Interest Subvention (Q1 FY27)</td>
+                                        <td class="px-4 py-3 font-mono text-gray-600">TL-SBI-98442</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">State Bank of India</td>
+                                        <td class="px-4 py-3 text-right font-bold text-purple-900">₹ 425.00 Lakhs</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">15 May 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">RBI RTGS Settled</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">MDF-DISB-2026-082</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Mazagon Dock Shipbuilders</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Green Tug Capital Grant (Tranche 2)</td>
+                                        <td class="px-4 py-3 font-mono text-gray-600">CF-BOB-88310</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Bank of Baroda</td>
+                                        <td class="px-4 py-3 text-right font-bold text-purple-900">₹ 380.00 Lakhs</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">22 May 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">RBI RTGS Settled</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">MDF-DISB-2026-083</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Garden Reach Shipbuilders</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Modernisation Capex Subsidy</td>
+                                        <td class="px-4 py-3 font-mono text-gray-600">TL-PNB-66290</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Punjab National Bank</td>
+                                        <td class="px-4 py-3 text-right font-bold text-purple-900">₹ 315.00 Lakhs</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">28 May 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">RBI RTGS Settled</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">MDF-DISB-2026-084</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Goa Shipyard Limited</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Interest Equalisation (Tranche 3)</td>
+                                        <td class="px-4 py-3 font-mono text-gray-600">CF-SBI-55418</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">State Bank of India</td>
+                                        <td class="px-4 py-3 text-right font-bold text-purple-900">₹ 240.00 Lakhs</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">05 Jun 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">RBI RTGS Settled</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">MDF-DISB-2026-085</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Hindustan Shipyard Ltd.</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Slipway Automation Subsidy</td>
+                                        <td class="px-4 py-3 font-mono text-gray-600">PL-CNR-77140</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Canara Bank</td>
+                                        <td class="px-4 py-3 text-right font-bold text-purple-900">₹ 260.00 Lakhs</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">11 Jun 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">RBI RTGS Settled</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">MDF-DISB-2026-086</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Gujarat Maritime Board Ltd.</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Recycling Yard Infrastructure Grant</td>
+                                        <td class="px-4 py-3 font-mono text-gray-600">TL-SBI-44391</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">State Bank of India</td>
+                                        <td class="px-4 py-3 text-right font-bold text-purple-900">₹ 220.00 Lakhs</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">18 Jun 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">RBI RTGS Settled</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot class="bg-gray-50 font-semibold text-gray-800 border-t border-gray-200">
+                                    <tr>
+                                        <td colspan="4" class="px-4 py-3 text-gray-900 font-bold">Consolidated FY 2026-27 Subvention Releases</td>
+                                        <td class="px-4 py-3 text-center text-xs text-gray-500">6 Tranches</td>
+                                        <td class="px-4 py-3 text-right font-bold text-purple-950">₹ 1,840.00 Lakhs</td>
+                                        <td colspan="2" class="px-4 py-3 text-center text-xs text-emerald-700 font-semibold">100% Direct DBT Disbursed</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Table 5: Claims Processed -->
+                    <div id="kpiContent_claims" style="display: none;">
+                        <div class="overflow-x-auto border border-gray-200 rounded-xl">
+                            <table class="min-w-full divide-y divide-gray-200 text-left text-xs">
+                                <thead class="bg-gray-50 text-gray-600 font-semibold uppercase tracking-wider text-[11px]">
+                                    <tr>
+                                        <th class="px-4 py-3">Claim Reference</th>
+                                        <th class="px-4 py-3">Shipyard / Entity</th>
+                                        <th class="px-4 py-3">Scheme Category</th>
+                                        <th class="px-4 py-3">Period / Tranche</th>
+                                        <th class="px-4 py-3 text-center">Lender Bank</th>
+                                        <th class="px-4 py-3 text-right">Claimed Value</th>
+                                        <th class="px-4 py-3 text-right">Settled Value</th>
+                                        <th class="px-4 py-3 text-center">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100 text-gray-700">
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">CLM-2026-0091</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Cochin Shipyard Limited</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Interest Subvention</td>
+                                        <td class="px-4 py-3 text-gray-600">Q1 FY 2026-27</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">State Bank of India</td>
+                                        <td class="px-4 py-3 text-right font-semibold text-gray-900">₹ 42.50 L</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 42.50 L</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Passed &amp; Credited</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">CLM-2026-0094</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Garden Reach Shipbuilders</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Modernisation Subsidy</td>
+                                        <td class="px-4 py-3 text-gray-600">Tranche 2</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Punjab National Bank</td>
+                                        <td class="px-4 py-3 text-right font-semibold text-gray-900">₹ 38.20 L</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 38.20 L</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Passed &amp; Credited</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">CLM-2026-0102</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Mazagon Dock Shipbuilders</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Green Tug Subvention</td>
+                                        <td class="px-4 py-3 text-gray-600">Tranche 1</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Bank of Baroda</td>
+                                        <td class="px-4 py-3 text-right font-semibold text-gray-900">₹ 29.75 L</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 29.75 L</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Passed &amp; Credited</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">CLM-2026-0109</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Goa Shipyard Limited</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Interest Subvention</td>
+                                        <td class="px-4 py-3 text-gray-600">Q1 FY 2026-27</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">State Bank of India</td>
+                                        <td class="px-4 py-3 text-right font-semibold text-gray-900">₹ 34.10 L</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 34.10 L</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Passed &amp; Credited</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">CLM-2026-0115</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Hindustan Shipyard Ltd.</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Capital Grant</td>
+                                        <td class="px-4 py-3 text-gray-600">Tranche 3</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Canara Bank</td>
+                                        <td class="px-4 py-3 text-right font-semibold text-gray-900">₹ 45.00 L</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 45.00 L</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Passed &amp; Credited</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">CLM-2026-0122</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Kolkata Dry Dock Yard</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Subvention Claim</td>
+                                        <td class="px-4 py-3 text-gray-600">Q4 FY 2025-26</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Bank of Baroda</td>
+                                        <td class="px-4 py-3 text-right font-semibold text-gray-900">₹ 38.20 L</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 38.20 L</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Passed &amp; Credited</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">CLM-2026-0130</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Vizag Marine Works Ltd.</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Project Subvention</td>
+                                        <td class="px-4 py-3 text-gray-600">Q1 FY 2026-27</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">State Bank of India</td>
+                                        <td class="px-4 py-3 text-right font-semibold text-gray-900">₹ 26.80 L</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 26.80 L</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-teal-100 text-teal-800">Audited &amp; Cleared</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">CLM-2026-0136</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Mumbai Offshore Fabricators</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Yard Capex Subsidy</td>
+                                        <td class="px-4 py-3 text-gray-600">Tranche 2</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">State Bank of India</td>
+                                        <td class="px-4 py-3 text-right font-semibold text-gray-900">₹ 31.50 L</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 31.50 L</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-teal-100 text-teal-800">Audited &amp; Cleared</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">CLM-2026-0141</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Chennai Naval Fabricators</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Interest Subvention</td>
+                                        <td class="px-4 py-3 text-gray-600">Q1 FY 2026-27</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Indian Bank</td>
+                                        <td class="px-4 py-3 text-right font-semibold text-gray-900">₹ 22.40 L</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 22.40 L</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-teal-100 text-teal-800">Audited &amp; Cleared</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">CLM-2026-0148</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Paradip Marine Services</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Vessel Construction Interest</td>
+                                        <td class="px-4 py-3 text-gray-600">Tranche 1</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">UCO Bank</td>
+                                        <td class="px-4 py-3 text-right font-semibold text-gray-900">₹ 28.90 L</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 28.90 L</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-teal-100 text-teal-800">Audited &amp; Cleared</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">CLM-2026-0153</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Pipavav Offshore Yard</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Drydock Subvention</td>
+                                        <td class="px-4 py-3 text-gray-600">Tranche 4</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Union Bank of India</td>
+                                        <td class="px-4 py-3 text-right font-semibold text-gray-900">₹ 24.60 L</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 24.60 L</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-teal-100 text-teal-800">Audited &amp; Cleared</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">CLM-2026-0159</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Tuticorin Shipping Works</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Equipment Subvention</td>
+                                        <td class="px-4 py-3 text-gray-600">Tranche 1</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">State Bank of India</td>
+                                        <td class="px-4 py-3 text-right font-semibold text-gray-900">₹ 19.60 L</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 19.60 L</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-teal-100 text-teal-800">Audited &amp; Cleared</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot class="bg-gray-50 font-semibold text-gray-800 border-t border-gray-200">
+                                    <tr>
+                                        <td colspan="5" class="px-4 py-3 text-gray-900 font-bold">Total Processed Claims Register (89 Completed Claims)</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 3,420.75 L</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-800">₹ 3,420.75 L</td>
+                                        <td class="px-4 py-3 text-center text-xs text-gray-600">100% Settled &amp; Reconciled</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Table 6: Borrowers Onboarded -->
+                    <div id="kpiContent_borrowers" style="display: none;">
+                        <div class="overflow-x-auto border border-gray-200 rounded-xl">
+                            <table class="min-w-full divide-y divide-gray-200 text-left text-xs">
+                                <thead class="bg-gray-50 text-gray-600 font-semibold uppercase tracking-wider text-[11px]">
+                                    <tr>
+                                        <th class="px-4 py-3">Registration ID</th>
+                                        <th class="px-4 py-3">Borrower / Enterprise</th>
+                                        <th class="px-4 py-3">Category</th>
+                                        <th class="px-4 py-3">Registered Port Cluster</th>
+                                        <th class="px-4 py-3 text-center">Primary Lender Bank</th>
+                                        <th class="px-4 py-3 text-right">Sanctioned Limit</th>
+                                        <th class="px-4 py-3 text-center">Active Facilities</th>
+                                        <th class="px-4 py-3 text-center">Onboarded Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100 text-gray-700">
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">BRW-CSL-01</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Cochin Shipyard Limited</td>
+                                        <td class="px-4 py-3 text-gray-600">PSU Shipyard</td>
+                                        <td class="px-4 py-3 text-gray-700">Kochi, Kerala</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">State Bank of India</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 1,250.00 Cr</td>
+                                        <td class="px-4 py-3 text-center font-semibold text-blue-900">3 Active Lines</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">14 Apr 2024</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">BRW-MDL-02</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Mazagon Dock Shipbuilders Ltd.</td>
+                                        <td class="px-4 py-3 text-gray-600">Defence / Commercial</td>
+                                        <td class="px-4 py-3 text-gray-700">Mumbai, Maharashtra</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Bank of Baroda</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 980.00 Cr</td>
+                                        <td class="px-4 py-3 text-center font-semibold text-blue-900">2 Active Lines</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">28 May 2024</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">BRW-GRS-03</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Garden Reach Shipbuilders &amp; Eng.</td>
+                                        <td class="px-4 py-3 text-gray-600">PSU Shipyard</td>
+                                        <td class="px-4 py-3 text-gray-700">Kolkata, West Bengal</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Punjab National Bank</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 820.00 Cr</td>
+                                        <td class="px-4 py-3 text-center font-semibold text-blue-900">2 Active Lines</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">11 Jun 2024</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">BRW-GSL-04</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Goa Shipyard Limited</td>
+                                        <td class="px-4 py-3 text-gray-600">Defence / Specialised</td>
+                                        <td class="px-4 py-3 text-gray-700">Mormugao, Goa</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">State Bank of India</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 640.00 Cr</td>
+                                        <td class="px-4 py-3 text-center font-semibold text-blue-900">2 Active Lines</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">24 Jul 2024</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">BRW-HSL-05</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Hindustan Shipyard Limited</td>
+                                        <td class="px-4 py-3 text-gray-600">Commercial Yard</td>
+                                        <td class="px-4 py-3 text-gray-700">Visakhapatnam, AP</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Canara Bank</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 710.00 Cr</td>
+                                        <td class="px-4 py-3 text-center font-semibold text-blue-900">3 Active Lines</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">05 Aug 2024</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">BRW-GMB-06</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Gujarat Maritime Board Ltd.</td>
+                                        <td class="px-4 py-3 text-gray-600">State Maritime Body</td>
+                                        <td class="px-4 py-3 text-gray-700">Gandhinagar / Alang, Gujarat</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">State Bank of India</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 450.00 Cr</td>
+                                        <td class="px-4 py-3 text-center font-semibold text-blue-900">1 Active Line</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">19 Oct 2024</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">BRW-SMP-07</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Syama Prasad Mookerjee Port Trust</td>
+                                        <td class="px-4 py-3 text-gray-600">Major Port Trust</td>
+                                        <td class="px-4 py-3 text-gray-700">Kolkata, West Bengal</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Bank of Baroda</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 320.00 Cr</td>
+                                        <td class="px-4 py-3 text-center font-semibold text-blue-900">1 Active Line</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">08 Nov 2024</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">BRW-VMW-08</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Vizag Marine Works Ltd.</td>
+                                        <td class="px-4 py-3 text-gray-600">Private Shiprepairer</td>
+                                        <td class="px-4 py-3 text-gray-700">Visakhapatnam, AP</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">State Bank of India</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 122.00 Cr</td>
+                                        <td class="px-4 py-3 text-center font-semibold text-blue-900">1 Active Line</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">15 Dec 2024</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">BRW-POV-09</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Pipavav Offshore Yard Ltd.</td>
+                                        <td class="px-4 py-3 text-gray-600">Large Fabricator</td>
+                                        <td class="px-4 py-3 text-gray-700">Pipavav, Gujarat</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Union Bank of India</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 520.00 Cr</td>
+                                        <td class="px-4 py-3 text-center font-semibold text-blue-900">2 Active Lines</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">12 Jan 2025</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">BRW-MOF-10</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Mumbai Offshore Fabricators</td>
+                                        <td class="px-4 py-3 text-gray-600">Marine Engineering</td>
+                                        <td class="px-4 py-3 text-gray-700">Mumbai, Maharashtra</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">State Bank of India</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 120.00 Cr</td>
+                                        <td class="px-4 py-3 text-center font-semibold text-blue-900">1 Active Line</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">04 Feb 2025</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">BRW-CNF-11</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Chennai Naval Fabricators</td>
+                                        <td class="px-4 py-3 text-gray-600">Specialised Yard</td>
+                                        <td class="px-4 py-3 text-gray-700">Chennai, Tamil Nadu</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Indian Bank</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 88.00 Cr</td>
+                                        <td class="px-4 py-3 text-center font-semibold text-blue-900">1 Active Line</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">20 Mar 2025</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">BRW-TSW-12</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Tuticorin Shipping Works Ltd.</td>
+                                        <td class="px-4 py-3 text-gray-600">Coastal Repair Yard</td>
+                                        <td class="px-4 py-3 text-gray-700">Tuticorin, Tamil Nadu</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">State Bank of India</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 75.00 Cr</td>
+                                        <td class="px-4 py-3 text-center font-semibold text-blue-900">1 Active Line</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">18 Apr 2025</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot class="bg-gray-50 font-semibold text-gray-800 border-t border-gray-200">
+                                    <tr>
+                                        <td colspan="5" class="px-4 py-3 text-gray-900 font-bold">Consolidated Borrowers Registry (12 Onboarded Enterprises)</td>
+                                        <td class="px-4 py-3 text-right font-bold text-blue-950">₹ 5,640.00 Cr</td>
+                                        <td colspan="2" class="px-4 py-3 text-center text-xs text-emerald-700 font-bold">100% Active &amp; Verified Portfolios</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="px-6 py-3.5 bg-gray-50 border-t border-gray-200 flex flex-wrap items-center justify-between gap-3 text-xs text-gray-600 flex-shrink-0">
+                    <div id="kpiModalFooterStats" class="flex-1 font-medium">
+                        Total Applications: <span class="font-bold text-gray-900">47</span> | Project Outlay: <span class="font-bold text-blue-900">₹ 4,280.00 Cr</span> | Requested Subvention: <span class="font-bold text-emerald-700">₹ 918.50 Cr</span>
+                    </div>
+                    <button type="button" onclick="window.closeKpiModal()" class="px-4 py-1.5 rounded-md text-xs font-semibold text-gray-700 hover:text-gray-900 bg-white hover:bg-gray-100 border border-gray-300 shadow-2xs transition-colors cursor-pointer">
+                        Close
                     </button>
                 </div>
             </div>
