@@ -904,21 +904,25 @@
         <!-- Interactive Bar Chart Controller Script -->
         <script>
             (function () {
-                // Generate 50 financial years from FY 1976-77 to FY 2025-26
+                // Generate 51 financial years from FY 1976-77 to FY 2026-27
                 const yearly50Labels = [];
                 const yearly50WC = [];
                 const yearly50TL = [];
-                for (let y = 1976; y <= 2025; y++) {
+                for (let y = 1976; y <= 2026; y++) {
                     const nextY = (y + 1) % 100;
                     const nextYStr = nextY < 10 ? '0' + nextY : '' + nextY;
                     yearly50Labels.push(`FY ${y}-${nextYStr}`);
                     
-                    const t = (y - 1976) / 49;
+                    const t = (y - 1976) / 50;
                     const baseWc = Math.round(120 + Math.pow(t, 1.8) * 2980 + Math.sin(y * 1.5) * 60);
                     const baseTl = Math.round(80 + Math.pow(t, 1.8) * 2220 + Math.cos(y * 1.5) * 45);
                     yearly50WC.push(Math.max(50, baseWc));
                     yearly50TL.push(Math.max(30, baseTl));
                 }
+                // Align recent years with scheme figures
+                yearly50WC[48] = 3050; yearly50TL[48] = 2220; // FY 2024-25
+                yearly50WC[49] = 3120; yearly50TL[49] = 2260; // FY 2025-26
+                yearly50WC[50] = 3380; yearly50TL[50] = 2450; // FY 2026-27
 
                 const subventionDataSets = {
                     monthly: {
@@ -1102,18 +1106,39 @@
                             tooltipValue.style.color = color;
                             tooltipValue.textContent = `Disbursement: Rs. ${Number(val).toLocaleString('en-IN')} Lakhs`;
 
+                            // Show tooltip and reset transform so dimensions can be accurately measured
+                            tooltip.style.display = 'block';
+                            tooltip.style.opacity = '1';
+                            tooltip.style.transform = 'none';
+
                             const barX = parseFloat(bar.getAttribute('x'));
                             const barW = parseFloat(bar.getAttribute('width'));
                             const barY = parseFloat(bar.getAttribute('y'));
 
-                            const left = barX + barW / 2;
-                            const top = Math.max(5, barY - 48);
+                            const tooltipW = tooltip.offsetWidth || 190;
+                            const tooltipH = tooltip.offsetHeight || 48;
+
+                            const visibleLeft = scrollContainer.scrollLeft;
+                            const visibleRight = visibleLeft + scrollContainer.clientWidth;
+                            const barCenterX = barX + barW / 2;
+
+                            // Clamp horizontal position so tooltip is NEVER cut off on right or left edge
+                            let left = barCenterX - tooltipW / 2;
+                            if (left + tooltipW > visibleRight - 8) {
+                                left = visibleRight - tooltipW - 8;
+                            }
+                            if (left < visibleLeft + 8) {
+                                left = visibleLeft + 8;
+                            }
+
+                            // Calculate vertical position: if space above bar is insufficient, flip below bar top
+                            let top = barY - tooltipH - 8;
+                            if (top < 6) {
+                                top = (barY + 12 + tooltipH <= 165) ? (barY + 12) : 6;
+                            }
 
                             tooltip.style.left = `${left}px`;
                             tooltip.style.top = `${top}px`;
-                            tooltip.style.transform = 'translateX(-50%)';
-                            tooltip.style.display = 'block';
-                            tooltip.style.opacity = '1';
                         });
 
                         bar.addEventListener('mouseleave', () => {
