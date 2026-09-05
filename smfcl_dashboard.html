@@ -1677,26 +1677,27 @@
         </script>
         <script>
             (function () {
-                // Generate 50 financial years from FY 1976-77 to FY 2025-26
+                // Generate 51 financial years from FY 1976-77 to FY 2026-27
                 const yearly50Labels = [];
                 const yearly50App = [];
                 const yearly50Approved = [];
-                for (let y = 1976; y <= 2025; y++) {
+                for (let y = 1976; y <= 2026; y++) {
                     const nextY = (y + 1) % 100;
                     const nextYStr = nextY < 10 ? '0' + nextY : '' + nextY;
                     yearly50Labels.push(`FY ${y}-${nextYStr}`);
                     
-                    const t = (y - 1976) / 49;
+                    const t = (y - 1976) / 50;
                     const baseApp = Math.round(15 + Math.pow(t, 2.2) * 340 + Math.sin(y * 1.3) * 6);
                     const baseAppr = Math.round(10 + Math.pow(t, 2.2) * 288 + Math.cos(y * 1.3) * 5);
                     yearly50App.push(Math.max(10, baseApp));
                     yearly50Approved.push(Math.max(8, baseAppr));
                 }
-                // Align last 4 years with current dashboard figures
+                // Align last 5 years with current dashboard figures
                 yearly50App[46] = 150; yearly50Approved[46] = 120; // FY 2022-23
                 yearly50App[47] = 220; yearly50Approved[47] = 180; // FY 2023-24
                 yearly50App[48] = 290; yearly50Approved[48] = 240; // FY 2024-25
                 yearly50App[49] = 370; yearly50Approved[49] = 310; // FY 2025-26
+                yearly50App[50] = 425; yearly50Approved[50] = 360; // FY 2026-27
 
                 const chartDataSets = {
                     monthly: {
@@ -1715,8 +1716,8 @@
                     },
                     yearly: {
                         labels: yearly50Labels,
-                        maxY: 400,
-                        yTicks: [0, 100, 200, 300, 400],
+                        maxY: 500,
+                        yTicks: [0, 100, 200, 300, 400, 500],
                         applications: yearly50App,
                         approved: yearly50Approved
                     }
