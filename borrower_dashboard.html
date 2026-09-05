@@ -1,0 +1,1360 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="csrf-token" content="WjepNDiWvouIq92q2qaLZO9udDKW2iGVQQvDmyNM" />
+        <title>Sagarmala Finance Corporation Limited - Borrower Dashboard</title>
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.bunny.net" />
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+        <!-- Tailwind CSS & Alpine.js -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            navy: {
+                                900: '#0d2b55',
+                            }
+                        },
+                        fontFamily: {
+                            sans: ['Figtree', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+                        },
+                        boxShadow: {
+                            'xs': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+                        }
+                    }
+                }
+            }
+        </script>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+        <style>
+            [x-cloak] { display: none !important; }
+            body { font-family: 'Figtree', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        </style>
+    </head>
+
+    <body class="font-sans antialiased">
+        <div id="toast" class="custom-toast"></div>
+        <div class="min-h-screen bg-gray-100">
+            <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+                <!-- Primary Navigation Menu -->
+                <div class="w-full mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between items-center h-20">
+                        <!-- Left: Ministry Logo -->
+                        <div class="flex items-center">
+                            <img
+                                src="https://iifmdf.adgstaging.in/assets/images/ministry_logo.svg"
+                                alt="Ministry of Ports, Shipping and Waterways"
+                                class="h-14 sm:h-16 w-auto max-h-16 object-contain flex-shrink-0 select-none"
+                            />
+                        </div>
+
+                        <!-- Right: SMFCL Logo + Title + Dropdown -->
+                        <div class="flex items-center gap-4">
+                            <!-- SMFCL Logo + Title -->
+                            <div class="flex items-center gap-2.5">
+                                <img
+                                    src="https://iifmdf.adgstaging.in/assets/images/smfcl_logo.png"
+                                    alt="SMFCL Logo"
+                                    class="h-11 sm:h-12 w-auto max-h-12 object-contain flex-shrink-0 select-none"
+                                />
+                                <div>
+                                    <span class="text-[#0d2b55] text-sm font-semibold hidden sm:inline-block tracking-tight">
+                                        Sagarmala Finance Corporation Limited (SMFCL)
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Settings Dropdown -->
+                            <div class="relative" x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
+                                <button
+                                    @click="open = ! open"
+                                    type="button"
+                                    class="inline-flex items-center gap-1.5 px-3 py-1 border border-gray-300 rounded text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none transition ease-in-out duration-150 cursor-pointer shadow-xs"
+                                >
+                                    <span>Borrower</span>
+                                    <svg class="h-3 w-3 text-gray-500 transition-transform duration-200" :class="{'rotate-180': open}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+
+                                <div
+                                    x-show="open"
+                                    x-transition:enter="transition ease-out duration-200"
+                                    x-transition:enter-start="opacity-0 scale-95"
+                                    x-transition:enter-end="opacity-100 scale-100"
+                                    x-transition:leave="transition ease-in duration-75"
+                                    x-transition:leave-start="opacity-100 scale-100"
+                                    x-transition:leave-end="opacity-0 scale-95"
+                                    class="absolute z-50 mt-2 w-48 rounded-md shadow-lg end-0"
+                                    style="display: none"
+                                    @click="open = false"
+                                >
+                                    <div class="rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-white border border-gray-100">
+                                        <a
+                                            class="block w-full px-4 py-2 text-start text-xs leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none transition duration-150 ease-in-out font-medium"
+                                            href="smfcl_dashboard.html"
+                                        >
+                                            SMFCL Dashboard
+                                        </a>
+                                        <a
+                                            class="block w-full px-4 py-2 text-start text-xs leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none transition duration-150 ease-in-out font-medium"
+                                            href="ministry_dashboard.html"
+                                        >
+                                            Ministry Dashboard
+                                        </a>
+                                        <a
+                                            class="block w-full px-4 py-2 text-start text-xs leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none transition duration-150 ease-in-out font-medium"
+                                            href="Lender_dashboard.html"
+                                        >
+                                            Lender Dashboard
+                                        </a>
+                                        <div class="border-t border-gray-100 my-1"></div>
+                                        <a
+                                            class="block w-full px-4 py-2 text-start text-xs leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none transition duration-150 ease-in-out"
+                                            href="javascript:void(0)"
+                                        >
+                                            Profile
+                                        </a>
+                                        <a
+                                            class="block w-full px-4 py-2 text-start text-xs leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none transition duration-150 ease-in-out"
+                                            href="javascript:void(0)"
+                                        >
+                                            Log Out
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Hamburger -->
+                        <div class="-me-2 flex items-center sm:hidden">
+                            <button
+                                @click="open = ! open"
+                                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
+                            >
+                                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                                    <path
+                                        :class="{'hidden': open, 'inline-flex': ! open }"
+                                        class="inline-flex"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M4 6h16M4 12h16M4 18h16"
+                                    />
+                                    <path
+                                        :class="{'hidden': ! open, 'inline-flex': open }"
+                                        class="hidden"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Responsive Navigation Menu -->
+                <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+                    <div class="pt-2 pb-3 space-y-1">Dashboard</div>
+                    <!-- Responsive Settings Options -->
+                    <div class="pt-4 pb-1 border-t border-gray-200">
+                        <div class="px-4">
+                            <div class="font-medium text-base text-gray-800">Borrower User</div>
+                            <div class="font-medium text-sm text-gray-500">borrower@gmail.com</div>
+                        </div>
+                        <div class="mt-3 space-y-1">
+                            <a
+                                class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out"
+                                href="smfcl_dashboard.html"
+                            >
+                                SMFCL Dashboard
+                            </a>
+                            <a
+                                class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out"
+                                href="ministry_dashboard.html"
+                            >
+                                Ministry Dashboard
+                            </a>
+                            <a
+                                class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out"
+                                href="Lender_dashboard.html"
+                            >
+                                Lender Dashboard
+                            </a>
+                            <a
+                                class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out"
+                                href="javascript:void(0)"
+                            >
+                                Profile
+                            </a>
+                            <a
+                                class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out"
+                                href="javascript:void(0)"
+                            >
+                                Log Out
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="flex min-h-[calc(100vh-5rem)]">
+                <!-- Left Sidebar -->
+                <aside class="w-[300px] min-h-[calc(100vh-5rem)] bg-[#0d2b55] text-white flex-shrink-0">
+                    <!-- <nav class="w-64 bg-gray-800 min-h-screen text-white"> -->
+                    <div class="flex-1 p-3 space-y-0.5 overflow-y-auto">
+                        <a
+                            href="#"
+                            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors bg-white/20 text-white"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                data-lucide="layout-dashboard"
+                                aria-hidden="true"
+                                class="lucide lucide-layout-dashboard w-4 h-4 flex-shrink-0"
+                            >
+                                <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                                <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                                <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                                <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                            </svg>
+                            <span class="flex-1">Dashboard</span>
+                        </a>
+
+                        <a
+                            href="javascript:void(0)"
+                            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-white hover:bg-white/10"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                data-lucide="layout-dashboard"
+                                aria-hidden="true"
+                                class="lucide lucide-layout-dashboard w-4 h-4 flex-shrink-0"
+                            >
+                                <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                                <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                                <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                                <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                            </svg>
+                            <span class="flex-1">My Applications</span>
+                        </a>
+
+                        <a
+                            href="javascript:void(0)"
+                            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-white hover:bg-white/10"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                data-lucide="layout-dashboard"
+                                aria-hidden="true"
+                                class="lucide lucide-layout-dashboard w-4 h-4 flex-shrink-0"
+                            >
+                                <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                                <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                                <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                                <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                            </svg>
+                            <span class="flex-1">Add Lender Information</span>
+                        </a>
+
+                        <a
+                            href="javascript:void(0)"
+                            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-white hover:bg-white/10"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                data-lucide="layout-dashboard"
+                                aria-hidden="true"
+                                class="lucide lucide-layout-dashboard w-4 h-4 flex-shrink-0"
+                            >
+                                <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                                <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                                <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                                <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                            </svg>
+                            <span class="flex-1">Lenders Information</span>
+                        </a>
+
+                        <a
+                            href="javascript:void(0)"
+                            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-white hover:bg-white/10"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                data-lucide="layout-dashboard"
+                                aria-hidden="true"
+                                class="lucide lucide-layout-dashboard w-4 h-4 flex-shrink-0"
+                            >
+                                <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                                <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                                <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                                <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                            </svg>
+                            <span class="flex-1">Create New Loan Application</span>
+                        </a>
+
+                        <div>
+                            <button
+                                id="appMenuBtn"
+                                class="w-full flex items-center text-sm gap-3 px-3 py-2.5 rounded-lg mb-0.5 text-left transition-colors text-white hover:bg-white/10"
+                            >
+                                <span class="flex-shrink-0">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="lucide lucide-file-text"
+                                    >
+                                        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                                        <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                                        <path d="M10 9H8"></path>
+                                        <path d="M16 13H8"></path>
+                                        <path d="M16 17H8"></path>
+                                    </svg>
+                                </span>
+                                <span class="text-sm flex-1 truncate">Application for IIF Tagging</span>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="14"
+                                    height="14"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="lucide lucide-chevron-down transition-transform rotate-180"
+                                >
+                                    <path d="m6 9 6 6 6-6"></path>
+                                </svg>
+                            </button>
+                            <div id="appSubmenu" class="ml-6 mb-1">
+                                <a
+                                    href="javascript:void(0)"
+                                    class="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-left text-sm transition-colors text-blue-200 hover:bg-white/10"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="12"
+                                        height="12"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="lucide lucide-chevron-right"
+                                    >
+                                        <path d="m9 18 6-6-6-6"></path>
+                                    </svg>
+                                    Eligible Application
+                                </a>
+                                <a
+                                    href="javascript:void(0)"
+                                    class="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-left text-sm transition-colors text-blue-200 hover:bg-white/10"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="12"
+                                        height="12"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="lucide lucide-chevron-right"
+                                    >
+                                        <path d="m9 18 6-6-6-6"></path>
+                                    </svg>
+                                    Not Eligible Application
+                                </a>
+                            </div>
+                        </div>
+
+                        <a
+                            href="javascript:void(0)"
+                            class="hidden flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-white"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                data-lucide="layout-dashboard"
+                                aria-hidden="true"
+                                class="lucide lucide-layout-dashboard w-4 h-4 flex-shrink-0"
+                            >
+                                <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                                <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                                <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                                <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                            </svg>
+                            <span class="flex-1">Claims</span>
+                        </a>
+
+                        <a
+                            href="#"
+                            class="hidden flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-white"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                data-lucide="send"
+                                aria-hidden="true"
+                                class="lucide lucide-send w-4 h-4 flex-shrink-0"
+                            >
+                                <path
+                                    d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"
+                                ></path>
+                                <path d="m21.854 2.147-10.94 10.939"></path>
+                            </svg>
+                            <span class="flex-1">Claim Requests</span>
+                        </a>
+                        <a
+                            href="#"
+                            class="hidden flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-white"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                data-lucide="activity"
+                                aria-hidden="true"
+                                class="lucide lucide-activity w-4 h-4 flex-shrink-0"
+                            >
+                                <path
+                                    d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"
+                                ></path>
+                            </svg>
+                            <span class="flex-1">Workflow Tracker</span>
+                        </a>
+                        <a
+                            href="#"
+                            class="hidden flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-white"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                data-lucide="bell"
+                                aria-hidden="true"
+                                class="lucide lucide-bell w-4 h-4 flex-shrink-0"
+                            >
+                                <path d="M10.268 21a2 2 0 0 0 3.464 0"></path>
+                                <path
+                                    d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"
+                                ></path>
+                            </svg>
+                            <span class="flex-1">Notifications</span>
+                        </a>
+                        <a
+                            href="#"
+                            class="hidden flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-white"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                data-lucide="file"
+                                aria-hidden="true"
+                                class="lucide lucide-file w-4 h-4 flex-shrink-0"
+                            >
+                                <path
+                                    d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"
+                                ></path>
+                                <path d="M14 2v5a1 1 0 0 0 1 1h5"></path>
+                            </svg>
+                            <span class="flex-1">Documents</span>
+                        </a>
+                    </div>
+
+                    <script>
+                        // const btn = document.getElementById('appMenuBtn');
+                        // const submenu = document.getElementById('appSubmenu');
+                        // const arrow = document.getElementById('appArrow');
+
+                        // btn.addEventListener('click', () => {
+                        //     submenu.classList.toggle('hidden');
+                        //     arrow.classList.toggle('rotate-180');
+                        // });
+                    </script>
+                </aside>
+                <!-- Page Content -->
+                <main class="w-full flex-1 min-w-0 min-h-[calc(100vh-5rem)] flex flex-col justify-between px-6 pt-6 pb-2 overflow-y-auto">
+                        <div class="mb-3">
+                            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>
+                        </div>
+                        <div class="space-y-6 flex-1">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <!-- <h2 class="text-gray-800">Welcome, M/s Indian Shipbuilders Pvt. Ltd.</h2> -->
+                                    <p class="text-gray-500 text-sm mt-1">
+                                        IIF Portal — Borrower Dashboard
+                                    </p>
+                                </div>
+                                <!-- <button
+                                    class="flex items-center gap-2 px-4 py-2 rounded-lg text-white text-sm"
+                                    style="background: rgb(13, 43, 85)"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="14"
+                                        height="14"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="lucide lucide-send"
+                                    >
+                                        <path
+                                            d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"
+                                        ></path>
+                                        <path d="m21.854 2.147-10.94 10.939"></path>
+                                    </svg>
+                                    New Claim
+                                </button> -->
+                            </div>
+                            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                                <div class="bg-white rounded-xl border border-gray-200 p-5">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div
+                                            class="w-10 h-10 rounded-lg flex items-center justify-center"
+                                            style="background: rgba(46, 125, 50, 0.125); color: rgb(46, 125, 50)"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="lucide lucide-circle-check-big"
+                                            >
+                                                <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
+                                                <path d="m9 11 3 3L22 4"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between mb-0.5">
+                                        <span class="text-2xl font-bold text-gray-900">Approved</span>
+                                        <span class="text-2xl font-bold text-gray-900">6</span>
+                                    </div>
+                                    <div class="text-sm font-medium text-gray-700">Application Status</div>
+                                </div>
+
+                                <!-- new cards start here  -->
+
+                                 <div class="bg-white rounded-xl border border-gray-200 p-5">
+                                    <div class="flex items-start justify-between mb-3">
+                                     <img width="48" height="48" src="https://img.icons8.com/fluency/48/submit-document.png" alt="submit-document"/>
+                                    </div>
+                                    <div class="flex items-center justify-between mb-0.5">
+                                        <span class="text-2xl font-bold text-gray-900">Submit</span>
+                                        <span class="text-2xl font-bold text-gray-900">5</span>
+                                    </div>
+                                      <div class="text-sm font-medium text-gray-700">Submit Application</div>
+                                     
+                                </div>
+
+                              <div class="bg-white rounded-xl border border-gray-200 p-5">
+                                 <img width="35" height="50" src="https://img.icons8.com/ios-filled/50/delete-view.png" alt="delete-view"/>
+                                    <div class="flex items-center justify-between mb-0.5 mt-4">
+                                        <span class="text-2xl font-bold text-gray-900">Reject</span>
+                                        <span class="text-2xl font-bold text-gray-900">2</span>
+
+                                    </div>
+                                      <div class="text-sm font-medium text-gray-700">Reject Application</div>
+                                   
+                                </div>
+
+                                   <!-- new cards end here  -->
+
+
+
+
+                                <div class="bg-white rounded-xl border border-gray-200 p-5">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div
+                                            class="w-10 h-10 rounded-lg flex items-center justify-center"
+                                            
+                                        >
+                                           <img width="64" height="64" src="https://img.icons8.com/nolan/64/inspection.png" alt="inspection"/>
+                                        </div>
+                                    </div>
+                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">Rs. 375 L</div>
+                                    <div class="text-sm font-medium text-gray-700">Pending compilance</div>
+                                    <!-- <div class="text-xs text-gray-400 mt-0.5">3% on Rs. 12,500 Lakhs</div> -->
+                                </div>
+
+                                 <div class="bg-white rounded-xl border border-gray-200 p-5">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div
+                                            class="w-10 h-10 rounded-lg flex items-center justify-center"
+                                            style="background: rgba(230, 81, 0, 0.125); color: rgb(230, 81, 0)"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="lucide lucide-clock"
+                                            >
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <polyline points="12 6 12 12 16 14"></polyline>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">Rs. 93.75 L</div>
+                                    <div class="text-sm font-medium text-gray-700">Pending Claim</div>
+                                    <div class="text-xs text-gray-400 mt-0.5">
+                                        3rd claim — awaiting lender validation
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-xl border border-gray-200 p-5">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div
+                                            class="w-10 h-10 rounded-lg flex items-center justify-center"
+                                            style="background: rgba(123, 31, 162, 0.125); color: rgb(123, 31, 162)"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="lucide lucide-send"
+                                            >
+                                                <path
+                                                    d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"
+                                                ></path>
+                                                <path d="m21.854 2.147-10.94 10.939"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">Rs. 375 L</div>
+                                    <div class="text-sm font-medium text-gray-700">Subvention Released</div>
+                                    <div class="text-xs text-gray-400 mt-0.5">2 claims processed</div>
+                                </div>
+                               
+                            </div>
+
+                          
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                <div class="bg-white rounded-xl border border-gray-200 p-5">
+                                    <h3 class="mb-4">Claim History</h3>
+                                    <div
+                                        class="recharts-responsive-container"
+                                        style="width: 100%; height: 180px; min-width: 0px"
+                                    >
+                                        <div
+                                            class="recharts-wrapper"
+                                            style="
+                                                position: relative;
+                                                cursor: default;
+                                                width: 100%;
+                                                height: 100%;
+                                                max-height: 180px;
+                                                max-width: 522px;
+                                            "
+                                        >
+                                            <svg
+                                                class="recharts-surface"
+                                                width="522"
+                                                height="180"
+                                                viewBox="0 0 522 180"
+                                                style="width: 100%; height: 100%"
+                                            >
+                                                <title></title>
+                                                <desc></desc>
+                                                <defs>
+                                                    <clipPath id="recharts1-clip">
+                                                        <rect x="65" y="5" height="140" width="452"></rect>
+                                                    </clipPath>
+                                                </defs>
+                                                <g class="recharts-cartesian-grid">
+                                                    <g class="recharts-cartesian-grid-horizontal">
+                                                        <line
+                                                            stroke-dasharray="3 3"
+                                                            stroke="#f0f0f0"
+                                                            fill="none"
+                                                            x="65"
+                                                            y="5"
+                                                            width="452"
+                                                            height="140"
+                                                            x1="65"
+                                                            y1="145"
+                                                            x2="517"
+                                                            y2="145"
+                                                        ></line>
+                                                        <line
+                                                            stroke-dasharray="3 3"
+                                                            stroke="#f0f0f0"
+                                                            fill="none"
+                                                            x="65"
+                                                            y="5"
+                                                            width="452"
+                                                            height="140"
+                                                            x1="65"
+                                                            y1="110"
+                                                            x2="517"
+                                                            y2="110"
+                                                        ></line>
+                                                        <line
+                                                            stroke-dasharray="3 3"
+                                                            stroke="#f0f0f0"
+                                                            fill="none"
+                                                            x="65"
+                                                            y="5"
+                                                            width="452"
+                                                            height="140"
+                                                            x1="65"
+                                                            y1="75"
+                                                            x2="517"
+                                                            y2="75"
+                                                        ></line>
+                                                        <line
+                                                            stroke-dasharray="3 3"
+                                                            stroke="#f0f0f0"
+                                                            fill="none"
+                                                            x="65"
+                                                            y="5"
+                                                            width="452"
+                                                            height="140"
+                                                            x1="65"
+                                                            y1="5"
+                                                            x2="517"
+                                                            y2="5"
+                                                        ></line>
+                                                    </g>
+                                                    <g class="recharts-cartesian-grid-vertical">
+                                                        <line
+                                                            stroke-dasharray="3 3"
+                                                            stroke="#f0f0f0"
+                                                            fill="none"
+                                                            x="65"
+                                                            y="5"
+                                                            width="452"
+                                                            height="140"
+                                                            x1="140.33333333333331"
+                                                            y1="5"
+                                                            x2="140.33333333333331"
+                                                            y2="145"
+                                                        ></line>
+                                                        <line
+                                                            stroke-dasharray="3 3"
+                                                            stroke="#f0f0f0"
+                                                            fill="none"
+                                                            x="65"
+                                                            y="5"
+                                                            width="452"
+                                                            height="140"
+                                                            x1="291"
+                                                            y1="5"
+                                                            x2="291"
+                                                            y2="145"
+                                                        ></line>
+                                                        <line
+                                                            stroke-dasharray="3 3"
+                                                            stroke="#f0f0f0"
+                                                            fill="none"
+                                                            x="65"
+                                                            y="5"
+                                                            width="452"
+                                                            height="140"
+                                                            x1="441.66666666666663"
+                                                            y1="5"
+                                                            x2="441.66666666666663"
+                                                            y2="145"
+                                                        ></line>
+                                                        <line
+                                                            stroke-dasharray="3 3"
+                                                            stroke="#f0f0f0"
+                                                            fill="none"
+                                                            x="65"
+                                                            y="5"
+                                                            width="452"
+                                                            height="140"
+                                                            x1="65"
+                                                            y1="5"
+                                                            x2="65"
+                                                            y2="145"
+                                                        ></line>
+                                                        <line
+                                                            stroke-dasharray="3 3"
+                                                            stroke="#f0f0f0"
+                                                            fill="none"
+                                                            x="65"
+                                                            y="5"
+                                                            width="452"
+                                                            height="140"
+                                                            x1="517"
+                                                            y1="5"
+                                                            x2="517"
+                                                            y2="145"
+                                                        ></line>
+                                                    </g>
+                                                </g>
+                                                <g class="recharts-layer recharts-cartesian-axis recharts-xAxis xAxis">
+                                                    <line
+                                                        orientation="bottom"
+                                                        width="452"
+                                                        height="30"
+                                                        x="65"
+                                                        y="145"
+                                                        class="recharts-cartesian-axis-line"
+                                                        stroke="#666"
+                                                        fill="none"
+                                                        x1="65"
+                                                        y1="145"
+                                                        x2="517"
+                                                        y2="145"
+                                                    ></line>
+                                                    <g class="recharts-cartesian-axis-ticks">
+                                                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                                                            <line
+                                                                orientation="bottom"
+                                                                width="452"
+                                                                height="30"
+                                                                x="65"
+                                                                y="145"
+                                                                class="recharts-cartesian-axis-tick-line"
+                                                                stroke="#666"
+                                                                fill="none"
+                                                                x1="140.33333333333331"
+                                                                y1="151"
+                                                                x2="140.33333333333331"
+                                                                y2="145"
+                                                            ></line>
+                                                            <text
+                                                                orientation="bottom"
+                                                                width="452"
+                                                                height="30"
+                                                                stroke="none"
+                                                                font-size="11"
+                                                                x="140.33333333333331"
+                                                                y="153"
+                                                                class="recharts-text recharts-cartesian-axis-tick-value"
+                                                                text-anchor="middle"
+                                                                fill="#666"
+                                                            >
+                                                                <tspan x="140.33333333333331" dy="0.71em">
+                                                                    Claim 1
+                                                                </tspan>
+                                                            </text>
+                                                        </g>
+                                                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                                                            <line
+                                                                orientation="bottom"
+                                                                width="452"
+                                                                height="30"
+                                                                x="65"
+                                                                y="145"
+                                                                class="recharts-cartesian-axis-tick-line"
+                                                                stroke="#666"
+                                                                fill="none"
+                                                                x1="291"
+                                                                y1="151"
+                                                                x2="291"
+                                                                y2="145"
+                                                            ></line>
+                                                            <text
+                                                                orientation="bottom"
+                                                                width="452"
+                                                                height="30"
+                                                                stroke="none"
+                                                                font-size="11"
+                                                                x="291"
+                                                                y="153"
+                                                                class="recharts-text recharts-cartesian-axis-tick-value"
+                                                                text-anchor="middle"
+                                                                fill="#666"
+                                                            >
+                                                                <tspan x="291" dy="0.71em">Claim 2</tspan>
+                                                            </text>
+                                                        </g>
+                                                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                                                            <line
+                                                                orientation="bottom"
+                                                                width="452"
+                                                                height="30"
+                                                                x="65"
+                                                                y="145"
+                                                                class="recharts-cartesian-axis-tick-line"
+                                                                stroke="#666"
+                                                                fill="none"
+                                                                x1="441.66666666666663"
+                                                                y1="151"
+                                                                x2="441.66666666666663"
+                                                                y2="145"
+                                                            ></line>
+                                                            <text
+                                                                orientation="bottom"
+                                                                width="452"
+                                                                height="30"
+                                                                stroke="none"
+                                                                font-size="11"
+                                                                x="441.66666666666663"
+                                                                y="153"
+                                                                class="recharts-text recharts-cartesian-axis-tick-value"
+                                                                text-anchor="middle"
+                                                                fill="#666"
+                                                            >
+                                                                <tspan x="441.66666666666663" dy="0.71em">
+                                                                    Claim 3 (Pending)
+                                                                </tspan>
+                                                            </text>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                                <g class="recharts-layer recharts-cartesian-axis recharts-yAxis yAxis">
+                                                    <line
+                                                        orientation="left"
+                                                        width="60"
+                                                        height="140"
+                                                        x="5"
+                                                        y="5"
+                                                        class="recharts-cartesian-axis-line"
+                                                        stroke="#666"
+                                                        fill="none"
+                                                        x1="65"
+                                                        y1="5"
+                                                        x2="65"
+                                                        y2="145"
+                                                    ></line>
+                                                    <g class="recharts-cartesian-axis-ticks">
+                                                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                                                            <line
+                                                                orientation="left"
+                                                                width="60"
+                                                                height="140"
+                                                                x="5"
+                                                                y="5"
+                                                                class="recharts-cartesian-axis-tick-line"
+                                                                stroke="#666"
+                                                                fill="none"
+                                                                x1="59"
+                                                                y1="145"
+                                                                x2="65"
+                                                                y2="145"
+                                                            ></line>
+                                                            <text
+                                                                orientation="left"
+                                                                width="60"
+                                                                height="140"
+                                                                stroke="none"
+                                                                font-size="11"
+                                                                x="57"
+                                                                y="145"
+                                                                class="recharts-text recharts-cartesian-axis-tick-value"
+                                                                text-anchor="end"
+                                                                fill="#666"
+                                                            >
+                                                                <tspan x="57" dy="0.355em">0</tspan>
+                                                            </text>
+                                                        </g>
+                                                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                                                            <line
+                                                                orientation="left"
+                                                                width="60"
+                                                                height="140"
+                                                                x="5"
+                                                                y="5"
+                                                                class="recharts-cartesian-axis-tick-line"
+                                                                stroke="#666"
+                                                                fill="none"
+                                                                x1="59"
+                                                                y1="110"
+                                                                x2="65"
+                                                                y2="110"
+                                                            ></line>
+                                                            <text
+                                                                orientation="left"
+                                                                width="60"
+                                                                height="140"
+                                                                stroke="none"
+                                                                font-size="11"
+                                                                x="57"
+                                                                y="110"
+                                                                class="recharts-text recharts-cartesian-axis-tick-value"
+                                                                text-anchor="end"
+                                                                fill="#666"
+                                                            >
+                                                                <tspan x="57" dy="0.355em">50</tspan>
+                                                            </text>
+                                                        </g>
+                                                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                                                            <line
+                                                                orientation="left"
+                                                                width="60"
+                                                                height="140"
+                                                                x="5"
+                                                                y="5"
+                                                                class="recharts-cartesian-axis-tick-line"
+                                                                stroke="#666"
+                                                                fill="none"
+                                                                x1="59"
+                                                                y1="75"
+                                                                x2="65"
+                                                                y2="75"
+                                                            ></line>
+                                                            <text
+                                                                orientation="left"
+                                                                width="60"
+                                                                height="140"
+                                                                stroke="none"
+                                                                font-size="11"
+                                                                x="57"
+                                                                y="75"
+                                                                class="recharts-text recharts-cartesian-axis-tick-value"
+                                                                text-anchor="end"
+                                                                fill="#666"
+                                                            >
+                                                                <tspan x="57" dy="0.355em">100</tspan>
+                                                            </text>
+                                                        </g>
+                                                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                                                            <line
+                                                                orientation="left"
+                                                                width="60"
+                                                                height="140"
+                                                                x="5"
+                                                                y="5"
+                                                                class="recharts-cartesian-axis-tick-line"
+                                                                stroke="#666"
+                                                                fill="none"
+                                                                x1="59"
+                                                                y1="40"
+                                                                x2="65"
+                                                                y2="40"
+                                                            ></line>
+                                                            <text
+                                                                orientation="left"
+                                                                width="60"
+                                                                height="140"
+                                                                stroke="none"
+                                                                font-size="11"
+                                                                x="57"
+                                                                y="40"
+                                                                class="recharts-text recharts-cartesian-axis-tick-value"
+                                                                text-anchor="end"
+                                                                fill="#666"
+                                                            >
+                                                                <tspan x="57" dy="0.355em">150</tspan>
+                                                            </text>
+                                                        </g>
+                                                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                                                            <line
+                                                                orientation="left"
+                                                                width="60"
+                                                                height="140"
+                                                                x="5"
+                                                                y="5"
+                                                                class="recharts-cartesian-axis-tick-line"
+                                                                stroke="#666"
+                                                                fill="none"
+                                                                x1="59"
+                                                                y1="5"
+                                                                x2="65"
+                                                                y2="5"
+                                                            ></line>
+                                                            <text
+                                                                orientation="left"
+                                                                width="60"
+                                                                height="140"
+                                                                stroke="none"
+                                                                font-size="11"
+                                                                x="57"
+                                                                y="8.25"
+                                                                class="recharts-text recharts-cartesian-axis-tick-value"
+                                                                text-anchor="end"
+                                                                fill="#666"
+                                                            >
+                                                                <tspan x="57" dy="0.355em">200</tspan>
+                                                            </text>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                                <g class="recharts-layer recharts-bar">
+                                                    <g class="recharts-layer recharts-bar-rectangles">
+                                                        <g class="recharts-layer recharts-bar-rectangle">
+                                                            <path
+                                                                x="80.06666666666666"
+                                                                y="13.75"
+                                                                width="120"
+                                                                height="131.25"
+                                                                radius="4,4,0,0"
+                                                                fill="#1e6bb8"
+                                                                name="Claim 1"
+                                                                class="recharts-rectangle"
+                                                                d="M80.06666666666666,17.75A 4,4,0,0,1,84.06666666666666,13.75L 196.06666666666666,13.75A 4,4,0,0,1,
+        200.06666666666666,17.75L 200.06666666666666,145L 80.06666666666666,145Z"
+                                                            ></path>
+                                                        </g>
+                                                        <g class="recharts-layer recharts-bar-rectangle">
+                                                            <path
+                                                                x="230.73333333333332"
+                                                                y="13.75"
+                                                                width="120"
+                                                                height="131.25"
+                                                                radius="4,4,0,0"
+                                                                fill="#1e6bb8"
+                                                                name="Claim 2"
+                                                                class="recharts-rectangle"
+                                                                d="M230.73333333333332,17.75A 4,4,0,0,1,234.73333333333332,13.75L 346.73333333333335,13.75A 4,4,0,0,1,
+        350.73333333333335,17.75L 350.73333333333335,145L 230.73333333333332,145Z"
+                                                            ></path>
+                                                        </g>
+                                                        <g class="recharts-layer recharts-bar-rectangle">
+                                                            <path
+                                                                x="381.4"
+                                                                y="79.375"
+                                                                width="120"
+                                                                height="65.625"
+                                                                radius="4,4,0,0"
+                                                                fill="#1e6bb8"
+                                                                name="Claim 3 (Pending)"
+                                                                class="recharts-rectangle"
+                                                                d="M381.4,83.375A 4,4,0,0,1,385.4,79.375L 497.4,79.375A 4,4,0,0,1,
+        501.4,83.375L 501.4,145L 381.4,145Z"
+                                                            ></path>
+                                                        </g>
+                                                    </g>
+                                                    <g class="recharts-layer"></g>
+                                                </g>
+                                            </svg>
+                                            <div
+                                                tabindex="-1"
+                                                class="recharts-tooltip-wrapper recharts-tooltip-wrapper-right recharts-tooltip-wrapper-bottom"
+                                                style="
+                                                    visibility: hidden;
+                                                    pointer-events: none;
+                                                    position: absolute;
+                                                    top: 0px;
+                                                    left: 0px;
+                                                    transform: translate(65px, 10px);
+                                                "
+                                            >
+                                                <div
+                                                    class="recharts-default-tooltip"
+                                                    style="
+                                                        margin: 0px;
+                                                        padding: 10px;
+                                                        background-color: rgb(255, 255, 255);
+                                                        border: 1px solid rgb(204, 204, 204);
+                                                        white-space: nowrap;
+                                                    "
+                                                >
+                                                    <p class="recharts-tooltip-label" style="margin: 0px"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-xl border border-gray-200 p-5">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <h3>Recent Notifications</h3>
+                                      
+                                    </div>
+                                    <div class="space-y-3">
+                                        <div class="flex gap-3 pb-3 border-b border-gray-50 last:border-0">
+                                            <div class="w-2 h-2 rounded-full mt-1.5 flex-shrink-0 bg-blue-400"></div>
+                                            <div class="flex-1">
+                                                <div class="text-sm text-gray-700">
+                                                    3rd Claim submitted — awaiting lender validation
+                                                </div>
+                                                <div class="text-xs text-gray-400">2h ago</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-3 pb-3 border-b border-gray-50 last:border-0">
+                                            <div class="w-2 h-2 rounded-full mt-1.5 flex-shrink-0 bg-green-500"></div>
+                                            <div class="flex-1">
+                                                <div class="text-sm text-gray-700">
+                                                    2nd Claim of Rs. 187.50 Lakhs successfully released
+                                                </div>
+                                                <div class="text-xs text-gray-400">3 days ago</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-3 pb-3 border-b border-gray-50 last:border-0">
+                                            <div class="w-2 h-2 rounded-full mt-1.5 flex-shrink-0 bg-green-500"></div>
+                                            <div class="flex-1">
+                                                <div class="text-sm text-gray-700">
+                                                    IA has approved your interest subvention application
+                                                </div>
+                                                <div class="text-xs text-gray-400">15 Jan</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-3 pb-3 border-b border-gray-50 last:border-0">
+                                            <div class="w-2 h-2 rounded-full mt-1.5 flex-shrink-0 bg-amber-400"></div>
+                                            <div class="flex-1">
+                                                <div class="text-sm text-gray-700">
+                                                    Login credentials created — please update your password
+                                                </div>
+                                                <div class="text-xs text-gray-400">14 Jan</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Blue Divider Line & Footer Container -->
+                        <div class="mt-auto pt-6">
+                            <div class="border-t-2 border-[#0d2b55]" style="border-color: #0d2b55;"></div>
+                            <footer class="mt-4 pb-1 text-center text-xs text-gray-500">
+                                <div>
+                                    © 2026 <span class="font-semibold text-[#0d2b55]">Sagarmala Finance Corporation Limited (SMFCL)</span>. <span class="font-semibold text-gray-800">Ministry of Ports, Shipping &amp; Waterways, Government of India</span>. All Rights Reserved.
+                                </div>
+                            </footer>
+                        </div>
+                    </main>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+        <script>
+            if (typeof lucide !== 'undefined' && lucide.createIcons) {
+                lucide.createIcons();
+            }
+        </script>
+        <!-- Alpine / Dropdown Fallback Controller -->
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                document.querySelectorAll('[x-data]').forEach((el) => {
+                    const trigger = el.querySelector('button');
+                    const dropdown = el.querySelector('[x-show="open"]');
+                    if (trigger && dropdown) {
+                        trigger.addEventListener('click', (e) => {
+                            if (!window.Alpine) {
+                                e.stopPropagation();
+                                const isHidden = dropdown.style.display === 'none' || !dropdown.style.display;
+                                dropdown.style.display = isHidden ? 'block' : 'none';
+                            }
+                        });
+                        document.addEventListener('click', () => {
+                            if (!window.Alpine && dropdown) {
+                                dropdown.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+
+                // Application for IIF Tagging accordion toggle
+                const appMenuBtn = document.getElementById('appMenuBtn');
+                const appSubmenu = document.getElementById('appSubmenu');
+                if (appMenuBtn && appSubmenu) {
+                    appMenuBtn.addEventListener('click', () => {
+                        const isHidden = appSubmenu.classList.contains('hidden');
+                        if (isHidden) {
+                            appSubmenu.classList.remove('hidden');
+                        } else {
+                            appSubmenu.classList.add('hidden');
+                        }
+                        const chevron = appMenuBtn.querySelector('.lucide-chevron-down');
+                        if (chevron) {
+                            chevron.classList.toggle('rotate-180');
+                        }
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>

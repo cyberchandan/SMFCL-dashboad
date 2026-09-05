@@ -1,0 +1,2231 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="csrf-token" content="Ir45bEmcrBFsTeUQbmPK968b2grYnKESkm5ReL7C" />
+        <title>Sagarmala Finance Corporation Limited</title>
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.bunny.net" />
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+        <!-- Tailwind CSS & Alpine.js -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            navy: {
+                                900: '#0d2b55',
+                            }
+                        },
+                        fontFamily: {
+                            sans: ['Figtree', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+                        },
+                        boxShadow: {
+                            'xs': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+                        }
+                    }
+                }
+            }
+        </script>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+        <style>
+            [x-cloak] { display: none !important; }
+            body { font-family: 'Figtree', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+            #disbursementScrollContainer::-webkit-scrollbar {
+                height: 10px;
+            }
+            #disbursementScrollContainer::-webkit-scrollbar-track {
+                background: #e2e8f0;
+                border-radius: 6px;
+            }
+            #disbursementScrollContainer::-webkit-scrollbar-thumb {
+                background: #2563eb;
+                border-radius: 6px;
+                border: 2px solid #e2e8f0;
+            }
+            #disbursementScrollContainer::-webkit-scrollbar-thumb:hover {
+                background: #1d4ed8;
+            }
+            #disbursementScrollContainer {
+                scrollbar-width: auto;
+                scrollbar-color: #2563eb #e2e8f0;
+            }
+            #pendingCardsList::-webkit-scrollbar {
+                width: 6px;
+            }
+            #pendingCardsList::-webkit-scrollbar-track {
+                background: #f1f5f9;
+                border-radius: 4px;
+            }
+            #pendingCardsList::-webkit-scrollbar-thumb {
+                background: #cbd5e1;
+                border-radius: 4px;
+            }
+            #pendingCardsList::-webkit-scrollbar-thumb:hover {
+                background: #94a3b8;
+            }
+            #pendingCardsList {
+                scrollbar-width: thin;
+                scrollbar-color: #cbd5e1 #f1f5f9;
+            }
+            @keyframes tabCardFadeIn {
+                from { opacity: 0; transform: translateY(5px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .animate-tabCardFadeIn {
+                animation: tabCardFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+
+            /* Custom Pending Action Card Styling */
+            .pending-item-card {
+                background-color: #ffffff !important;
+                border: 1px solid #e2e8f0 !important;
+                border-radius: 10px !important;
+                padding: 11px 14px !important;
+                margin-bottom: 9px !important;
+                box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03) !important;
+                transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+                position: relative;
+            }
+            .pending-item-card:hover {
+                border-color: #cbd5e1 !important;
+                box-shadow: 0 4px 14px -2px rgba(15, 23, 42, 0.08) !important;
+                transform: translateY(-1px);
+                background-color: #fbfcfe !important;
+            }
+            .pending-item-card[data-category="claim"],
+            .pending-item-card[data-category="approval"],
+            .pending-item-card[data-category="application"],
+            .pending-item-card[data-category="compliance"] {
+                border-left: 3.5px solid #0D2B55 !important;
+            }
+
+            /* Reference ID Badge */
+            .card-ref-badge {
+                display: inline-flex !important;
+                align-items: center !important;
+                gap: 5px !important;
+                padding: 2.5px 7px !important;
+                background-color: #f1f5f9 !important;
+                border: 1px solid #e2e8f0 !important;
+                border-radius: 5px !important;
+                font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+                font-size: 11px !important;
+                font-weight: 600 !important;
+                color: #334155 !important;
+                letter-spacing: -0.01em !important;
+            }
+
+            /* Waiting Badges */
+            .waiting-pill {
+                display: inline-flex !important;
+                align-items: center !important;
+                gap: 4px !important;
+                padding: 2.5px 8.5px !important;
+                border-radius: 9999px !important;
+                font-size: 11px !important;
+                font-weight: 600 !important;
+                white-space: nowrap !important;
+                line-height: 1.35 !important;
+            }
+            .waiting-pill-rose {
+                background-color: #fef2f2 !important;
+                color: #b91c1c !important;
+                border: 1px solid #fecaca !important;
+            }
+            .waiting-pill-orange {
+                background-color: #fff7ed !important;
+                color: #c2410c !important;
+                border: 1px solid #fed7aa !important;
+            }
+            .waiting-pill-amber {
+                background-color: #fffbeb !important;
+                color: #b45309 !important;
+                border: 1px solid #fde68a !important;
+            }
+            .waiting-pill-emerald {
+                background-color: #f0fdf4 !important;
+                color: #15803d !important;
+                border: 1px solid #bbf7d0 !important;
+            }
+
+            /* Avatar Badges */
+            .card-avatar-box {
+                width: 34px !important;
+                height: 34px !important;
+                border-radius: 8px !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                font-weight: 700 !important;
+                font-size: 12px !important;
+                flex-shrink: 0 !important;
+            }
+            .avatar-claim,
+            .avatar-approval,
+            .avatar-application,
+            .avatar-compliance {
+                background-color: #eef3f9 !important;
+                color: #0D2B55 !important;
+                border: 1px solid #c7d7e8 !important;
+            }
+
+            /* Company Name & Action Subtitle */
+            .card-company-title {
+                font-size: 12.5px !important;
+                font-weight: 700 !important;
+                color: #0f172a !important;
+                line-height: 1.25 !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+            }
+            .card-action-sub {
+                display: flex !important;
+                align-items: center !important;
+                gap: 5px !important;
+                font-size: 11px !important;
+                color: #64748b !important;
+                margin-top: 2px !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+            }
+            .status-indicator-dot {
+                width: 6px !important;
+                height: 6px !important;
+                border-radius: 50% !important;
+                flex-shrink: 0 !important;
+            }
+            .dot-claim,
+            .dot-approval,
+            .dot-application,
+            .dot-compliance {
+                background-color: #0D2B55 !important;
+            }
+
+            /* Review Button */
+            .btn-card-review {
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                gap: 5px !important;
+                height: 28px !important;
+                padding: 0 12px !important;
+                border-radius: 6px !important;
+                font-size: 11.5px !important;
+                font-weight: 600 !important;
+                color: #ffffff !important;
+                background-color: #0d2b55 !important;
+                border: 1px solid #0d2b55 !important;
+                cursor: pointer !important;
+                white-space: nowrap !important;
+                flex-shrink: 0 !important;
+                box-shadow: 0 1px 2px rgba(13, 43, 85, 0.15) !important;
+                transition: all 0.15s ease !important;
+                text-decoration: none !important;
+            }
+            .btn-card-review:hover {
+                background-color: #1a4277 !important;
+                border-color: #1a4277 !important;
+                box-shadow: 0 3px 8px rgba(13, 43, 85, 0.25) !important;
+                transform: translateY(-1px) !important;
+            }
+            .btn-card-review:active {
+                transform: translateY(0) scale(0.97) !important;
+            }
+            .btn-card-review svg {
+                transition: transform 0.15s ease !important;
+            }
+            .btn-card-review:hover svg {
+                transform: translateX(2px) !important;
+            }
+
+            /* Quick Review Modal */
+            .review-modal-backdrop {
+                position: fixed;
+                inset: 0;
+                background-color: rgba(15, 23, 42, 0.55);
+                backdrop-filter: blur(2px);
+                z-index: 9999;
+                display: none;
+                align-items: center;
+                justify-content: center;
+                padding: 16px;
+            }
+            .review-modal-content {
+                background: #ffffff;
+                border-radius: 12px;
+                width: 100%;
+                max-width: 520px;
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.05);
+                border: 1px solid #e2e8f0;
+                overflow: hidden;
+                animation: tabCardFadeIn 0.2s ease-out;
+            }
+        </style>
+    </head>
+
+    <body class="font-sans antialiased">
+        <div id="toast" class="custom-toast"></div>
+        <div class="min-h-screen bg-gray-100">
+            <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+                <!-- Primary Navigation Menu -->
+                <div class="w-full mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between items-center h-20">
+                        <!-- Left: Ministry Logo -->
+                        <div class="flex items-center">
+                            <img
+                                src="https://iifmdf.adgstaging.in/assets/images/ministry_logo.svg"
+                                alt="Ministry of Ports, Shipping and Waterways"
+                                class="h-14 sm:h-16 w-auto max-h-16 object-contain flex-shrink-0 select-none"
+                            />
+                        </div>
+
+                        <!-- Right: SMFCL Logo + Title + Dropdown -->
+                        <div class="flex items-center gap-4">
+                            <!-- SMFCL Logo + Title -->
+                            <div class="flex items-center gap-2.5">
+                                <img
+                                    src="https://iifmdf.adgstaging.in/assets/images/smfcl_logo.png"
+                                    alt="SMFCL Logo"
+                                    class="h-11 sm:h-12 w-auto max-h-12 object-contain flex-shrink-0 select-none"
+                                />
+                                <div>
+                                    <span class="text-[#0d2b55] text-sm font-semibold hidden sm:inline-block tracking-tight">
+                                        Sagarmala Finance Corporation Limited (SMFCL)
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Settings Dropdown -->
+                            <div class="relative" x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
+                                <button
+                                    @click="open = ! open"
+                                    type="button"
+                                    class="inline-flex items-center gap-1.5 px-3 py-1 border border-gray-300 rounded text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none transition ease-in-out duration-150 cursor-pointer shadow-xs"
+                                >
+                                    <span>SMFCL</span>
+                                    <svg class="h-3 w-3 text-gray-500 transition-transform duration-200" :class="{'rotate-180': open}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+
+                                <div
+                                    x-show="open"
+                                    x-transition:enter="transition ease-out duration-200"
+                                    x-transition:enter-start="opacity-0 scale-95"
+                                    x-transition:enter-end="opacity-100 scale-100"
+                                    x-transition:leave="transition ease-in duration-75"
+                                    x-transition:leave-start="opacity-100 scale-100"
+                                    x-transition:leave-end="opacity-0 scale-95"
+                                    class="absolute z-50 mt-2 w-48 rounded-md shadow-lg end-0"
+                                    style="display: none"
+                                    @click="open = false"
+                                >
+                                    <div class="rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-white border border-gray-100">
+                                        <a
+                                            class="block w-full px-4 py-2 text-start text-xs leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none transition duration-150 ease-in-out font-medium"
+                                            href="ministry_dashboard.html"
+                                        >
+                                            Ministry Dashboard
+                                        </a>
+                                        <a
+                                            class="block w-full px-4 py-2 text-start text-xs leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none transition duration-150 ease-in-out font-medium"
+                                            href="borrower_dashboard.html"
+                                        >
+                                            Borrower Dashboard
+                                        </a>
+                                        <a
+                                            class="block w-full px-4 py-2 text-start text-xs leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none transition duration-150 ease-in-out font-medium"
+                                            href="Lender_dashboard.html"
+                                        >
+                                            Lender Dashboard
+                                        </a>
+                                        <div class="border-t border-gray-100 my-1"></div>
+                                        <a
+                                            class="block w-full px-4 py-2 text-start text-xs leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none transition duration-150 ease-in-out"
+                                            href="javascript:void(0)"
+                                        >
+                                            Profile
+                                        </a>
+                                        <a
+                                            class="block w-full px-4 py-2 text-start text-xs leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none transition duration-150 ease-in-out"
+                                            href="javascript:void(0)"
+                                        >
+                                            Log Out
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Hamburger -->
+                        <div class="-me-2 flex items-center sm:hidden">
+                            <button
+                                @click="open = ! open"
+                                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
+                            >
+                                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                                    <path
+                                        :class="{'hidden': open, 'inline-flex': ! open }"
+                                        class="inline-flex"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M4 6h16M4 12h16M4 18h16"
+                                    />
+                                    <path
+                                        :class="{'hidden': ! open, 'inline-flex': open }"
+                                        class="hidden"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Responsive Navigation Menu -->
+                <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+                    <div class="pt-2 pb-3 space-y-1">Dashboard</div>
+                    <!-- Responsive Settings Options -->
+                    <div class="pt-4 pb-1 border-t border-gray-200">
+                        <div class="px-4">
+                            <div class="font-medium text-base text-gray-800">SMFCL</div>
+                            <div class="font-medium text-sm text-gray-500">smfcl@gmail.com</div>
+                        </div>
+                        <div class="mt-3 space-y-1">
+                            <a
+                                class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out font-semibold"
+                                href="ministry_dashboard.html"
+                            >
+                                Ministry Dashboard
+                            </a>
+                            <a
+                                class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out font-semibold"
+                                href="borrower_dashboard.html"
+                            >
+                                Borrower Dashboard
+                            </a>
+                            <a
+                                class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out font-semibold"
+                                href="Lender_dashboard.html"
+                            >
+                                Lender Dashboard
+                            </a>
+                            <a
+                                class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out"
+                                href="javascript:void(0)"
+                            >
+                                Profile
+                            </a>
+                            <a
+                                class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out"
+                                href="javascript:void(0)"
+                            >
+                                Log Out
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="flex min-h-[calc(100vh-5rem)]">
+                <!-- Left Sidebar -->
+                <aside class="w-[300px] min-h-[calc(100vh-5rem)] bg-[#0d2b55] text-white flex-shrink-0">
+                    <!-- <nav class="w-64 bg-gray-800 min-h-screen text-white"> -->
+                    <!-- <nav class="w-64 bg-gray-800 min-h-screen text-white"> -->
+
+                    <div class="flex-1 p-3 space-y-0.5 overflow-y-auto">
+                        <a
+                            href="smfcl_dashboard.html"
+                            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors bg-white/20 text-white"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                data-lucide="layout-dashboard"
+                                aria-hidden="true"
+                                class="lucide lucide-layout-dashboard w-4 h-4 flex-shrink-0"
+                            >
+                                <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                                <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                                <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                                <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                            </svg>
+                            <span class="flex-1">Dashboard</span>
+                        </a>
+
+                        <a
+                            href="javascript:void(0)"
+                            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-white hover:bg-white/10"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-users"
+                            >
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            <span class="flex-1">Borrower Registration</span>
+                        </a>
+
+                        <a
+                            href="javascript:void(0)"
+                            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-white hover:bg-white/10"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-clipboard-list"
+                            >
+                                <rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect>
+                                <path
+                                    d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
+                                ></path>
+                                <path d="M12 11h4"></path>
+                                <path d="M12 16h4"></path>
+                                <path d="M8 11h.01"></path>
+                                <path d="M8 16h.01"></path></svg
+                            ><span class="flex-1">Borrower Application</span>
+                        </a>
+
+                        <a
+                            href="javascript:void(0)"
+                            class="hidden flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-white"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-clipboard-list"
+                            >
+                                <rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect>
+                                <path
+                                    d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
+                                ></path>
+                                <path d="M12 11h4"></path>
+                                <path d="M12 16h4"></path>
+                                <path d="M8 11h.01"></path>
+                                <path d="M8 16h.01"></path>
+                            </svg>
+                            <span class="flex-1">Claims</span>
+                        </a>
+
+                        <div class="hidden">
+                            <button
+                                id="appMenuBtn"
+                                class="w-full flex items-center text-sm gap-3 px-3 py-2.5 rounded-lg mb-0.5 text-left transition-colors text-white hover:bg-white/10"
+                            >
+                                <span class="flex-shrink-0">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="lucide lucide-file-text"
+                                    >
+                                        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                                        <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                                        <path d="M10 9H8"></path>
+                                        <path d="M16 13H8"></path>
+                                        <path d="M16 17H8"></path>
+                                    </svg>
+                                </span>
+                                <span class="text-sm flex-1 truncate">Applications</span>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="14"
+                                    height="14"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="lucide lucide-chevron-down transition-transform rotate-180"
+                                >
+                                    <path d="m6 9 6 6 6-6"></path>
+                                </svg>
+                            </button>
+                            <div id="appSubmenu" class="ml-6 mb-1">
+                                <a
+                                    href=""
+                                    class="flex items-center gap-2 px-3 py-2 rounded-lg text-left text-sm transition-colors text-blue-200 hover:bg-white/10"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="12"
+                                        height="12"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="lucide lucide-chevron-right"
+                                    >
+                                        <path d="m9 18 6-6-6-6"></path>
+                                    </svg>
+                                    Review Queue
+                                </a>
+                                <a
+                                    href=""
+                                    class="flex items-center gap-2 px-3 py-2 rounded-lg text-left text-sm transition-colors text-blue-200 hover:bg-white/10"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="12"
+                                        height="12"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="lucide lucide-chevron-right"
+                                    >
+                                        <path d="m9 18 6-6-6-6"></path>
+                                    </svg>
+                                    Approved Projects
+                                </a>
+
+                                <a
+                                    href=""
+                                    class="flex items-center gap-2 px-3 py-2 rounded-lg text-left text-sm transition-colors text-blue-200 hover:bg-white/10"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="12"
+                                        height="12"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="lucide lucide-chevron-right"
+                                    >
+                                        <path d="m9 18 6-6-6-6"></path>
+                                    </svg>
+                                    Rejected / On-Hold
+                                </a>
+                            </div>
+                        </div>
+
+                        <div>
+                            <button
+                                id="taggingMenuBtn"
+                                class="w-full flex items-center text-sm gap-3 px-3 py-2.5 rounded-lg mb-0.5 text-left transition-colors text-white hover:bg-white/10 cursor-pointer"
+                            >
+                                <span class="flex-shrink-0">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="lucide lucide-file-text"
+                                    >
+                                        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                                        <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                                        <path d="M10 9H8"></path>
+                                        <path d="M16 13H8"></path>
+                                        <path d="M16 17H8"></path>
+                                    </svg>
+                                </span>
+                                <span class="text-sm flex-1 truncate">Application for IIF Tagging</span>
+                                <svg
+                                    id="taggingArrow"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="14"
+                                    height="14"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="lucide lucide-chevron-down transition-transform rotate-180"
+                                >
+                                    <path d="m6 9 6 6 6-6"></path>
+                                </svg>
+                            </button>
+                            <div id="taggingSubmenu" class="ml-6 mb-1">
+                                <a
+                                    href="javascript:void(0)"
+                                    class="flex items-center gap-2 px-3 py-2 rounded-lg text-left text-sm transition-colors text-blue-200 hover:bg-white/10"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="12"
+                                        height="12"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="lucide lucide-chevron-right"
+                                    >
+                                        <path d="m9 18 6-6-6-6"></path>
+                                    </svg>
+                                    Eligible
+                                </a>
+                                <a
+                                    href="javascript:void(0)"
+                                    class="flex items-center gap-2 px-3 py-2 rounded-lg text-left text-sm transition-colors text-blue-200 hover:bg-white/10"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="12"
+                                        height="12"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="lucide lucide-chevron-right"
+                                    >
+                                        <path d="m9 18 6-6-6-6"></path>
+                                    </svg>
+                                    Not Eligible
+                                </a>
+                            </div>
+                        </div>
+
+                        <!--<a href=""
+        class=" flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors  text-white ">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            data-lucide="file-text" aria-hidden="true" class="lucide lucide-file-text w-4 h-4 flex-shrink-0">
+            <path
+                d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z">
+            </path>
+            <path d="M14 2v5a1 1 0 0 0 1 1h5"></path>
+            <path d="M10 9H8"></path>
+            <path d="M16 13H8"></path>
+            <path d="M16 17H8"></path>
+        </svg> <span class="flex-1">Applications Review</span>
+    </a>-->
+
+                        <a
+                            href=""
+                            class="hidden flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-white"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                data-lucide="send"
+                                aria-hidden="true"
+                                class="lucide lucide-send w-4 h-4 flex-shrink-0"
+                            >
+                                <path
+                                    d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"
+                                ></path>
+                                <path d="m21.854 2.147-10.94 10.939"></path>
+                            </svg>
+                            <span class="flex-1">Claim Release</span>
+                        </a>
+
+                        <a
+                            href=""
+                            class="hidden flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-white"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                data-lucide="activity"
+                                aria-hidden="true"
+                                class="lucide lucide-activity w-4 h-4 flex-shrink-0"
+                            >
+                                <path
+                                    d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"
+                                ></path>
+                            </svg>
+                            <span class="flex-1">Report &amp; MIS</span>
+                        </a>
+
+                        <a
+                            href=""
+                            class="hidden flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-white"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                data-lucide="bell"
+                                aria-hidden="true"
+                                class="lucide lucide-bell w-4 h-4 flex-shrink-0"
+                            >
+                                <path d="M10.268 21a2 2 0 0 0 3.464 0"></path>
+                                <path
+                                    d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"
+                                ></path>
+                            </svg>
+                            <span class="flex-1">Notifications</span>
+                        </a>
+                    </div>
+
+                    <script>
+                        const taggingBtn = document.getElementById("taggingMenuBtn");
+                        const taggingSubmenu = document.getElementById("taggingSubmenu");
+                        const taggingArrow = document.getElementById("taggingArrow");
+
+                        if (taggingBtn && taggingSubmenu) {
+                            taggingBtn.addEventListener("click", () => {
+                                taggingSubmenu.classList.toggle("hidden");
+                                if (taggingArrow) taggingArrow.classList.toggle("rotate-180");
+                            });
+                        }
+                    </script>
+                </aside>
+                <!-- Page Content -->
+                <main class="w-full flex-1 min-w-0 min-h-[calc(100vh-5rem)] flex flex-col justify-between px-6 pt-6 pb-2 overflow-y-auto">
+                        <div>
+                            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>
+                        </div>
+                        <div class="space-y-6 flex-1">
+                            <div>
+                                <h2 class="text-gray-800">SMFCL Dashboard</h2>
+                                
+                            </div>
+                            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                                <div class="bg-white rounded-xl border border-gray-200 p-5">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div
+                                            class="w-10 h-10 rounded-lg flex items-center justify-center"
+                                            style="background: rgba(30, 107, 184, 0.125); color: rgb(30, 107, 184)"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="lucide lucide-file-text"
+                                            >
+                                                <path
+                                                    d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
+                                                ></path>
+                                                <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                                                <path d="M10 9H8"></path>
+                                                <path d="M16 13H8"></path>
+                                                <path d="M16 17H8"></path>
+                                            </svg>
+                                        </div>
+                                       
+                                        
+                                    </div>
+                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">47</div>
+                                    <div class="text-sm font-medium text-gray-700">Total Applications</div>
+                                    <div class="text-xs text-gray-400 mt-0.5">This financial year</div>
+                                </div>
+                                <div class="bg-white rounded-xl border border-gray-200 p-5">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div
+                                            class="w-10 h-10 rounded-lg flex items-center justify-center"
+                                            style="background: rgba(46, 125, 50, 0.125); color: rgb(46, 125, 50)"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="lucide lucide-circle-check-big"
+                                            >
+                                                <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
+                                                <path d="m9 11 3 3L22 4"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">31</div>
+                                    <div class="text-sm font-medium text-gray-700">Approved Projects</div>
+                                    <div class="text-xs text-gray-400 mt-0.5">Active under IIF</div>
+                                </div>
+                                <div class="bg-white rounded-xl border border-gray-200 p-5">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div
+                                            class="w-10 h-10 rounded-lg flex items-center justify-center"
+                                            style="background: rgba(230, 81, 0, 0.125); color: rgb(230, 81, 0)"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="lucide lucide-clock"
+                                            >
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <polyline points="12 6 12 12 16 14"></polyline>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">7</div>
+                                    <div class="text-sm font-medium text-gray-700">Pending Review</div>
+                                    <div class="text-xs text-gray-400 mt-0.5">Action required</div>
+                                </div>
+                                <div class="bg-white rounded-xl border border-gray-200 p-5">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div
+                                            class="w-10 h-10 rounded-lg flex items-center justify-center"
+                                            style="background: rgba(123, 31, 162, 0.125); color: rgb(123, 31, 162)"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="lucide lucide-trending-up"
+                                            >
+                                                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                                                <polyline points="16 7 22 7 22 13"></polyline>
+                                            </svg>
+                                        </div>
+                                 
+                                    </div>
+                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">Rs. 1,840 L</div>
+                                    <div class="text-sm font-medium text-gray-700">Total Subvention Released</div>
+                                    <div class="text-xs text-gray-400 mt-0.5">FY 2026-27</div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                                <div class="bg-white rounded-xl border border-gray-200 p-5">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div
+                                            class="w-10 h-10 rounded-lg flex items-center justify-center"
+                                            style="background: rgba(0, 121, 107, 0.125); color: rgb(0, 121, 107)"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="lucide lucide-send"
+                                            >
+                                                <path
+                                                    d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"
+                                                ></path>
+                                                <path d="m21.854 2.147-10.94 10.939"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">89</div>
+                                    <div class="text-sm font-medium text-gray-700">Claims Processed</div>
+                                    <div class="text-xs text-gray-400 mt-0.5">Across All Loan Applications</div>
+                                </div>
+                                <div class="bg-white rounded-xl border border-gray-200 p-5">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div
+                                            class="w-10 h-10 rounded-lg flex items-center justify-center"
+                                            style="background: rgba(92, 107, 192, 0.125); color: rgb(92, 107, 192)"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="lucide lucide-landmark"
+                                            >
+                                                <line x1="3" x2="21" y1="22" y2="22"></line>
+                                                <line x1="6" x2="6" y1="18" y2="11"></line>
+                                                <line x1="10" x2="10" y1="18" y2="11"></line>
+                                                <line x1="14" x2="14" y1="18" y2="11"></line>
+                                                <line x1="18" x2="18" y1="18" y2="11"></line>
+                                                <polygon points="12 2 20 7 4 7"></polygon>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">12</div>
+                                    <div class="text-sm font-medium text-gray-700">Borrowers Onboarded</div>
+                                    <div class="text-xs text-gray-400 mt-0.5">Active participants</div>
+                                </div>
+                                <!-- <div class="bg-white rounded-xl border border-gray-200 p-5">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div
+                                            class="w-10 h-10 rounded-lg flex items-center justify-center"
+                                            style="background: rgba(245, 124, 0, 0.125); color: rgb(245, 124, 0)"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="lucide lucide-circle-alert"
+                                            >
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <line x1="12" x2="12" y1="8" y2="12"></line>
+                                                <line x1="12" x2="12.01" y1="16" y2="16"></line>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">3</div>
+                                    <div class="text-sm font-medium text-gray-700">Queries Raised</div>
+                                    <div class="text-xs text-gray-400 mt-0.5">Awaiting response</div>
+                                </div> -->
+                                <!-- <div class="bg-white rounded-xl border border-gray-200 p-5">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div
+                                            class="w-10 h-10 rounded-lg flex items-center justify-center"
+                                            style="background: rgba(198, 40, 40, 0.125); color: rgb(198, 40, 40)"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="lucide lucide-activity"
+                                            >
+                                                <path
+                                                    d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"
+                                                ></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">9</div>
+                                    <div class="text-sm font-medium text-gray-700">Rejected Applications</div>
+                                    <div class="text-xs text-gray-400 mt-0.5">With reasons on record</div>
+                                </div> -->
+                            </div>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                <div class="bg-white rounded-xl border border-gray-200 p-5">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div>
+                                            <h3 class="font-semibold text-gray-800">Disbursement Trends (FY 2025-26)</h3>
+                                            <div class="flex items-center gap-4 text-xs text-gray-500 mt-1">
+                                                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full inline-block" style="background-color: #1e6bb8;"></span> Working Capital</span>
+                                                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full inline-block" style="background-color: #f97316;"></span> Term Loan</span>
+                                            </div>
+                                        </div>
+                                        <select id="disbursementSelect" class="text-xs border border-gray-300 rounded-md px-2.5 py-1.5 bg-white text-gray-700 font-medium shadow-sm hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 cursor-pointer">
+                                            <option value="yearly">Yearly Basis</option>
+                                            <option value="monthly" selected>Monthly Basis</option>
+                                            <option value="quarterly">Quarterly Basis</option>
+                                        </select>
+                                    </div>
+                                    <div class="relative w-full flex items-start" style="height: 220px;">
+                                        <!-- Pinned Fixed Y-Axis on the left (never scrolls away) -->
+                                        <div class="flex-shrink-0 relative select-none" style="width: 55px; height: 195px;">
+                                            <svg id="disbursementYAxisSvg" class="w-full h-full overflow-visible" viewBox="0 0 55 200" preserveAspectRatio="none">
+                                                <g id="disbursementYAxisFixed"></g>
+                                            </svg>
+                                        </div>
+                                        <!-- Horizontally Scrollable Chart Area for Grid, Lines, and X-Axis -->
+                                        <div id="disbursementScrollContainer" class="flex-1 overflow-x-hidden overflow-y-hidden relative select-none" style="height: 220px;">
+                                            <svg id="disbursementChartSvg" class="overflow-visible block cursor-crosshair" style="height: 195px;" viewBox="0 0 460 200" preserveAspectRatio="none">
+                                                <!-- Grid Group -->
+                                                <g id="chartGrid"></g>
+                                                <!-- X Axis Ticks -->
+                                                <g id="chartXAxis"></g>
+                                                <!-- Chart Paths and Dots -->
+                                                <g id="chartPaths"></g>
+                                                <!-- Hover Crosshair Guide Line -->
+                                                <line id="hoverGuideLine" x1="0" y1="5" x2="0" y2="165" stroke="#cccccc" stroke-width="1" opacity="0"></line>
+                                                <!-- Hover Active Dots -->
+                                                <circle id="hoverDotBlue" r="3.5" stroke="#1e6bb8" stroke-width="2" fill="#1e6bb8" opacity="0"></circle>
+                                                <circle id="hoverDotOrange" r="3.5" stroke="#f97316" stroke-width="2" fill="#f97316" opacity="0"></circle>
+                                                <!-- Transparent Overlay Rect to Capture All Mouse Events -->
+                                                <rect id="chartHoverOverlay" x="0" y="0" width="100%" height="200" fill="transparent" style="cursor: crosshair; pointer-events: all;"></rect>
+                                            </svg>
+                                            <!-- Tooltip Box -->
+                                            <div id="chartTooltip" class="absolute pointer-events-none z-30 bg-white" style="display: none; opacity: 0; top: 5px; min-width: 210px; padding: 12px 16px 14px 16px; border: 1px solid #b4b4b4; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); font-family: 'Segoe UI', Arial, sans-serif;">
+                                                <div id="tooltipTitle" class="text-base font-semibold text-gray-900 mb-2"></div>
+                                                <div id="tooltipContent" class="space-y-1.5 text-sm font-normal"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-xl border border-gray-200 p-5 flex flex-col justify-between" style="min-height: 295px;">
+                                    <div>
+                                        <div class="flex items-center justify-between mb-3">
+                                            <div class="flex items-center gap-2.5">
+                                                <h3 class="font-semibold text-gray-800">Pending Action</h3>
+                                                <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full" style="background-color: #e8eef6; color: #0D2B55; border: 1px solid #c7d7e8;">14 pending</span>
+                                            </div>
+                                           
+                                        </div>
+
+                                        <!-- Cool Modern Segmented Tabs -->
+                                        <div class="flex items-center justify-between gap-2 mb-3 pb-2.5 border-b border-gray-100">
+                                            <div class="inline-flex p-1 bg-gray-100/90 rounded-lg border border-gray-200/70" id="pendingTabsNav" role="tablist">
+                                                <button type="button" id="tabBtnApplication" data-target="application" class="pending-tab-btn px-3 py-1 text-xs font-semibold rounded-md transition-all flex items-center shadow-xs bg-white cursor-pointer" style="color: #0D2B55;">
+                                                    <span>Application</span>
+                                                </button>
+                                                <button type="button" id="tabBtnCompliance" data-target="compliance" class="pending-tab-btn px-3 py-1 text-xs font-medium rounded-md transition-all flex items-center text-gray-500 hover:text-gray-800 cursor-pointer">
+                                                    <span>Compliance</span>
+                                                </button>
+                                                <button type="button" id="tabBtnClaim" data-target="claim" class="pending-tab-btn px-3 py-1 text-xs font-medium rounded-md transition-all flex items-center text-gray-500 hover:text-gray-800 cursor-pointer">
+                                                    <span>Claim</span>
+                                                </button>
+                                                <button type="button" id="tabBtnAll" data-target="all" class="pending-tab-btn px-3 py-1 text-xs font-medium rounded-md transition-all flex items-center text-gray-500 hover:text-gray-800 cursor-pointer">
+                                                    <span>All</span>
+                                                </button>
+                                            </div>
+                                            <div id="pendingFilterStatus" class="text-xs text-gray-400 font-medium hidden sm:block">
+                                                Showing 2 Applications
+                                            </div>
+                                        </div>
+
+                                        <!-- Cards Container with smooth scrolling and high waiting days on top -->
+                                        <div id="pendingCardsList" class="overflow-y-auto pr-1" style="min-height: 185px; max-height: 222px;">
+                                            <!-- Compliance Card 1: Syama Prasad Mookerjee Port Trust (Waiting 8 days) -->
+                                            <div class="pending-item-card animate-tabCardFadeIn" data-category="compliance" style="display: none;">
+                                                <div class="flex items-center justify-between gap-2 mb-2">
+                                                    <span class="card-ref-badge">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                                        CMP-SMP-BOB-TL-2026-01-011
+                                                    </span>
+                                                    <span class="waiting-pill waiting-pill-rose">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                        Waiting 8 days
+                                                    </span>
+                                                </div>
+                                                <div class="flex items-center justify-between gap-3">
+                                                    <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                                                        <div class="card-avatar-box avatar-compliance">SP</div>
+                                                        <div class="min-w-0 flex-1">
+                                                            <div class="card-company-title" title="M/s Syama Prasad Mookerjee Port Trust">
+                                                                M/s Syama Prasad Mookerjee Port Trust
+                                                            </div>
+                                                            <div class="card-action-sub">
+                                                                <span class="status-indicator-dot dot-compliance"></span>
+                                                                <span>Environmental Clearance Audit Overdue</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-shrink-0">
+                                                        <button type="button" class="btn-card-review" onclick="openReviewModal('CMP-SMP-BOB-TL-2026-01-011', 'M/s Syama Prasad Mookerjee Port Trust', 'Compliance', '8 days', '₹ 74.50 Lakhs', 'Bank of Baroda')">
+                                                            <span>Review</span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Claim Card 1: Gujarat Maritime Board Ltd. (Waiting 7 days) -->
+                                            <div class="pending-item-card animate-tabCardFadeIn" data-category="claim" style="display: none;">
+                                                <div class="flex items-center justify-between gap-2 mb-2">
+                                                    <span class="card-ref-badge">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                                        CLM-CSL-SBI-WCDL-2026-01-008
+                                                    </span>
+                                                    <span class="waiting-pill waiting-pill-rose">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                        Waiting 7 days
+                                                    </span>
+                                                </div>
+                                                <div class="flex items-center justify-between gap-3">
+                                                    <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                                                        <div class="card-avatar-box avatar-claim">GM</div>
+                                                        <div class="min-w-0 flex-1">
+                                                            <div class="card-company-title" title="M/s Gujarat Maritime Board Ltd.">
+                                                                M/s Gujarat Maritime Board Ltd.
+                                                            </div>
+                                                            <div class="card-action-sub">
+                                                                <span class="status-indicator-dot dot-claim"></span>
+                                                                <span>Claim Release Action Required</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-shrink-0">
+                                                        <button type="button" class="btn-card-review" onclick="openReviewModal('CLM-CSL-SBI-WCDL-2026-01-008', 'M/s Gujarat Maritime Board Ltd.', 'Claim', '7 days', '₹ 42.50 Lakhs', 'State Bank of India')">
+                                                            <span>Review</span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Compliance Card 2: Cochin Shipyard Ltd. (Waiting 6 days) -->
+                                            <div class="pending-item-card animate-tabCardFadeIn" data-category="compliance" style="display: none;">
+                                                <div class="flex items-center justify-between gap-2 mb-2">
+                                                    <span class="card-ref-badge">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                                        CMP-CSL-SBI-WCDL-2026-01-009
+                                                    </span>
+                                                    <span class="waiting-pill waiting-pill-orange">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                        Waiting 6 days
+                                                    </span>
+                                                </div>
+                                                <div class="flex items-center justify-between gap-3">
+                                                    <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                                                        <div class="card-avatar-box avatar-compliance">CS</div>
+                                                        <div class="min-w-0 flex-1">
+                                                            <div class="card-company-title" title="M/s Cochin Shipyard Ltd.">
+                                                                M/s Cochin Shipyard Ltd.
+                                                            </div>
+                                                            <div class="card-action-sub">
+                                                                <span class="status-indicator-dot dot-compliance"></span>
+                                                                <span>Compliance Audit Action Required</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-shrink-0">
+                                                        <button type="button" class="btn-card-review" onclick="openReviewModal('CMP-CSL-SBI-WCDL-2026-01-009', 'M/s Cochin Shipyard Ltd.', 'Compliance', '6 days', '₹ 58.40 Lakhs', 'State Bank of India')">
+                                                            <span>Review</span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Claim Card 2: Paradip Stevedores Ltd. (Waiting 5 days) -->
+                                            <div class="pending-item-card animate-tabCardFadeIn" data-category="claim" style="display: none;">
+                                                <div class="flex items-center justify-between gap-2 mb-2">
+                                                    <span class="card-ref-badge">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                                        CLM-CSL-SBI-WCDL-2026-01-007
+                                                    </span>
+                                                    <span class="waiting-pill waiting-pill-orange">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                        Waiting 5 days
+                                                    </span>
+                                                </div>
+                                                <div class="flex items-center justify-between gap-3">
+                                                    <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                                                        <div class="card-avatar-box avatar-claim">PS</div>
+                                                        <div class="min-w-0 flex-1">
+                                                            <div class="card-company-title" title="M/s Paradip Stevedores Ltd.">
+                                                                M/s Paradip Stevedores Ltd.
+                                                            </div>
+                                                            <div class="card-action-sub">
+                                                                <span class="status-indicator-dot dot-claim"></span>
+                                                                <span>Claim Release Action Required</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-shrink-0">
+                                                        <button type="button" class="btn-card-review" onclick="openReviewModal('CLM-CSL-SBI-WCDL-2026-01-007', 'M/s Paradip Stevedores Ltd.', 'Claim', '5 days', '₹ 28.75 Lakhs', 'Punjab National Bank')">
+                                                            <span>Review</span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Compliance Card 3: Garden Reach Shipbuilders Ltd. (Waiting 5 days) -->
+                                            <div class="pending-item-card animate-tabCardFadeIn" data-category="compliance" style="display: none;">
+                                                <div class="flex items-center justify-between gap-2 mb-2">
+                                                    <span class="card-ref-badge">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                                        CMP-GRS-PNB-TL-2026-01-012
+                                                    </span>
+                                                    <span class="waiting-pill waiting-pill-orange">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                        Waiting 5 days
+                                                    </span>
+                                                </div>
+                                                <div class="flex items-center justify-between gap-3">
+                                                    <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                                                        <div class="card-avatar-box avatar-compliance">GR</div>
+                                                        <div class="min-w-0 flex-1">
+                                                            <div class="card-company-title" title="M/s Garden Reach Shipbuilders Ltd.">
+                                                                M/s Garden Reach Shipbuilders Ltd.
+                                                            </div>
+                                                            <div class="card-action-sub">
+                                                                <span class="status-indicator-dot dot-compliance"></span>
+                                                                <span>Statutory Lender Covenant Review</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-shrink-0">
+                                                        <button type="button" class="btn-card-review" onclick="openReviewModal('CMP-GRS-PNB-TL-2026-01-012', 'M/s Garden Reach Shipbuilders Ltd.', 'Compliance', '5 days', '₹ 49.20 Lakhs', 'Punjab National Bank')">
+                                                            <span>Review</span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Application Card 1: Vizag Shipyard Ltd. (Waiting 4 days) -->
+                                            <div class="pending-item-card animate-tabCardFadeIn" data-category="application">
+                                                <div class="flex items-center justify-between gap-2 mb-2">
+                                                    <span class="card-ref-badge">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                                        APP-CSL-SBI-WCDL-2026-01-002
+                                                    </span>
+                                                    <span class="waiting-pill waiting-pill-orange">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                        Waiting 4 days
+                                                    </span>
+                                                </div>
+                                                <div class="flex items-center justify-between gap-3">
+                                                    <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                                                        <div class="card-avatar-box avatar-application">VS</div>
+                                                        <div class="min-w-0 flex-1">
+                                                            <div class="card-company-title" title="M/s Vizag Shipyard Ltd.">
+                                                                M/s Vizag Shipyard Ltd.
+                                                            </div>
+                                                            <div class="card-action-sub">
+                                                                <span class="status-indicator-dot dot-application"></span>
+                                                                <span>Application Action Required</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-shrink-0">
+                                                        <button type="button" class="btn-card-review" onclick="openReviewModal('APP-CSL-SBI-WCDL-2026-01-002', 'M/s Vizag Shipyard Ltd.', 'Application', '4 days', '₹ 65.00 Lakhs', 'Bank of Baroda')">
+                                                            <span>Review</span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Compliance Card 4: Jawaharlal Nehru Port Authority (Waiting 4 days) -->
+                                            <div class="pending-item-card animate-tabCardFadeIn" data-category="compliance" style="display: none;">
+                                                <div class="flex items-center justify-between gap-2 mb-2">
+                                                    <span class="card-ref-badge">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                                        CMP-JNP-HDFC-WCDL-2026-01-013
+                                                    </span>
+                                                    <span class="waiting-pill waiting-pill-orange">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                        Waiting 4 days
+                                                    </span>
+                                                </div>
+                                                <div class="flex items-center justify-between gap-3">
+                                                    <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                                                        <div class="card-avatar-box avatar-compliance">JN</div>
+                                                        <div class="min-w-0 flex-1">
+                                                            <div class="card-company-title" title="M/s Jawaharlal Nehru Port Authority">
+                                                                M/s Jawaharlal Nehru Port Authority
+                                                            </div>
+                                                            <div class="card-action-sub">
+                                                                <span class="status-indicator-dot dot-compliance"></span>
+                                                                <span>Annual Tariff Regulatory Filing Pending</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-shrink-0">
+                                                        <button type="button" class="btn-card-review" onclick="openReviewModal('CMP-JNP-HDFC-WCDL-2026-01-013', 'M/s Jawaharlal Nehru Port Authority', 'Compliance', '4 days', '₹ 62.00 Lakhs', 'HDFC Bank')">
+                                                            <span>Review</span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Compliance Card 5: Mazagon Dock Shipbuilders Ltd. (Waiting 3 days) -->
+                                            <div class="pending-item-card animate-tabCardFadeIn" data-category="compliance" style="display: none;">
+                                                <div class="flex items-center justify-between gap-2 mb-2">
+                                                    <span class="card-ref-badge">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                                        CMP-CSL-PNB-TL-2026-01-004
+                                                    </span>
+                                                    <span class="waiting-pill waiting-pill-amber">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                        Waiting 3 days
+                                                    </span>
+                                                </div>
+                                                <div class="flex items-center justify-between gap-3">
+                                                    <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                                                        <div class="card-avatar-box avatar-compliance">MD</div>
+                                                        <div class="min-w-0 flex-1">
+                                                            <div class="card-company-title" title="M/s Mazagon Dock Shipbuilders Ltd.">
+                                                                M/s Mazagon Dock Shipbuilders Ltd.
+                                                            </div>
+                                                            <div class="card-action-sub">
+                                                                <span class="status-indicator-dot dot-compliance"></span>
+                                                                <span>Compliance Documentation Pending</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-shrink-0">
+                                                        <button type="button" class="btn-card-review" onclick="openReviewModal('CMP-CSL-PNB-TL-2026-01-004', 'M/s Mazagon Dock Shipbuilders Ltd.', 'Compliance', '3 days', '₹ 38.00 Lakhs', 'Punjab National Bank')">
+                                                            <span>Review</span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Claim Card 3: Kochi Marine Corp. (Waiting 3 days) -->
+                                            <div class="pending-item-card animate-tabCardFadeIn" data-category="claim" style="display: none;">
+                                                <div class="flex items-center justify-between gap-2 mb-2">
+                                                    <span class="card-ref-badge">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                                        CLM-CSL-SBI-WCDL-2026-01-006
+                                                    </span>
+                                                    <span class="waiting-pill waiting-pill-amber">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                        Waiting 3 days
+                                                    </span>
+                                                </div>
+                                                <div class="flex items-center justify-between gap-3">
+                                                    <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                                                        <div class="card-avatar-box avatar-claim">KM</div>
+                                                        <div class="min-w-0 flex-1">
+                                                            <div class="card-company-title" title="M/s Kochi Marine Corp.">
+                                                                M/s Kochi Marine Corp.
+                                                            </div>
+                                                            <div class="card-action-sub">
+                                                                <span class="status-indicator-dot dot-claim"></span>
+                                                                <span>Claim Release Action Required</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-shrink-0">
+                                                        <button type="button" class="btn-card-review" onclick="openReviewModal('CLM-CSL-SBI-WCDL-2026-01-006', 'M/s Kochi Marine Corp.', 'Claim', '3 days', '₹ 34.20 Lakhs', 'Canara Bank')">
+                                                            <span>Review</span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Application Card 2: Mumbai Offshore Yards (Waiting 2 days) -->
+                                            <div class="pending-item-card animate-tabCardFadeIn" data-category="application">
+                                                <div class="flex items-center justify-between gap-2 mb-2">
+                                                    <span class="card-ref-badge">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                                        APP-CSL-SBI-WCDL-2026-01-001
+                                                    </span>
+                                                    <span class="waiting-pill waiting-pill-amber">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                        Waiting 2 days
+                                                    </span>
+                                                </div>
+                                                <div class="flex items-center justify-between gap-3">
+                                                    <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                                                        <div class="card-avatar-box avatar-application">MO</div>
+                                                        <div class="min-w-0 flex-1">
+                                                            <div class="card-company-title" title="M/s Mumbai Offshore Yards">
+                                                                M/s Mumbai Offshore Yards
+                                                            </div>
+                                                            <div class="card-action-sub">
+                                                                <span class="status-indicator-dot dot-application"></span>
+                                                                <span>Application Action Required</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-shrink-0">
+                                                        <button type="button" class="btn-card-review" onclick="openReviewModal('APP-CSL-SBI-WCDL-2026-01-001', 'M/s Mumbai Offshore Yards', 'Application', '2 days', '₹ 50.00 Lakhs', 'State Bank of India')">
+                                                            <span>Review</span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Claim Card 4: Goa Shipbuilders & Engg. (Waiting 2 days) -->
+                                            <div class="pending-item-card animate-tabCardFadeIn" data-category="claim" style="display: none;">
+                                                <div class="flex items-center justify-between gap-2 mb-2">
+                                                    <span class="card-ref-badge">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                                        CLM-CSL-SBI-WCDL-2026-01-005
+                                                    </span>
+                                                    <span class="waiting-pill waiting-pill-amber">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                        Waiting 2 days
+                                                    </span>
+                                                </div>
+                                                <div class="flex items-center justify-between gap-3">
+                                                    <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                                                        <div class="card-avatar-box avatar-claim">GS</div>
+                                                        <div class="min-w-0 flex-1">
+                                                            <div class="card-company-title" title="M/s Goa Shipbuilders & Engg.">
+                                                                M/s Goa Shipbuilders & Engg.
+                                                            </div>
+                                                            <div class="card-action-sub">
+                                                                <span class="status-indicator-dot dot-claim"></span>
+                                                                <span>Claim Release Action Required</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-shrink-0">
+                                                        <button type="button" class="btn-card-review" onclick="openReviewModal('CLM-CSL-SBI-WCDL-2026-01-005', 'M/s Goa Shipbuilders & Engg.', 'Claim', '2 days', '₹ 19.80 Lakhs', 'Union Bank of India')">
+                                                            <span>Review</span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Compliance Card 6: Kandla Container Terminal Pvt Ltd. (Waiting 2 days) -->
+                                            <div class="pending-item-card animate-tabCardFadeIn" data-category="compliance" style="display: none;">
+                                                <div class="flex items-center justify-between gap-2 mb-2">
+                                                    <span class="card-ref-badge">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                                        CMP-KCT-AXIS-WCDL-2026-01-014
+                                                    </span>
+                                                    <span class="waiting-pill waiting-pill-amber">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                        Waiting 2 days
+                                                    </span>
+                                                </div>
+                                                <div class="flex items-center justify-between gap-3">
+                                                    <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                                                        <div class="card-avatar-box avatar-compliance">KC</div>
+                                                        <div class="min-w-0 flex-1">
+                                                            <div class="card-company-title" title="M/s Kandla Container Terminal Pvt Ltd.">
+                                                                M/s Kandla Container Terminal Pvt Ltd.
+                                                            </div>
+                                                            <div class="card-action-sub">
+                                                                <span class="status-indicator-dot dot-compliance"></span>
+                                                                <span>Insurance Renewal Undertaking Pending</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-shrink-0">
+                                                        <button type="button" class="btn-card-review" onclick="openReviewModal('CMP-KCT-AXIS-WCDL-2026-01-014', 'M/s Kandla Container Terminal Pvt Ltd.', 'Compliance', '2 days', '₹ 27.80 Lakhs', 'Axis Bank')">
+                                                            <span>Review</span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Compliance Card 7: Mormugao Port Authority (Waiting 1 day) -->
+                                            <div class="pending-item-card animate-tabCardFadeIn" data-category="compliance" style="display: none;">
+                                                <div class="flex items-center justify-between gap-2 mb-2">
+                                                    <span class="card-ref-badge">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                                        CMP-MPA-CAN-TL-2026-01-015
+                                                    </span>
+                                                    <span class="waiting-pill waiting-pill-emerald">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                        Waiting 1 day
+                                                    </span>
+                                                </div>
+                                                <div class="flex items-center justify-between gap-3">
+                                                    <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                                                        <div class="card-avatar-box avatar-compliance">MP</div>
+                                                        <div class="min-w-0 flex-1">
+                                                            <div class="card-company-title" title="M/s Mormugao Port Authority">
+                                                                M/s Mormugao Port Authority
+                                                            </div>
+                                                            <div class="card-action-sub">
+                                                                <span class="status-indicator-dot dot-compliance"></span>
+                                                                <span>End-Use Fund Certification Verification</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-shrink-0">
+                                                        <button type="button" class="btn-card-review" onclick="openReviewModal('CMP-MPA-CAN-TL-2026-01-015', 'M/s Mormugao Port Authority', 'Compliance', '1 day', '₹ 31.50 Lakhs', 'Canara Bank')">
+                                                            <span>Review</span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Claim Card 5: Chennai Naval Works (Waiting 1 day) -->
+                                            <div class="pending-item-card animate-tabCardFadeIn" data-category="claim" style="display: none;">
+                                                <div class="flex items-center justify-between gap-2 mb-2">
+                                                    <span class="card-ref-badge">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-400"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                                        CLM-CSL-SBI-WCDL-2026-01-003
+                                                    </span>
+                                                    <span class="waiting-pill waiting-pill-emerald">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                        Waiting 1 day
+                                                    </span>
+                                                </div>
+                                                <div class="flex items-center justify-between gap-3">
+                                                    <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                                                        <div class="card-avatar-box avatar-claim">CN</div>
+                                                        <div class="min-w-0 flex-1">
+                                                            <div class="card-company-title" title="M/s Chennai Naval Works">
+                                                                M/s Chennai Naval Works
+                                                            </div>
+                                                            <div class="card-action-sub">
+                                                                <span class="status-indicator-dot dot-claim"></span>
+                                                                <span>Claim Release Action Required</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-shrink-0">
+                                                        <button type="button" class="btn-card-review" onclick="openReviewModal('CLM-CSL-SBI-WCDL-2026-01-003', 'M/s Chennai Naval Works', 'Claim', '1 day', '₹ 15.60 Lakhs', 'Indian Bank')">
+                                                            <span>Review</span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Blue Divider Line & Footer Container -->
+                        <div class="mt-auto pt-6">
+                            <div class="border-t-2 border-[#0d2b55]" style="border-color: #0d2b55;"></div>
+                            <footer class="mt-4 pb-1 text-center text-xs text-gray-500">
+                                <div>
+                                    © 2026 <span class="font-semibold text-[#0d2b55]">Sagarmala Finance Corporation Limited (SMFCL)</span>. <span class="font-semibold text-gray-800">Ministry of Ports, Shipping &amp; Waterways, Government of India</span>. All Rights Reserved.
+                                </div>
+                            </footer>
+                        </div>
+                    </main>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+        <script>
+            if (typeof lucide !== 'undefined' && lucide.createIcons) {
+                lucide.createIcons();
+            }
+        </script>
+        <script>
+            (function () {
+                // Generate 50 financial years from FY 1976-77 to FY 2025-26
+                const yearly50Labels = [];
+                const yearly50App = [];
+                const yearly50Approved = [];
+                for (let y = 1976; y <= 2025; y++) {
+                    const nextY = (y + 1) % 100;
+                    const nextYStr = nextY < 10 ? '0' + nextY : '' + nextY;
+                    yearly50Labels.push(`FY ${y}-${nextYStr}`);
+                    
+                    const t = (y - 1976) / 49;
+                    const baseApp = Math.round(15 + Math.pow(t, 2.2) * 340 + Math.sin(y * 1.3) * 6);
+                    const baseAppr = Math.round(10 + Math.pow(t, 2.2) * 288 + Math.cos(y * 1.3) * 5);
+                    yearly50App.push(Math.max(10, baseApp));
+                    yearly50Approved.push(Math.max(8, baseAppr));
+                }
+                // Align last 4 years with current dashboard figures
+                yearly50App[46] = 150; yearly50Approved[46] = 120; // FY 2022-23
+                yearly50App[47] = 220; yearly50Approved[47] = 180; // FY 2023-24
+                yearly50App[48] = 290; yearly50Approved[48] = 240; // FY 2024-25
+                yearly50App[49] = 370; yearly50Approved[49] = 310; // FY 2025-26
+
+                const chartDataSets = {
+                    monthly: {
+                        labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar'],
+                        maxY: 28,
+                        yTicks: [0, 7, 14, 21, 28],
+                        applications: [12, 14, 16, 18, 19, 21, 20, 22, 23, 21, 24, 26],
+                        approved: [8, 11, 13, 14, 15, 16, 16, 17, 18, 18, 19, 21]
+                    },
+                    quarterly: {
+                        labels: ['Q1 (Apr-Jun)', 'Q2 (Jul-Sep)', 'Q3 (Oct-Dec)', 'Q4 (Jan-Mar)'],
+                        maxY: 80,
+                        yTicks: [0, 20, 40, 60, 80],
+                        applications: [45, 58, 64, 72],
+                        approved: [32, 45, 52, 60]
+                    },
+                    yearly: {
+                        labels: yearly50Labels,
+                        maxY: 400,
+                        yTicks: [0, 100, 200, 300, 400],
+                        applications: yearly50App,
+                        approved: yearly50Approved
+                    }
+                };
+
+                const select = document.getElementById('disbursementSelect');
+                const scrollContainer = document.getElementById('disbursementScrollContainer');
+                const svg = document.getElementById('disbursementChartSvg');
+                const yAxisFixedGroup = document.getElementById('disbursementYAxisFixed');
+                const gridGroup = document.getElementById('chartGrid');
+                const xAxisGroup = document.getElementById('chartXAxis');
+                const pathsGroup = document.getElementById('chartPaths');
+                const hoverGuideLine = document.getElementById('hoverGuideLine');
+                const hoverDotBlue = document.getElementById('hoverDotBlue');
+                const hoverDotOrange = document.getElementById('hoverDotOrange') || document.getElementById('hoverDotGreen');
+                const chartHoverOverlay = document.getElementById('chartHoverOverlay');
+                const tooltip = document.getElementById('chartTooltip');
+                const tooltipTitle = document.getElementById('tooltipTitle');
+                const tooltipContent = document.getElementById('tooltipContent');
+
+                if (!select || !svg || !scrollContainer) return;
+
+                const topPad = 5;
+                const bottomPad = 165;
+                const height = bottomPad - topPad; // 160
+
+                let currentDatasetKey = select.value || 'monthly';
+                let currentPoints = {};
+                let currentActualWidth = 460;
+
+                function generateSmoothPath(points) {
+                    if (!points || points.length === 0) return '';
+                    if (points.length === 1) return `M ${points[0].x},${points[0].y}`;
+
+                    let path = `M ${points[0].x.toFixed(1)},${points[0].y.toFixed(1)}`;
+                    for (let i = 0; i < points.length - 1; i++) {
+                        const p0 = i === 0 ? points[i] : points[i - 1];
+                        const p1 = points[i];
+                        const p2 = points[i + 1];
+                        const p3 = i + 2 < points.length ? points[i + 2] : p2;
+
+                        const cp1x = p1.x + (p2.x - p0.x) / 6;
+                        const cp1y = p1.y + (p2.y - p0.y) / 6;
+                        const cp2x = p2.x - (p3.x - p1.x) / 6;
+                        const cp2y = p2.y - (p3.y - p1.y) / 6;
+
+                        path += ` C ${cp1x.toFixed(1)},${cp1y.toFixed(1)} ${cp2x.toFixed(1)},${cp2y.toFixed(1)} ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`;
+                    }
+                    return path;
+                }
+
+                function renderChart(key) {
+                    currentDatasetKey = key;
+                    const data = chartDataSets[key] || chartDataSets.monthly;
+                    const n = data.labels.length;
+
+                    // Calculate required width based on data items
+                    const containerWidth = scrollContainer.clientWidth || 460;
+                    const isYearly = (key === 'yearly');
+
+                    // ONLY Yearly Basis expands for horizontal scrolling across 50 years; Monthly & Quarterly fit 100%
+                    let actualWidth = containerWidth;
+                    if (isYearly) {
+                        const neededWidth = n * 82; // 50 * 82 = 4100px
+                        actualWidth = Math.max(containerWidth, neededWidth);
+                    }
+
+                    currentActualWidth = actualWidth;
+                    const isScrollable = isYearly && (actualWidth > containerWidth);
+
+                    // Configure scrollable overflow and SVG sizing strictly for yearly basis
+                    if (isScrollable) {
+                        scrollContainer.classList.remove('overflow-x-hidden');
+                        scrollContainer.classList.add('overflow-x-auto');
+                        scrollContainer.style.overflowX = 'auto';
+
+                        svg.style.width = `${actualWidth}px`;
+                        svg.style.minWidth = `${actualWidth}px`;
+                        svg.style.maxWidth = 'none';
+                        svg.setAttribute('width', actualWidth);
+                    } else {
+                        scrollContainer.classList.remove('overflow-x-auto');
+                        scrollContainer.classList.add('overflow-x-hidden');
+                        scrollContainer.style.overflowX = 'hidden';
+
+                        svg.style.width = '100%';
+                        svg.style.minWidth = '100%';
+                        svg.style.maxWidth = '100%';
+                        svg.removeAttribute('width');
+                    }
+
+                    svg.setAttribute('viewBox', `0 0 ${actualWidth} 200`);
+                    if (chartHoverOverlay) {
+                        chartHoverOverlay.setAttribute('width', actualWidth);
+                        chartHoverOverlay.setAttribute('height', '200');
+                    }
+
+                    // Render Fixed Y-Axis on the left (never scrolls away)
+                    let yFixedHtml = '<line x1="54" y1="5" x2="54" y2="165" stroke="#666" fill="none"></line><g>';
+                    data.yTicks.forEach((tickVal) => {
+                        const ratio = tickVal / data.maxY;
+                        const yPos = bottomPad - ratio * height;
+                        yFixedHtml += `
+                            <g class="recharts-layer recharts-cartesian-axis-tick">
+                                <line stroke="#666" fill="none" x1="48" y1="${yPos}" x2="54" y2="${yPos}"></line>
+                                <text font-size="11" x="44" y="${yPos}" text-anchor="end" fill="#666" dy="0.355em">${tickVal}</text>
+                            </g>`;
+                    });
+                    yFixedHtml += '</g>';
+                    if (yAxisFixedGroup) yAxisFixedGroup.innerHTML = yFixedHtml;
+
+                    // Calculate X padding and positions
+                    let leftPad = 35;
+                    let rightPad = actualWidth - 35;
+                    if (key === 'quarterly') {
+                        leftPad = 50;
+                        rightPad = actualWidth - 50;
+                    }
+                    const usableWidth = rightPad - leftPad;
+                    const xStep = usableWidth / (n - 1);
+
+                    const xPositions = [];
+                    for (let i = 0; i < n; i++) {
+                        xPositions.push(leftPad + i * xStep);
+                    }
+
+                    // Y Grid lines (Horizontal across the full canvas)
+                    let yGridHtml = '<g class="recharts-cartesian-grid-horizontal">';
+                    data.yTicks.forEach((tickVal) => {
+                        const ratio = tickVal / data.maxY;
+                        const yPos = bottomPad - ratio * height;
+                        yGridHtml += `<line stroke-dasharray="3 3" stroke="#f0f0f0" fill="none" x1="0" y1="${yPos}" x2="${actualWidth}" y2="${yPos}"></line>`;
+                    });
+                    yGridHtml += '</g>';
+
+                    // X Grid & Axis (Vertical across data points)
+                    let xGridHtml = '<g class="recharts-cartesian-grid-vertical">';
+                    let xAxisHtml = `<line x1="0" y1="165" x2="${actualWidth}" y2="165" stroke="#666" fill="none"></line><g>`;
+
+                    xPositions.forEach((xPos, i) => {
+                        xGridHtml += `<line stroke-dasharray="3 3" stroke="#f0f0f0" fill="none" x1="${xPos}" y1="5" x2="${xPos}" y2="165"></line>`;
+                        xAxisHtml += `
+                            <g class="recharts-layer recharts-cartesian-axis-tick">
+                                <line stroke="#666" fill="none" x1="${xPos}" y1="165" x2="${xPos}" y2="171"></line>
+                                <text font-size="11" x="${xPos}" y="174" text-anchor="middle" fill="#666" dy="0.71em">${data.labels[i]}</text>
+                            </g>`;
+                    });
+                    xGridHtml += '</g>';
+                    xAxisHtml += '</g>';
+
+                    gridGroup.innerHTML = yGridHtml + xGridHtml;
+                    xAxisGroup.innerHTML = xAxisHtml;
+
+                    // Point calculations
+                    const appPoints = [];
+                    const approvedPoints = [];
+
+                    for (let i = 0; i < n; i++) {
+                        const x = xPositions[i];
+                        const yApp = bottomPad - (data.applications[i] / data.maxY) * height;
+                        const yApproved = bottomPad - (data.approved[i] / data.maxY) * height;
+
+                        appPoints.push({ x, y: yApp, val: data.applications[i] });
+                        approvedPoints.push({ x, y: yApproved, val: data.approved[i] });
+                    }
+
+                    currentPoints = { xPositions, appPoints, approvedPoints, labels: data.labels };
+
+                    // Render lines & circles
+                    const appPathD = generateSmoothPath(appPoints);
+                    const approvedPathD = generateSmoothPath(approvedPoints);
+
+                    let pathsHtml = `
+                        <!-- Working Capital Line (Blue) -->
+                        <g class="recharts-layer recharts-line">
+                            <path stroke="#1e6bb8" stroke-width="2" fill="none" d="${appPathD}"></path>
+                            <g class="recharts-layer recharts-line-dots">
+                    `;
+                    appPoints.forEach((pt) => {
+                        pathsHtml += `<circle r="3" stroke="#1e6bb8" stroke-width="2" fill="#fff" cx="${pt.x}" cy="${pt.y}"></circle>`;
+                    });
+                    pathsHtml += `
+                            </g>
+                        </g>
+                        <!-- Term Loan Line (Orange) -->
+                        <g class="recharts-layer recharts-line">
+                            <path stroke="#f97316" stroke-width="2" fill="none" d="${approvedPathD}"></path>
+                            <g class="recharts-layer recharts-line-dots">
+                    `;
+                    approvedPoints.forEach((pt) => {
+                        pathsHtml += `<circle r="3" stroke="#f97316" stroke-width="2" fill="#fff" cx="${pt.x}" cy="${pt.y}"></circle>`;
+                    });
+                    pathsHtml += `
+                            </g>
+                        </g>
+                    `;
+
+                    pathsGroup.innerHTML = pathsHtml;
+                    hideTooltip();
+
+                    // Scroll behavior: auto-scroll to end on yearly so latest years are in view
+                    if (isScrollable) {
+                        setTimeout(() => {
+                            scrollContainer.scrollLeft = scrollContainer.scrollWidth;
+                        }, 50);
+                    } else {
+                        scrollContainer.scrollLeft = 0;
+                    }
+                }
+
+                function hideTooltip() {
+                    if (hoverGuideLine) hoverGuideLine.setAttribute('opacity', '0');
+                    if (hoverDotBlue) hoverDotBlue.setAttribute('opacity', '0');
+                    if (hoverDotOrange) hoverDotOrange.setAttribute('opacity', '0');
+                    if (tooltip) {
+                        tooltip.style.opacity = '0';
+                        tooltip.style.display = 'none';
+                    }
+                }
+
+                let isChartDragging = false;
+                let dragStartX = 0;
+                let initialScrollLeft = 0;
+
+                function handleMouseMove(e) {
+                    if (!currentPoints || !currentPoints.xPositions || currentPoints.xPositions.length === 0) return;
+                    if (isChartDragging) return;
+
+                    const rect = svg.getBoundingClientRect();
+                    const mouseX = e.clientX - rect.left;
+                    const svgX = (mouseX / rect.width) * currentActualWidth;
+
+                    if (svgX < 0 || svgX > currentActualWidth) {
+                        hideTooltip();
+                        return;
+                    }
+
+                    let closestIdx = 0;
+                    let minDiff = Infinity;
+                    currentPoints.xPositions.forEach((xPos, i) => {
+                        const diff = Math.abs(xPos - svgX);
+                        if (diff < minDiff) {
+                            minDiff = diff;
+                            closestIdx = i;
+                        }
+                    });
+
+                    const xPos = currentPoints.xPositions[closestIdx];
+                    const appPt = currentPoints.appPoints[closestIdx];
+                    const approvedPt = currentPoints.approvedPoints[closestIdx];
+                    const label = currentPoints.labels[closestIdx];
+
+                    hoverGuideLine.setAttribute('x1', xPos);
+                    hoverGuideLine.setAttribute('x2', xPos);
+                    hoverGuideLine.setAttribute('opacity', '1');
+
+                    hoverDotBlue.setAttribute('cx', appPt.x);
+                    hoverDotBlue.setAttribute('cy', appPt.y);
+                    hoverDotBlue.setAttribute('opacity', '1');
+
+                    if (hoverDotOrange) {
+                        hoverDotOrange.setAttribute('cx', approvedPt.x);
+                        hoverDotOrange.setAttribute('cy', approvedPt.y);
+                        hoverDotOrange.setAttribute('opacity', '1');
+                    }
+
+                    tooltipTitle.textContent = label;
+                    tooltipContent.innerHTML = `
+                        <div style="color: #1e6bb8; font-size: 14px; line-height: 1.4; white-space: nowrap;">Working Capital : ${appPt.val} Lakh</div>
+                        <div style="color: #f97316; font-size: 14px; line-height: 1.4; white-space: nowrap;">Term Loan : ${approvedPt.val} Lakh</div>
+                    `;
+
+                    const visibleScrollLeft = scrollContainer.scrollLeft;
+                    const visibleWidth = scrollContainer.clientWidth;
+                    const screenXInContainer = xPos - visibleScrollLeft;
+
+                    if (screenXInContainer > visibleWidth - 230) {
+                        tooltip.style.left = `calc(${xPos}px - 12px)`;
+                        tooltip.style.transform = `translateX(-100%)`;
+                    } else {
+                        tooltip.style.left = `calc(${xPos}px + 12px)`;
+                        tooltip.style.transform = `none`;
+                    }
+
+                    tooltip.style.display = 'block';
+                    tooltip.style.opacity = '1';
+                }
+
+                // Mouse Wheel Horizontal Scrolling on Yearly Chart
+                scrollContainer.addEventListener('wheel', (e) => {
+                    if (select.value === 'yearly') {
+                        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                            e.preventDefault();
+                            scrollContainer.scrollLeft += e.deltaY * 1.5;
+                        }
+                    }
+                }, { passive: false });
+
+                // Click and Drag to Scroll
+                scrollContainer.addEventListener('mousedown', (e) => {
+                    if (select.value !== 'yearly') return;
+                    isChartDragging = true;
+                    dragStartX = e.pageX - scrollContainer.offsetLeft;
+                    initialScrollLeft = scrollContainer.scrollLeft;
+                    scrollContainer.style.cursor = 'grabbing';
+                });
+
+                window.addEventListener('mousemove', (e) => {
+                    if (!isChartDragging) return;
+                    e.preventDefault();
+                    const x = e.pageX - scrollContainer.offsetLeft;
+                    const walk = (x - dragStartX) * 1.5;
+                    scrollContainer.scrollLeft = initialScrollLeft - walk;
+                });
+
+                window.addEventListener('mouseup', () => {
+                    if (isChartDragging) {
+                        isChartDragging = false;
+                        scrollContainer.style.cursor = '';
+                    }
+                });
+
+                select.addEventListener('change', function () {
+                    renderChart(this.value);
+                });
+
+                scrollContainer.addEventListener('mousemove', handleMouseMove);
+                scrollContainer.addEventListener('mouseleave', hideTooltip);
+
+                window.addEventListener('resize', () => {
+                    renderChart(select.value);
+                });
+
+                renderChart(currentDatasetKey);
+            })();
+
+            // Pending Action Claim & Approval Tab Switcher
+            (function () {
+                const tabBtns = document.querySelectorAll('.pending-tab-btn');
+                const cards = document.querySelectorAll('.pending-item-card');
+                const statusText = document.getElementById('pendingFilterStatus');
+
+                if (!tabBtns.length || !cards.length) return;
+
+                tabBtns.forEach((btn) => {
+                    btn.addEventListener('click', function () {
+                        const target = this.getAttribute('data-target');
+
+                        // Update Tab Buttons UI
+                        tabBtns.forEach((b) => {
+                            if (b === this) {
+                                b.classList.remove('text-gray-500', 'font-medium', 'hover:text-gray-800');
+                                b.classList.add('bg-white', 'font-semibold', 'shadow-xs');
+                                b.style.color = '#0D2B55';
+                            } else {
+                                b.style.color = '';
+                                b.classList.remove('bg-white', 'font-semibold', 'shadow-xs');
+                                b.classList.add('text-gray-500', 'font-medium', 'hover:text-gray-800');
+                            }
+                        });
+
+                        // Show/Hide Cards with smooth animation
+                        let visibleCount = 0;
+                        cards.forEach((card) => {
+                            const category = card.getAttribute('data-category');
+                            if (target === 'all' || category === target || (target === 'application' && category === 'approval')) {
+                                card.style.display = 'block';
+                                card.classList.remove('animate-tabCardFadeIn');
+                                void card.offsetWidth; // trigger reflow for animation
+                                card.classList.add('animate-tabCardFadeIn');
+                                visibleCount++;
+                            } else {
+                                card.style.display = 'none';
+                                card.classList.remove('animate-tabCardFadeIn');
+                            }
+                        });
+
+                        if (statusText) {
+                            if (target === 'compliance') statusText.textContent = `Showing ${visibleCount} Compliances`;
+                            else if (target === 'application' || target === 'approval') statusText.textContent = `Showing ${visibleCount} Applications`;
+                            else if (target === 'claim') statusText.textContent = `Showing ${visibleCount} Claims`;
+                            else statusText.textContent = `Showing ${visibleCount} Actions`;
+                        }
+                    });
+                });
+            })();
+
+            // Quick Review Modal Handlers
+            window.openReviewModal = function (refId, company, type, waiting, amount, bank) {
+                const refEl = document.getElementById('modalRefId');
+                const compEl = document.getElementById('modalCompanyName');
+                const typeEl = document.getElementById('modalActionType');
+                const waitEl = document.getElementById('modalWaiting');
+                const amtEl = document.getElementById('modalAmount');
+                const bankEl = document.getElementById('modalBank');
+                const modalTitle = document.getElementById('modalTitleText');
+
+                if (modalTitle) modalTitle.textContent = 'Review ' + (type || 'Action') + ' Details';
+                if (refEl) refEl.textContent = refId || '';
+                if (compEl) compEl.textContent = company || '';
+                if (typeEl) {
+                    typeEl.textContent = (type || 'Claim') + ' Action';
+                    typeEl.style.color = '#0D2B55';
+                }
+                if (waitEl) waitEl.textContent = 'Waiting ' + (waiting || '');
+                if (amtEl) amtEl.textContent = amount || '₹ 25.00 Lakhs';
+                if (bankEl) bankEl.textContent = bank || 'State Bank of India';
+
+                const modal = document.getElementById('pendingReviewModal');
+                if (modal) modal.style.display = 'flex';
+            };
+
+            window.closeReviewModal = function () {
+                const modal = document.getElementById('pendingReviewModal');
+                if (modal) modal.style.display = 'none';
+            };
+
+            window.confirmReviewAction = function () {
+                const ref = document.getElementById('modalRefId') ? document.getElementById('modalRefId').textContent : '';
+                window.closeReviewModal();
+                alert('Opening detailed verification workflow for ' + ref);
+            };
+        </script>
+
+        <!-- Quick Review Modal for Pending Action Cards -->
+        <div id="pendingReviewModal" class="review-modal-backdrop" onclick="if(event.target === this) window.closeReviewModal()">
+            <div class="review-modal-content">
+                <!-- Modal Header -->
+                <div class="px-5 py-4 border-b border-gray-100 flex items-center justify-between" style="background-color: #0d2b55;">
+                    <div class="flex items-center gap-3 text-white">
+                        <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-white flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        </div>
+                        <div>
+                            <h3 id="modalTitleText" class="text-sm font-bold text-white leading-tight">Review Action Details</h3>
+                            <p id="modalRefId" class="text-[11px] text-blue-200 font-mono mt-0.5">CLM-CSL-SBI-WCDL-2026-01-008</p>
+                        </div>
+                    </div>
+                    <button type="button" onclick="window.closeReviewModal()" class="text-white/70 hover:text-white p-1 rounded-md hover:bg-white/10 transition-colors cursor-pointer" aria-label="Close">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+                <!-- Modal Body -->
+                <div class="p-5 space-y-3.5">
+                    <div class="grid grid-cols-2 gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200/80 text-xs">
+                        <div>
+                            <span class="text-gray-400 block text-[11px] font-medium">Beneficiary / Enterprise</span>
+                            <span id="modalCompanyName" class="text-gray-900 font-bold text-xs mt-0.5 block">M/s Gujarat Maritime Board Ltd.</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-400 block text-[11px] font-medium">Action Stage</span>
+                            <span id="modalActionType" class="font-bold text-xs mt-0.5 block" style="color: #0D2B55;">Claim Release</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-400 block text-[11px] font-medium">Claim Amount</span>
+                            <span id="modalAmount" class="text-gray-900 font-bold text-xs mt-0.5 block">₹ 42.50 Lakhs</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-400 block text-[11px] font-medium">Turnaround Waiting</span>
+                            <span id="modalWaiting" class="text-rose-600 font-bold text-xs mt-0.5 block">Waiting 7 days</span>
+                        </div>
+                        <div class="col-span-2 pt-1 border-t border-gray-200/60 flex items-center justify-between">
+                            <span class="text-gray-400 text-[11px] font-medium">Lender Bank:</span>
+                            <span id="modalBank" class="text-gray-800 font-semibold text-xs">State Bank of India</span>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-blue-50/60 rounded-lg border border-blue-100 text-xs text-blue-950">
+                        <div class="font-semibold flex items-center gap-1.5 mb-1 text-blue-900">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-blue-600"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                            Desk Verification Checklist
+                        </div>
+                        <p class="text-blue-800 text-[11px] leading-relaxed">
+                            Documentation &amp; subsidy entitlement calculation reviewed under Sagarmala MDF guidelines. Ready for desk sign-off.
+                        </p>
+                    </div>
+                </div>
+                <!-- Modal Footer -->
+                <div class="px-5 py-3.5 bg-gray-50 border-t border-gray-100 flex items-center justify-end gap-2.5">
+                    <button type="button" onclick="window.closeReviewModal()" class="px-3.5 py-1.5 rounded-md text-xs font-semibold text-gray-600 hover:text-gray-800 hover:bg-gray-200/70 border border-gray-300 transition-colors cursor-pointer">
+                        Cancel
+                    </button>
+                    <button type="button" onclick="window.confirmReviewAction()" class="px-4 py-1.5 rounded-md text-xs font-semibold text-white bg-[#0d2b55] hover:bg-[#163a6e] transition-colors cursor-pointer shadow-xs">
+                        Open Action Desk
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Alpine / Dropdown Fallback Controller -->
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                document.querySelectorAll('[x-data]').forEach((el) => {
+                    const trigger = el.querySelector('button');
+                    const dropdown = el.querySelector('[x-show="open"]');
+                    if (trigger && dropdown) {
+                        trigger.addEventListener('click', (e) => {
+                            if (!window.Alpine) {
+                                e.stopPropagation();
+                                const isHidden = dropdown.style.display === 'none' || !dropdown.style.display;
+                                dropdown.style.display = isHidden ? 'block' : 'none';
+                            }
+                        });
+                        document.addEventListener('click', () => {
+                            if (!window.Alpine && dropdown) {
+                                dropdown.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

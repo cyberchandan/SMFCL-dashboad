@@ -1,0 +1,1413 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="csrf-token" content="WjepNDiWvouIq92q2qaLZO9udDKW2iGVQQvDmyNM" />
+        <title>Sagarmala Finance Corporation Limited</title>
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.bunny.net" />
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+        <!-- Tailwind CSS & Alpine.js -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            navy: {
+                                900: '#0d2b55',
+                            }
+                        },
+                        fontFamily: {
+                            sans: ['Figtree', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+                        },
+                        boxShadow: {
+                            'xs': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+                        }
+                    }
+                }
+            }
+        </script>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+        <style>
+            [x-cloak] { display: none !important; }
+            body { font-family: 'Figtree', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+            #chartScrollContainer::-webkit-scrollbar {
+                height: 10px;
+            }
+            #chartScrollContainer::-webkit-scrollbar-track {
+                background: #e2e8f0;
+                border-radius: 6px;
+            }
+            #chartScrollContainer::-webkit-scrollbar-thumb {
+                background: #2563eb;
+                border-radius: 6px;
+                border: 2px solid #e2e8f0;
+            }
+            #chartScrollContainer::-webkit-scrollbar-thumb:hover {
+                background: #1d4ed8;
+            }
+            #chartScrollContainer {
+                scrollbar-width: auto;
+                scrollbar-color: #2563eb #e2e8f0;
+            }
+        </style>
+    </head>
+
+    <body class="font-sans antialiased">
+        <div id="toast" class="custom-toast"></div>
+        <div class="min-h-screen bg-gray-100">
+            <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+                <!-- Primary Navigation Menu -->
+                <div class="w-full mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between items-center h-20">
+                        <!-- Left: Ministry Logo -->
+                        <div class="flex items-center">
+                            <img
+                                src="https://iifmdf.adgstaging.in/assets/images/ministry_logo.svg"
+                                alt="Ministry of Ports, Shipping and Waterways"
+                                class="h-14 sm:h-16 w-auto max-h-16 object-contain flex-shrink-0 select-none"
+                            />
+                        </div>
+
+                        <!-- Right: SMFCL Logo + Title + Dropdown -->
+                        <div class="flex items-center gap-4">
+                            <!-- SMFCL Logo + Title -->
+                            <div class="flex items-center gap-2.5">
+                                <img
+                                    src="https://iifmdf.adgstaging.in/assets/images/smfcl_logo.png"
+                                    alt="SMFCL Logo"
+                                    class="h-11 sm:h-12 w-auto max-h-12 object-contain flex-shrink-0 select-none"
+                                />
+                                <div>
+                                    <span class="text-[#0d2b55] text-sm font-semibold hidden sm:inline-block tracking-tight">
+                                        Sagarmala Finance Corporation Limited (SMFCL)
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Settings Dropdown -->
+                            <div class="relative" x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
+                                <button
+                                    @click="open = ! open"
+                                    type="button"
+                                    class="inline-flex items-center gap-1.5 px-3 py-1 border border-gray-300 rounded text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none transition ease-in-out duration-150 cursor-pointer shadow-xs"
+                                >
+                                    <span>Ministry</span>
+                                    <svg class="h-3 w-3 text-gray-500 transition-transform duration-200" :class="{'rotate-180': open}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+
+                                <div
+                                    x-show="open"
+                                    x-transition:enter="transition ease-out duration-200"
+                                    x-transition:enter-start="opacity-0 scale-95"
+                                    x-transition:enter-end="opacity-100 scale-100"
+                                    x-transition:leave="transition ease-in duration-75"
+                                    x-transition:leave-start="opacity-100 scale-100"
+                                    x-transition:leave-end="opacity-0 scale-95"
+                                    class="absolute z-50 mt-2 w-48 rounded-md shadow-lg end-0"
+                                    style="display: none"
+                                    @click="open = false"
+                                >
+                                    <div class="rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-white border border-gray-100">
+                                        <a
+                                            class="block w-full px-4 py-2 text-start text-xs leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none transition duration-150 ease-in-out font-medium"
+                                            href="smfcl_dashboard.html"
+                                        >
+                                            SMFCL Dashboard
+                                        </a>
+                                        <a
+                                            class="block w-full px-4 py-2 text-start text-xs leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none transition duration-150 ease-in-out font-medium"
+                                            href="borrower_dashboard.html"
+                                        >
+                                            Borrower Dashboard
+                                        </a>
+                                        <a
+                                            class="block w-full px-4 py-2 text-start text-xs leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none transition duration-150 ease-in-out font-medium"
+                                            href="Lender_dashboard.html"
+                                        >
+                                            Lender Dashboard
+                                        </a>
+                                        <div class="border-t border-gray-100 my-1"></div>
+                                        <a
+                                            class="block w-full px-4 py-2 text-start text-xs leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none transition duration-150 ease-in-out"
+                                            href="javascript:void(0)"
+                                        >
+                                            Profile
+                                        </a>
+                                        <a
+                                            class="block w-full px-4 py-2 text-start text-xs leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none transition duration-150 ease-in-out"
+                                            href="javascript:void(0)"
+                                        >
+                                            Log Out
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Hamburger -->
+                        <div class="-me-2 flex items-center sm:hidden">
+                            <button
+                                @click="open = ! open"
+                                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
+                            >
+                                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                                    <path
+                                        :class="{'hidden': open, 'inline-flex': ! open }"
+                                        class="inline-flex"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M4 6h16M4 12h16M4 18h16"
+                                    />
+                                    <path
+                                        :class="{'hidden': ! open, 'inline-flex': open }"
+                                        class="hidden"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Responsive Navigation Menu -->
+                <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+                    <div class="pt-2 pb-3 space-y-1">Dashboard</div>
+                    <!-- Responsive Settings Options -->
+                    <div class="pt-4 pb-1 border-t border-gray-200">
+                        <div class="px-4">
+                            <div class="font-medium text-base text-gray-800">Ministry User</div>
+                            <div class="font-medium text-sm text-gray-500">ministry@shipmin.gov.in</div>
+                        </div>
+                        <div class="mt-3 space-y-1">
+                            <a
+                                class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out font-semibold"
+                                href="smfcl_dashboard.html"
+                            >
+                                SMFCL Dashboard
+                            </a>
+                            <a
+                                class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out font-semibold"
+                                href="borrower_dashboard.html"
+                            >
+                                Borrower Dashboard
+                            </a>
+                            <a
+                                class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out font-semibold"
+                                href="Lender_dashboard.html"
+                            >
+                                Lender Dashboard
+                            </a>
+                            <a
+                                class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out"
+                                href="javascript:void(0)"
+                            >
+                                Profile
+                            </a>
+                            <a
+                                class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out"
+                                href="javascript:void(0)"
+                            >
+                                Log Out
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="flex min-h-[calc(100vh-5rem)]">
+                <!-- Left Sidebar -->
+                <aside class="w-[300px] min-h-[calc(100vh-5rem)] bg-[#0d2b55] text-white flex-shrink-0">
+                    <!-- <nav class="w-64 bg-gray-800 min-h-screen text-white"> -->
+                    <div class="flex-1 p-3 space-y-0.5 overflow-y-auto">
+                        <a
+                            href="ministry_dashboard.html"
+                            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors bg-white/20 text-white"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                data-lucide="layout-dashboard"
+                                aria-hidden="true"
+                                class="lucide lucide-layout-dashboard w-4 h-4 flex-shrink-0"
+                            >
+                                <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                                <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                                <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                                <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                            </svg>
+                            <span class="flex-1">Dashboard</span>
+                        </a>
+
+                        <a
+                            href="javascript:void(0)"
+                            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-white hover:bg-white/10"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                data-lucide="layout-dashboard"
+                                aria-hidden="true"
+                                class="lucide lucide-layout-dashboard w-4 h-4 flex-shrink-0"
+                            >
+                                <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                                <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                                <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                                <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                            </svg>
+                            <span class="flex-1">My Applications</span>
+                        </a>
+
+                        <a
+                            href="javascript:void(0)"
+                            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-white hover:bg-white/10"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                data-lucide="layout-dashboard"
+                                aria-hidden="true"
+                                class="lucide lucide-layout-dashboard w-4 h-4 flex-shrink-0"
+                            >
+                                <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                                <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                                <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                                <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                            </svg>
+                            <span class="flex-1">Add Lender Information</span>
+                        </a>
+
+                        <a
+                            href="javascript:void(0)"
+                            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-white hover:bg-white/10"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                data-lucide="layout-dashboard"
+                                aria-hidden="true"
+                                class="lucide lucide-layout-dashboard w-4 h-4 flex-shrink-0"
+                            >
+                                <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                                <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                                <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                                <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                            </svg>
+                            <span class="flex-1">Lenders Information</span>
+                        </a>
+
+                        <a
+                            href="javascript:void(0)"
+                            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-white hover:bg-white/10"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                data-lucide="layout-dashboard"
+                                aria-hidden="true"
+                                class="lucide lucide-layout-dashboard w-4 h-4 flex-shrink-0"
+                            >
+                                <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                                <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                                <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                                <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                            </svg>
+                            <span class="flex-1">Create New Loan Application</span>
+                        </a>
+
+                        <div>
+                            <button
+                                id="appMenuBtn"
+                                class="w-full flex items-center text-sm gap-3 px-3 py-2.5 rounded-lg mb-0.5 text-left transition-colors text-white hover:bg-white/10 cursor-pointer"
+                            >
+                                <span class="flex-shrink-0">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="lucide lucide-file-text"
+                                    >
+                                        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                                        <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                                        <path d="M10 9H8"></path>
+                                        <path d="M16 13H8"></path>
+                                        <path d="M16 17H8"></path>
+                                    </svg>
+                                </span>
+                                <span class="text-sm flex-1 truncate">Application for IIF Tagging</span>
+                                <svg
+                                    id="appArrow"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="14"
+                                    height="14"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="lucide lucide-chevron-down transition-transform rotate-180"
+                                >
+                                    <path d="m6 9 6 6 6-6"></path>
+                                </svg>
+                            </button>
+                            <div id="appSubmenu" class="ml-6 mb-1">
+                                <a
+                                    href="javascript:void(0)"
+                                    class="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-left text-sm transition-colors text-blue-200 hover:bg-white/10"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="12"
+                                        height="12"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="lucide lucide-chevron-right"
+                                    >
+                                        <path d="m9 18 6-6-6-6"></path>
+                                    </svg>
+                                    Eligible Application
+                                </a>
+                                <a
+                                    href="javascript:void(0)"
+                                    class="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-left text-sm transition-colors text-blue-200 hover:bg-white/10"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="12"
+                                        height="12"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="lucide lucide-chevron-right"
+                                    >
+                                        <path d="m9 18 6-6-6-6"></path>
+                                    </svg>
+                                    Not Eligible Application
+                                </a>
+                            </div>
+                        </div>
+
+                        <a
+                            href="javascript:void(0)"
+                            class="hidden flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-white"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                data-lucide="layout-dashboard"
+                                aria-hidden="true"
+                                class="lucide lucide-layout-dashboard w-4 h-4 flex-shrink-0"
+                            >
+                                <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                                <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                                <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                                <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                            </svg>
+                            <span class="flex-1">Claims</span>
+                        </a>
+
+                        <a
+                            href="#"
+                            class="hidden flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-white"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                data-lucide="send"
+                                aria-hidden="true"
+                                class="lucide lucide-send w-4 h-4 flex-shrink-0"
+                            >
+                                <path
+                                    d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"
+                                ></path>
+                                <path d="m21.854 2.147-10.94 10.939"></path>
+                            </svg>
+                            <span class="flex-1">Claim Requests</span>
+                        </a>
+                        <a
+                            href="#"
+                            class="hidden flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-white"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                data-lucide="activity"
+                                aria-hidden="true"
+                                class="lucide lucide-activity w-4 h-4 flex-shrink-0"
+                            >
+                                <path
+                                    d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"
+                                ></path>
+                            </svg>
+                            <span class="flex-1">Workflow Tracker</span>
+                        </a>
+                        <a
+                            href="#"
+                            class="hidden flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-white"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                data-lucide="bell"
+                                aria-hidden="true"
+                                class="lucide lucide-bell w-4 h-4 flex-shrink-0"
+                            >
+                                <path d="M10.268 21a2 2 0 0 0 3.464 0"></path>
+                                <path
+                                    d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"
+                                ></path>
+                            </svg>
+                            <span class="flex-1">Notifications</span>
+                        </a>
+                        <a
+                            href="#"
+                            class="hidden flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-white"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                data-lucide="file"
+                                aria-hidden="true"
+                                class="lucide lucide-file w-4 h-4 flex-shrink-0"
+                            >
+                                <path
+                                    d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"
+                                ></path>
+                                <path d="M14 2v5a1 1 0 0 0 1 1h5"></path>
+                            </svg>
+                            <span class="flex-1">Documents</span>
+                        </a>
+                    </div>
+
+                    <script>
+                        const appBtn = document.getElementById('appMenuBtn');
+                        const appSubmenu = document.getElementById('appSubmenu');
+                        const appArrow = document.getElementById('appArrow');
+
+                        if (appBtn && appSubmenu) {
+                            appBtn.addEventListener('click', () => {
+                                appSubmenu.classList.toggle('hidden');
+                                if (appArrow) appArrow.classList.toggle('rotate-180');
+                            });
+                        }
+                    </script>
+                </aside>
+                <!-- Page Content -->
+                <main class="w-full flex-1 min-w-0 min-h-[calc(100vh-5rem)] flex flex-col justify-between px-6 pt-6 pb-2 overflow-y-auto">
+                    <div class="space-y-6 flex-1">
+                            <!-- Page Title Bar -->
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <h2 class="text-xl font-bold text-gray-800">Ministry / Government Dashboard</h2>
+                                   
+                                </div>
+                               
+                            </div>
+
+                            <!-- Metric Cards Grid -->
+                            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                                <div class="bg-white rounded-xl border border-gray-200 p-5">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(30, 107, 184, 0.125); color: rgb(30, 107, 184);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>
+                                        </div>
+                                    </div>
+                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">31</div>
+                                    <div class="text-sm font-medium text-gray-700">Total Loan Tagged</div>
+                                    <!-- <div class="text-xs text-gray-400 mt-0.5">Under IIF Scheme</div> -->
+                                </div>
+                                <div class="bg-white rounded-xl border border-gray-200 p-5">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(46, 125, 50, 0.125); color: rgb(46, 125, 50);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+                                        </div>
+                                    </div>
+                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">Rs. 1,840 L</div>
+                                    <div class="text-sm font-medium text-gray-700">Total Subvention Released</div>
+                                    <!-- <div class="text-xs text-gray-400 mt-0.5">Across all approved projects</div> -->
+                                </div>
+                                <div class="bg-white rounded-xl border border-gray-200 p-5">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(123, 31, 162, 0.125); color: rgb(123, 31, 162);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-landmark"><line x1="3" x2="21" y1="22" y2="22"></line><line x1="6" x2="6" y1="18" y2="11"></line><line x1="10" x2="10" y1="18" y2="11"></line><line x1="14" x2="14" y1="18" y2="11"></line><line x1="18" x2="18" y1="18" y2="11"></line><polygon points="12 2 20 7 4 7"></polygon></svg>
+                                        </div>
+                                    </div>
+                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">Rs. 48,500 L</div>
+                                    <div class="text-sm font-medium text-gray-700">Total Loan Coverage</div>
+                                    <!-- <div class="text-xs text-gray-400 mt-0.5">IIF scheme portfolio</div> -->
+                                </div>
+                                <div class="bg-white rounded-xl border border-gray-200 p-5">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(230, 81, 0, 0.125); color: rgb(230, 81, 0);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building2"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg>
+                                        </div>
+                                    </div>
+                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">12</div>
+                                    <div class="text-sm font-medium text-gray-700">Borrower Participating</div>
+                                </div>
+                            </div>
+
+                            <!-- Charts Grid -->
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                <!-- Card 1: Subvention Disbursement Bar Chart with Dropdown & Dual Series -->
+                                <div class="bg-white rounded-xl border border-gray-200 p-5">
+                                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                                        <div>
+                                            <h3 class="font-semibold text-gray-800 text-sm whitespace-nowrap">
+                                                Subvention Disbursement (Rs. in Lakhs)
+                                            </h3>
+                                            <div class="flex items-center gap-4 text-xs text-gray-500 mt-1">
+                                                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full inline-block" style="background-color: #1e6bb8;"></span> Working Capital</span>
+                                                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full inline-block" style="background-color: #f97316;"></span> Term Loan</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-2 flex-shrink-0">
+                                            <select id="subventionSelect" class="text-xs border border-gray-300 rounded-md px-2.5 py-1.5 bg-white text-gray-700 font-medium shadow-sm hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 cursor-pointer">
+                                                <option value="quarterly" selected="">Quarterly Basis</option>
+                                                <option value="monthly">Monthly Basis</option>
+                                                <option value="yearly">Yearly Basis</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="relative w-full flex items-start" style="height: 220px;">
+                                        <!-- Pinned Fixed Y-Axis on the left (never scrolls away) -->
+                                        <div class="flex-shrink-0 relative select-none" style="width: 55px; height: 195px;">
+                                            <svg id="chartYAxisSvg" class="w-full h-full overflow-visible" viewBox="0 0 55 200" preserveAspectRatio="none">
+                                                <g id="chartYAxisFixed"></g>
+                                            </svg>
+                                        </div>
+                                        <!-- Horizontally Scrollable Chart Area for Grid, Bars, and X-Axis -->
+                                        <div id="chartScrollContainer" class="flex-1 overflow-x-hidden overflow-y-hidden relative select-none" style="height: 220px;">
+                                            <svg id="subventionChartSvg" class="overflow-visible block" style="height: 195px;" viewBox="0 0 460 200" preserveAspectRatio="none">
+                                                <!-- Grid Group -->
+                                                <g id="chartGrid"></g>
+                                                <!-- X Axis Ticks -->
+                                                <g id="chartXAxis"></g>
+                                                <!-- Bars Group -->
+                                                <g id="chartBars"></g>
+                                            </svg>
+                                            <!-- Tooltip Box -->
+                                            <div id="subventionTooltip" class="absolute pointer-events-none z-30 bg-white" style="display: none; opacity: 0; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.12); font-family: sans-serif; white-space: nowrap;">
+                                                <div id="tooltipLabel" class="text-xs font-semibold text-gray-800 mb-1"></div>
+                                                <div id="tooltipValue" class="text-xs font-bold"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card 2: Loan Type Distribution -->
+                                <div class="bg-white rounded-xl border border-gray-200 p-5 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-gray-900 text-base mb-3.5">Total Subvention Released
+</h3>
+                                        <div class="flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-8 w-full">
+                                            <!-- Left: Donut Chart -->
+                                            <div class="flex-shrink-0 flex items-center justify-center w-full sm:w-auto py-1">
+                                                <div class="relative flex-shrink-0" style="width: 300px; height: 250px;">
+                                                    <svg class="w-full h-full select-none drop-shadow-xs" viewBox="0 0 160 160">
+                                                        <!-- Orange Slice: Term Loan (22%) -->
+                                                        <path d="M 17.34 66.98 A 64 64 0 0 1 80 16 L 80 39 A 41 41 0 0 0 39.86 71.66 Z" fill="#ea580c" stroke="#ffffff" stroke-width="2.5" class="transition-all hover:opacity-90 cursor-pointer">
+                                                            <title>Term Loan: 5 loans (22%)</title>
+                                                        </path>
+                                                        <!-- Blue Slice: Working Capital Loan (78%) -->
+                                                        <path d="M 80 16 A 64 64 0 1 1 17.34 66.98 L 39.86 71.66 A 41 41 0 1 0 80 39 Z" fill="#1e6bb8" stroke="#ffffff" stroke-width="2.5" class="transition-all hover:opacity-90 cursor-pointer">
+                                                            <title>Working Capital Loan: 18 loans (78%)</title>
+                                                        </path>
+                                                        <!-- Percentage Labels on Slices -->
+                                                        <text x="47" y="43" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle" style="pointer-events: none;">22%</text>
+                                                        <text x="113" y="123" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle" style="pointer-events: none;">78%</text>
+                                                        <!-- Donut Center Hole -->
+                                                        <circle cx="80" cy="80" r="39.5" fill="#ffffff"></circle>
+                                                        <text x="80" y="75" fill="#111827" font-size="21" font-weight="bold" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">23</text>
+                                                        <text x="80" y="91" fill="#6b7280" font-size="9.5" font-weight="600" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">Total Loans</text>
+                                                    </svg>
+                                                </div>
+                                            </div>
+
+                                            <!-- Right: Stat Summary Card (Compact, Cool & Premium Stripes) -->
+                                            <div class="flex-1 w-full min-w-0 bg-[#fff8f3] border border-[#fde8d7] rounded-2xl shadow-xs" style="max-width: 370px; padding: 14px 16px;">
+                                                <!-- Header with Circular Badge & Orange Title -->
+                                                <div class="flex items-center gap-2.5" style="margin-bottom: 12px;">
+                                                    <div class="w-8 h-8 rounded-full bg-[#ffe5d3] flex items-center justify-center flex-shrink-0">
+                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#eb5e0c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                                            <ellipse cx="12" cy="5.5" rx="7.5" ry="2.5"></ellipse>
+                                                            <path d="M4.5 5.5v5c0 1.38 3.36 2.5 7.5 2.5s7.5-1.12 7.5-2.5v-5"></path>
+                                                            <path d="M4.5 10.5v5c0 1.38 3.36 2.5 7.5 2.5s7.5-1.12 7.5-2.5v-5"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <h4 class="font-bold text-sm sm:text-[15px] text-[#eb5e0c] tracking-tight">Loan Type Distribution</h4>
+                                                </div>
+
+                                                <!-- Small, Sleek Stripe Cards -->
+                                                <div class="flex flex-col">
+                                                    <!-- Stripe 1: Working Capital Loan -->
+                                                    <div class="bg-white rounded-xl border border-[#f0f2f5] shadow-2xs hover:border-[#fde8d7] transition-all flex items-center justify-between gap-3" style="margin-bottom: 10px; padding: 10px 14px;">
+                                                        <div class="min-w-0">
+                                                            <div class="font-bold text-[#0f172a] text-xs sm:text-[13px] leading-tight truncate">Working Capital Loan</div>
+                                                            <div class="text-[11px] text-[#64748b] font-medium" style="margin-top: 2px;">18 Loans</div>
+                                                            <div class="text-[10px] text-[#94a3b8] font-normal">Loan Amount (In Lakh)</div>
+                                                        </div>
+                                                        <div class="text-right flex-shrink-0">
+                                                            <span class="font-extrabold text-base sm:text-[17px] text-[#eb5e0c] tracking-tight whitespace-nowrap">INR 256</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Stripe 2: Term Loan -->
+                                                    <div class="bg-white rounded-xl border border-[#f0f2f5] shadow-2xs hover:border-[#fde8d7] transition-all flex items-center justify-between gap-3" style="padding: 10px 14px;">
+                                                        <div class="min-w-0">
+                                                            <div class="font-bold text-[#0f172a] text-xs sm:text-[13px] leading-tight truncate">Term Loan</div>
+                                                            <div class="text-[11px] text-[#64748b] font-medium" style="margin-top: 2px;">5 Loans</div>
+                                                            <div class="text-[10px] text-[#94a3b8] font-normal">Loan Amount (In Lakh)</div>
+                                                        </div>
+                                                        <div class="text-right flex-shrink-0">
+                                                            <span class="font-extrabold text-base sm:text-[17px] text-[#eb5e0c] tracking-tight whitespace-nowrap">INR 87</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quarterly Target vs Achieved vs Released (Rs. in lakhs) Table Card -->
+                            <div class="bg-white rounded-xl border border-gray-200 p-5">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="font-bold text-gray-900 text-base">Quarterly vs Released <span class="font-normal text-gray-500 text-sm">(Rs. in Lakhs)</span></h3>
+                                    <!-- Cool, Compact Dropdown Export Button & Menu -->
+                                    <div class="relative inline-block text-left" id="exportDropdownWrapper">
+                                        <button id="exportDropdownBtn" type="button" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 active:bg-gray-100 transition-all shadow-2xs cursor-pointer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500">
+                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                                <polyline points="7 10 12 15 17 10"></polyline>
+                                                <line x1="12" x2="12" y1="15" y2="3"></line>
+                                            </svg>
+                                            <span>Export</span>
+                                            <svg id="exportChevron" xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400 transition-transform duration-200">
+                                                <path d="m6 9 6 6 6-6"></path>
+                                            </svg>
+                                        </button>
+                                        <!-- Sleek Dropdown Menu with optimal width and no text truncation -->
+                                        <div id="exportMenu" class="hidden absolute right-0 mt-1.5 rounded-lg bg-white shadow-lg border border-gray-200 p-1 z-50 ring-1 ring-black/5" style="width: 145px; min-width: 145px;">
+                                            <button type="button" id="exportPdfBtn" class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium text-gray-700 hover:bg-red-50 hover:text-red-700 transition-colors text-left cursor-pointer group">
+                                                <span class="flex items-center gap-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-500 flex-shrink-0 group-hover:scale-105 transition-transform">
+                                                        <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                                                        <polyline points="14 2 14 8 20 8"></polyline>
+                                                    </svg>
+                                                    PDF
+                                                </span>
+                                                <span class="text-[10px] text-gray-400 font-mono group-hover:text-red-600">.pdf</span>
+                                            </button>
+                                            <button type="button" id="exportExcelBtn" class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 transition-colors text-left cursor-pointer group">
+                                                <span class="flex items-center gap-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-600 flex-shrink-0 group-hover:scale-105 transition-transform">
+                                                        <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+                                                        <line x1="3" x2="21" y1="9" y2="9"></line>
+                                                        <line x1="3" x2="21" y1="15" y2="15"></line>
+                                                        <line x1="9" x2="9" y1="3" y2="21"></line>
+                                                        <line x1="15" x2="15" y1="3" y2="21"></line>
+                                                    </svg>
+                                                    Excel
+                                                </span>
+                                                <span class="text-[10px] text-gray-400 font-mono group-hover:text-emerald-600">.xlsx</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="overflow-x-auto border border-blue-100/80 rounded-xl">
+                                    <table id="quarterlyTable" class="w-full text-sm border-collapse">
+                                        <thead>
+                                            <tr class="bg-[#f0f4f9] text-gray-800 text-center font-semibold text-xs border-b border-blue-100">
+                                                <th class="py-3.5 px-4 text-center border-r border-blue-100 w-1/4">Quarter</th>
+                                                <th class="py-3.5 px-4 text-center border-r border-blue-100 w-1/4">
+                                                    Target for FY 2026-27<br>
+                                                    <span class="font-normal text-gray-500">(Rs. in Lakhs.)</span>
+                                                </th>
+                                                <th class="py-3.5 px-4 text-center border-r border-blue-100 w-1/4">
+                                                    Released<br>
+                                                    <span class="font-normal text-gray-500">(Rs. in Lakhs)</span>
+                                                </th>
+                                                <th class="py-3.5 px-4 text-center w-1/4">
+                                                    Achievement (%)<br>
+                                                    <span class="font-normal text-gray-500">(Released / Budget)</span>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-gray-100 text-gray-800 text-center text-sm font-medium">
+                                            <!-- Q1 Row -->
+                                            <tr class="hover:bg-gray-50/80 transition-colors">
+                                                <td class="py-3.5 px-4 border-r border-gray-100 font-semibold text-gray-900">Q1</td>
+                                                <td class="py-3.5 px-4 border-r border-gray-100">10</td>
+                                                <td class="py-3.5 px-4 border-r border-gray-100">5</td>
+                                                <td class="py-3.5 px-4 font-bold text-red-600">50%</td>
+                                            </tr>
+                                            <!-- Q2 Row -->
+                                            <tr class="hover:bg-gray-50/80 transition-colors">
+                                                <td class="py-3.5 px-4 border-r border-gray-100 font-semibold text-gray-900">Q2</td>
+                                                <td class="py-3.5 px-4 border-r border-gray-100">40</td>
+                                                <td class="py-3.5 px-4 border-r border-gray-100">45</td>
+                                                <td class="py-3.5 px-4 font-bold text-green-600">112.50%</td>
+                                            </tr>
+                                            <!-- Q3 Row -->
+                                            <tr class="hover:bg-gray-50/80 transition-colors">
+                                                <td class="py-3.5 px-4 border-r border-gray-100 font-semibold text-gray-900">Q3</td>
+                                                <td class="py-3.5 px-4 border-r border-gray-100">50</td>
+                                                <td class="py-3.5 px-4 border-r border-gray-100 text-gray-400">—</td>
+                                                <td class="py-3.5 px-4 text-gray-400">—</td>
+                                            </tr>
+                                            <!-- Q4 Row -->
+                                            <tr class="hover:bg-gray-50/80 transition-colors">
+                                                <td class="py-3.5 px-4 border-r border-gray-100 font-semibold text-gray-900">Q4</td>
+                                                <td class="py-3.5 px-4 border-r border-gray-100">100</td>
+                                                <td class="py-3.5 px-4 border-r border-gray-100 text-gray-400">—</td>
+                                                <td class="py-3.5 px-4 text-gray-400">—</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <!-- Total Row -->
+                                            <tr class="bg-[#f0f4f9] text-gray-900 text-center font-bold text-sm border-t-2 border-blue-100">
+                                                <td class="py-3.5 px-4 border-r border-blue-100">Total (in Lakhs)</td>
+                                                <td class="py-3.5 px-4 border-r border-blue-100">200</td>
+                                                <td class="py-3.5 px-4 border-r border-blue-100">50</td>
+                                                <td class="py-3.5 px-4 text-red-600">25%</td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <!-- Footer Subtexts -->
+                                <div class="flex items-center justify-between mt-4 text-xs text-gray-500 font-medium">
+                                    <div>All amounts are in Indian Rupees (INR) in Lakhs</div>
+                                    <div class="flex items-center gap-1 text-gray-400">
+                                        Data as on 04 Sept 2026, 12:08 PM IST
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info inline">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <path d="M12 16v-4"></path>
+                                            <path d="M12 8h.01"></path>
+                                        </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Blue Divider Line & Footer Container -->
+                        <div class="mt-auto pt-6">
+                            <div class="border-t-2 border-[#0d2b55]" style="border-color: #0d2b55;"></div>
+                            <footer class="mt-4 pb-1 text-center text-xs text-gray-500">
+                                <div>
+                                    © 2026 <span class="font-semibold text-[#0d2b55]">Sagarmala Finance Corporation Limited (SMFCL)</span>. <span class="font-semibold text-gray-800">Ministry of Ports, Shipping &amp; Waterways, Government of India</span>. All Rights Reserved.
+                                </div>
+                            </footer>
+                        </div>
+                    </main>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+        <script>
+            if (typeof lucide !== 'undefined' && lucide.createIcons) {
+                lucide.createIcons();
+            }
+        </script>
+        <!-- Interactive Bar Chart Controller Script -->
+        <script>
+            (function () {
+                // Generate 50 financial years from FY 1976-77 to FY 2025-26
+                const yearly50Labels = [];
+                const yearly50WC = [];
+                const yearly50TL = [];
+                for (let y = 1976; y <= 2025; y++) {
+                    const nextY = (y + 1) % 100;
+                    const nextYStr = nextY < 10 ? '0' + nextY : '' + nextY;
+                    yearly50Labels.push(`FY ${y}-${nextYStr}`);
+                    
+                    const t = (y - 1976) / 49;
+                    const baseWc = Math.round(120 + Math.pow(t, 1.8) * 2980 + Math.sin(y * 1.5) * 60);
+                    const baseTl = Math.round(80 + Math.pow(t, 1.8) * 2220 + Math.cos(y * 1.5) * 45);
+                    yearly50WC.push(Math.max(50, baseWc));
+                    yearly50TL.push(Math.max(30, baseTl));
+                }
+
+                const subventionDataSets = {
+                    monthly: {
+                        labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar'],
+                        maxY: 300,
+                        yTicks: [0, 75, 150, 225, 300],
+                        workingCapital: [85, 95, 100, 130, 140, 150, 160, 170, 180, 200, 210, 220],
+                        termLoan: [55, 65, 70, 95, 105, 110, 125, 130, 135, 150, 160, 170]
+                    },
+                    quarterly: {
+                        labels: ['Q1 (Apr-Jun)', 'Q2 (Jul-Sep)', 'Q3 (Oct-Dec)', 'Q4 (Jan-Mar)'],
+                        maxY: 800,
+                        yTicks: [0, 200, 400, 600, 800],
+                        workingCapital: [280, 420, 510, 630],
+                        termLoan: [190, 310, 390, 480]
+                    },
+                    yearly: {
+                        labels: yearly50Labels,
+                        maxY: 4000,
+                        yTicks: [0, 1000, 2000, 3000, 4000],
+                        workingCapital: yearly50WC,
+                        termLoan: yearly50TL
+                    }
+                };
+
+                const select = document.getElementById('subventionSelect');
+                const scrollContainer = document.getElementById('chartScrollContainer');
+                const svg = document.getElementById('subventionChartSvg');
+                const yAxisSvg = document.getElementById('chartYAxisSvg');
+                const yAxisFixedGroup = document.getElementById('chartYAxisFixed');
+                const gridGroup = document.getElementById('chartGrid');
+                const xAxisGroup = document.getElementById('chartXAxis');
+                const barsGroup = document.getElementById('chartBars');
+                const tooltip = document.getElementById('subventionTooltip');
+                const tooltipLabel = document.getElementById('tooltipLabel');
+                const tooltipValue = document.getElementById('tooltipValue');
+                const scrollHint = document.getElementById('scrollHint');
+
+                if (!select || !svg || !scrollContainer) return;
+
+                const topPad = 5;
+                const bottomPad = 165;
+                const height = bottomPad - topPad; // 160
+
+                function renderChart(key) {
+                    const data = subventionDataSets[key] || subventionDataSets.quarterly;
+                    const n = data.labels.length;
+
+                    // Calculate required width based on data items
+                    const containerWidth = scrollContainer.clientWidth || 460;
+                    const isYearly = (key === 'yearly');
+
+                    // ONLY Yearly Basis expands for horizontal scrolling across 50 years; Monthly & Quarterly fit 100%
+                    let actualWidth = containerWidth;
+                    if (isYearly) {
+                        const neededWidth = n * 82;
+                        actualWidth = Math.max(containerWidth, neededWidth);
+                    }
+
+                    const isScrollable = isYearly && (actualWidth > containerWidth);
+
+                    // Configure scrollable overflow and SVG sizing strictly for yearly basis
+                    if (isScrollable) {
+                        scrollContainer.classList.remove('overflow-x-hidden');
+                        scrollContainer.classList.add('overflow-x-auto');
+                        scrollContainer.style.overflowX = 'auto';
+
+                        svg.style.width = `${actualWidth}px`;
+                        svg.style.minWidth = `${actualWidth}px`;
+                        svg.style.maxWidth = 'none';
+                        svg.setAttribute('width', actualWidth);
+                    } else {
+                        scrollContainer.classList.remove('overflow-x-auto');
+                        scrollContainer.classList.add('overflow-x-hidden');
+                        scrollContainer.style.overflowX = 'hidden';
+
+                        svg.style.width = '100%';
+                        svg.style.minWidth = '100%';
+                        svg.style.maxWidth = '100%';
+                        svg.removeAttribute('width');
+                    }
+
+                    const slotWidth = actualWidth / n;
+                    const singleBarWidth = Math.min(26, Math.max(8, (slotWidth * 0.65) / 2));
+                    const groupGap = Math.min(4, Math.max(2, slotWidth * 0.08));
+
+                    // Update SVG dimensions and viewBox
+                    svg.setAttribute('viewBox', `0 0 ${actualWidth} 200`);
+
+                    // Render Fixed Y-Axis on the left
+                    let yFixedHtml = '<line x1="54" y1="5" x2="54" y2="165" stroke="#94a3b8" stroke-width="1.2"></line><g>';
+                    data.yTicks.forEach((tickVal) => {
+                        const ratio = tickVal / data.maxY;
+                        const yPos = bottomPad - ratio * height;
+                        yFixedHtml += `
+                            <g class="recharts-layer recharts-cartesian-axis-tick">
+                                <line stroke="#94a3b8" stroke-width="1" x1="48" y1="${yPos}" x2="54" y2="${yPos}"></line>
+                                <text font-size="11" x="44" y="${yPos}" text-anchor="end" fill="#64748b" font-weight="500" dy="0.355em">${tickVal}</text>
+                            </g>`;
+                    });
+                    yFixedHtml += '</g>';
+                    if (yAxisFixedGroup) yAxisFixedGroup.innerHTML = yFixedHtml;
+
+                    // Render Grid across the full actualWidth
+                    let gridHtml = '';
+                    data.yTicks.forEach((tickVal) => {
+                        const ratio = tickVal / data.maxY;
+                        const yPos = bottomPad - ratio * height;
+                        gridHtml += `<line stroke-dasharray="3 3" stroke="#e2e8f0" stroke-width="1" fill="none" x1="0" y1="${yPos}" x2="${actualWidth}" y2="${yPos}"></line>`;
+                    });
+                    // Vertical grid dividers
+                    for (let i = 0; i <= n; i++) {
+                        const xPos = i * slotWidth;
+                        gridHtml += `<line stroke-dasharray="3 3" stroke="#f1f5f9" stroke-width="1" fill="none" x1="${xPos}" y1="5" x2="${xPos}" y2="165"></line>`;
+                    }
+                    gridGroup.innerHTML = gridHtml;
+
+                    // Render X-Axis baseline and ticks
+                    let xAxisHtml = `<line x1="0" y1="165" x2="${actualWidth}" y2="165" stroke="#94a3b8" stroke-width="1.2"></line><g>`;
+                    data.labels.forEach((label, i) => {
+                        const xCenter = (i + 0.5) * slotWidth;
+                        xAxisHtml += `
+                            <g class="recharts-layer recharts-cartesian-axis-tick">
+                                <line stroke="#94a3b8" stroke-width="1" x1="${xCenter}" y1="165" x2="${xCenter}" y2="171"></line>
+                                <text font-size="11" x="${xCenter}" y="174" text-anchor="middle" fill="#64748b" font-weight="500" dy="0.71em">${label}</text>
+                            </g>`;
+                    });
+                    xAxisHtml += '</g>';
+                    xAxisGroup.innerHTML = xAxisHtml;
+
+                    // Render Grouped Bars
+                    let barsHtml = '';
+                    data.labels.forEach((_, i) => {
+                        const wcVal = data.workingCapital[i];
+                        const tlVal = data.termLoan[i];
+                        const xCenter = (i + 0.5) * slotWidth;
+
+                        // Left bar: Working Capital (Blue)
+                        const xBarBlue = xCenter - singleBarWidth - groupGap / 2;
+                        const blueHeight = (wcVal / data.maxY) * height;
+                        const yBarBlue = bottomPad - blueHeight;
+
+                        if (wcVal > 0) {
+                            barsHtml += `
+                                <rect x="${xBarBlue.toFixed(1)}" y="${yBarBlue.toFixed(1)}" width="${singleBarWidth.toFixed(1)}" height="${blueHeight.toFixed(1)}" rx="3" ry="3" fill="#1e6bb8" class="cursor-pointer transition-all hover:fill-[#165697]" data-series="Working Capital" data-color="#1e6bb8" data-label="${data.labels[i]}" data-value="${wcVal}"></rect>
+                            `;
+                        }
+
+                        // Right bar: Term Loan (Orange)
+                        const xBarOrange = xCenter + groupGap / 2;
+                        const orangeHeight = (tlVal / data.maxY) * height;
+                        const yBarOrange = bottomPad - orangeHeight;
+
+                        if (tlVal > 0) {
+                            barsHtml += `
+                                <rect x="${xBarOrange.toFixed(1)}" y="${yBarOrange.toFixed(1)}" width="${singleBarWidth.toFixed(1)}" height="${orangeHeight.toFixed(1)}" rx="3" ry="3" fill="#f97316" class="cursor-pointer transition-all hover:fill-[#ea580c]" data-series="Term Loan" data-color="#f97316" data-label="${data.labels[i]}" data-value="${tlVal}"></rect>
+                            `;
+                        }
+                    });
+                    barsGroup.innerHTML = barsHtml;
+
+                    // Scroll behavior: when viewing yearly (large dataset), auto-scroll to the end (most recent years)
+                    if (isScrollable) {
+                        setTimeout(() => {
+                            scrollContainer.scrollLeft = scrollContainer.scrollWidth;
+                        }, 50);
+                    } else {
+                        scrollContainer.scrollLeft = 0;
+                    }
+
+                    // Attach hover listeners for tooltips
+                    const barElements = barsGroup.querySelectorAll('rect');
+                    barElements.forEach((bar) => {
+                        bar.addEventListener('mouseenter', (e) => {
+                            const lbl = bar.getAttribute('data-label');
+                            const val = bar.getAttribute('data-value');
+                            const series = bar.getAttribute('data-series');
+                            const color = bar.getAttribute('data-color');
+
+                            tooltipLabel.textContent = `${lbl} — ${series}`;
+                            tooltipValue.style.color = color;
+                            tooltipValue.textContent = `Disbursement: Rs. ${Number(val).toLocaleString('en-IN')} Lakhs`;
+
+                            const barX = parseFloat(bar.getAttribute('x'));
+                            const barW = parseFloat(bar.getAttribute('width'));
+                            const barY = parseFloat(bar.getAttribute('y'));
+
+                            const left = barX + barW / 2;
+                            const top = Math.max(5, barY - 48);
+
+                            tooltip.style.left = `${left}px`;
+                            tooltip.style.top = `${top}px`;
+                            tooltip.style.transform = 'translateX(-50%)';
+                            tooltip.style.display = 'block';
+                            tooltip.style.opacity = '1';
+                        });
+
+                        bar.addEventListener('mouseleave', () => {
+                            tooltip.style.opacity = '0';
+                            tooltip.style.display = 'none';
+                        });
+                    });
+                }
+
+                // Header Navigation Buttons for Smooth Scrolling
+
+
+                // Mouse Wheel Horizontal Scrolling on Yearly Chart
+                scrollContainer.addEventListener('wheel', (e) => {
+                    if (select.value === 'yearly') {
+                        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                            e.preventDefault();
+                            scrollContainer.scrollLeft += e.deltaY * 1.5;
+                        }
+                    }
+                }, { passive: false });
+
+                // Click and Drag to Scroll on the Chart
+                let isChartDragging = false;
+                let dragStartX = 0;
+                let initialScrollLeft = 0;
+
+                scrollContainer.addEventListener('mousedown', (e) => {
+                    if (select.value !== 'yearly') return;
+                    isChartDragging = true;
+                    dragStartX = e.pageX - scrollContainer.offsetLeft;
+                    initialScrollLeft = scrollContainer.scrollLeft;
+                    scrollContainer.style.cursor = 'grabbing';
+                });
+                window.addEventListener('mouseup', () => {
+                    if (!isChartDragging) return;
+                    isChartDragging = false;
+                    scrollContainer.style.cursor = '';
+                });
+                scrollContainer.addEventListener('mousemove', (e) => {
+                    if (!isChartDragging || select.value !== 'yearly') return;
+                    e.preventDefault();
+                    const x = e.pageX - scrollContainer.offsetLeft;
+                    const delta = (x - dragStartX) * 1.5;
+                    scrollContainer.scrollLeft = initialScrollLeft - delta;
+                });
+
+                select.addEventListener('change', function () {
+                    renderChart(this.value);
+                });
+
+                window.addEventListener('resize', () => {
+                    renderChart(select.value || 'quarterly');
+                });
+
+                renderChart(select.value || 'quarterly');
+            })();
+        </script>
+
+        <!-- Export Libraries: SheetJS (Excel) & jsPDF + AutoTable (PDF) -->
+        <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+
+        <!-- Export Controller Script -->
+        <script>
+            (function () {
+                const exportBtn = document.getElementById('exportDropdownBtn');
+                const exportMenu = document.getElementById('exportMenu');
+                const exportChevron = document.getElementById('exportChevron');
+                const exportPdfBtn = document.getElementById('exportPdfBtn');
+                const exportExcelBtn = document.getElementById('exportExcelBtn');
+
+                function toggleMenu(show) {
+                    if (!exportMenu) return;
+                    const shouldShow = typeof show === 'boolean' ? show : exportMenu.classList.contains('hidden');
+                    if (shouldShow) {
+                        exportMenu.classList.remove('hidden');
+                        if (exportChevron) exportChevron.classList.add('rotate-180');
+                    } else {
+                        exportMenu.classList.add('hidden');
+                        if (exportChevron) exportChevron.classList.remove('rotate-180');
+                    }
+                }
+
+                if (exportBtn && exportMenu) {
+                    exportBtn.addEventListener('click', function (e) {
+                        e.stopPropagation();
+                        toggleMenu();
+                    });
+
+                    document.addEventListener('click', function (e) {
+                        if (!exportMenu.contains(e.target) && !exportBtn.contains(e.target)) {
+                            toggleMenu(false);
+                        }
+                    });
+
+                    document.addEventListener('keydown', function (e) {
+                        if (e.key === 'Escape') {
+                            toggleMenu(false);
+                        }
+                    });
+                }
+
+                function extractTableData() {
+                    const table = document.getElementById('quarterlyTable') || document.querySelector('table');
+                    const headers = [];
+                    table.querySelectorAll('thead tr:first-child th').forEach(th => {
+                        headers.push(th.innerText.replace(/\r?\n/g, ' ').replace(/\s+/g, ' ').trim());
+                    });
+
+                    const rows = [];
+                    table.querySelectorAll('tbody tr').forEach(tr => {
+                        const row = [];
+                        tr.querySelectorAll('td').forEach(td => {
+                            row.push(td.innerText.replace(/\r?\n/g, ' ').replace(/\s+/g, ' ').trim());
+                        });
+                        if (row.length) rows.push(row);
+                    });
+
+                    const footers = [];
+                    table.querySelectorAll('tfoot tr').forEach(tr => {
+                        const row = [];
+                        tr.querySelectorAll('td').forEach(td => {
+                            row.push(td.innerText.replace(/\r?\n/g, ' ').replace(/\s+/g, ' ').trim());
+                        });
+                        if (row.length) footers.push(row);
+                    });
+
+                    return { table, headers, rows, footers };
+                }
+
+                // Export to Excel
+                if (exportExcelBtn) {
+                    exportExcelBtn.addEventListener('click', function (e) {
+                        e.stopPropagation();
+                        toggleMenu(false);
+
+                        const { headers, rows, footers, table } = extractTableData();
+                        const filename = 'Quarterly_Target_vs_Achieved_vs_Released';
+
+                        if (typeof XLSX !== 'undefined') {
+                            const allData = [headers, ...rows, ...footers];
+                            const ws = XLSX.utils.aoa_to_sheet(allData);
+
+                            // Column widths
+                            ws['!cols'] = [
+                                { wch: 15 },
+                                { wch: 32 },
+                                { wch: 25 },
+                                { wch: 28 }
+                            ];
+
+                            const wb = XLSX.utils.book_new();
+                            XLSX.utils.book_append_sheet(wb, ws, 'Quarterly Summary');
+                            XLSX.writeFile(wb, filename + '.xlsx');
+                        } else {
+                            // Instant Fallback (CSV with UTF-8 BOM for Microsoft Excel)
+                            const allData = [headers, ...rows, ...footers];
+                            let csvContent = '\uFEFF';
+                            allData.forEach(r => {
+                                const escaped = r.map(c => `"${c.replace(/"/g, '""')}"`).join(',');
+                                csvContent += escaped + '\r\n';
+                            });
+                            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                            const link = document.createElement('a');
+                            link.href = URL.createObjectURL(blob);
+                            link.download = filename + '.csv';
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                        }
+                    });
+                }
+
+                // Export to PDF
+                if (exportPdfBtn) {
+                    exportPdfBtn.addEventListener('click', function (e) {
+                        e.stopPropagation();
+                        toggleMenu(false);
+
+                        const { table } = extractTableData();
+                        const filename = 'Quarterly_Target_vs_Achieved_vs_Released';
+
+                        if (window.jspdf && window.jspdf.jsPDF) {
+                            const { jsPDF } = window.jspdf;
+                            const doc = new jsPDF({
+                                orientation: 'portrait',
+                                unit: 'mm',
+                                format: 'a4'
+                            });
+
+                            // Header banner
+                            doc.setFillColor(13, 43, 85);
+                            doc.rect(0, 0, 210, 24, 'F');
+                            doc.setTextColor(255, 255, 255);
+                            doc.setFontSize(14);
+                            doc.setFont('helvetica', 'bold');
+                            doc.text('Sagarmala Finance Corporation Limited', 14, 11);
+                            doc.setFontSize(9);
+                            doc.setFont('helvetica', 'normal');
+                            doc.setTextColor(190, 215, 250);
+                            doc.text('Ministry Dashboard — Quarterly Target vs Achieved vs Released', 14, 18);
+
+                            // Date & Currency info
+                            doc.setTextColor(100, 116, 139);
+                            doc.setFontSize(8.5);
+                            const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+                            doc.text('Generated on: ' + today + ' | All amounts in Indian Rupees (INR)', 14, 31);
+
+                            // Generate Table
+                            doc.autoTable({
+                                html: table,
+                                startY: 35,
+                                theme: 'grid',
+                                headStyles: {
+                                    fillColor: [240, 244, 249],
+                                    textColor: [30, 41, 59],
+                                    fontStyle: 'bold',
+                                    halign: 'center',
+                                    valign: 'middle',
+                                    lineWidth: 0.2,
+                                    lineColor: [203, 213, 225]
+                                },
+                                bodyStyles: {
+                                    textColor: [51, 65, 85],
+                                    halign: 'center',
+                                    valign: 'middle',
+                                    lineWidth: 0.1,
+                                    lineColor: [226, 232, 240]
+                                },
+                                footStyles: {
+                                    fillColor: [240, 244, 249],
+                                    textColor: [15, 23, 42],
+                                    fontStyle: 'bold',
+                                    halign: 'center',
+                                    valign: 'middle',
+                                    lineWidth: 0.3,
+                                    lineColor: [203, 213, 225]
+                                },
+                                styles: {
+                                    font: 'helvetica',
+                                    fontSize: 9,
+                                    cellPadding: 4.5
+                                },
+                                didParseCell: function (data) {
+                                    if (data.section === 'body' && data.column.index === 3) {
+                                        const txt = (data.cell.text || []).join(' ');
+                                        if (txt.includes('112') || txt.includes('100')) {
+                                            data.cell.styles.textColor = [22, 163, 74];
+                                            data.cell.styles.fontStyle = 'bold';
+                                        } else if (txt.includes('50') || txt.includes('25')) {
+                                            data.cell.styles.textColor = [220, 38, 38];
+                                            data.cell.styles.fontStyle = 'bold';
+                                        }
+                                    }
+                                    if (data.section === 'foot' && data.column.index === 3) {
+                                        data.cell.styles.textColor = [220, 38, 38];
+                                        data.cell.styles.fontStyle = 'bold';
+                                    }
+                                }
+                            });
+
+                            doc.save(filename + '.pdf');
+                        } else {
+                            // Instant Fallback to Print / Save to PDF
+                            window.print();
+                        }
+                    });
+                }
+            })();
+        </script>
+        <!-- Alpine / Dropdown Fallback Controller -->
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                document.querySelectorAll('[x-data]').forEach((el) => {
+                    const trigger = el.querySelector('button');
+                    const dropdown = el.querySelector('[x-show="open"]');
+                    if (trigger && dropdown) {
+                        trigger.addEventListener('click', (e) => {
+                            if (!window.Alpine) {
+                                e.stopPropagation();
+                                const isHidden = dropdown.style.display === 'none' || !dropdown.style.display;
+                                dropdown.style.display = isHidden ? 'block' : 'none';
+                            }
+                        });
+                        document.addEventListener('click', () => {
+                            if (!window.Alpine && dropdown) {
+                                dropdown.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
