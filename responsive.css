@@ -709,19 +709,20 @@ svg.recharts-surface {
     /* Ensure top navbar padding matches cards margin for unified vertical alignment */
     nav .px-4,
     nav .w-full.mx-auto {
-        padding-left: 1.25rem !important;
-        padding-right: 1.25rem !important;
-        padding-left: max(1.25rem, env(safe-area-inset-left, 0px)) !important;
-        padding-right: max(1.25rem, env(safe-area-inset-right, 0px)) !important;
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+        box-sizing: border-box !important;
     }
 
-    /* Maintain generous left & right padding around dashboard cards on mobile */
+    /* Maintain uniform, generous 1.5rem (24px) left & right padding around dashboard cards */
     main,
     main.w-full,
     main.flex-1 {
-        padding: 1.125rem 1.25rem 2.5rem 1.25rem !important;
-        padding-left: max(1.25rem, env(safe-area-inset-left, 0px)) !important;
-        padding-right: max(1.25rem, env(safe-area-inset-right, 0px)) !important;
+        padding: 1.25rem 1.5rem 2.5rem 1.5rem !important;
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
     }
 
     /* Logo scaling on small screens */
@@ -741,15 +742,24 @@ svg.recharts-surface {
         font-size: 0.6875rem !important;
     }
 
-    /* Metric Cards Grid: Balanced 2-column spacing with clear gutter */
+    /* Metric Cards Grid: Centered 2-column spacing with uniform 1.5rem side gutters */
     .grid.grid-cols-2.lg\:grid-cols-4 {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
         gap: 0.75rem !important;
+        box-sizing: border-box !important;
     }
 
     /* Metric Card Internal Spacing */
     .kpi-interactive-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
         padding: 0.875rem 0.75rem !important;
         border-radius: 0.75rem !important;
+        box-sizing: border-box !important;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03) !important;
     }
 
@@ -916,27 +926,33 @@ svg.recharts-surface {
    10.5 SCREEN SIZE: <= 480px (Compact Mobile Devices)
    ------------------------------------------------------------------------------ */
 @media (max-width: 480px) {
-    /* Maintain generous screen padding around cards on compact phones */
+    /* Maintain uniform 1.5rem (24px) screen padding around cards on compact phones */
     main,
     main.w-full,
     main.flex-1 {
-        padding: 1rem 1.125rem 2.25rem 1.125rem !important;
-        padding-left: max(1.125rem, env(safe-area-inset-left, 0px)) !important;
-        padding-right: max(1.125rem, env(safe-area-inset-right, 0px)) !important;
+        padding: 1rem 1.5rem 2.25rem 1.5rem !important;
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
     }
 
     nav .px-4,
     nav .w-full.mx-auto {
-        padding-left: 1.125rem !important;
-        padding-right: 1.125rem !important;
-        padding-left: max(1.125rem, env(safe-area-inset-left, 0px)) !important;
-        padding-right: max(1.125rem, env(safe-area-inset-right, 0px)) !important;
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+        box-sizing: border-box !important;
     }
 
-    /* For tiny devices, metric cards adapt smoothly */
+    /* Metric cards 2-column layout with centered alignment */
     .grid.grid-cols-2.lg\:grid-cols-4 {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
         gap: 0.625rem !important;
+        box-sizing: border-box !important;
     }
 
     /* Card number sizing on ultra-compact screens */
@@ -999,15 +1015,18 @@ svg.recharts-surface {
     main,
     main.w-full,
     main.flex-1 {
-        padding: 0.875rem 0.875rem 2rem 0.875rem !important;
-        padding-left: max(0.875rem, env(safe-area-inset-left, 0px)) !important;
-        padding-right: max(0.875rem, env(safe-area-inset-right, 0px)) !important;
+        padding: 0.875rem 1.25rem 2rem 1.25rem !important;
+        padding-left: 1.25rem !important;
+        padding-right: 1.25rem !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
     }
 
     nav .px-4,
     nav .w-full.mx-auto {
-        padding-left: 0.875rem !important;
-        padding-right: 0.875rem !important;
+        padding-left: 1.25rem !important;
+        padding-right: 1.25rem !important;
+        box-sizing: border-box !important;
     }
 
     /* Single column for cards if screen is narrower than 360px */
