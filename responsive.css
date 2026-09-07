@@ -655,7 +655,7 @@ svg.recharts-surface {
         width: 100% !important;
         max-width: 100vw !important;
         min-width: 0 !important;
-        padding: 1rem 0.85rem 2rem 0.85rem !important;
+        padding: 1.25rem 1.5rem 2.5rem 1.5rem !important;
         margin: 0 !important;
         box-sizing: border-box !important;
         min-height: auto !important;
@@ -706,9 +706,22 @@ svg.recharts-surface {
         height: 3.75rem !important;
     }
 
-    nav .px-4 {
-        padding-left: 0.625rem !important;
-        padding-right: 0.625rem !important;
+    /* Ensure top navbar padding matches cards margin for unified vertical alignment */
+    nav .px-4,
+    nav .w-full.mx-auto {
+        padding-left: 1.25rem !important;
+        padding-right: 1.25rem !important;
+        padding-left: max(1.25rem, env(safe-area-inset-left, 0px)) !important;
+        padding-right: max(1.25rem, env(safe-area-inset-right, 0px)) !important;
+    }
+
+    /* Maintain generous left & right padding around dashboard cards on mobile */
+    main,
+    main.w-full,
+    main.flex-1 {
+        padding: 1.125rem 1.25rem 2.5rem 1.25rem !important;
+        padding-left: max(1.25rem, env(safe-area-inset-left, 0px)) !important;
+        padding-right: max(1.25rem, env(safe-area-inset-right, 0px)) !important;
     }
 
     /* Logo scaling on small screens */
@@ -728,15 +741,16 @@ svg.recharts-surface {
         font-size: 0.6875rem !important;
     }
 
-    /* Metric Cards Grid: Compact spacing */
+    /* Metric Cards Grid: Balanced 2-column spacing with clear gutter */
     .grid.grid-cols-2.lg\:grid-cols-4 {
-        gap: 0.625rem !important;
+        gap: 0.75rem !important;
     }
 
     /* Metric Card Internal Spacing */
     .kpi-interactive-card {
-        padding: 0.75rem !important;
-        border-radius: 0.625rem !important;
+        padding: 0.875rem 0.75rem !important;
+        border-radius: 0.75rem !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03) !important;
     }
 
     .kpi-interactive-card .w-10.h-10 {
@@ -761,9 +775,9 @@ svg.recharts-surface {
         font-size: 0.6875rem !important;
     }
 
-    /* Charts Container & Card Padding */
+    /* Charts Container & Card Padding: Generous internal breathing space */
     .bg-white.rounded-xl.border.border-gray-200.p-5 {
-        padding: 0.875rem !important;
+        padding: 1rem !important;
         border-radius: 0.75rem !important;
     }
 
@@ -902,10 +916,27 @@ svg.recharts-surface {
    10.5 SCREEN SIZE: <= 480px (Compact Mobile Devices)
    ------------------------------------------------------------------------------ */
 @media (max-width: 480px) {
-    /* For tiny devices, metric cards can adapt smoothly */
+    /* Maintain generous screen padding around cards on compact phones */
+    main,
+    main.w-full,
+    main.flex-1 {
+        padding: 1rem 1.125rem 2.25rem 1.125rem !important;
+        padding-left: max(1.125rem, env(safe-area-inset-left, 0px)) !important;
+        padding-right: max(1.125rem, env(safe-area-inset-right, 0px)) !important;
+    }
+
+    nav .px-4,
+    nav .w-full.mx-auto {
+        padding-left: 1.125rem !important;
+        padding-right: 1.125rem !important;
+        padding-left: max(1.125rem, env(safe-area-inset-left, 0px)) !important;
+        padding-right: max(1.125rem, env(safe-area-inset-right, 0px)) !important;
+    }
+
+    /* For tiny devices, metric cards adapt smoothly */
     .grid.grid-cols-2.lg\:grid-cols-4 {
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        gap: 0.5rem !important;
+        gap: 0.625rem !important;
     }
 
     /* Card number sizing on ultra-compact screens */
@@ -965,6 +996,20 @@ svg.recharts-surface {
    10.6 SCREEN SIZE: <= 360px (Ultra-Small Screens e.g. Galaxy Fold / iPhone SE 1st)
    ------------------------------------------------------------------------------ */
 @media (max-width: 360px) {
+    main,
+    main.w-full,
+    main.flex-1 {
+        padding: 0.875rem 0.875rem 2rem 0.875rem !important;
+        padding-left: max(0.875rem, env(safe-area-inset-left, 0px)) !important;
+        padding-right: max(0.875rem, env(safe-area-inset-right, 0px)) !important;
+    }
+
+    nav .px-4,
+    nav .w-full.mx-auto {
+        padding-left: 0.875rem !important;
+        padding-right: 0.875rem !important;
+    }
+
     /* Single column for cards if screen is narrower than 360px */
     .grid.grid-cols-2.lg\:grid-cols-4 {
         grid-template-columns: 1fr !important;
