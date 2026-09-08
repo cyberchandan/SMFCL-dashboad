@@ -1715,6 +1715,125 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Quarterly Target vs Achieved vs Released (Rs. in lakhs) Table Card -->
+                            <div class="bg-white rounded-xl border border-gray-200 p-5">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="font-bold text-gray-900 text-base">Target vs Released <span class="font-normal text-gray-500 text-sm">(Rs. in Lakhs)</span></h3>
+                                    <!-- Cool, Compact Dropdown Export Button & Menu -->
+                                    <div class="relative inline-block text-left" id="exportDropdownWrapper">
+                                        <button id="exportDropdownBtn" type="button" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 active:bg-gray-100 transition-all shadow-2xs cursor-pointer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500">
+                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                                <polyline points="7 10 12 15 17 10"></polyline>
+                                                <line x1="12" x2="12" y1="15" y2="3"></line>
+                                            </svg>
+                                            <span>Export</span>
+                                            <svg id="exportChevron" xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400 transition-transform duration-200">
+                                                <path d="m6 9 6 6 6-6"></path>
+                                            </svg>
+                                        </button>
+                                        <!-- Sleek Dropdown Menu with optimal width and no text truncation -->
+                                        <div id="exportMenu" class="hidden absolute right-0 mt-1.5 rounded-lg bg-white shadow-lg border border-gray-200 p-1 z-50 ring-1 ring-black/5" style="width: 145px; min-width: 145px;">
+                                            <button type="button" id="exportPdfBtn" class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium text-gray-700 hover:bg-red-50 hover:text-red-700 transition-colors text-left cursor-pointer group">
+                                                <span class="flex items-center gap-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-500 flex-shrink-0 group-hover:scale-105 transition-transform">
+                                                        <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                                                        <polyline points="14 2 14 8 20 8"></polyline>
+                                                    </svg>
+                                                    PDF
+                                                </span>
+                                                <span class="text-[10px] text-gray-400 font-mono group-hover:text-red-600">.pdf</span>
+                                            </button>
+                                            <button type="button" id="exportExcelBtn" class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 transition-colors text-left cursor-pointer group">
+                                                <span class="flex items-center gap-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-600 flex-shrink-0 group-hover:scale-105 transition-transform">
+                                                        <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+                                                        <line x1="3" x2="21" y1="9" y2="9"></line>
+                                                        <line x1="3" x2="21" y1="15" y2="15"></line>
+                                                        <line x1="9" x2="9" y1="3" y2="21"></line>
+                                                        <line x1="15" x2="15" y1="3" y2="21"></line>
+                                                    </svg>
+                                                    Excel
+                                                </span>
+                                                <span class="text-[10px] text-gray-400 font-mono group-hover:text-emerald-600">.xlsx</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="overflow-x-auto border border-blue-100/80 rounded-xl">
+                                    <table id="quarterlyTable" class="w-full text-sm border-collapse">
+                                        <thead>
+                                            <tr class="bg-[#f0f4f9] text-gray-800 text-center font-semibold text-xs border-b border-blue-100">
+                                                <th class="py-3.5 px-4 text-center border-r border-blue-100 w-1/4">Quarter</th>
+                                                <th class="py-3.5 px-4 text-center border-r border-blue-100 w-1/4">
+                                                    Target for FY 2026-27<br>
+                                                    <span class="font-normal text-gray-500">(Rs. in Lakhs.)</span>
+                                                </th>
+                                                <th class="py-3.5 px-4 text-center border-r border-blue-100 w-1/4">
+                                                    Released<br>
+                                                    <span class="font-normal text-gray-500">(Rs. in Lakhs)</span>
+                                                </th>
+                                                <th class="py-3.5 px-4 text-center w-1/4">
+                                                    Achievement (%)<br>
+                                                    <span class="font-normal text-gray-500">(Released / Budget)</span>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-gray-100 text-gray-800 text-center text-sm font-medium">
+                                            <!-- Q1 Row -->
+                                            <tr class="hover:bg-gray-50/80 transition-colors">
+                                                <td class="py-3.5 px-4 border-r border-gray-100 font-semibold text-gray-900">Q1</td>
+                                                <td class="py-3.5 px-4 border-r border-gray-100">10</td>
+                                                <td class="py-3.5 px-4 border-r border-gray-100">5</td>
+                                                <td class="py-3.5 px-4 font-bold text-red-600">50%</td>
+                                            </tr>
+                                            <!-- Q2 Row -->
+                                            <tr class="hover:bg-gray-50/80 transition-colors">
+                                                <td class="py-3.5 px-4 border-r border-gray-100 font-semibold text-gray-900">Q2</td>
+                                                <td class="py-3.5 px-4 border-r border-gray-100">40</td>
+                                                <td class="py-3.5 px-4 border-r border-gray-100">45</td>
+                                                <td class="py-3.5 px-4 font-bold text-green-600">112.50%</td>
+                                            </tr>
+                                            <!-- Q3 Row -->
+                                            <tr class="hover:bg-gray-50/80 transition-colors">
+                                                <td class="py-3.5 px-4 border-r border-gray-100 font-semibold text-gray-900">Q3</td>
+                                                <td class="py-3.5 px-4 border-r border-gray-100">50</td>
+                                                <td class="py-3.5 px-4 border-r border-gray-100 text-gray-400">—</td>
+                                                <td class="py-3.5 px-4 text-gray-400">—</td>
+                                            </tr>
+                                            <!-- Q4 Row -->
+                                            <tr class="hover:bg-gray-50/80 transition-colors">
+                                                <td class="py-3.5 px-4 border-r border-gray-100 font-semibold text-gray-900">Q4</td>
+                                                <td class="py-3.5 px-4 border-r border-gray-100">100</td>
+                                                <td class="py-3.5 px-4 border-r border-gray-100 text-gray-400">—</td>
+                                                <td class="py-3.5 px-4 text-gray-400">—</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <!-- Total Row -->
+                                            <tr class="bg-[#f0f4f9] text-gray-900 text-center font-bold text-sm border-t-2 border-blue-100">
+                                                <td class="py-3.5 px-4 border-r border-blue-100">Total (in Lakhs)</td>
+                                                <td class="py-3.5 px-4 border-r border-blue-100">200</td>
+                                                <td class="py-3.5 px-4 border-r border-blue-100">50</td>
+                                                <td class="py-3.5 px-4 text-red-600">25%</td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <!-- Footer Subtexts -->
+                                <div class="flex items-center justify-between mt-4 text-xs text-gray-500 font-medium">
+                                    <div>All amounts are in Indian Rupees (INR) in Lakhs</div>
+                                    <div class="flex items-center gap-1 text-gray-400">
+                                        Data as on 04 Sept 2026, 12:08 PM IST
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info inline">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <path d="M12 16v-4"></path>
+                                            <path d="M12 8h.01"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Blue Divider Line & Footer Container -->
@@ -3424,6 +3543,213 @@
                 </div>
             </div>
         </div>
+        <!-- Export Libraries: SheetJS (Excel) & jsPDF + AutoTable (PDF) -->
+        <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+
+        <!-- Export Controller Script -->
+        <script>
+            (function () {
+                const exportBtn = document.getElementById('exportDropdownBtn');
+                const exportMenu = document.getElementById('exportMenu');
+                const exportChevron = document.getElementById('exportChevron');
+                const exportPdfBtn = document.getElementById('exportPdfBtn');
+                const exportExcelBtn = document.getElementById('exportExcelBtn');
+
+                function toggleMenu(show) {
+                    if (!exportMenu) return;
+                    const shouldShow = typeof show === 'boolean' ? show : exportMenu.classList.contains('hidden');
+                    if (shouldShow) {
+                        exportMenu.classList.remove('hidden');
+                        if (exportChevron) exportChevron.classList.add('rotate-180');
+                    } else {
+                        exportMenu.classList.add('hidden');
+                        if (exportChevron) exportChevron.classList.remove('rotate-180');
+                    }
+                }
+
+                if (exportBtn && exportMenu) {
+                    exportBtn.addEventListener('click', function (e) {
+                        e.stopPropagation();
+                        toggleMenu();
+                    });
+
+                    document.addEventListener('click', function (e) {
+                        if (!exportMenu.contains(e.target) && !exportBtn.contains(e.target)) {
+                            toggleMenu(false);
+                        }
+                    });
+
+                    document.addEventListener('keydown', function (e) {
+                        if (e.key === 'Escape') {
+                            toggleMenu(false);
+                        }
+                    });
+                }
+
+                function extractTableData() {
+                    const table = document.getElementById('quarterlyTable') || document.querySelector('table');
+                    const headers = [];
+                    table.querySelectorAll('thead tr:first-child th').forEach(th => {
+                        headers.push(th.innerText.replace(/\r?\n/g, ' ').replace(/\s+/g, ' ').trim());
+                    });
+
+                    const rows = [];
+                    table.querySelectorAll('tbody tr').forEach(tr => {
+                        const row = [];
+                        tr.querySelectorAll('td').forEach(td => {
+                            row.push(td.innerText.replace(/\r?\n/g, ' ').replace(/\s+/g, ' ').trim());
+                        });
+                        if (row.length) rows.push(row);
+                    });
+
+                    const footers = [];
+                    table.querySelectorAll('tfoot tr').forEach(tr => {
+                        const row = [];
+                        tr.querySelectorAll('td').forEach(td => {
+                            row.push(td.innerText.replace(/\r?\n/g, ' ').replace(/\s+/g, ' ').trim());
+                        });
+                        if (row.length) footers.push(row);
+                    });
+
+                    return { table, headers, rows, footers };
+                }
+
+                // Export to Excel
+                if (exportExcelBtn) {
+                    exportExcelBtn.addEventListener('click', function (e) {
+                        e.stopPropagation();
+                        toggleMenu(false);
+
+                        const { headers, rows, footers, table } = extractTableData();
+                        const filename = 'Quarterly_Target_vs_Achieved_vs_Released';
+
+                        if (typeof XLSX !== 'undefined') {
+                            const allData = [headers, ...rows, ...footers];
+                            const ws = XLSX.utils.aoa_to_sheet(allData);
+
+                            ws['!cols'] = [
+                                { wch: 15 },
+                                { wch: 32 },
+                                { wch: 25 },
+                                { wch: 28 }
+                            ];
+
+                            const wb = XLSX.utils.book_new();
+                            XLSX.utils.book_append_sheet(wb, ws, 'Quarterly Summary');
+                            XLSX.writeFile(wb, filename + '.xlsx');
+                        } else {
+                            const allData = [headers, ...rows, ...footers];
+                            let csvContent = '\uFEFF';
+                            allData.forEach(r => {
+                                const escaped = r.map(c => `"${c.replace(/"/g, '""')}"`).join(',');
+                                csvContent += escaped + '\r\n';
+                            });
+                            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                            const link = document.createElement('a');
+                            link.href = URL.createObjectURL(blob);
+                            link.download = filename + '.csv';
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                        }
+                    });
+                }
+
+                // Export to PDF
+                if (exportPdfBtn) {
+                    exportPdfBtn.addEventListener('click', function (e) {
+                        e.stopPropagation();
+                        toggleMenu(false);
+
+                        const { table } = extractTableData();
+                        const filename = 'Quarterly_Target_vs_Achieved_vs_Released';
+
+                        if (window.jspdf && window.jspdf.jsPDF) {
+                            const { jsPDF } = window.jspdf;
+                            const doc = new jsPDF({
+                                orientation: 'portrait',
+                                unit: 'mm',
+                                format: 'a4'
+                            });
+
+                            doc.setFillColor(13, 43, 85);
+                            doc.rect(0, 0, 210, 24, 'F');
+                            doc.setTextColor(255, 255, 255);
+                            doc.setFontSize(14);
+                            doc.setFont('helvetica', 'bold');
+                            doc.text('Sagarmala Finance Corporation Limited', 14, 11);
+                            doc.setFontSize(9);
+                            doc.setFont('helvetica', 'normal');
+                            doc.setTextColor(190, 215, 250);
+                            doc.text('SMFCL Dashboard — Quarterly Target vs Achieved vs Released', 14, 18);
+
+                            doc.setTextColor(100, 116, 139);
+                            doc.setFontSize(8.5);
+                            const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+                            doc.text('Generated on: ' + today + ' | All amounts in Indian Rupees (INR)', 14, 31);
+
+                            doc.autoTable({
+                                html: table,
+                                startY: 35,
+                                theme: 'grid',
+                                headStyles: {
+                                    fillColor: [240, 244, 249],
+                                    textColor: [30, 41, 59],
+                                    fontStyle: 'bold',
+                                    halign: 'center',
+                                    valign: 'middle',
+                                    lineWidth: 0.2,
+                                    lineColor: [203, 213, 225]
+                                },
+                                bodyStyles: {
+                                    textColor: [51, 65, 85],
+                                    halign: 'center',
+                                    valign: 'middle',
+                                    lineWidth: 0.1,
+                                    lineColor: [226, 232, 240]
+                                },
+                                footStyles: {
+                                    fillColor: [240, 244, 249],
+                                    textColor: [15, 23, 42],
+                                    fontStyle: 'bold',
+                                    halign: 'center',
+                                    valign: 'middle',
+                                    lineWidth: 0.3,
+                                    lineColor: [203, 213, 225]
+                                },
+                                styles: {
+                                    font: 'helvetica',
+                                    fontSize: 9,
+                                    cellPadding: 4.5
+                                },
+                                didParseCell: function (data) {
+                                    if (data.section === 'body' && data.column.index === 3) {
+                                        const txt = (data.cell.text || []).join(' ');
+                                        if (txt.includes('112') || txt.includes('100')) {
+                                            data.cell.styles.textColor = [22, 163, 74];
+                                            data.cell.styles.fontStyle = 'bold';
+                                        } else if (txt.includes('50') || txt.includes('25')) {
+                                            data.cell.styles.textColor = [220, 38, 38];
+                                            data.cell.styles.fontStyle = 'bold';
+                                        }
+                                    }
+                                    if (data.section === 'foot' && data.column.index === 3) {
+                                        data.cell.styles.textColor = [220, 38, 38];
+                                        data.cell.styles.fontStyle = 'bold';
+                                    }
+                                }
+                            });
+
+                            doc.save(filename + '.pdf');
+                        } else {
+                            window.print();
+                        }
+                    });
+                }
+            })();
+        </script>
         <!-- Alpine / Dropdown Fallback Controller -->
         <script>
             document.addEventListener('DOMContentLoaded', () => {
