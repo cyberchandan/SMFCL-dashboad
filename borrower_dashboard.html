@@ -1009,6 +1009,44 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
                                     </div>
                                 </div>
+
+                                <!-- Card 7: Recent Notifications -->
+                                <div class="col-span-2 lg:col-span-2 bg-white rounded-xl border border-gray-200 p-5 flex flex-col justify-between">
+                                    <div>
+                                        <!-- Header -->
+                                        <div class="flex items-center justify-between mb-4">
+                                            <h3 class="text-lg font-bold text-gray-900">Recent Notifications</h3>
+                                            <button type="button" onclick="window.openNotificationsModal()" class="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors cursor-pointer bg-transparent border-0 p-0">
+                                                View All &rarr;
+                                            </button>
+                                        </div>
+
+                                        <!-- Notifications List (showing top 2 for uniform card height) -->
+                                        <div class="space-y-3.5">
+                                            <!-- Notification 1 -->
+                                            <div class="flex items-start gap-3 pb-3 border-b border-gray-100 last:border-0 last:pb-0">
+                                                <span class="w-2.5 h-2.5 rounded-full bg-amber-500 mt-1 flex-shrink-0"></span>
+                                                <div class="flex-1 min-w-0">
+                                                    <p class="text-xs font-medium text-gray-800 leading-snug">
+                                                        Your claim <span class="font-semibold text-gray-900">CLM-CSL-SBI-WCDL-2026-01-002</span> is under lender validation
+                                                    </p>
+                                                    <span class="text-[11px] text-gray-400 mt-0.5 block">2 hours ago</span>
+                                                </div>
+                                            </div>
+
+                                            <!-- Notification 2 -->
+                                            <div class="flex items-start gap-3">
+                                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 mt-1 flex-shrink-0"></span>
+                                                <div class="flex-1 min-w-0">
+                                                    <p class="text-xs font-medium text-gray-800 leading-snug">
+                                                        Subvention of <span class="font-semibold text-gray-900">₹ 187.50 Lakh</span> has been released for <span class="font-semibold text-gray-900">CLM-CSL-HDFC-WCDL-2026-02-001</span>
+                                                    </p>
+                                                    <span class="text-[11px] text-gray-400 mt-0.5 block">1 day ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                           
@@ -1266,47 +1304,81 @@
                                     </div>
                                 </div>
 
-                                <!-- Card 2: Subvention Disbursement Bar Chart with Dropdown & Dual Series -->
-                                <div class="bg-white rounded-xl border border-gray-200 p-5">
-                                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-                                        <div>
-                                            <h3 class="font-semibold text-gray-800 text-sm whitespace-nowrap">
-                                                Claim History
-                                            </h3>
-                                            <div class="flex items-center gap-4 text-xs text-gray-500 mt-1">
-                                                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full inline-block" style="background-color: #1e6bb8;"></span> Claimed Amount</span>
-                                                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full inline-block" style="background-color: #f97316;"></span> Released Amount</span>
+                                <!-- Card 2: Claim Distribution Category Pie Chart (WC & Term Loan) -->
+                                <div class="bg-white rounded-xl border border-gray-200 p-5 flex flex-col justify-between" style="min-height: 295px;">
+                                    <div>
+                                        <!-- Header -->
+                                        <div class="flex items-center justify-between gap-3 mb-3">
+                                            <div>
+                                                <div class="flex items-baseline gap-2">
+                                                    <h3 class="font-semibold text-gray-800 text-sm whitespace-nowrap">
+                                                        Claim History
+                                                    </h3>
+                                                    <span class="text-xs font-semibold text-gray-500">(FY 2026-27)</span>
+                                                </div>
+                                                <div class="flex items-center gap-4 text-xs text-gray-500 mt-1">
+                                                    <span class="flex items-center gap-1.5 cursor-pointer hover:text-gray-800 transition-colors" id="legendWc">
+                                                        <span class="w-2.5 h-2.5 rounded-full inline-block bg-[#1e6bb8]"></span> Working Capital (WC)
+                                                    </span>
+                                                    <span class="flex items-center gap-1.5 cursor-pointer hover:text-gray-800 transition-colors" id="legendTl">
+                                                        <span class="w-2.5 h-2.5 rounded-full inline-block bg-[#f97316]"></span> Term Loan
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="flex items-center gap-2 flex-shrink-0">
-                                            <select id="subventionSelect" class="text-xs border border-gray-300 rounded-md px-2.5 py-1.5 bg-white text-gray-700 font-medium shadow-sm hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 cursor-pointer">
-                                                <option value="quarterly" selected="">Quarterly Basis</option>
-                                                <option value="monthly">Monthly Basis</option>
-                                                <option value="yearly">Yearly Basis</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="relative w-full flex items-start" style="height: 220px;">
-                                        <!-- Pinned Fixed Y-Axis on the left (never scrolls away) -->
-                                        <div class="flex-shrink-0 relative select-none" style="width: 55px; height: 195px;">
-                                            <svg id="chartYAxisSvg" class="w-full h-full overflow-visible" viewBox="0 0 55 200" preserveAspectRatio="none">
-                                                <g id="chartYAxisFixed"></g>
-                                            </svg>
-                                        </div>
-                                        <!-- Horizontally Scrollable Chart Area for Grid, Bars, and X-Axis -->
-                                        <div id="chartScrollContainer" class="flex-1 overflow-x-hidden overflow-y-hidden relative select-none" style="height: 220px;">
-                                            <svg id="subventionChartSvg" class="overflow-visible block" style="height: 195px;" viewBox="0 0 460 200" preserveAspectRatio="none">
-                                                <!-- Grid Group -->
-                                                <g id="chartGrid"></g>
-                                                <!-- X Axis Ticks -->
-                                                <g id="chartXAxis"></g>
-                                                <!-- Bars Group -->
-                                                <g id="chartBars"></g>
-                                            </svg>
-                                            <!-- Tooltip Box -->
-                                            <div id="subventionTooltip" class="absolute pointer-events-none z-30 bg-white" style="display: none; opacity: 0; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.12); font-family: sans-serif; white-space: nowrap;">
-                                                <div id="tooltipLabel" class="text-xs font-semibold text-gray-800 mb-1"></div>
-                                                <div id="tooltipValue" class="text-xs font-bold"></div>
+
+                                        <!-- Chart Body Container -->
+                                        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-2">
+                                            <!-- SVG Pie / Donut Chart -->
+                                            <div class="relative flex-shrink-0 w-44 h-44 flex items-center justify-center">
+                                                <svg id="claimPieSvg" class="w-full h-full transform -rotate-90 overflow-visible" viewBox="0 0 200 200">
+                                                    <g id="pieSlicesGroup"></g>
+                                                </svg>
+                                                <!-- Center Donut Content -->
+                                                <div class="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none p-2">
+                                                    <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider" id="pieCenterLabel">FY 2026-27</span>
+                                                    <span class="text-base font-extrabold text-gray-900 leading-tight" id="pieCenterTotal">₹ 5,830 L</span>
+                                                    <span class="text-[10px] text-gray-500 font-medium" id="pieCenterSub">Total Subvention</span>
+                                                </div>
+                                            </div>
+
+                                            <!-- Category Stats Side List -->
+                                            <div class="flex-1 w-full space-y-2.5">
+                                                <!-- Working Capital Card -->
+                                                <div id="cardWcBox" class="p-2.5 rounded-lg border border-gray-100 bg-gray-50/70 hover:bg-blue-50/50 hover:border-blue-200 transition-all cursor-pointer">
+                                                    <div class="flex items-center justify-between text-xs mb-1">
+                                                        <span class="font-semibold text-gray-800 flex items-center gap-1.5">
+                                                            <span class="w-2 h-2 rounded-full bg-[#1e6bb8]"></span> Working Capital (WC)
+                                                        </span>
+                                                        <span class="font-bold text-[#1e6bb8]" id="wcPercent">58.0%</span>
+                                                    </div>
+                                                    <div class="flex items-center justify-between text-xs text-gray-500 mb-1.5">
+                                                        <span>Subvention Share</span>
+                                                        <span class="font-semibold text-gray-900" id="wcAmount">₹ 3,380.00 L</span>
+                                                    </div>
+                                                    <!-- Progress Bar -->
+                                                    <div class="w-full h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                                                        <div id="wcBar" class="h-full bg-[#1e6bb8] rounded-full transition-all duration-500" style="width: 58%;"></div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Term Loan Card -->
+                                                <div id="cardTlBox" class="p-2.5 rounded-lg border border-gray-100 bg-gray-50/70 hover:bg-orange-50/50 hover:border-orange-200 transition-all cursor-pointer">
+                                                    <div class="flex items-center justify-between text-xs mb-1">
+                                                        <span class="font-semibold text-gray-800 flex items-center gap-1.5">
+                                                            <span class="w-2 h-2 rounded-full bg-[#f97316]"></span> Term Loan
+                                                        </span>
+                                                        <span class="font-bold text-[#f97316]" id="tlPercent">42.0%</span>
+                                                    </div>
+                                                    <div class="flex items-center justify-between text-xs text-gray-500 mb-1.5">
+                                                        <span>Subvention Share</span>
+                                                        <span class="font-semibold text-gray-900" id="tlAmount">₹ 2,450.00 L</span>
+                                                    </div>
+                                                    <!-- Progress Bar -->
+                                                    <div class="w-full h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                                                        <div id="tlBar" class="h-full bg-[#f97316] rounded-full transition-all duration-500" style="width: 42%;"></div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1427,369 +1499,104 @@
                                     }
                                 });
 
-                                // Subvention Disbursement Bar Chart Interactive Controller Script
+                                // Claim History Category Pie Chart Controller Script (Fixed FY 2026-27)
                                 (function () {
-                                    // Generate 51 financial years from FY 1976-77 to FY 2026-27
-                                    const yearly50Labels = [];
-                                    const yearly50WC = [];
-                                    const yearly50TL = [];
-                                    for (let y = 1976; y <= 2026; y++) {
-                                        const nextY = (y + 1) % 100;
-                                        const nextYStr = nextY < 10 ? '0' + nextY : '' + nextY;
-                                        yearly50Labels.push(`FY ${y}-${nextYStr}`);
-                                        
-                                        const t = (y - 1976) / 50;
-                                        const baseWc = Math.round(120 + Math.pow(t, 1.8) * 2980 + Math.sin(y * 1.5) * 60);
-                                        const baseTl = Math.round(80 + Math.pow(t, 1.8) * 2220 + Math.cos(y * 1.5) * 45);
-                                        yearly50WC.push(Math.max(50, baseWc));
-                                        yearly50TL.push(Math.max(30, baseTl));
-                                    }
-                                    // Align recent years with scheme figures
-                                    yearly50WC[48] = 3050; yearly50TL[48] = 2220; // FY 2024-25
-                                    yearly50WC[49] = 3120; yearly50TL[49] = 2260; // FY 2025-26
-                                    yearly50WC[50] = 3380; yearly50TL[50] = 2450; // FY 2026-27
-
-                                    const subventionDataSets = {
-                                        monthly: {
-                                            labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar'],
-                                            maxY: 300,
-                                            yTicks: [0, 75, 150, 225, 300],
-                                            workingCapital: [85, 95, 100, 130, 140, 150, 160, 170, 180, 200, 210, 220],
-                                            termLoan: [55, 65, 70, 95, 105, 110, 125, 130, 135, 150, 160, 170]
-                                        },
-                                        quarterly: {
-                                            labels: ['Q1 (Apr-Jun)', 'Q2 (Jul-Sep)', 'Q3 (Oct-Dec)', 'Q4 (Jan-Mar)'],
-                                            maxY: 800,
-                                            yTicks: [0, 200, 400, 600, 800],
-                                            workingCapital: [280, 420, 510, 630],
-                                            termLoan: [190, 310, 390, 480]
-                                        },
-                                        yearly: {
-                                            labels: yearly50Labels,
-                                            maxY: 4000,
-                                            yTicks: [0, 1000, 2000, 3000, 4000],
-                                            workingCapital: yearly50WC,
-                                            termLoan: yearly50TL
-                                        }
+                                    const d = {
+                                        label: 'FY 2026-27',
+                                        year: 'FY 2026-27',
+                                        wc: 3380.00,
+                                        tl: 2450.00
                                     };
 
-                                    const select = document.getElementById('subventionSelect');
-                                    const scrollContainer = document.getElementById('chartScrollContainer');
-                                    const svg = document.getElementById('subventionChartSvg');
-                                    const yAxisSvg = document.getElementById('chartYAxisSvg');
-                                    const yAxisFixedGroup = document.getElementById('chartYAxisFixed');
-                                    const gridGroup = document.getElementById('chartGrid');
-                                    const xAxisGroup = document.getElementById('chartXAxis');
-                                    const barsGroup = document.getElementById('chartBars');
-                                    const tooltip = document.getElementById('subventionTooltip');
-                                    const tooltipLabel = document.getElementById('tooltipLabel');
-                                    const tooltipValue = document.getElementById('tooltipValue');
+                                    const slicesGroup = document.getElementById('pieSlicesGroup');
+                                    const centerLabel = document.getElementById('pieCenterLabel');
+                                    const centerTotal = document.getElementById('pieCenterTotal');
+                                    const centerSub = document.getElementById('pieCenterSub');
 
-                                    if (!select || !svg || !scrollContainer) return;
+                                    const wcPercent = document.getElementById('wcPercent');
+                                    const wcAmount = document.getElementById('wcAmount');
+                                    const wcBar = document.getElementById('wcBar');
 
-                                    const topPad = 5;
-                                    const bottomPad = 165;
-                                    const height = bottomPad - topPad; // 160
+                                    const tlPercent = document.getElementById('tlPercent');
+                                    const tlAmount = document.getElementById('tlAmount');
+                                    const tlBar = document.getElementById('tlBar');
 
-                                    function renderChart(key) {
-                                        const data = subventionDataSets[key] || subventionDataSets.quarterly;
-                                        const n = data.labels.length;
+                                    const cardWcBox = document.getElementById('cardWcBox');
+                                    const cardTlBox = document.getElementById('cardTlBox');
 
-                                        // Calculate required width based on data items
-                                        const containerWidth = scrollContainer.clientWidth || 460;
-                                        const isYearly = (key === 'yearly');
+                                    if (!slicesGroup) return;
 
-                                        // ONLY Yearly Basis expands for horizontal scrolling across 50 years; Monthly & Quarterly fit 100%
-                                        let actualWidth = containerWidth;
-                                        if (isYearly) {
-                                            const neededWidth = n * 82;
-                                            actualWidth = Math.max(containerWidth, neededWidth);
-                                        }
+                                    function getSlicePath(cx, cy, rOut, rIn, startAngle, endAngle) {
+                                        if (endAngle - startAngle >= 360) endAngle = startAngle + 359.999;
+                                        const rad = Math.PI / 180;
+                                        const xo1 = cx + rOut * Math.cos(startAngle * rad);
+                                        const yo1 = cy + rOut * Math.sin(startAngle * rad);
+                                        const xo2 = cx + rOut * Math.cos(endAngle * rad);
+                                        const yo2 = cy + rOut * Math.sin(endAngle * rad);
 
-                                        const isScrollable = isYearly && (actualWidth > containerWidth);
+                                        const xi2 = cx + rIn * Math.cos(endAngle * rad);
+                                        const yi2 = cy + rIn * Math.sin(endAngle * rad);
+                                        const xi1 = cx + rIn * Math.cos(startAngle * rad);
+                                        const yi1 = cy + rIn * Math.sin(startAngle * rad);
 
-                                        // Configure scrollable overflow and SVG sizing strictly for yearly basis
-                                        if (isScrollable) {
-                                            scrollContainer.classList.remove('overflow-x-hidden');
-                                            scrollContainer.classList.add('overflow-x-auto');
-                                            scrollContainer.style.overflowX = 'auto';
+                                        const largeArc = (endAngle - startAngle) > 180 ? 1 : 0;
 
-                                            svg.style.width = `${actualWidth}px`;
-                                            svg.style.minWidth = `${actualWidth}px`;
-                                            svg.style.maxWidth = 'none';
-                                            svg.setAttribute('width', actualWidth);
-                                        } else {
-                                            scrollContainer.classList.remove('overflow-x-auto');
-                                            scrollContainer.classList.add('overflow-x-hidden');
-                                            scrollContainer.style.overflowX = 'hidden';
-
-                                            svg.style.width = '100%';
-                                            svg.style.minWidth = '100%';
-                                            svg.style.maxWidth = '100%';
-                                            svg.removeAttribute('width');
-                                        }
-
-                                        const slotWidth = actualWidth / n;
-                                        const singleBarWidth = Math.min(26, Math.max(8, (slotWidth * 0.65) / 2));
-                                        const groupGap = Math.min(4, Math.max(2, slotWidth * 0.08));
-
-                                        // Update SVG dimensions and viewBox
-                                        svg.setAttribute('viewBox', `0 0 ${actualWidth} 200`);
-
-                                        // Render Fixed Y-Axis on the left
-                                        let yFixedHtml = '<line x1="54" y1="5" x2="54" y2="165" stroke="#94a3b8" stroke-width="1.2"></line><g>';
-                                        data.yTicks.forEach((tickVal) => {
-                                            const ratio = tickVal / data.maxY;
-                                            const yPos = bottomPad - ratio * height;
-                                            yFixedHtml += `
-                                                <g class="recharts-layer recharts-cartesian-axis-tick">
-                                                    <line stroke="#94a3b8" stroke-width="1" x1="48" y1="${yPos}" x2="54" y2="${yPos}"></line>
-                                                    <text font-size="11" x="44" y="${yPos}" text-anchor="end" fill="#64748b" font-weight="500" dy="0.355em">${tickVal}</text>
-                                                </g>`;
-                                        });
-                                        yFixedHtml += '</g>';
-                                        if (yAxisFixedGroup) yAxisFixedGroup.innerHTML = yFixedHtml;
-
-                                        // Render Grid across the full actualWidth
-                                        let gridHtml = '';
-                                        data.yTicks.forEach((tickVal) => {
-                                            const ratio = tickVal / data.maxY;
-                                            const yPos = bottomPad - ratio * height;
-                                            gridHtml += `<line stroke-dasharray="3 3" stroke="#e2e8f0" stroke-width="1" fill="none" x1="0" y1="${yPos}" x2="${actualWidth}" y2="${yPos}"></line>`;
-                                        });
-                                        // Vertical grid dividers
-                                        for (let i = 0; i <= n; i++) {
-                                            const xPos = i * slotWidth;
-                                            gridHtml += `<line stroke-dasharray="3 3" stroke="#f1f5f9" stroke-width="1" fill="none" x1="${xPos}" y1="5" x2="${xPos}" y2="165"></line>`;
-                                        }
-                                        gridGroup.innerHTML = gridHtml;
-
-                                        // Render X-Axis baseline and ticks
-                                        let xAxisHtml = `<line x1="0" y1="165" x2="${actualWidth}" y2="165" stroke="#94a3b8" stroke-width="1.2"></line><g>`;
-                                        data.labels.forEach((label, i) => {
-                                            const xCenter = (i + 0.5) * slotWidth;
-                                            xAxisHtml += `
-                                                <g class="recharts-layer recharts-cartesian-axis-tick">
-                                                    <line stroke="#94a3b8" stroke-width="1" x1="${xCenter}" y1="165" x2="${xCenter}" y2="171"></line>
-                                                    <text font-size="11" x="${xCenter}" y="174" text-anchor="middle" fill="#64748b" font-weight="500" dy="0.71em">${label}</text>
-                                                </g>`;
-                                        });
-                                        xAxisHtml += '</g>';
-                                        xAxisGroup.innerHTML = xAxisHtml;
-
-                                        // Render Grouped Bars
-                                        let barsHtml = '';
-                                        data.labels.forEach((_, i) => {
-                                            const wcVal = data.workingCapital[i];
-                                            const tlVal = data.termLoan[i];
-                                            const xCenter = (i + 0.5) * slotWidth;
-
-                                            // Left bar: Claimed Amount (Blue)
-                                            const xBarBlue = xCenter - singleBarWidth - groupGap / 2;
-                                            const blueHeight = (wcVal / data.maxY) * height;
-                                            const yBarBlue = bottomPad - blueHeight;
-
-                                            if (wcVal > 0) {
-                                                barsHtml += `
-                                                    <rect x="${xBarBlue.toFixed(1)}" y="${yBarBlue.toFixed(1)}" width="${singleBarWidth.toFixed(1)}" height="${blueHeight.toFixed(1)}" rx="3" ry="3" fill="#1e6bb8" class="cursor-pointer transition-all hover:fill-[#165697]" data-series="Claimed Amount" data-color="#1e6bb8" data-label="${data.labels[i]}" data-value="${wcVal}"></rect>
-                                                `;
-                                            }
-
-                                            // Right bar: Released Amount (Orange)
-                                            const xBarOrange = xCenter + groupGap / 2;
-                                            const orangeHeight = (tlVal / data.maxY) * height;
-                                            const yBarOrange = bottomPad - orangeHeight;
-
-                                            if (tlVal > 0) {
-                                                barsHtml += `
-                                                    <rect x="${xBarOrange.toFixed(1)}" y="${yBarOrange.toFixed(1)}" width="${singleBarWidth.toFixed(1)}" height="${orangeHeight.toFixed(1)}" rx="3" ry="3" fill="#f97316" class="cursor-pointer transition-all hover:fill-[#ea580c]" data-series="Released Amount" data-color="#f97316" data-label="${data.labels[i]}" data-value="${tlVal}"></rect>
-                                                `;
-                                            }
-                                        });
-                                        barsGroup.innerHTML = barsHtml;
-
-                                        // Scroll behavior: when viewing yearly (large dataset), auto-scroll to the end (most recent years)
-                                        if (isScrollable) {
-                                            setTimeout(() => {
-                                                scrollContainer.scrollLeft = scrollContainer.scrollWidth;
-                                            }, 50);
-                                        } else {
-                                            scrollContainer.scrollLeft = 0;
-                                        }
-
-                                        // Attach hover listeners for tooltips
-                                        const barElements = barsGroup.querySelectorAll('rect');
-                                        barElements.forEach((bar) => {
-                                            bar.addEventListener('mouseenter', (e) => {
-                                                const lbl = bar.getAttribute('data-label');
-                                                const val = bar.getAttribute('data-value');
-                                                const series = bar.getAttribute('data-series');
-                                                const color = bar.getAttribute('data-color');
-
-                                                tooltipLabel.textContent = `${lbl} — ${series}`;
-                                                tooltipValue.style.color = color;
-                                                tooltipValue.textContent = `${series}: Rs. ${Number(val).toLocaleString('en-IN')} Lakhs`;
-
-                                                // Show tooltip and reset transform so dimensions can be accurately measured
-                                                tooltip.style.display = 'block';
-                                                tooltip.style.opacity = '1';
-                                                tooltip.style.transform = 'none';
-
-                                                const barX = parseFloat(bar.getAttribute('x'));
-                                                const barW = parseFloat(bar.getAttribute('width'));
-                                                const barY = parseFloat(bar.getAttribute('y'));
-
-                                                const tooltipW = tooltip.offsetWidth || 190;
-                                                const tooltipH = tooltip.offsetHeight || 48;
-
-                                                const visibleLeft = scrollContainer.scrollLeft;
-                                                const visibleRight = visibleLeft + scrollContainer.clientWidth;
-                                                const barCenterX = barX + barW / 2;
-
-                                                // Clamp horizontal position so tooltip is NEVER cut off on right or left edge
-                                                let left = barCenterX - tooltipW / 2;
-                                                if (left + tooltipW > visibleRight - 8) {
-                                                    left = visibleRight - tooltipW - 8;
-                                                }
-                                                if (left < visibleLeft + 8) {
-                                                    left = visibleLeft + 8;
-                                                }
-
-                                                // Calculate vertical position: if space above bar is insufficient, flip below bar top
-                                                let top = barY - tooltipH - 8;
-                                                if (top < 6) {
-                                                    top = (barY + 12 + tooltipH <= 165) ? (barY + 12) : 6;
-                                                }
-
-                                                tooltip.style.left = `${left}px`;
-                                                tooltip.style.top = `${top}px`;
-                                            });
-
-                                            bar.addEventListener('mouseleave', () => {
-                                                tooltip.style.opacity = '0';
-                                                tooltip.style.display = 'none';
-                                            });
-                                        });
+                                        return `M ${xo1.toFixed(2)} ${yo1.toFixed(2)} A ${rOut} ${rOut} 0 ${largeArc} 1 ${xo2.toFixed(2)} ${yo2.toFixed(2)} L ${xi2.toFixed(2)} ${yi2.toFixed(2)} A ${rIn} ${rIn} 0 ${largeArc} 0 ${xi1.toFixed(2)} ${yi1.toFixed(2)} Z`;
                                     }
 
-                                    // Mouse Wheel Horizontal Scrolling on Yearly Chart
-                                    scrollContainer.addEventListener('wheel', (e) => {
-                                        if (select.value === 'yearly') {
-                                            if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-                                                e.preventDefault();
-                                                scrollContainer.scrollLeft += e.deltaY * 1.5;
-                                            }
+                                    function renderPie() {
+                                        const total = d.wc + d.tl;
+                                        const wcPct = ((d.wc / total) * 100).toFixed(1);
+                                        const tlPct = ((d.tl / total) * 100).toFixed(1);
+
+                                        if (centerLabel) centerLabel.textContent = d.label;
+                                        if (centerTotal) centerTotal.textContent = `₹ ${Math.round(total).toLocaleString('en-IN')} L`;
+                                        if (centerSub) centerSub.textContent = 'Total Subvention';
+
+                                        if (wcPercent) wcPercent.textContent = `${wcPct}%`;
+                                        if (wcAmount) wcAmount.textContent = `₹ ${d.wc.toLocaleString('en-IN')} L`;
+                                        if (wcBar) wcBar.style.width = `${wcPct}%`;
+
+                                        if (tlPercent) tlPercent.textContent = `${tlPct}%`;
+                                        if (tlAmount) tlAmount.textContent = `₹ ${d.tl.toLocaleString('en-IN')} L`;
+                                        if (tlBar) tlBar.style.width = `${tlPct}%`;
+
+                                        // Render Donut Slices
+                                        const cx = 100, cy = 100, rOut = 82, rIn = 54;
+                                        const gap = 2; // gap in degrees
+
+                                        const angleWc = (d.wc / total) * 360;
+
+                                        const pathWc = getSlicePath(cx, cy, rOut, rIn, 0, angleWc - gap / 2);
+                                        const pathTl = getSlicePath(cx, cy, rOut, rIn, angleWc + gap / 2, 360 - gap / 2);
+
+                                        slicesGroup.innerHTML = `
+                                            <path id="sliceWc" d="${pathWc}" fill="#1e6bb8" class="cursor-pointer transition-all duration-300 hover:opacity-90 hover:brightness-110" title="Working Capital (WC): ₹ ${d.wc.toLocaleString('en-IN')} L (${wcPct}%)"></path>
+                                            <path id="sliceTl" d="${pathTl}" fill="#f97316" class="cursor-pointer transition-all duration-300 hover:opacity-90 hover:brightness-110" title="Term Loan: ₹ ${d.tl.toLocaleString('en-IN')} L (${tlPct}%)"></path>
+                                        `;
+
+                                        // Interactive Hover Highlights
+                                        const sliceWcEl = document.getElementById('sliceWc');
+                                        const sliceTlEl = document.getElementById('sliceTl');
+
+                                        if (sliceWcEl && cardWcBox) {
+                                            cardWcBox.onmouseenter = () => { sliceWcEl.style.fill = '#165697'; };
+                                            cardWcBox.onmouseleave = () => { sliceWcEl.style.fill = '#1e6bb8'; };
+                                            sliceWcEl.onmouseenter = () => { cardWcBox.classList.add('bg-blue-100/60'); };
+                                            sliceWcEl.onmouseleave = () => { cardWcBox.classList.remove('bg-blue-100/60'); };
                                         }
-                                    }, { passive: false });
 
-                                    // Click and Drag to Scroll on the Chart
-                                    let isChartDragging = false;
-                                    let dragStartX = 0;
-                                    let initialScrollLeft = 0;
+                                        if (sliceTlEl && cardTlBox) {
+                                            cardTlBox.onmouseenter = () => { sliceTlEl.style.fill = '#ea580c'; };
+                                            cardTlBox.onmouseleave = () => { sliceTlEl.style.fill = '#f97316'; };
+                                            sliceTlEl.onmouseenter = () => { cardTlBox.classList.add('bg-orange-100/60'); };
+                                            sliceTlEl.onmouseleave = () => { cardTlBox.classList.remove('bg-orange-100/60'); };
+                                        }
+                                    }
 
-                                    scrollContainer.addEventListener('mousedown', (e) => {
-                                        if (select.value !== 'yearly') return;
-                                        isChartDragging = true;
-                                        dragStartX = e.pageX - scrollContainer.offsetLeft;
-                                        initialScrollLeft = scrollContainer.scrollLeft;
-                                        scrollContainer.style.cursor = 'grabbing';
-                                    });
-                                    window.addEventListener('mouseup', () => {
-                                        if (!isChartDragging) return;
-                                        isChartDragging = false;
-                                        scrollContainer.style.cursor = '';
-                                    });
-                                    scrollContainer.addEventListener('mousemove', (e) => {
-                                        if (!isChartDragging || select.value !== 'yearly') return;
-                                        e.preventDefault();
-                                        const x = e.pageX - scrollContainer.offsetLeft;
-                                        const delta = (x - dragStartX) * 1.5;
-                                        scrollContainer.scrollLeft = initialScrollLeft - delta;
-                                    });
-
-                                    select.addEventListener('change', function () {
-                                        renderChart(this.value);
-                                    });
-
-                                    window.addEventListener('resize', () => {
-                                        renderChart(select.value || 'quarterly');
-                                    });
-
-                                    renderChart(select.value || 'quarterly');
+                                    renderPie();
                                 })();
                                 </script>
-                            
-
-                                <!-- Card 4: Recent Notifications -->
-                                <div class="bg-white rounded-xl border border-gray-200 p-5 flex flex-col justify-between">
-                                    <div>
-                                        <!-- Header -->
-                                        <div class="flex items-center justify-between mb-4">
-                                            <h3 class="text-lg font-bold text-gray-900">Recent Notifications</h3>
-                                            <button type="button" onclick="window.openNotificationsModal()" class="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors cursor-pointer bg-transparent border-0 p-0">
-                                                View All &rarr;
-                                            </button>
-                                        </div>
-
-                                        <!-- Notifications List -->
-                                        <div class="space-y-3.5">
-                                            <!-- Notification 1 -->
-                                            <div class="flex items-start gap-3 pb-3 border-b border-gray-100 last:border-0 last:pb-0">
-                                                <span class="w-2.5 h-2.5 rounded-full bg-amber-500 mt-1 flex-shrink-0"></span>
-                                                <div class="flex-1 min-w-0">
-                                                    <p class="text-xs font-medium text-gray-800 leading-snug">
-                                                        Your claim <span class="font-semibold text-gray-900">CLM-CSL-SBI-WCDL-2026-01-002</span> is under lender validation
-                                                    </p>
-                                                    <span class="text-[11px] text-gray-400 mt-0.5 block">2 hours ago</span>
-                                                </div>
-                                            </div>
-
-                                            <!-- Notification 2 -->
-                                            <div class="flex items-start gap-3 pb-3 border-b border-gray-100 last:border-0 last:pb-0">
-                                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 mt-1 flex-shrink-0"></span>
-                                                <div class="flex-1 min-w-0">
-                                                    <p class="text-xs font-medium text-gray-800 leading-snug">
-                                                        Subvention of <span class="font-semibold text-gray-900">₹ 187.50 Lakh</span> has been released for <span class="font-semibold text-gray-900">CLM-CSL-HDFC-WCDL-2026-02-001</span>
-                                                    </p>
-                                                    <span class="text-[11px] text-gray-400 mt-0.5 block">1 day ago</span>
-                                                </div>
-                                            </div>
-
-                                            <!-- Notification 3 -->
-                                            <div class="flex items-start gap-3 pb-3 border-b border-gray-100 last:border-0 last:pb-0">
-                                                <span class="w-2.5 h-2.5 rounded-full bg-blue-500 mt-1 flex-shrink-0"></span>
-                                                <div class="flex-1 min-w-0">
-                                                    <p class="text-xs font-medium text-gray-800 leading-snug">
-                                                        Please upload pending compliance document for <span class="font-semibold text-gray-900">APP-CSL-ICICI-WCDL-2026-03</span>
-                                                    </p>
-                                                    <span class="text-[11px] text-gray-400 mt-0.5 block">3 days ago</span>
-                                                </div>
-                                            </div>
-
-                                            <!-- Notification 4 -->
-                                            <div class="flex items-start gap-3 pb-3 border-b border-gray-100 last:border-0 last:pb-0">
-                                                <span class="w-2.5 h-2.5 rounded-full bg-amber-500 mt-1 flex-shrink-0"></span>
-                                                <div class="flex-1 min-w-0">
-                                                    <p class="text-xs font-medium text-gray-800 leading-snug">
-                                                        Your application <span class="font-semibold text-gray-900">APP-CSL-SBI-WCDL-2026-01</span> has been returned for correction
-                                                    </p>
-                                                    <span class="text-[11px] text-gray-400 mt-0.5 block">4 days ago</span>
-                                                </div>
-                                            </div>
-
-                                            <!-- Notification 5 -->
-                                            <div class="flex items-start gap-3">
-                                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 mt-1 flex-shrink-0"></span>
-                                                <div class="flex-1 min-w-0">
-                                                    <p class="text-xs font-medium text-gray-800 leading-snug">
-                                                        Login credentials created successfully
-                                                    </p>
-                                                    <span class="text-[11px] text-gray-400 mt-0.5 block">15 Jan 2026</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
