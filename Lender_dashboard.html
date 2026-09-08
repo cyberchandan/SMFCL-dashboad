@@ -1992,19 +1992,19 @@
                 if (footerEl) footerEl.innerHTML = cfg.footer;
                 if (searchInput) searchInput.value = '';
 
-                // Toggle tabs buttons UI
+                // Toggle tabs buttons UI: display ONLY the clicked card's tab as a static indicator, hide all other tab buttons to disable toggling
                 ['submitted', 'approved', 'compliance', 'pending_claim', 'rejected', 'released'].forEach((k) => {
                     const btn = document.getElementById(`kpiTabBtn_${k}`);
                     const content = document.getElementById(`kpiContent_${k}`);
                     if (btn) {
                         if (k === tabKey) {
-                            btn.classList.remove('text-gray-600', 'font-medium', 'hover:text-gray-900');
-                            btn.classList.add('bg-white', 'font-semibold', 'shadow-xs');
+                            btn.style.display = 'inline-flex';
+                            btn.classList.remove('text-gray-600', 'font-medium', 'hover:text-gray-900', 'cursor-pointer');
+                            btn.classList.add('bg-white', 'font-semibold', 'shadow-xs', 'cursor-default');
                             btn.style.color = '#0D2B55';
+                            btn.style.pointerEvents = 'none';
                         } else {
-                            btn.style.color = '';
-                            btn.classList.remove('bg-white', 'font-semibold', 'shadow-xs');
-                            btn.classList.add('text-gray-600', 'font-medium', 'hover:text-gray-900');
+                            btn.style.display = 'none';
                         }
                     }
                     if (content) {
