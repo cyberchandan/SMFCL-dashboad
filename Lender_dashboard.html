@@ -302,7 +302,7 @@
             transform: translateY(0) scale(0.99);
         }
     </style>
-    <link rel="stylesheet" href="responsive.css" />
+    <!-- <link rel="stylesheet" href="responsive.css" /> -->
 </head>
 
 <body class="font-sans antialiased">
@@ -641,132 +641,186 @@
                             <p class="text-gray-500 text-sm mt-1">IIF Portal — Lender View</p>
                         </div>
                         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 px-2">
-                            <!-- Card 1: Total Borrowers -->
-                            <div onclick="openKpiModal('borrowers')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view full Borrowers Table">
+                            <!-- Card 1: Pending Application -->
+                            <div onclick="openKpiModal('submitted')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Pending Applications">
                                 <div>
-                                    <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform group-hover:scale-110"
-                                        style="background: rgba(30, 107, 184, 0.125); color: rgb(30, 107, 184);"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="lucide lucide-building2 lucide-building-2">
-                                            <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path>
-                                            <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
-                                            <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path>
-                                            <path d="M10 6h4"></path>
-                                            <path d="M10 10h4"></path>
-                                            <path d="M10 14h4"></path>
-                                            <path d="M10 18h4"></path>
-                                        </svg></div>
-                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">4</div>
-                                    <div class="text-sm font-medium text-gray-700">Total Borrowers</div>
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110" style="background: rgba(30, 107, 184, 0.125); color: rgb(30, 107, 184);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between mb-0.5">
+                                        <span class="text-2xl font-bold text-gray-900">Pending Application</span>
+                                        <span class="text-2xl font-bold text-gray-900">8</span>
+                                    </div>
+                                    <div class="text-sm font-medium text-gray-700">Review pending list</div>
                                 </div>
                                 <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-[#0d2b55] group-hover:text-blue-700">
-                                    <span>View borrowers table</span>
+                                    <span>View pending applications</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
                                 </div>
                             </div>
 
-                            <!-- Card 2: Pending Validations -->
-                            <div onclick="openKpiModal('pending')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view full Pending Validations Table">
+                            <!-- Card 2: Approved -->
+                            <div onclick="openKpiModal('approved')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Approved Applications">
                                 <div>
-                                    <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform group-hover:scale-110"
-                                        style="background: rgba(230, 81, 0, 0.125); color: rgb(230, 81, 0);"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="lucide lucide-circle-alert">
-                                            <circle cx="12" cy="12" r="10"></circle>
-                                            <line x1="12" y1="8" x2="12"></line>
-                                            <line x1="12" x2="12.01" y1="16" y2="16"></line>
-                                        </svg></div>
-                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">2</div>
-                                    <div class="text-sm font-medium text-gray-700">Pending Validations</div>
-                                </div>
-                                <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-orange-700 group-hover:text-orange-800">
-                                    <span>Review pending list</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                </div>
-                            </div>
-
-                            <!-- Card 3: Claims Validated -->
-                            <div onclick="openKpiModal('claims')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view full Claims Register Table">
-                                <div>
-                                    <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform group-hover:scale-110"
-                                        style="background: rgba(46, 125, 50, 0.125); color: rgb(46, 125, 50);"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="lucide lucide-circle-check-big">
-                                            <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
-                                            <path d="m9 11 3 3L22 4"></path>
-                                        </svg></div>
-                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">12</div>
-                                    <div class="text-sm font-medium text-gray-700">Claims Validated</div>
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110" style="background: rgba(46, 125, 50, 0.125); color: rgb(46, 125, 50);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between mb-0.5">
+                                        <span class="text-2xl font-bold text-gray-900">Approved</span>
+                                        <span class="text-2xl font-bold text-gray-900">12</span>
+                                    </div>
+                                    <div class="text-sm font-medium text-gray-700">Application Status</div>
                                 </div>
                                 <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-emerald-700 group-hover:text-emerald-800">
-                                    <span>View claims register</span>
+                                    <span>View approved list</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
                                 </div>
                             </div>
 
-                            <!-- Card 4: Total Loan Exposure -->
-                            <div onclick="openKpiModal('exposure')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view full Loan Exposure Portfolio Table">
+                            <!-- Card 3: Pending Compliance -->
+                            <div onclick="openKpiModal('compliance')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Pending Compliance">
                                 <div>
-                                    <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform group-hover:scale-110"
-                                        style="background: rgba(123, 31, 162, 0.125); color: rgb(123, 31, 162);"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="lucide lucide-landmark">
-                                            <line x1="3" x2="21" y1="22" y2="22"></line>
-                                            <line x1="6" x2="6" y1="18" y2="11"></line>
-                                            <line x1="10" x2="10" y1="18" y2="11"></line>
-                                            <line x1="14" x2="14" y1="18" y2="11"></line>
-                                            <line x1="18" x2="18" y1="18" y2="11"></line>
-                                            <polygon points="12 2 20 7 4 7"></polygon>
-                                        </svg></div>
-                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">Rs. 48,500 L</div>
-                                    <div class="text-sm font-medium text-gray-700">Total Loan Exposure</div>
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110" style="background: rgba(234, 88, 12, 0.125); color: rgb(234, 88, 12);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-check"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="m9 14 2 2 4-4"></path></svg>
+                                        </div>
+                                    </div>
+                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">Rs. 375 L</div>
+                                    <div class="text-sm font-medium text-gray-700">Pending Compliance</div>
+                                </div>
+                                <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-amber-700 group-hover:text-amber-800">
+                                    <span>View compliance items</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                </div>
+                            </div>
+
+                            <!-- Card 4: Pending Claim -->
+                            <div onclick="openKpiModal('pending_claim')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Pending Claim">
+                                <div>
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110" style="background: rgba(230, 81, 0, 0.125); color: rgb(230, 81, 0)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                        </div>
+                                    </div>
+                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">Rs. 93.75 L</div>
+                                    <div class="text-sm font-medium text-gray-700">Pending Claim</div>
+                                    <div class="text-xs text-gray-400 mt-0.5">Awaiting lender validation</div>
+                                </div>
+                                <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-orange-700 group-hover:text-orange-800">
+                                    <span>Review pending claim</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                </div>
+                            </div>
+
+                            <!-- Card 5: Reject -->
+                            <div onclick="openKpiModal('rejected')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Rejected Applications">
+                                <div>
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110" style="background: rgba(220, 38, 38, 0.125); color: rgb(220, 38, 38)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between mb-0.5">
+                                        <span class="text-2xl font-bold text-gray-900">Reject</span>
+                                        <span class="text-2xl font-bold text-gray-900">2</span>
+                                    </div>
+                                    <div class="text-sm font-medium text-gray-700">Reject Application</div>
+                                </div>
+                                <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-red-700 group-hover:text-red-800">
+                                    <span>View rejected details</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                </div>
+                            </div>
+
+                            <!-- Card 6: Subvention Released -->
+                            <div onclick="openKpiModal('released')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Subvention Released">
+                                <div>
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110" style="background: rgba(123, 31, 162, 0.125); color: rgb(123, 31, 162)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path><path d="m21.854 2.147-10.94 10.939"></path></svg>
+                                        </div>
+                                    </div>
+                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">Rs. 375 L</div>
+                                    <div class="text-sm font-medium text-gray-700">Subvention Released</div>
+                                    <div class="text-xs text-gray-400 mt-0.5">6 claims processed</div>
                                 </div>
                                 <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-purple-700 group-hover:text-purple-800">
-                                    <span>View loan breakdown</span>
+                                    <span>View payment register</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                </div>
+                            </div>
+
+                            <!-- Card 7: Recent Notifications -->
+                            <div class="col-span-2 lg:col-span-2 bg-white rounded-xl border border-gray-200 p-5 flex flex-col justify-between">
+                                <div>
+                                    <!-- Header -->
+                                    <div class="flex items-center justify-between mb-4">
+                                        <h3 class="text-lg font-bold text-gray-900">Recent Notifications</h3>
+                                        <button type="button" onclick="window.openNotificationsModal()" class="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors cursor-pointer bg-transparent border-0 p-0">
+                                            View All &rarr;
+                                        </button>
+                                    </div>
+
+                                    <!-- Notifications List (showing top 2 for uniform card height) -->
+                                    <div class="space-y-3.5">
+                                        <!-- Notification 1 -->
+                                        <div class="flex items-start gap-3 pb-3 border-b border-gray-100 last:border-0 last:pb-0">
+                                            <span class="w-2.5 h-2.5 rounded-full bg-amber-500 mt-1 flex-shrink-0"></span>
+                                            <div class="flex-1 min-w-0">
+                                                <p class="text-xs font-medium text-gray-800 leading-snug">
+                                                    Claim <span class="font-semibold text-gray-900">IIF-CLM-2026-00182</span> from M/s Gujarat Maritime Board requires lender validation
+                                                </p>
+                                                <span class="text-[11px] text-gray-400 mt-0.5 block">2 hours ago</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Notification 2 -->
+                                        <div class="flex items-start gap-3">
+                                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 mt-1 flex-shrink-0"></span>
+                                            <div class="flex-1 min-w-0">
+                                                <p class="text-xs font-medium text-gray-800 leading-snug">
+                                                    Subvention of <span class="font-semibold text-gray-900">₹ 42.50 Lakh</span> released for <span class="font-semibold text-gray-900">CLM-2026-0091</span>
+                                                </p>
+                                                <span class="text-[11px] text-gray-400 mt-0.5 block">1 day ago</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-white rounded-xl border border-gray-200 p-5">
-                            <div>
-                                <div class="flex items-center justify-between mb-3">
-                                    <div class="flex items-center gap-2.5">
-                                        <h3 class="font-semibold text-gray-800">Pending Action</h3>
-                                        <span id="pendingTotalBadge" class="text-[11px] font-semibold px-2 py-0.5 rounded-full" style="background-color: #e8eef6; color: #0D2B55; border: 1px solid #c7d7e8;">20 pending</span>
-                                    </div>
-                                </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Card 1: Pending Action -->
+                            <div class="bg-white rounded-xl border border-gray-200 p-5 flex flex-col justify-between" style="min-height: 295px;">
+                                <div>
+                                    
 
-                                <!-- Cool Modern Segmented Tabs -->
-                                <div class="flex items-center justify-between gap-2 mb-3 pb-2.5 border-b border-gray-100">
-                                    <div class="inline-flex p-1 bg-gray-100/90 rounded-lg border border-gray-200/70" id="pendingTabsNav" role="tablist">
-                                        <button type="button" id="tabBtnApplication" data-target="application" class="pending-tab-btn px-3 py-1 text-xs font-semibold rounded-md transition-all flex items-center shadow-xs bg-white cursor-pointer" style="color: #0D2B55;">
-                                            <span>Application</span>
-                                        </button>
-                                        <button type="button" id="tabBtnCompliance" data-target="compliance" class="pending-tab-btn px-3 py-1 text-xs font-medium rounded-md transition-all flex items-center text-gray-500 hover:text-gray-800 cursor-pointer">
-                                            <span>Compliance</span>
-                                        </button>
-                                        <button type="button" id="tabBtnClaim" data-target="claim" class="pending-tab-btn px-3 py-1 text-xs font-medium rounded-md transition-all flex items-center text-gray-500 hover:text-gray-800 cursor-pointer">
-                                            <span>Claim</span>
-                                        </button>
-                                        <button type="button" id="tabBtnAll" data-target="all" class="pending-tab-btn px-3 py-1 text-xs font-medium rounded-md transition-all flex items-center text-gray-500 hover:text-gray-800 cursor-pointer">
-                                            <span>All</span>
-                                        </button>
+                                    <!-- Cool Modern Segmented Tabs -->
+                                    <div class="flex items-center justify-between gap-2 mb-3 pb-2.5 border-b border-gray-100">
+                                        <div class="inline-flex p-1 bg-gray-100/90 rounded-lg border border-gray-200/70" id="pendingTabsNav" role="tablist">
+                                            <button type="button" id="tabBtnApplication" data-target="application" class="pending-tab-btn px-3 py-1 text-xs font-semibold rounded-md transition-all flex items-center shadow-xs bg-white cursor-pointer" style="color: #0D2B55;">
+                                                <span>Application</span>
+                                            </button>
+                                            <button type="button" id="tabBtnCompliance" data-target="compliance" class="pending-tab-btn px-3 py-1 text-xs font-medium rounded-md transition-all flex items-center text-gray-500 hover:text-gray-800 cursor-pointer">
+                                                <span>Compliance</span>
+                                            </button>
+                                            <button type="button" id="tabBtnClaim" data-target="claim" class="pending-tab-btn px-3 py-1 text-xs font-medium rounded-md transition-all flex items-center text-gray-500 hover:text-gray-800 cursor-pointer">
+                                                <span>Claim</span>
+                                            </button>
+                                            <button type="button" id="tabBtnAll" data-target="all" class="pending-tab-btn px-3 py-1 text-xs font-medium rounded-md transition-all flex items-center text-gray-500 hover:text-gray-800 cursor-pointer">
+                                                <span>All</span>
+                                            </button>
+                                        </div>
+                                        <div id="pendingFilterStatus" class="text-xs text-gray-400 font-medium hidden sm:block">
+                                            Showing 8 Applications
+                                        </div>
                                     </div>
-                                    <div id="pendingFilterStatus" class="text-xs text-gray-400 font-medium hidden sm:block">
-                                        Showing 8 Applications
-                                    </div>
-                                </div>
 
-                                <!-- Cards Container with smooth scrolling -->
-                                <div id="pendingCardsList" class="overflow-y-auto pr-1" style="max-height: 450px;">
+                                    <!-- Cards Container with smooth scrolling -->
+                                    <div id="pendingCardsList" class="overflow-y-auto pr-1" style="max-height: 254px;">
 
                                     <!-- Application Card 1: Cochin Maritime Yards (Waiting 4 days, URGENT) -->
                                     <div class="pending-item-card animate-tabCardFadeIn" data-category="application" data-waiting-days="4">
@@ -1468,14 +1522,102 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            
 
-                                    <!-- Empty state for tabs with no items (e.g. Compliance) -->
-                                    <div id="pendingEmptyState" class="py-8 text-center text-xs text-gray-400" style="display: none;">
-                                        No pending actions in this category
+                        
+                        
+                        
+                        
+                        </div> 
+                         <div class="bg-white rounded-xl border border-gray-200 p-5 flex flex-col justify-between" style="min-height: 295px;"><div class="bg-white rounded-xl border border-gray-200 p-5 flex flex-col justify-between" style="min-height: 295px;">
+                           
+
+                            <!-- Card 2: Claim Distribution Category Pie Chart (WC & Term Loan) -->
+                            <div class="bg-white rounded-xl flex flex-col justify-between" style="min-height: 295px;">
+                                <div>
+                                    <!-- Header -->
+                                    <div class="flex items-center justify-between gap-3 mb-3">
+                                        <div>
+                                            <div class="flex items-baseline gap-2">
+                                                <h3 class="font-semibold text-gray-800 text-sm whitespace-nowrap">
+                                                    Claim History
+                                                </h3>
+                                                <span class="text-xs font-semibold text-gray-500">(FY 2026-27)</span>
+                                            </div>
+                                            <div class="flex items-center gap-4 text-xs text-gray-500 mt-1">
+                                                <span class="flex items-center gap-1.5 cursor-pointer hover:text-gray-800 transition-colors" id="legendWc">
+                                                    <span class="w-2.5 h-2.5 rounded-full inline-block bg-[#1e6bb8]"></span> Working Capital
+                                                </span>
+                                                <span class="flex items-center gap-1.5 cursor-pointer hover:text-gray-800 transition-colors" id="legendTl">
+                                                    <span class="w-2.5 h-2.5 rounded-full inline-block bg-[#f97316]"></span> Term Loan
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Chart Body Container -->
+                                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-2">
+                                        <!-- SVG Pie / Donut Chart -->
+                                        <div class="relative flex-shrink-0 w-44 h-44 flex items-center justify-center">
+                                            <svg id="claimPieSvg" class="w-full h-full transform -rotate-90 overflow-visible" viewBox="0 0 200 200">
+                                                <g id="pieSlicesGroup">
+                    <path id="sliceWc" d="M 182.00 100.00 A 82 82 0 1 1 27.41 61.87 L 52.19 74.89 A 54 54 0 1 0 154.00 100.00 Z" fill="#1e6bb8" class="cursor-pointer transition-all duration-300 hover:opacity-90 hover:brightness-110" title="Working Capital (WC): ₹ 3,380 L (58.0%)"></path>
+                    <path id="sliceTl" d="M 28.78 59.36 A 82 82 0 0 1 181.99 98.57 L 153.99 99.06 A 54 54 0 0 0 53.10 73.23 Z" fill="#f97316" class="cursor-pointer transition-all duration-300 hover:opacity-90 hover:brightness-110" title="Term Loan: ₹ 2,450 L (42.0%)"></path>
+                </g>
+                                            </svg>
+                                            <!-- Center Donut Content -->
+                                            <div class="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none p-2">
+                                                <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider" id="pieCenterLabel">FY 2026-27</span>
+                                                <span class="text-base font-extrabold text-gray-900 leading-tight" id="pieCenterTotal">₹ 5,830 L</span>
+                                                <span class="text-[10px] text-gray-500 font-medium" id="pieCenterSub">Total Subvention</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Category Stats Side List -->
+                                        <div class="flex-1 w-full space-y-2.5">
+                                            <!-- Working Capital Card -->
+                                            <div id="cardWcBox" class="p-2.5 rounded-lg border border-gray-100 bg-gray-50/70 hover:bg-blue-50/50 hover:border-blue-200 transition-all cursor-pointer">
+                                                <div class="flex items-center justify-between text-xs mb-1">
+                                                    <span class="font-semibold text-gray-800 flex items-center gap-1.5">
+                                                        <span class="w-2 h-2 rounded-full bg-[#1e6bb8]"></span> Working Capital (WC)
+                                                    </span>
+                                                    <span class="font-bold text-[#1e6bb8]" id="wcPercent">58.0%</span>
+                                                </div>
+                                                <div class="flex items-center justify-between text-xs text-gray-500 mb-1.5">
+                                                    <span>Subvention Share</span>
+                                                    <span class="font-semibold text-gray-900" id="wcAmount">₹ 3,380 L</span>
+                                                </div>
+                                                <!-- Progress Bar -->
+                                                <div class="w-full h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                                                    <div id="wcBar" class="h-full bg-[#1e6bb8] rounded-full transition-all duration-500" style="width: 58%;"></div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Term Loan Card -->
+                                            <div id="cardTlBox" class="p-2.5 rounded-lg border border-gray-100 bg-gray-50/70 hover:bg-orange-50/50 hover:border-orange-200 transition-all cursor-pointer">
+                                                <div class="flex items-center justify-between text-xs mb-1">
+                                                    <span class="font-semibold text-gray-800 flex items-center gap-1.5">
+                                                        <span class="w-2 h-2 rounded-full bg-[#f97316]"></span> Term Loan
+                                                    </span>
+                                                    <span class="font-bold text-[#f97316]" id="tlPercent">42.0%</span>
+                                                </div>
+                                                <div class="flex items-center justify-between text-xs text-gray-500 mb-1.5">
+                                                    <span>Subvention Share</span>
+                                                    <span class="font-semibold text-gray-900" id="tlAmount">₹ 2,450 L</span>
+                                                </div>
+                                                <!-- Progress Bar -->
+                                                <div class="w-full h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                                                    <div id="tlBar" class="h-full bg-[#f97316] rounded-full transition-all duration-500" style="width: 42%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div></div>
+
                     </div>
 
                     <!-- Blue Divider Line & Footer Container -->
@@ -1666,55 +1808,159 @@
             alert('Opening detailed verification workflow for ' + ref);
         };
 
+        window.openNotificationsModal = function () {
+            const modal = document.getElementById('allNotificationsModal');
+            if (modal) modal.style.display = 'flex';
+        };
+
+        window.closeNotificationsModal = function () {
+            const modal = document.getElementById('allNotificationsModal');
+            if (modal) modal.style.display = 'none';
+        };
+
+        // Claim History Category Pie Chart Controller Script (Fixed FY 2026-27)
+        (function () {
+            const d = {
+                label: 'FY 2026-27',
+                year: 'FY 2026-27',
+                wc: 3380.00,
+                tl: 2450.00
+            };
+
+            const slicesGroup = document.getElementById('pieSlicesGroup');
+            const centerLabel = document.getElementById('pieCenterLabel');
+            const centerTotal = document.getElementById('pieCenterTotal');
+            const centerSub = document.getElementById('pieCenterSub');
+
+            const wcPercent = document.getElementById('wcPercent');
+            const wcAmount = document.getElementById('wcAmount');
+            const wcBar = document.getElementById('wcBar');
+
+            const tlPercent = document.getElementById('tlPercent');
+            const tlAmount = document.getElementById('tlAmount');
+            const tlBar = document.getElementById('tlBar');
+
+            if (!slicesGroup) return;
+
+            function getSlicePath(cx, cy, rOut, rIn, startAngle, endAngle) {
+                if (endAngle - startAngle >= 360) endAngle = startAngle + 359.999;
+                const rad = Math.PI / 180;
+                const xo1 = cx + rOut * Math.cos(startAngle * rad);
+                const yo1 = cy + rOut * Math.sin(startAngle * rad);
+                const xo2 = cx + rOut * Math.cos(endAngle * rad);
+                const yo2 = cy + rOut * Math.sin(endAngle * rad);
+
+                const xi2 = cx + rIn * Math.cos(endAngle * rad);
+                const yi2 = cy + rIn * Math.sin(endAngle * rad);
+                const xi1 = cx + rIn * Math.cos(startAngle * rad);
+                const yi1 = cy + rIn * Math.sin(startAngle * rad);
+
+                const largeArc = (endAngle - startAngle) > 180 ? 1 : 0;
+
+                return `M ${xo1.toFixed(2)} ${yo1.toFixed(2)} A ${rOut} ${rOut} 0 ${largeArc} 1 ${xo2.toFixed(2)} ${yo2.toFixed(2)} L ${xi2.toFixed(2)} ${yi2.toFixed(2)} A ${rIn} ${rIn} 0 ${largeArc} 0 ${xi1.toFixed(2)} ${yi1.toFixed(2)} Z`;
+            }
+
+            function renderPie() {
+                const total = d.wc + d.tl;
+                const wcPct = ((d.wc / total) * 100).toFixed(1);
+                const tlPct = ((d.tl / total) * 100).toFixed(1);
+
+                if (centerLabel) centerLabel.textContent = d.label;
+                if (centerTotal) centerTotal.textContent = `₹ ${Math.round(total).toLocaleString('en-IN')} L`;
+                if (centerSub) centerSub.textContent = 'Total Subvention';
+
+                if (wcPercent) wcPercent.textContent = `${wcPct}%`;
+                if (wcAmount) wcAmount.textContent = `₹ ${d.wc.toLocaleString('en-IN')} L`;
+                if (wcBar) wcBar.style.width = `${wcPct}%`;
+
+                if (tlPercent) tlPercent.textContent = `${tlPct}%`;
+                if (tlAmount) tlAmount.textContent = `₹ ${d.tl.toLocaleString('en-IN')} L`;
+                if (tlBar) tlBar.style.width = `${tlPct}%`;
+
+                const cx = 100, cy = 100, rOut = 82, rIn = 54;
+                const gap = 2;
+
+                const angleWc = (d.wc / total) * 360;
+
+                const pathWc = getSlicePath(cx, cy, rOut, rIn, 0, angleWc - gap / 2);
+                const pathTl = getSlicePath(cx, cy, rOut, rIn, angleWc + gap / 2, 360 - gap / 2);
+
+                slicesGroup.innerHTML = `
+                    <path id="sliceWc" d="${pathWc}" fill="#1e6bb8" class="cursor-pointer transition-all duration-300 hover:opacity-90 hover:brightness-110" title="Working Capital (WC): ₹ ${d.wc.toLocaleString('en-IN')} L (${wcPct}%)"></path>
+                    <path id="sliceTl" d="${pathTl}" fill="#f97316" class="cursor-pointer transition-all duration-300 hover:opacity-90 hover:brightness-110" title="Term Loan: ₹ ${d.tl.toLocaleString('en-IN')} L (${tlPct}%)"></path>
+                `;
+            }
+
+            renderPie();
+        })();
+
         // KPI Centered Popup Table Modal Controller
         (function () {
             const kpiDataConfigs = {
-                borrowers: {
-                    title: 'Total Borrowers',
-                    badge: '4 Active Borrowers',
-                    subtitle: 'State Bank of India · Maritime Infrastructure & Shipyard Credit Portfolio',
+                submitted: {
+                    title: 'Pending Applications',
+                    badge: '8 Pending Applications',
+                    subtitle: 'State Bank of India · Applications awaiting initial desk verification',
                     iconBg: 'rgba(30, 107, 184, 0.2)',
                     iconColor: '#93c5fd',
-                    iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg>',
-                    footer: 'Total Sanctioned: <span class="font-bold text-gray-900">₹ 48,500.00 L</span> | Total Disbursed: <span class="font-bold text-emerald-700">₹ 38,500.00 L</span> | Portfolio Quality: <span class="font-bold text-emerald-700">100% Standard Assets</span>'
+                    iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>',
+                    footer: 'Total Submitted Applications: <span class="font-bold text-gray-900">8 Items</span> | Total Value: <span class="font-bold text-blue-900">₹ 4,850.00 L</span> | Action Desk SLA: <span class="font-bold text-emerald-700">Within 48 Hours</span>'
                 },
-                pending: {
-                    title: 'Pending Validations',
-                    badge: '2 Actions Required',
-                    subtitle: 'Lender Verification Desk · Immediate Turnaround Due within 48 Hours',
-                    iconBg: 'rgba(230, 81, 0, 0.2)',
-                    iconColor: '#fdba74',
-                    iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>',
-                    footer: 'Pending Value Under Review: <span class="font-bold text-gray-900">₹ 120.00 L</span> | Average Waiting: <span class="font-bold text-rose-600">5 Days</span> | Escalation Status: <span class="font-bold text-amber-600">High Priority</span>'
-                },
-                claims: {
-                    title: 'Claims Validated',
-                    badge: '12 Claims Verified',
-                    subtitle: 'Interest Equalisation & Capital Subsidy Claims Approved by State Bank of India',
+                approved: {
+                    title: 'Approved Applications',
+                    badge: '12 Approved Applications',
+                    subtitle: 'State Bank of India · Applications approved under IIF Scheme',
                     iconBg: 'rgba(46, 125, 50, 0.2)',
                     iconColor: '#86efac',
                     iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>',
-                    footer: 'Total Validated Volume: <span class="font-bold text-emerald-800">₹ 381.55 L</span> | Released by SMFCL: <span class="font-bold text-gray-900">6 Claims (₹ 227.75 L)</span> | In SMFCL Process: <span class="font-bold text-blue-700">6 Claims (₹ 153.80 L)</span>'
+                    footer: 'Total Approved Facilities: <span class="font-bold text-emerald-800">12 Projects</span> | Sanction Limit: <span class="font-bold text-gray-900">₹ 48,500.00 L</span> | Subvention Rate: <span class="font-bold text-blue-900">3.00% p.a.</span>'
                 },
-                exposure: {
-                    title: 'Total Loan Exposure',
-                    badge: '₹ 48,500 Lakhs Total Facility',
-                    subtitle: 'Consolidated Maritime Infrastructure Credit Lines & Exposure Distribution',
+                compliance: {
+                    title: 'Pending Compliance',
+                    badge: '4 Compliance Items',
+                    subtitle: 'State Bank of India · Compliance documents & verification pending',
+                    iconBg: 'rgba(234, 88, 12, 0.2)',
+                    iconColor: '#fdba74',
+                    iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="m9 14 2 2 4-4"></path></svg>',
+                    footer: 'Pending Compliance Value: <span class="font-bold text-amber-900">₹ 375.00 L</span> | Items Pending Desk: <span class="font-bold text-gray-900">4 Items</span> | Escalation Status: <span class="font-bold text-rose-600">Action Required</span>'
+                },
+                pending_claim: {
+                    title: 'Pending Claims',
+                    badge: '2 Claims Pending Validation',
+                    subtitle: 'State Bank of India · Claims submitted awaiting lender desk validation',
+                    iconBg: 'rgba(230, 81, 0, 0.2)',
+                    iconColor: '#fdba74',
+                    iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>',
+                    footer: 'Pending Claim Amount: <span class="font-bold text-orange-900">₹ 93.75 L</span> | Validation Target: <span class="font-bold text-gray-900">48 Hours SLA</span> | Priority: <span class="font-bold text-rose-600">Urgent</span>'
+                },
+                rejected: {
+                    title: 'Rejected Applications',
+                    badge: '2 Rejected Items',
+                    subtitle: 'State Bank of India · Applications or claims rejected with remarks',
+                    iconBg: 'rgba(220, 38, 38, 0.2)',
+                    iconColor: '#fca5a5',
+                    iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>',
+                    footer: 'Total Rejected: <span class="font-bold text-rose-900">2 Items</span> | Rejection Cause: <span class="font-bold text-gray-800">Incomplete documentation / Discrepancy</span> | Resubmission: <span class="font-bold text-blue-800">Allowed on correction</span>'
+                },
+                released: {
+                    title: 'Subvention Released',
+                    badge: '₹ 375 Lakhs Released',
+                    subtitle: 'State Bank of India · Interest subvention released to lender account',
                     iconBg: 'rgba(123, 31, 162, 0.2)',
                     iconColor: '#d8b4fe',
-                    iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="22" y2="22"></line><line x1="6" x2="6" y1="18" y2="11"></line><line x1="10" x2="10" y1="18" y2="11"></line><line x1="14" x2="14" y1="18" y2="11"></line><line x1="18" x2="18" y1="18" y2="11"></line><polygon points="12 2 20 7 4 7"></polygon></svg>',
-                    footer: 'Sanctioned Limit: <span class="font-bold text-blue-900">₹ 48,500.00 L</span> | Current Outstanding: <span class="font-bold text-purple-900">₹ 38,500.00 L</span> | Undrawn Headroom: <span class="font-bold text-slate-700">₹ 10,000.00 L</span>'
+                    iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path><path d="m21.854 2.147-10.94 10.939"></path></svg>',
+                    footer: 'Total Subvention Released: <span class="font-bold text-purple-900">₹ 375.00 L</span> | Processed Claims: <span class="font-bold text-emerald-700">6 Claims</span> | Direct Credit Status: <span class="font-bold text-gray-900">100% Credited</span>'
                 }
             };
 
-            let currentActiveKpiTab = 'borrowers';
+            let currentActiveKpiTab = 'submitted';
 
             window.openKpiModal = function (tabKey) {
                 const modal = document.getElementById('kpiDetailsModal');
                 if (!modal) return;
                 modal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
-                window.switchKpiTab(tabKey || 'borrowers');
+                window.switchKpiTab(tabKey || 'submitted');
             };
 
             window.closeKpiModal = function () {
@@ -1724,7 +1970,7 @@
             };
 
             window.switchKpiTab = function (tabKey) {
-                if (!kpiDataConfigs[tabKey]) tabKey = 'borrowers';
+                if (!kpiDataConfigs[tabKey]) tabKey = 'submitted';
                 currentActiveKpiTab = tabKey;
 
                 const cfg = kpiDataConfigs[tabKey];
@@ -1747,7 +1993,7 @@
                 if (searchInput) searchInput.value = '';
 
                 // Toggle tabs buttons UI
-                ['borrowers', 'pending', 'claims', 'exposure'].forEach((k) => {
+                ['submitted', 'approved', 'compliance', 'pending_claim', 'rejected', 'released'].forEach((k) => {
                     const btn = document.getElementById(`kpiTabBtn_${k}`);
                     const content = document.getElementById(`kpiContent_${k}`);
                     if (btn) {
@@ -1813,6 +2059,7 @@
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     window.closeKpiModal();
+                    window.closeNotificationsModal();
                 }
             });
         })();
@@ -1913,18 +2160,24 @@
             <!-- Tab Switcher & Search Bar -->
             <div class="px-6 py-3 bg-gray-50 border-b border-gray-200 flex flex-wrap items-center justify-between gap-3 flex-shrink-0">
                 <!-- Tabs -->
-                <div class="inline-flex p-1 bg-gray-200/70 rounded-lg text-xs">
-                    <button id="kpiTabBtn_borrowers" type="button" onclick="window.switchKpiTab('borrowers')" class="px-3 py-1.5 rounded-md font-semibold text-[#0d2b55] bg-white shadow-xs transition-all cursor-pointer">
-                        Total Borrowers (4)
+                <div class="inline-flex p-1 bg-gray-200/70 rounded-lg text-xs flex-wrap gap-1">
+                    <button id="kpiTabBtn_submitted" type="button" onclick="window.switchKpiTab('submitted')" class="px-3 py-1.5 rounded-md font-semibold text-[#0d2b55] bg-white shadow-xs transition-all cursor-pointer">
+                        Pending Application (8)
                     </button>
-                    <button id="kpiTabBtn_pending" type="button" onclick="window.switchKpiTab('pending')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer">
-                        Pending Validations (2)
+                    <button id="kpiTabBtn_approved" type="button" onclick="window.switchKpiTab('approved')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer">
+                        Approved (12)
                     </button>
-                    <button id="kpiTabBtn_claims" type="button" onclick="window.switchKpiTab('claims')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer">
-                        Claims Validated (12)
+                    <button id="kpiTabBtn_compliance" type="button" onclick="window.switchKpiTab('compliance')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer">
+                        Pending Compliance (4)
                     </button>
-                    <button id="kpiTabBtn_exposure" type="button" onclick="window.switchKpiTab('exposure')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer">
-                        Loan Exposure (₹ 48,500 L)
+                    <button id="kpiTabBtn_pending_claim" type="button" onclick="window.switchKpiTab('pending_claim')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer">
+                        Pending Claim (2)
+                    </button>
+                    <button id="kpiTabBtn_rejected" type="button" onclick="window.switchKpiTab('rejected')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer">
+                        Reject (2)
+                    </button>
+                    <button id="kpiTabBtn_released" type="button" onclick="window.switchKpiTab('released')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer">
+                        Subvention Released (₹ 375 L)
                     </button>
                 </div>
 
@@ -1939,8 +2192,8 @@
 
             <!-- Scrollable Table Content Body -->
             <div class="flex-1 overflow-y-auto overflow-x-auto p-6 bg-white min-h-[340px]">
-                <!-- Table 1: Borrowers -->
-                <div id="kpiContent_borrowers">
+                <!-- Table 1: Pending Application -->
+                <div id="kpiContent_submitted">
                     <div class="overflow-x-auto border border-gray-200 rounded-xl">
                         <table class="min-w-full divide-y divide-gray-200 text-left text-xs">
                             <thead class="bg-gray-50 text-gray-600 font-semibold uppercase tracking-wider text-[11px]">
@@ -2027,7 +2280,7 @@
                             </tbody>
                             <tfoot class="bg-gray-50 font-semibold text-gray-800 border-t border-gray-200">
                                 <tr>
-                                    <td colspan="3" class="px-4 py-3 text-gray-900 font-bold">Total Portfolio (4 Active Borrowers)</td>
+                                    <td colspan="3" class="px-4 py-3 text-gray-900 font-bold">Total Pending Applications (8 Items)</td>
                                     <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 48,500.00 L</td>
                                     <td class="px-4 py-3 text-right font-bold text-emerald-800">₹ 38,500.00 L</td>
                                     <td colspan="3" class="px-4 py-3 text-center text-xs text-gray-500">100% Verified Standard Credit Lines</td>
@@ -2037,8 +2290,95 @@
                     </div>
                 </div>
 
-                <!-- Table 2: Pending Validations -->
-                <div id="kpiContent_pending" style="display: none;">
+                <!-- Table 2: Approved -->
+                <div id="kpiContent_approved" style="display: none;">
+                    <div class="overflow-x-auto border border-gray-200 rounded-xl">
+                        <table class="min-w-full divide-y divide-gray-200 text-left text-xs">
+                            <thead class="bg-gray-50 text-gray-600 font-semibold uppercase tracking-wider text-[11px]">
+                                <tr>
+                                    <th class="px-4 py-3">Claim Reference</th>
+                                    <th class="px-4 py-3">Shipyard / Beneficiary</th>
+                                    <th class="px-4 py-3">Scheme / Purpose</th>
+                                    <th class="px-4 py-3 text-right">Validated Amount</th>
+                                    <th class="px-4 py-3 text-center">Validation Date</th>
+                                    <th class="px-4 py-3 text-center">Lender Desk Sign-off</th>
+                                    <th class="px-4 py-3 text-center">SMFCL Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 text-gray-700">
+                                <tr class="hover:bg-blue-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0091</td>
+                                    <td class="px-4 py-3 font-bold text-gray-900">Cochin Shipyard Limited</td>
+                                    <td class="px-4 py-3 font-medium text-gray-700">Interest Equalisation (Q1)</td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 42.50 L</td>
+                                    <td class="px-4 py-3 text-center text-gray-600">02 May 2026</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Disbursed (₹ 42.50 L)</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-blue-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0094</td>
+                                    <td class="px-4 py-3 font-bold text-gray-900">Garden Reach Shipbuilders</td>
+                                    <td class="px-4 py-3 font-medium text-gray-700">Modernisation Capex Subsidy</td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 38.20 L</td>
+                                    <td class="px-4 py-3 text-center text-gray-600">08 May 2026</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Disbursed (₹ 38.20 L)</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Table 3: Pending Compliance -->
+                <div id="kpiContent_compliance" style="display: none;">
+                    <div class="overflow-x-auto border border-gray-200 rounded-xl">
+                        <table class="min-w-full divide-y divide-gray-200 text-left text-xs">
+                            <thead class="bg-gray-50 text-gray-600 font-semibold uppercase tracking-wider text-[11px]">
+                                <tr>
+                                    <th class="px-4 py-3">Reference ID</th>
+                                    <th class="px-4 py-3">Enterprise Name</th>
+                                    <th class="px-4 py-3">Pending Compliance Item</th>
+                                    <th class="px-4 py-3 text-right">Value</th>
+                                    <th class="px-4 py-3 text-center">Target Due</th>
+                                    <th class="px-4 py-3 text-center">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 text-gray-700">
+                                <tr class="hover:bg-amber-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">IIF-CMP-2026-00188</td>
+                                    <td class="px-4 py-3 font-bold text-gray-900">M/s Garden Reach Shipbuilders Ltd.</td>
+                                    <td class="px-4 py-3 font-medium text-gray-800">Quarterly Covenant &amp; End-Use Fund Audit</td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 62.50 L</td>
+                                    <td class="px-4 py-3 text-center text-gray-600">24 Jun 2026</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-800">Under Desk Audit</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-amber-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">IIF-CMP-2026-00194</td>
+                                    <td class="px-4 py-3 font-bold text-gray-900">M/s Mazagon Dock Shipbuilders Ltd.</td>
+                                    <td class="px-4 py-3 font-medium text-gray-800">Statutory Vessel Insurance &amp; Hypothecation Review</td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 48.00 L</td>
+                                    <td class="px-4 py-3 text-center text-gray-600">29 Jun 2026</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-800">Awaiting Hypothecation Deed</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Table 4: Pending Claim -->
+                <div id="kpiContent_pending_claim" style="display: none;">
                     <div class="overflow-x-auto border border-gray-200 rounded-xl">
                         <table class="min-w-full divide-y divide-gray-200 text-left text-xs">
                             <thead class="bg-gray-50 text-gray-600 font-semibold uppercase tracking-wider text-[11px]">
@@ -2104,300 +2444,86 @@
                                     </td>
                                 </tr>
                             </tbody>
-                            <tfoot class="bg-gray-50 font-semibold text-gray-800 border-t border-gray-200">
-                                <tr>
-                                    <td colspan="3" class="px-4 py-3 text-gray-900 font-bold">Total Pending Desk Items (2 Urgent Tasks)</td>
-                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 120.00 Lakhs</td>
-                                    <td colspan="3" class="px-4 py-3 text-center text-xs text-amber-700 font-medium">Turnaround Target: 48 Hours strictly adhered under SMFCL SLA</td>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>
 
-                <!-- Table 3: Claims Validated -->
-                <div id="kpiContent_claims" style="display: none;">
+                <!-- Table 5: Reject -->
+                <div id="kpiContent_rejected" style="display: none;">
                     <div class="overflow-x-auto border border-gray-200 rounded-xl">
                         <table class="min-w-full divide-y divide-gray-200 text-left text-xs">
                             <thead class="bg-gray-50 text-gray-600 font-semibold uppercase tracking-wider text-[11px]">
                                 <tr>
-                                    <th class="px-4 py-3">Claim Reference</th>
-                                    <th class="px-4 py-3">Shipyard / Beneficiary</th>
-                                    <th class="px-4 py-3">Scheme / Purpose</th>
-                                    <th class="px-4 py-3 text-right">Validated Amount</th>
-                                    <th class="px-4 py-3 text-center">Validation Date</th>
-                                    <th class="px-4 py-3 text-center">Lender Desk Sign-off</th>
-                                    <th class="px-4 py-3 text-center">SMFCL Status</th>
+                                    <th class="px-4 py-3">Reference ID</th>
+                                    <th class="px-4 py-3">Enterprise / Borrower</th>
+                                    <th class="px-4 py-3">Rejection Reason / Remarks</th>
+                                    <th class="px-4 py-3 text-right">Amount</th>
+                                    <th class="px-4 py-3 text-center">Rejection Date</th>
+                                    <th class="px-4 py-3 text-center">Status</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100 text-gray-700">
-                                <tr class="hover:bg-blue-50/30 transition-colors">
-                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0091</td>
-                                    <td class="px-4 py-3 font-bold text-gray-900">Cochin Shipyard Limited</td>
-                                    <td class="px-4 py-3 font-medium text-gray-700">Interest Equalisation (Q1)</td>
-                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 42.50 L</td>
-                                    <td class="px-4 py-3 text-center text-gray-600">02 May 2026</td>
-                                    <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
-                                    </td>
-                                    <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Disbursed (₹ 42.50 L)</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-blue-50/30 transition-colors">
-                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0094</td>
-                                    <td class="px-4 py-3 font-bold text-gray-900">Garden Reach Shipbuilders</td>
-                                    <td class="px-4 py-3 font-medium text-gray-700">Modernisation Capex Subsidy</td>
-                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 38.20 L</td>
-                                    <td class="px-4 py-3 text-center text-gray-600">08 May 2026</td>
-                                    <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
-                                    </td>
-                                    <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Disbursed (₹ 38.20 L)</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-blue-50/30 transition-colors">
-                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0102</td>
-                                    <td class="px-4 py-3 font-bold text-gray-900">Mazagon Dock Shipbuilders</td>
-                                    <td class="px-4 py-3 font-medium text-gray-700">Green Tug Interest Subvention</td>
-                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 29.75 L</td>
+                                <tr class="hover:bg-rose-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-mono font-bold text-rose-700">IIF-BRW-2026-00109</td>
+                                    <td class="px-4 py-3 font-bold text-gray-900">M/s Coastal Engineering Pvt. Ltd.</td>
+                                    <td class="px-4 py-3 font-medium text-rose-700">Invalid Bank Guarantee tenure (Expired before claim period)</td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 35.00 L</td>
                                     <td class="px-4 py-3 text-center text-gray-600">14 May 2026</td>
                                     <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
-                                    </td>
-                                    <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Disbursed (₹ 29.75 L)</span>
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-rose-100 text-rose-800">Rejected</span>
                                     </td>
                                 </tr>
-                                <tr class="hover:bg-blue-50/30 transition-colors">
-                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0109</td>
-                                    <td class="px-4 py-3 font-bold text-gray-900">Goa Shipyard Limited</td>
-                                    <td class="px-4 py-3 font-medium text-gray-700">Interest Subvention (Tranche 2)</td>
-                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 34.10 L</td>
-                                    <td class="px-4 py-3 text-center text-gray-600">19 May 2026</td>
-                                    <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
-                                    </td>
-                                    <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Disbursed (₹ 34.10 L)</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-blue-50/30 transition-colors">
-                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0115</td>
-                                    <td class="px-4 py-3 font-bold text-gray-900">Hindustan Shipyard Ltd.</td>
-                                    <td class="px-4 py-3 font-medium text-gray-700">Slipway Automation Claim</td>
-                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 45.00 L</td>
-                                    <td class="px-4 py-3 text-center text-gray-600">25 May 2026</td>
-                                    <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
-                                    </td>
-                                    <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Disbursed (₹ 45.00 L)</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-blue-50/30 transition-colors">
-                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0122</td>
-                                    <td class="px-4 py-3 font-bold text-gray-900">Kolkata Dry Dock Yard</td>
-                                    <td class="px-4 py-3 font-medium text-gray-700">Subvention Claim (Q4 FY25)</td>
-                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 38.20 L</td>
+                                <tr class="hover:bg-rose-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-mono font-bold text-rose-700">IIF-CLM-2026-00142</td>
+                                    <td class="px-4 py-3 font-bold text-gray-900">M/s Western Sea Docks Ltd.</td>
+                                    <td class="px-4 py-3 font-medium text-rose-700">Duplicate claim submission detected for Q3 subvention</td>
+                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 18.20 L</td>
                                     <td class="px-4 py-3 text-center text-gray-600">01 Jun 2026</td>
                                     <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
-                                    </td>
-                                    <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Disbursed (₹ 38.20 L)</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-blue-50/30 transition-colors">
-                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0130</td>
-                                    <td class="px-4 py-3 font-bold text-gray-900">Vizag Marine Works Ltd.</td>
-                                    <td class="px-4 py-3 font-medium text-gray-700">Floating Crane Loan Subvention</td>
-                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 26.80 L</td>
-                                    <td class="px-4 py-3 text-center text-gray-600">05 Jun 2026</td>
-                                    <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
-                                    </td>
-                                    <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-800 border border-amber-200">SMFCL Technical Audit</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-blue-50/30 transition-colors">
-                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0136</td>
-                                    <td class="px-4 py-3 font-bold text-gray-900">Mumbai Offshore Fabricators</td>
-                                    <td class="px-4 py-3 font-medium text-gray-700">Yard Modernisation Interest</td>
-                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 31.50 L</td>
-                                    <td class="px-4 py-3 text-center text-gray-600">09 Jun 2026</td>
-                                    <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
-                                    </td>
-                                    <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-800 border border-blue-200">Pending SMFCL Sanction</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-blue-50/30 transition-colors">
-                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0141</td>
-                                    <td class="px-4 py-3 font-bold text-gray-900">Chennai Naval Fabricators</td>
-                                    <td class="px-4 py-3 font-medium text-gray-700">Interest Equalisation (Q2)</td>
-                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 22.40 L</td>
-                                    <td class="px-4 py-3 text-center text-gray-600">12 Jun 2026</td>
-                                    <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
-                                    </td>
-                                    <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-800 border border-blue-200">SMFCL Finance Desk</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-blue-50/30 transition-colors">
-                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0148</td>
-                                    <td class="px-4 py-3 font-bold text-gray-900">Paradip Marine Services</td>
-                                    <td class="px-4 py-3 font-medium text-gray-700">Vessel Construction Interest</td>
-                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 28.90 L</td>
-                                    <td class="px-4 py-3 text-center text-gray-600">15 Jun 2026</td>
-                                    <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
-                                    </td>
-                                    <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-800 border border-blue-200">Verification Underway</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-blue-50/30 transition-colors">
-                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0153</td>
-                                    <td class="px-4 py-3 font-bold text-gray-900">Pipavav Offshore Yard</td>
-                                    <td class="px-4 py-3 font-medium text-gray-700">Drydock Deepening Support</td>
-                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 24.60 L</td>
-                                    <td class="px-4 py-3 text-center text-gray-600">16 Jun 2026</td>
-                                    <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
-                                    </td>
-                                    <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-purple-50 text-purple-800 border border-purple-200">Sanction Issued (Pending Credit)</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-blue-50/30 transition-colors">
-                                    <td class="px-4 py-3 font-mono font-semibold text-[#0d2b55]">CLM-2026-0159</td>
-                                    <td class="px-4 py-3 font-bold text-gray-900">Tuticorin Shipping Works</td>
-                                    <td class="px-4 py-3 font-medium text-gray-700">Equipment Subvention Claim</td>
-                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 19.60 L</td>
-                                    <td class="px-4 py-3 text-center text-gray-600">18 Jun 2026</td>
-                                    <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Verified &amp; Passed</span>
-                                    </td>
-                                    <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-800 border border-blue-200">Under SMFCL Review</span>
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-rose-100 text-rose-800">Rejected</span>
                                     </td>
                                 </tr>
                             </tbody>
-                            <tfoot class="bg-gray-50 font-semibold text-gray-800 border-t border-gray-200">
-                                <tr>
-                                    <td colspan="3" class="px-4 py-3 text-gray-900 font-bold">Total Validated Claims (12 Completed Validations)</td>
-                                    <td class="px-4 py-3 text-right font-bold text-emerald-800">₹ 381.55 L</td>
-                                    <td colspan="3" class="px-4 py-3 text-center text-xs text-gray-600">6 Released by SMFCL (₹ 227.75 L) · 6 in Process (₹ 153.80 L)</td>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>
 
-                <!-- Table 4: Loan Exposure -->
-                <div id="kpiContent_exposure" style="display: none;">
+                <!-- Table 6: Subvention Released -->
+                <div id="kpiContent_released" style="display: none;">
                     <div class="overflow-x-auto border border-gray-200 rounded-xl">
                         <table class="min-w-full divide-y divide-gray-200 text-left text-xs">
                             <thead class="bg-gray-50 text-gray-600 font-semibold uppercase tracking-wider text-[11px]">
                                 <tr>
+                                    <th class="px-4 py-3">Disbursement Ref</th>
                                     <th class="px-4 py-3">Borrower / Enterprise</th>
-                                    <th class="px-4 py-3">Loan Facility &amp; Account</th>
-                                    <th class="px-4 py-3 text-right">Sanctioned Limit</th>
-                                    <th class="px-4 py-3 text-right">Outstanding Balance</th>
-                                    <th class="px-4 py-3 text-right">Undrawn Headroom</th>
-                                    <th class="px-4 py-3 text-center">Subvention</th>
-                                    <th class="px-4 py-3 text-center">Collateral Coverage</th>
-                                    <th class="px-4 py-3 text-center">Asset Class</th>
+                                    <th class="px-4 py-3">Subvention Category</th>
+                                    <th class="px-4 py-3 text-right">Released Amount</th>
+                                    <th class="px-4 py-3 text-center">Credit Date</th>
+                                    <th class="px-4 py-3 text-center">Credit Status</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100 text-gray-700">
-                                <tr class="hover:bg-blue-50/30 transition-colors">
-                                    <td class="px-4 py-3 font-bold text-gray-900">
-                                        M/s Cochin Maritime Yards Pvt. Ltd.
-                                        <span class="block text-[11px] font-normal text-gray-500">Kochi Cluster · SBI Commercial Branch</span>
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        <span class="font-medium text-gray-800">Term Loan (Capex Drydock)</span>
-                                        <span class="block text-[11px] font-mono text-gray-500">TL-SBI-98442</span>
-                                    </td>
-                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 14,500.00 L</td>
-                                    <td class="px-4 py-3 text-right font-bold text-purple-900">₹ 11,200.00 L</td>
-                                    <td class="px-4 py-3 text-right font-semibold text-gray-700">₹ 3,300.00 L</td>
-                                    <td class="px-4 py-3 text-center font-bold text-blue-900">3.00% p.a.</td>
-                                    <td class="px-4 py-3 text-center font-semibold text-emerald-800">135% Coverage</td>
+                                <tr class="hover:bg-purple-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-mono font-bold text-purple-900">DISB-2026-0041</td>
+                                    <td class="px-4 py-3 font-bold text-gray-900">M/s Cochin Maritime Yards Pvt. Ltd.</td>
+                                    <td class="px-4 py-3 font-medium text-gray-800">Interest Equalisation (Tranche 1)</td>
+                                    <td class="px-4 py-3 text-right font-bold text-purple-950">₹ 125.00 L</td>
+                                    <td class="px-4 py-3 text-center text-gray-600">10 Apr 2026</td>
                                     <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Standard (SMA-0)</span>
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-purple-100 text-purple-800">Credited to Account</span>
                                     </td>
                                 </tr>
-                                <tr class="hover:bg-blue-50/30 transition-colors">
-                                    <td class="px-4 py-3 font-bold text-gray-900">
-                                        M/s Goa Shipbuilding Co.
-                                        <span class="block text-[11px] font-normal text-gray-500">Mormugao Cluster · SBI Panaji Large Corp</span>
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        <span class="font-medium text-gray-800">Term + Working Capital Line</span>
-                                        <span class="block text-[11px] font-mono text-gray-500">CF-SBI-55418</span>
-                                    </td>
-                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 9,800.00 L</td>
-                                    <td class="px-4 py-3 text-right font-bold text-purple-900">₹ 8,400.00 L</td>
-                                    <td class="px-4 py-3 text-right font-semibold text-gray-700">₹ 1,400.00 L</td>
-                                    <td class="px-4 py-3 text-center font-bold text-blue-900">3.00% p.a.</td>
-                                    <td class="px-4 py-3 text-center font-semibold text-emerald-800">142% Coverage</td>
+                                <tr class="hover:bg-purple-50/30 transition-colors">
+                                    <td class="px-4 py-3 font-mono font-bold text-purple-900">DISB-2026-0058</td>
+                                    <td class="px-4 py-3 font-bold text-gray-900">M/s Goa Shipbuilding Co.</td>
+                                    <td class="px-4 py-3 font-medium text-gray-800">Capex Subvention Grant</td>
+                                    <td class="px-4 py-3 text-right font-bold text-purple-950">₹ 250.00 L</td>
+                                    <td class="px-4 py-3 text-center text-gray-600">04 May 2026</td>
                                     <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Standard (SMA-0)</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-blue-50/30 transition-colors">
-                                    <td class="px-4 py-3 font-bold text-gray-900">
-                                        M/s Vizag Marine Works Ltd.
-                                        <span class="block text-[11px] font-normal text-gray-500">Vizag Port Cluster · SBI Overseas Branch</span>
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        <span class="font-medium text-gray-800">Project Finance Loan</span>
-                                        <span class="block text-[11px] font-mono text-gray-500">PL-SBI-77291</span>
-                                    </td>
-                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 12,200.00 L</td>
-                                    <td class="px-4 py-3 text-right font-bold text-purple-900">₹ 9,500.00 L</td>
-                                    <td class="px-4 py-3 text-right font-semibold text-gray-700">₹ 2,700.00 L</td>
-                                    <td class="px-4 py-3 text-center font-bold text-blue-900">3.00% p.a.</td>
-                                    <td class="px-4 py-3 text-center font-semibold text-emerald-800">128% Coverage</td>
-                                    <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Standard (SMA-0)</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-blue-50/30 transition-colors">
-                                    <td class="px-4 py-3 font-bold text-gray-900">
-                                        M/s Mumbai Offshore Fabricators
-                                        <span class="block text-[11px] font-normal text-gray-500">Mumbai Harbour · SBI Corporate Accounts</span>
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        <span class="font-medium text-gray-800">Green Tug Retrofit Capex</span>
-                                        <span class="block text-[11px] font-mono text-gray-500">TL-SBI-33214</span>
-                                    </td>
-                                    <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 12,000.00 L</td>
-                                    <td class="px-4 py-3 text-right font-bold text-purple-900">₹ 9,400.00 L</td>
-                                    <td class="px-4 py-3 text-right font-semibold text-gray-700">₹ 2,600.00 L</td>
-                                    <td class="px-4 py-3 text-center font-bold text-blue-900">3.00% p.a.</td>
-                                    <td class="px-4 py-3 text-center font-semibold text-emerald-800">130% Coverage</td>
-                                    <td class="px-4 py-3 text-center">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">Standard (SMA-0)</span>
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-purple-100 text-purple-800">Credited to Account</span>
                                     </td>
                                 </tr>
                             </tbody>
-                            <tfoot class="bg-gray-50 font-semibold text-gray-800 border-t border-gray-200">
-                                <tr>
-                                    <td colspan="2" class="px-4 py-3 text-gray-900 font-bold">Consolidated Portfolio Totals</td>
-                                    <td class="px-4 py-3 text-right font-bold text-blue-950">₹ 48,500.00 L</td>
-                                    <td class="px-4 py-3 text-right font-bold text-purple-950">₹ 38,500.00 L</td>
-                                    <td class="px-4 py-3 text-right font-bold text-slate-800">₹ 10,000.00 L</td>
-                                    <td colspan="3" class="px-4 py-3 text-center text-xs text-emerald-700 font-bold">100% Satisfactory / Zero Delinquencies</td>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -2409,6 +2535,107 @@
                     Total Sanctioned: <span class="font-bold text-gray-900">₹ 48,500.00 L</span> | Total Disbursed: <span class="font-bold text-emerald-700">₹ 38,500.00 L</span> | Portfolio Quality: <span class="font-bold text-emerald-700">100% Standard Assets</span>
                 </div>
                 <button type="button" onclick="window.closeKpiModal()" class="px-4 py-1.5 rounded-md text-xs font-semibold text-gray-700 hover:text-gray-900 bg-white hover:bg-gray-100 border border-gray-300 shadow-2xs transition-colors cursor-pointer">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- All Notifications Popup Modal -->
+    <div id="allNotificationsModal" class="review-modal-backdrop" onclick="if(event.target === this) window.closeNotificationsModal()">
+        <div class="review-modal-content" style="max-width: 640px; max-height: 88vh; display: flex; flex-direction: column;">
+            <!-- Modal Header -->
+            <div class="px-5 py-4 border-b border-gray-100 flex items-center justify-between flex-shrink-0" style="background-color: #0d2b55;">
+                <div class="flex items-center gap-3 text-white">
+                    <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center text-white flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h3 class="text-sm font-bold text-white leading-tight">All Notifications</h3>
+                            <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-white/15 text-blue-100 border border-white/20">6 Total</span>
+                        </div>
+                        <p class="text-[11px] text-blue-200 mt-0.5">State Bank of India · Lender Desk Notifications</p>
+                    </div>
+                </div>
+                <button type="button" onclick="window.closeNotificationsModal()" class="text-white/70 hover:text-white p-1 rounded-md hover:bg-white/10 transition-colors cursor-pointer" aria-label="Close">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+
+            <!-- Modal Body with Vertical Scrolling -->
+            <div id="allNotificationsScrollList" class="p-5 overflow-y-auto flex-1 divide-y divide-gray-100" style="max-height: 480px;">
+                <!-- Notification 1 -->
+                <div class="flex items-start gap-3 py-3 first:pt-0">
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-500 mt-1 flex-shrink-0"></span>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-xs font-medium text-gray-800 leading-snug">
+                            Claim <span class="font-semibold text-gray-900">IIF-CLM-2026-00182</span> from M/s Gujarat Maritime Board requires lender validation
+                        </p>
+                        <span class="text-[11px] text-gray-400 mt-0.5 block">2 hours ago · State Bank of India</span>
+                    </div>
+                </div>
+
+                <!-- Notification 2 -->
+                <div class="flex items-start gap-3 py-3">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 mt-1 flex-shrink-0"></span>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-xs font-medium text-gray-800 leading-snug">
+                            Subvention of <span class="font-semibold text-gray-900">₹ 42.50 Lakh</span> released for <span class="font-semibold text-gray-900">CLM-2026-0091</span>
+                        </p>
+                        <span class="text-[11px] text-gray-400 mt-0.5 block">1 day ago · Credited to Account</span>
+                    </div>
+                </div>
+
+                <!-- Notification 3 -->
+                <div class="flex items-start gap-3 py-3">
+                    <span class="w-2.5 h-2.5 rounded-full bg-blue-500 mt-1 flex-shrink-0"></span>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-xs font-medium text-gray-800 leading-snug">
+                            New application <span class="font-semibold text-gray-900">IIF-BRW-2026-00156</span> submitted by M/s Cochin Maritime Yards
+                        </p>
+                        <span class="text-[11px] text-gray-400 mt-0.5 block">2 days ago · Step 6 Desk Verification</span>
+                    </div>
+                </div>
+
+                <!-- Notification 4 -->
+                <div class="flex items-start gap-3 py-3">
+                    <span class="w-2.5 h-2.5 rounded-full bg-purple-500 mt-1 flex-shrink-0"></span>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-xs font-medium text-gray-800 leading-snug">
+                            Quarterly Interest Subvention Sanction Letter issued for <span class="font-semibold text-gray-900">SO/SMFCL/2026/044</span>
+                        </p>
+                        <span class="text-[11px] text-gray-400 mt-0.5 block">3 days ago · SMFCL Finance Division</span>
+                    </div>
+                </div>
+
+                <!-- Notification 5 -->
+                <div class="flex items-start gap-3 py-3">
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-500 mt-1 flex-shrink-0"></span>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-xs font-medium text-gray-800 leading-snug">
+                            Pending compliance audit document for <span class="font-semibold text-gray-900">IIF-CMP-2026-00188</span> uploaded by borrower
+                        </p>
+                        <span class="text-[11px] text-gray-400 mt-0.5 block">4 days ago · Review Required</span>
+                    </div>
+                </div>
+
+                <!-- Notification 6 -->
+                <div class="flex items-start gap-3 py-3">
+                    <span class="w-2.5 h-2.5 rounded-full bg-rose-500 mt-1 flex-shrink-0"></span>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-xs font-medium text-gray-800 leading-snug">
+                            Application <span class="font-semibold text-gray-900">IIF-BRW-2026-00109</span> marked as rejected due to invalid Bank Guarantee tenure
+                        </p>
+                        <span class="text-[11px] text-gray-400 mt-0.5 block">5 days ago · Remarks Recorded</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="px-5 py-3 bg-gray-50 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500 flex-shrink-0">
+                <span>Showing 6 recent notifications</span>
+                <button type="button" onclick="window.closeNotificationsModal()" class="px-4 py-1.5 rounded-md font-semibold text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 transition-colors cursor-pointer shadow-xs">
                     Close
                 </button>
             </div>

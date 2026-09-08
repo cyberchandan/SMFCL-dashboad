@@ -1050,7 +1050,7 @@
                             </div>
 
                           
-                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <!-- Card 1: Pending Action -->
                                 <div class="bg-white rounded-xl border border-gray-200 p-5 flex flex-col justify-between" style="min-height: 295px;">
                                     <div>
@@ -1332,7 +1332,10 @@
                                             <!-- SVG Pie / Donut Chart -->
                                             <div class="relative flex-shrink-0 w-44 h-44 flex items-center justify-center">
                                                 <svg id="claimPieSvg" class="w-full h-full transform -rotate-90 overflow-visible" viewBox="0 0 200 200">
-                                                    <g id="pieSlicesGroup"></g>
+                                                    <g id="pieSlicesGroup">
+                                                        <path id="sliceWc" d="M 182.00 100.00 A 82 82 0 1 1 27.41 61.87 L 52.19 74.89 A 54 54 0 1 0 154.00 100.00 Z" fill="#1e6bb8" class="cursor-pointer transition-all duration-300 hover:opacity-90 hover:brightness-110" title="Working Capital (WC): ₹ 3,380 L (58.0%)"></path>
+                                                        <path id="sliceTl" d="M 28.78 59.36 A 82 82 0 0 1 181.99 98.57 L 153.99 99.06 A 54 54 0 0 0 53.10 73.23 Z" fill="#f97316" class="cursor-pointer transition-all duration-300 hover:opacity-90 hover:brightness-110" title="Term Loan: ₹ 2,450 L (42.0%)"></path>
+                                                    </g>
                                                 </svg>
                                                 <!-- Center Donut Content -->
                                                 <div class="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none p-2">
