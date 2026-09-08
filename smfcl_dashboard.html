@@ -260,6 +260,9 @@
                 justify-content: center;
                 padding: 16px;
             }
+            .review-modal-backdrop.active {
+                display: flex !important;
+            }
             .review-modal-content {
                 background: #ffffff;
                 border-radius: 12px;
@@ -1098,77 +1101,58 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
                                     </div>
                                 </div>
-                                <!-- <div class="bg-white rounded-xl border border-gray-200 p-5">
-                                    <div class="flex items-start justify-between mb-3">
-                                        <div
-                                            class="w-10 h-10 rounded-lg flex items-center justify-center"
-                                            style="background: rgba(245, 124, 0, 0.125); color: rgb(245, 124, 0)"
-                                        >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="20"
-                                                height="20"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                stroke-width="2"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                class="lucide lucide-circle-alert"
-                                            >
-                                                <circle cx="12" cy="12" r="10"></circle>
-                                                <line x1="12" x2="12" y1="8" y2="12"></line>
-                                                <line x1="12" x2="12.01" y1="16" y2="16"></line>
-                                            </svg>
+                                <!-- Card 7: Recent Notifications -->
+                                <div class="col-span-2 lg:col-span-2 bg-white rounded-xl border border-gray-200 p-5 flex flex-col justify-between">
+                                    <div>
+                                        <!-- Header -->
+                                        <div class="flex items-center justify-between mb-4">
+                                            <h3 class="text-lg font-bold text-gray-900">Recent Notifications</h3>
+                                            <button type="button" onclick="window.openNotificationsModal()" class="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors cursor-pointer bg-transparent border-0 p-0">
+                                                View All &rarr;
+                                            </button>
+                                        </div>
+
+                                        <!-- Notifications List -->
+                                        <div class="space-y-3.5">
+                                            <!-- Notification 1 -->
+                                            <div class="flex items-start gap-3 pb-3 border-b border-gray-100">
+                                                <span class="w-2.5 h-2.5 rounded-full bg-amber-500 mt-1 flex-shrink-0"></span>
+                                                <div class="flex-1 min-w-0">
+                                                    <p class="text-xs font-medium text-gray-800 leading-snug">
+                                                        Your claim <span class="font-semibold text-gray-900">CLM-CSL-SBI-WCDL-2026-01-002</span> is under lender validation
+                                                    </p>
+                                                    <span class="text-[11px] text-gray-400 mt-0.5 block">2 hours ago</span>
+                                                </div>
+                                            </div>
+
+                                            <!-- Notification 2 -->
+                                            <div class="flex items-start gap-3">
+                                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 mt-1 flex-shrink-0"></span>
+                                                <div class="flex-1 min-w-0">
+                                                    <p class="text-xs font-medium text-gray-800 leading-snug">
+                                                        Subvention of <span class="font-semibold text-gray-900">₹ 187.50 Lakh</span> has been released for <span class="font-semibold text-gray-900">CLM-CSL-HDFC-WCDL-2026-02-001</span>
+                                                    </p>
+                                                    <span class="text-[11px] text-gray-400 mt-0.5 block">1 day ago</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">3</div>
-                                    <div class="text-sm font-medium text-gray-700">Queries Raised</div>
-                                    <div class="text-xs text-gray-400 mt-0.5">Awaiting response</div>
-                                </div> -->
-                                <!-- <div class="bg-white rounded-xl border border-gray-200 p-5">
-                                    <div class="flex items-start justify-between mb-3">
-                                        <div
-                                            class="w-10 h-10 rounded-lg flex items-center justify-center"
-                                            style="background: rgba(198, 40, 40, 0.125); color: rgb(198, 40, 40)"
-                                        >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="20"
-                                                height="20"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                stroke-width="2"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                class="lucide lucide-activity"
-                                            >
-                                                <path
-                                                    d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"
-                                                ></path>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">9</div>
-                                    <div class="text-sm font-medium text-gray-700">Rejected Applications</div>
-                                    <div class="text-xs text-gray-400 mt-0.5">With reasons on record</div>
-                                </div> -->
+                                </div>
                             </div>
                             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                 <div class="bg-white rounded-xl border border-gray-200 p-5">
                                     <div class="flex items-center justify-between mb-4">
                                         <div>
-                                            <h3 class="font-semibold text-gray-800">Disbursement Trends (FY 2026-27)</h3>
-                                            <div class="flex items-center gap-4 text-xs text-gray-500 mt-1">
+                                            <h3 class="font-bold text-gray-900 text-base md:text-lg tracking-tight">Disbursement Trends (FY 2026-27)</h3>
+                                            <div class="flex items-center gap-4 text-xs font-medium text-gray-600 mt-1">
                                                 <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full inline-block" style="background-color: #1e6bb8;"></span> Working Capital</span>
                                                 <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full inline-block" style="background-color: #f97316;"></span> Term Loan</span>
                                             </div>
                                         </div>
-                                        <select id="disbursementSelect" class="text-xs border border-gray-300 rounded-md px-2.5 py-1.5 bg-white text-gray-700 font-medium shadow-sm hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 cursor-pointer">
-                                            <option value="yearly">Yearly Basis</option>
+                                        <select id="disbursementSelect" class="text-xs border border-gray-300 rounded-lg px-3 py-1.5 bg-white text-gray-700 font-medium shadow-2xs hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 cursor-pointer">
                                             <option value="monthly" selected>Monthly Basis</option>
                                             <option value="quarterly">Quarterly Basis</option>
+                                            <option value="yearly">Yearly Basis</option>
                                         </select>
                                     </div>
                                     <div class="relative w-full flex items-start" style="height: 220px;">
@@ -1188,17 +1172,17 @@
                                                 <!-- Chart Paths and Dots -->
                                                 <g id="chartPaths"></g>
                                                 <!-- Hover Crosshair Guide Line -->
-                                                <line id="hoverGuideLine" x1="0" y1="5" x2="0" y2="165" stroke="#cccccc" stroke-width="1" opacity="0"></line>
+                                                <line id="hoverGuideLine" x1="0" y1="5" x2="0" y2="165" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3" opacity="0"></line>
                                                 <!-- Hover Active Dots -->
-                                                <circle id="hoverDotBlue" r="3.5" stroke="#1e6bb8" stroke-width="2" fill="#1e6bb8" opacity="0"></circle>
-                                                <circle id="hoverDotOrange" r="3.5" stroke="#f97316" stroke-width="2" fill="#f97316" opacity="0"></circle>
+                                                <circle id="hoverDotBlue" r="4.5" stroke="#1e6bb8" stroke-width="2.5" fill="#ffffff" opacity="0"></circle>
+                                                <circle id="hoverDotOrange" r="4.5" stroke="#f97316" stroke-width="2.5" fill="#ffffff" opacity="0"></circle>
                                                 <!-- Transparent Overlay Rect to Capture All Mouse Events -->
                                                 <rect id="chartHoverOverlay" x="0" y="0" width="100%" height="200" fill="transparent" style="cursor: crosshair; pointer-events: all;"></rect>
                                             </svg>
                                             <!-- Tooltip Box -->
-                                            <div id="chartTooltip" class="absolute pointer-events-none z-30 bg-white" style="display: none; opacity: 0; top: 5px; min-width: 210px; padding: 12px 16px 14px 16px; border: 1px solid #b4b4b4; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); font-family: 'Segoe UI', Arial, sans-serif;">
-                                                <div id="tooltipTitle" class="text-base font-semibold text-gray-900 mb-2"></div>
-                                                <div id="tooltipContent" class="space-y-1.5 text-sm font-normal"></div>
+                                            <div id="chartTooltip" class="absolute pointer-events-none z-30 bg-white rounded-lg shadow-lg border border-gray-200 p-3" style="display: none; opacity: 0; top: 5px; min-width: 200px;">
+                                                <div id="tooltipTitle" class="text-xs font-bold text-gray-900 mb-1.5 pb-1 border-b border-gray-100"></div>
+                                                <div id="tooltipContent" class="space-y-1 text-xs font-semibold"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -2481,10 +2465,26 @@
                     link.click();
                 };
 
+                window.openNotificationsModal = function () {
+                    const modal = document.getElementById('allNotificationsModal');
+                    if (modal) {
+                        modal.classList.add('active');
+                        modal.style.display = 'flex';
+                    }
+                };
+                window.closeNotificationsModal = function () {
+                    const modal = document.getElementById('allNotificationsModal');
+                    if (modal) {
+                        modal.classList.remove('active');
+                        modal.style.display = 'none';
+                    }
+                };
+
                 // ESC key closes modal
                 document.addEventListener('keydown', (e) => {
                     if (e.key === 'Escape') {
                         window.closeKpiModal();
+                        window.closeNotificationsModal();
                     }
                 });
             })();
@@ -2549,6 +2549,151 @@
                     </button>
                     <button type="button" onclick="window.confirmReviewAction()" class="px-4 py-1.5 rounded-md text-xs font-semibold text-white bg-[#0d2b55] hover:bg-[#163a6e] transition-colors cursor-pointer shadow-xs">
                         Open Action Desk
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- All Notifications Popup Modal -->
+        <div id="allNotificationsModal" class="review-modal-backdrop" onclick="if(event.target === this) window.closeNotificationsModal()">
+            <div class="review-modal-content" style="max-width: 640px; max-height: 88vh; display: flex; flex-direction: column;">
+                <!-- Modal Header -->
+                <div class="px-5 py-4 border-b border-gray-100 flex items-center justify-between flex-shrink-0" style="background-color: #0d2b55;">
+                    <div class="flex items-center gap-3 text-white">
+                        <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center text-white flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h3 class="text-sm font-bold text-white leading-tight">All Notifications</h3>
+                                <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-white/15 text-blue-100 border border-white/20">10 Total</span>
+                            </div>
+                            <p class="text-[11px] text-blue-200 mt-0.5">SMFCL Portal · Activity &amp; Notifications History</p>
+                        </div>
+                    </div>
+                    <button type="button" onclick="window.closeNotificationsModal()" class="text-white/70 hover:text-white p-1 rounded-md hover:bg-white/10 transition-colors cursor-pointer" aria-label="Close">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+
+                <!-- Modal Body with Vertical Scrolling -->
+                <div id="allNotificationsScrollList" class="p-5 overflow-y-auto flex-1 divide-y divide-gray-100" style="max-height: 480px;">
+                    <!-- Notification 1 -->
+                    <div class="flex items-start gap-3 py-3 first:pt-0">
+                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500 mt-1 flex-shrink-0"></span>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-xs font-medium text-gray-800 leading-snug">
+                                Your claim <span class="font-semibold text-gray-900">CLM-CSL-SBI-WCDL-2026-01-002</span> is under lender validation
+                            </p>
+                            <span class="text-[11px] text-gray-400 mt-0.5 block">2 hours ago · State Bank of India</span>
+                        </div>
+                    </div>
+
+                    <!-- Notification 2 -->
+                    <div class="flex items-start gap-3 py-3">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 mt-1 flex-shrink-0"></span>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-xs font-medium text-gray-800 leading-snug">
+                                Subvention of <span class="font-semibold text-gray-900">₹ 187.50 Lakh</span> has been released for <span class="font-semibold text-gray-900">CLM-CSL-HDFC-WCDL-2026-02-001</span>
+                            </p>
+                            <span class="text-[11px] text-gray-400 mt-0.5 block">1 day ago · Disbursed to Account</span>
+                        </div>
+                    </div>
+
+                    <!-- Notification 3 -->
+                    <div class="flex items-start gap-3 py-3">
+                        <span class="w-2.5 h-2.5 rounded-full bg-blue-500 mt-1 flex-shrink-0"></span>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-xs font-medium text-gray-800 leading-snug">
+                                Please upload pending compliance document for <span class="font-semibold text-gray-900">APP-CSL-ICICI-WCDL-2026-03</span>
+                            </p>
+                            <span class="text-[11px] text-gray-400 mt-0.5 block">3 days ago · Annual Financial Statement</span>
+                        </div>
+                    </div>
+
+                    <!-- Notification 4 -->
+                    <div class="flex items-start gap-3 py-3">
+                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500 mt-1 flex-shrink-0"></span>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-xs font-medium text-gray-800 leading-snug">
+                                Your application <span class="font-semibold text-gray-900">APP-CSL-SBI-WCDL-2026-01</span> has been returned for correction
+                            </p>
+                            <span class="text-[11px] text-gray-400 mt-0.5 block">4 days ago · Clarification Requested</span>
+                        </div>
+                    </div>
+
+                    <!-- Notification 5 -->
+                    <div class="flex items-start gap-3 py-3">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 mt-1 flex-shrink-0"></span>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-xs font-medium text-gray-800 leading-snug">
+                                Login credentials created successfully
+                            </p>
+                            <span class="text-[11px] text-gray-400 mt-0.5 block">15 Jan 2026 · Account Security</span>
+                        </div>
+                    </div>
+
+                    <!-- Notification 6 -->
+                    <div class="flex items-start gap-3 py-3">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 mt-1 flex-shrink-0"></span>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-xs font-medium text-gray-800 leading-snug">
+                                Claim <span class="font-semibold text-gray-900">CLM-CSL-SBI-WCDL-2026-01-001</span> interest subvention of <span class="font-semibold text-gray-900">₹ 93.75 Lakh</span> credited successfully
+                            </p>
+                            <span class="text-[11px] text-gray-400 mt-0.5 block">12 Jan 2026 · SBI Escrow Account</span>
+                        </div>
+                    </div>
+
+                    <!-- Notification 7 -->
+                    <div class="flex items-start gap-3 py-3">
+                        <span class="w-2.5 h-2.5 rounded-full bg-blue-500 mt-1 flex-shrink-0"></span>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-xs font-medium text-gray-800 leading-snug">
+                                Quarterly Utilization Certificate for <span class="font-semibold text-gray-900">APP-CSL-SBI-WCDL-2026-01</span> verified by Ministry Auditor
+                            </p>
+                            <span class="text-[11px] text-gray-400 mt-0.5 block">08 Jan 2026 · Compliance Cleared</span>
+                        </div>
+                    </div>
+
+                    <!-- Notification 8 -->
+                    <div class="flex items-start gap-3 py-3">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 mt-1 flex-shrink-0"></span>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-xs font-medium text-gray-800 leading-snug">
+                                Application <span class="font-semibold text-gray-900">APP-CSL-HDFC-WCDL-2026-02</span> formally approved by Sagarmala Committee
+                            </p>
+                            <span class="text-[11px] text-gray-400 mt-0.5 block">02 Jan 2026 · In-Principle Sanction</span>
+                        </div>
+                    </div>
+
+                    <!-- Notification 9 -->
+                    <div class="flex items-start gap-3 py-3">
+                        <span class="w-2.5 h-2.5 rounded-full bg-blue-500 mt-1 flex-shrink-0"></span>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-xs font-medium text-gray-800 leading-snug">
+                                Quarterly Interest Subvention Claim submitted for <span class="font-semibold text-gray-900">CLM-CSL-HDFC-WCDL-2026-02-001</span>
+                            </p>
+                            <span class="text-[11px] text-gray-400 mt-0.5 block">28 Dec 2025 · Claim Desk</span>
+                        </div>
+                    </div>
+
+                    <!-- Notification 10 -->
+                    <div class="flex items-start gap-3 py-3 last:pb-0">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 mt-1 flex-shrink-0"></span>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-xs font-medium text-gray-800 leading-snug">
+                                Enterprise accreditation and KYC verified for Sagarmala MDF scheme
+                            </p>
+                            <span class="text-[11px] text-gray-400 mt-0.5 block">10 Dec 2025 · Ministry Portal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="px-5 py-3.5 bg-gray-50 border-t border-gray-100 flex items-center justify-between flex-shrink-0">
+                    <span class="text-xs text-gray-500 font-medium">Showing 10 notifications</span>
+                    <button type="button" onclick="window.closeNotificationsModal()" class="px-4 py-1.5 rounded-md text-xs font-semibold text-white bg-[#0d2b55] hover:bg-[#163a6e] transition-colors cursor-pointer shadow-xs">
+                        Close
                     </button>
                 </div>
             </div>
