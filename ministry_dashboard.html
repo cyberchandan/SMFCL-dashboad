@@ -1834,37 +1834,126 @@
                     });
                 };
 
-                window.exportKpiTable = function () {
+                window.toggleModalExportMenu = function (show) {
+                    const menu = document.getElementById('modalExportMenu');
+                    const chevron = document.getElementById('modalExportChevron');
+                    if (!menu) return;
+                    const isHidden = menu.classList.contains('hidden');
+                    const shouldShow = typeof show === 'boolean' ? show : isHidden;
+                    if (shouldShow) {
+                        menu.classList.remove('hidden');
+                        if (chevron) chevron.classList.add('rotate-180');
+                    } else {
+                        menu.classList.add('hidden');
+                        if (chevron) chevron.classList.remove('rotate-180');
+                    }
+                };
+
+                document.addEventListener('click', function (e) {
+                    const btn = document.getElementById('modalExportDropdownBtn');
+                    const menu = document.getElementById('modalExportMenu');
+                    if (menu && btn && !menu.contains(e.target) && !btn.contains(e.target)) {
+                        window.toggleModalExportMenu(false);
+                    }
+                });
+
+                window.exportKpiModalFormat = function (format) {
+                    window.toggleModalExportMenu(false);
                     const activeContainer = document.getElementById(`kpiContent_${currentActiveKpiTab}`);
                     if (!activeContainer) return;
                     const table = activeContainer.querySelector('table');
                     if (!table) return;
 
-                    let csv = [];
-                    const rows = table.querySelectorAll('tr');
-                    rows.forEach((row) => {
-                        if (row.style.display === 'none') return;
-                        const cols = row.querySelectorAll('th, td');
-                        let rowData = [];
-                        cols.forEach((col) => {
-                            let text = col.innerText.replace(/(\r\n|\n|\r)/gm, ' ').replace(/"/g, '""').trim();
-                            rowData.push(`"${text}"`);
-                        });
-                        if (rowData.length) csv.push(rowData.join(','));
-                    });
+                    const cfg = kpiDataConfigs[currentActiveKpiTab] || { title: 'Ministry Data Report', subtitle: 'Ministry of Ports, Shipping & Waterways' };
+                    const filename = `ministry_${currentActiveKpiTab}_report`;
 
-                    const csvString = csv.join('\n');
-                    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
-                    const link = document.createElement('a');
-                    link.href = URL.createObjectURL(blob);
-                    link.download = `ministry_${currentActiveKpiTab}_data.csv`;
-                    link.click();
+                    if (format === 'excel') {
+                        let headers = [];
+                        table.querySelectorAll('thead tr th').forEach(th => {
+                            headers.push(th.innerText.replace(/\r?\n/g, ' ').replace(/\s+/g, ' ').trim());
+                        });
+                        let rows = [];
+                        table.querySelectorAll('tbody tr').forEach(tr => {
+                            if (tr.style.display === 'none') return;
+                            let row = [];
+                            tr.querySelectorAll('td').forEach(td => {
+                                row.push(td.innerText.replace(/\r?\n/g, ' ').replace(/\s+/g, ' ').trim());
+                            });
+                            if (row.length) rows.push(row);
+                        });
+                        let footers = [];
+                        table.querySelectorAll('tfoot tr').forEach(tr => {
+                            let row = [];
+                            tr.querySelectorAll('td').forEach(td => {
+                                row.push(td.innerText.replace(/\r?\n/g, ' ').replace(/\s+/g, ' ').trim());
+                            });
+                            if (row.length) footers.push(row);
+                        });
+
+                        if (typeof XLSX !== 'undefined') {
+                            const allData = [headers, ...rows, ...footers];
+                            const ws = XLSX.utils.aoa_to_sheet(allData);
+                            const wb = XLSX.utils.book_new();
+                            XLSX.utils.book_append_sheet(wb, ws, 'Report');
+                            XLSX.writeFile(wb, filename + '.xlsx');
+                        } else {
+                            let csv = [];
+                            [headers, ...rows, ...footers].forEach(r => {
+                                csv.push(r.map(c => `"${c.replace(/"/g, '""')}"`).join(','));
+                            });
+                            const blob = new Blob(['\uFEFF' + csv.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
+                            const link = document.createElement('a');
+                            link.href = URL.createObjectURL(blob);
+                            link.download = filename + '.csv';
+                            link.click();
+                        }
+                    } else if (format === 'doc') {
+                        const wordStyle = '<style>h2 { color: #0d2b55; margin-bottom: 2px; } p.sub { color: #64748b; font-size: 11px; margin-bottom: 15px; } table { border-collapse: collapse; width: 100%; font-size: 11px; } th { background-color: #0d2b55; color: #ffffff; padding: 6px; border: 1px solid #cbd5e1; } td { padding: 6px; border: 1px solid #e2e8f0; text-align: left; } tfoot td { font-weight: bold; background-color: #f8fafc; border-top: 2px solid #0d2b55; }</style>';
+                        const wordContent = '<div style="font-family: Calibri, Arial, sans-serif; padding: 20px;"><h2>' + cfg.title + '</h2><p class="sub">' + cfg.subtitle + ' • Date: ' + new Date().toLocaleDateString('en-IN') + '</p>' + table.outerHTML + '</div>';
+                        const html = wordStyle + wordContent;
+                        const blob = new Blob([html], { type: 'application/msword;charset=utf-8;' });
+                        const link = document.createElement('a');
+                        link.href = URL.createObjectURL(blob);
+                        link.download = filename + '.doc';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    } else if (format === 'pdf') {
+                        if (window.jspdf && window.jspdf.jsPDF) {
+                            const { jsPDF } = window.jspdf;
+                            const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+                            doc.setFillColor(13, 43, 85);
+                            doc.rect(0, 0, 297, 22, 'F');
+                            doc.setTextColor(255, 255, 255);
+                            doc.setFontSize(13);
+                            doc.setFont('helvetica', 'bold');
+                            doc.text(cfg.title, 14, 11);
+                            doc.setFontSize(8.5);
+                            doc.setFont('helvetica', 'normal');
+                            doc.setTextColor(190, 215, 250);
+                            doc.text(cfg.subtitle + ' | Ministry of Ports, Shipping & Waterways', 14, 17);
+
+                            doc.autoTable({
+                                html: table,
+                                startY: 27,
+                                theme: 'grid',
+                                headStyles: { fillColor: [13, 43, 85], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 8 },
+                                bodyStyles: { fontSize: 7.5, textColor: [30, 41, 59] },
+                                footStyles: { fillColor: [241, 245, 249], textColor: [15, 23, 42], fontStyle: 'bold', fontSize: 8 },
+                                styles: { cellPadding: 2.5 }
+                            });
+                            doc.save(filename + '.pdf');
+                        } else {
+                            window.print();
+                        }
+                    }
                 };
 
                 // ESC key closes modal
                 document.addEventListener('keydown', (e) => {
                     if (e.key === 'Escape') {
                         window.closeKpiModal();
+                        window.toggleModalExportMenu(false);
                     }
                 });
             })();
@@ -1888,10 +1977,60 @@
                         </div>
                     </div>
                     <div class="flex items-center gap-3">
-                        <button type="button" onclick="window.exportKpiTable()" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg text-xs font-semibold border border-white/20 transition-colors cursor-pointer shadow-xs">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                            Export CSV
-                        </button>
+                        <!-- Modal Export Dropdown Button & Menu -->
+                        <div class="relative inline-block text-left" id="modalExportDropdownWrapper">
+                            <button id="modalExportDropdownBtn" type="button" onclick="window.toggleModalExportMenu()" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg text-xs font-semibold border border-white/20 transition-all cursor-pointer shadow-xs">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" x2="12" y1="15" y2="3"></line>
+                                </svg>
+                                <span>Export</span>
+                                <svg id="modalExportChevron" xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-white/80 transition-transform duration-200">
+                                    <path d="m6 9 6 6 6-6"></path>
+                                </svg>
+                            </button>
+
+                            <!-- Dropdown Menu -->
+                            <div id="modalExportMenu" class="hidden absolute right-0 mt-1.5 rounded-lg bg-white shadow-xl border border-gray-200 p-1 z-50 ring-1 ring-black/5" style="width: 140px; min-width: 140px;">
+                                <button type="button" onclick="window.exportKpiModalFormat('pdf')" class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium text-gray-700 hover:bg-red-50 hover:text-red-700 transition-colors text-left cursor-pointer group">
+                                    <span class="flex items-center gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-500 flex-shrink-0">
+                                            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                        </svg>
+                                        PDF
+                                    </span>
+                                    <span class="text-[10px] text-gray-400 font-mono group-hover:text-red-600">.pdf</span>
+                                </button>
+                                <button type="button" onclick="window.exportKpiModalFormat('excel')" class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 transition-colors text-left cursor-pointer group">
+                                    <span class="flex items-center gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-600 flex-shrink-0">
+                                            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+                                            <line x1="3" x2="21" y1="9" y2="9"></line>
+                                            <line x1="3" x2="21" y1="15" y2="15"></line>
+                                            <line x1="9" x2="9" y1="3" y2="21"></line>
+                                            <line x1="15" x2="15" y1="3" y2="21"></line>
+                                        </svg>
+                                        Excel
+                                    </span>
+                                    <span class="text-[10px] text-gray-400 font-mono group-hover:text-emerald-600">.xlsx</span>
+                                </button>
+                                <button type="button" onclick="window.exportKpiModalFormat('doc')" class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors text-left cursor-pointer group">
+                                    <span class="flex items-center gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600 flex-shrink-0">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                                            <polyline points="10 9 9 9 8 9"></polyline>
+                                        </svg>
+                                        DOCS
+                                    </span>
+                                    <span class="text-[10px] text-gray-400 font-mono group-hover:text-blue-600">.doc</span>
+                                </button>
+                            </div>
+                        </div>
                         <button type="button" onclick="window.closeKpiModal()" class="text-white/80 hover:text-white p-1.5 rounded-lg hover:bg-white/15 transition-colors cursor-pointer" aria-label="Close modal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                         </button>
