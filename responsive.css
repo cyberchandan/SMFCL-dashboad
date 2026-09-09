@@ -1,0 +1,1082 @@
+/**
+ * ==============================================================================
+ * SAGARMALA FINANCE CORPORATION LIMITED (SMFCL) - RESPONSIVE STYLESHEET
+ * ==============================================================================
+ * File: responsive.css
+ * Description: Universal responsive stylesheet for all SMFCL portals & dashboards.
+ *              Designed to be included via <link rel="stylesheet" href="responsive.css">
+ *              WITHOUT modifying any existing HTML or JavaScript files.
+ *
+ * Applicable Dashboards:
+ *   1. Ministry / Government Dashboard (index.html & ministry_dashboard.html)
+ *   2. Lender Dashboard (Lender_dashboard.html)
+ *   3. Borrower Dashboard (borrower_dashboard.html)
+ *   4. SMFCL Executive Dashboard (smfcl_dashboard.html)
+ *
+ * Breakpoint Reference:
+ *   - Desktop (Large):     > 1280px
+ *   - Laptop / Tablet Land: 1024px - 1280px
+ *   - Tablet Portrait:      768px - 1023px
+ *   - Mobile Landscape:     640px - 767px
+ *   - Mobile Portrait:      480px - 639px
+ *   - Small Mobile:         < 480px
+ * ==============================================================================
+ */
+
+/* ==============================================================================
+   TABLE OF CONTENTS:
+   ------------------------------------------------------------------------------
+   1. GLOBAL RESET, VIEWPORT & CORE LAYOUT
+   2. TOP NAVIGATION BAR (SHARED ACROSS ALL DASHBOARDS)
+   3. SIDEBAR NAVIGATION (SHARED ACROSS ALL DASHBOARDS)
+   4. KPI METRIC CARDS GRID (SHARED & ADAPTIVE)
+   5. MINISTRY DASHBOARD SPECIFIC RULES (ministry_dashboard.html / index.html)
+   6. LENDER DASHBOARD SPECIFIC RULES (Lender_dashboard.html)
+   7. BORROWER DASHBOARD SPECIFIC RULES (borrower_dashboard.html)
+   8. SMFCL DASHBOARD SPECIFIC RULES (smfcl_dashboard.html)
+   9. MODALS & POPUPS SYSTEM (KPI Modal & Quick Review Modal)
+   10. BREAKPOINT-SPECIFIC MEDIA QUERIES
+   11. PRINT & ACCESSIBILITY OPTIMIZATIONS
+   ============================================================================== */
+
+
+/* ==============================================================================
+   1. GLOBAL RESET, VIEWPORT & CORE LAYOUT
+   ============================================================================== */
+
+/* Ensure smooth box-sizing and prevent accidental horizontal page blowout */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Ensure all images and embedded SVGs are responsive by default */
+img,
+svg {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Custom Toast notification responsive positioning */
+.custom-toast {
+    max-width: calc(100vw - 32px) !important;
+    word-break: break-word !important;
+}
+
+
+/* ==============================================================================
+   2. TOP NAVIGATION BAR (SHARED ACROSS ALL DASHBOARDS)
+   ============================================================================== */
+
+/* Base header adjustments for fluid alignment */
+nav.bg-white {
+    position: relative;
+    z-index: 40;
+    width: 100%;
+}
+
+/* Navigation brand logos responsiveness */
+nav .h-20 {
+    min-height: 4.5rem;
+    transition: height 0.2s ease;
+}
+
+/* User Profile & Portal Switcher Dropdown Menu */
+nav [x-show="open"].absolute {
+    max-width: calc(100vw - 24px);
+}
+
+
+/* ==============================================================================
+   3. SIDEBAR NAVIGATION (SHARED ACROSS ALL DASHBOARDS)
+   ============================================================================== */
+
+/* Main outer flex container */
+.flex.min-h-\[calc\(100vh-5rem\)\] {
+    width: 100%;
+    max-width: 100vw;
+}
+
+/* Sidebar scroll styling */
+aside::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+aside::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+/* Content Main Container */
+main.flex-1 {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+
+/* ==============================================================================
+   4. KPI METRIC CARDS GRID (SHARED & ADAPTIVE)
+   ============================================================================== */
+
+/* KPI Interactive Cards styling enhancement */
+.kpi-interactive-card {
+    min-width: 0;
+    word-break: break-word;
+}
+
+.kpi-interactive-card:focus-visible {
+    outline: 2px solid #0d2b55;
+    outline-offset: 2px;
+}
+
+
+/* ==============================================================================
+   5. MINISTRY DASHBOARD SPECIFIC RULES (ministry_dashboard.html & index.html)
+   ============================================================================== */
+
+/* ------------------------------------------------------------------------------
+   5.1 Ministry Dashboard - Subvention Disbursement Bar Chart
+   ------------------------------------------------------------------------------ */
+#chartScrollContainer {
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    -webkit-overflow-scrolling: touch;
+}
+
+#subventionChartSvg {
+    display: block;
+    max-width: none;
+}
+
+#chartYAxisSvg {
+    display: block;
+}
+
+#subventionTooltip {
+    max-width: calc(100vw - 40px) !important;
+    pointer-events: none !important;
+}
+
+/* ------------------------------------------------------------------------------
+   5.2 Ministry Dashboard - Loan Type Distribution (Donut Chart & Stats)
+   ------------------------------------------------------------------------------ */
+/* Responsive Donut SVG container */
+div:has(> svg [title*="Working Capital Loan"]) {
+    max-width: 100% !important;
+}
+
+/* ------------------------------------------------------------------------------
+   5.3 Ministry Dashboard - Quarterly vs Released Table Card
+   ------------------------------------------------------------------------------ */
+#quarterlyTable {
+    min-width: 480px;
+}
+
+#exportDropdownWrapper {
+    position: relative;
+    z-index: 25;
+}
+
+#exportMenu {
+    max-width: calc(100vw - 32px);
+}
+
+
+/* ==============================================================================
+   6. LENDER DASHBOARD SPECIFIC RULES (Lender_dashboard.html)
+   ============================================================================== */
+
+/* ------------------------------------------------------------------------------
+   6.1 Lender Dashboard - Pending Action Segmented Tabs
+   ------------------------------------------------------------------------------ */
+#pendingTabsNav {
+    display: inline-flex;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+}
+
+#pendingTabsNav::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+.pending-tab-btn {
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* ------------------------------------------------------------------------------
+   6.2 Lender Dashboard - Pending Action Cards List
+   ------------------------------------------------------------------------------ */
+#pendingCardsList {
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+.pending-item-card {
+    min-width: 0;
+}
+
+.pending-item-card .card-company-title {
+    max-width: 100%;
+}
+
+.pending-item-card .card-action-sub {
+    max-width: 100%;
+}
+
+/* ------------------------------------------------------------------------------
+   6.3 Lender Dashboard - Review Action Button
+   ------------------------------------------------------------------------------ */
+.btn-card-review {
+    touch-action: manipulation;
+}
+
+
+/* ==============================================================================
+   7. BORROWER DASHBOARD SPECIFIC RULES (borrower_dashboard.html)
+   ============================================================================== */
+
+/* ------------------------------------------------------------------------------
+   7.1 Borrower Dashboard - 6 KPI Metric Cards Grid
+   ------------------------------------------------------------------------------ */
+/* Adaptive layout for 6 cards on various screen sizes */
+body:has(#recharts1-clip) .grid.grid-cols-2.lg\:grid-cols-4 {
+    display: grid;
+}
+
+/* ------------------------------------------------------------------------------
+   7.2 Borrower Dashboard - Claim History Recharts Chart
+   ------------------------------------------------------------------------------ */
+.recharts-responsive-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+
+.recharts-wrapper {
+    max-width: 100% !important;
+}
+
+svg.recharts-surface {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+/* ------------------------------------------------------------------------------
+   7.3 Borrower Dashboard - Recent Notifications Card
+   ------------------------------------------------------------------------------ */
+.notification-item {
+    word-break: break-word;
+}
+
+
+/* ==============================================================================
+   8. SMFCL DASHBOARD SPECIFIC RULES (smfcl_dashboard.html)
+   ============================================================================== */
+
+/* ------------------------------------------------------------------------------
+   8.1 SMFCL Dashboard - Disbursement Trends Chart (Interactive Line Chart)
+   ------------------------------------------------------------------------------ */
+#disbursementScrollContainer {
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    -webkit-overflow-scrolling: touch;
+}
+
+#disbursementChartSvg {
+    display: block;
+    max-width: none;
+}
+
+#disbursementYAxisSvg {
+    display: block;
+}
+
+#chartTooltip {
+    max-width: calc(100vw - 40px) !important;
+    pointer-events: none !important;
+}
+
+/* ------------------------------------------------------------------------------
+   8.2 SMFCL Dashboard - Submenu Accordion Navigation
+   ------------------------------------------------------------------------------ */
+#appSubmenu,
+#taggingSubmenu {
+    transition: all 0.2s ease-in-out;
+}
+
+
+/* ==============================================================================
+   9. MODALS & POPUPS SYSTEM (KPI Modal & Quick Review Modal)
+   ============================================================================== */
+
+/* ------------------------------------------------------------------------------
+   9.1 KPI Centered Data Modal (.kpi-modal-backdrop & .kpi-modal-container)
+   ------------------------------------------------------------------------------ */
+.kpi-modal-backdrop {
+    padding: 16px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.kpi-modal-container {
+    max-height: 92vh !important;
+}
+
+/* Scrollable Tabs row inside KPI Modal */
+.kpi-modal-container .inline-flex.p-1.bg-gray-200\/70 {
+    display: inline-flex;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.kpi-modal-container .inline-flex.p-1.bg-gray-200\/70::-webkit-scrollbar {
+    display: none;
+}
+
+.kpi-modal-container .inline-flex.p-1.bg-gray-200\/70 button {
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* KPI Modal Data Tables Horizontal Scroll */
+.kpi-modal-container .overflow-x-auto {
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+.kpi-modal-container table {
+    min-width: 720px;
+}
+
+/* ------------------------------------------------------------------------------
+   9.2 Quick Review Modal (.review-modal-backdrop & .review-modal-content)
+   ------------------------------------------------------------------------------ */
+.review-modal-backdrop {
+    padding: 16px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.review-modal-content {
+    max-width: 520px;
+    width: 100%;
+}
+
+
+/* ==============================================================================
+   10. BREAKPOINT-SPECIFIC MEDIA QUERIES
+   ============================================================================== */
+
+/* ------------------------------------------------------------------------------
+   10.1 SCREEN SIZE: <= 1280px (Laptops & Desktops)
+   ------------------------------------------------------------------------------ */
+@media (max-width: 1280px) {
+    /* Compact the sidebar slightly for more workspace */
+    aside.w-\[300px\] {
+        width: 260px !important;
+    }
+
+    /* Adjust main content padding */
+    main.px-6 {
+        padding-left: 1.25rem !important;
+        padding-right: 1.25rem !important;
+    }
+}
+
+
+/* ------------------------------------------------------------------------------
+   10.2 SCREEN SIZE: <= 1024px (Tablets Landscape & Medium Screens)
+   ------------------------------------------------------------------------------ */
+@media (max-width: 1024px) {
+    /* Optimize Sidebar Width for Tablet */
+    aside.w-\[300px\] {
+        width: 230px !important;
+    }
+
+    /* Main padding */
+    main.px-6 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        padding-top: 1.25rem !important;
+    }
+
+    /* 4-column metric cards become 2-column grid */
+    .grid.grid-cols-2.lg\:grid-cols-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 0.875rem !important;
+    }
+
+    /* Charts grid stack to 1 column */
+    .grid.grid-cols-1.lg\:grid-cols-2 {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem !important;
+    }
+
+    /* Ministry Dashboard: Loan Type Donut & Stats Card alignment */
+    .flex.flex-col.sm\:flex-row.items-center.justify-between.gap-6 {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 1.25rem !important;
+    }
+
+    div:has(> .drop-shadow-xs) {
+        margin: 0 auto;
+    }
+
+    /* KPI Modal container max-width */
+    .kpi-modal-container {
+        max-width: 95vw !important;
+    }
+}
+
+
+/* ------------------------------------------------------------------------------
+   10.3 SCREEN SIZE: <= 768px (Tablets Portrait & Large Mobile)
+   ------------------------------------------------------------------------------ */
+@media (max-width: 768px) {
+    /* Top Nav adjustments */
+    nav .h-20 {
+        height: 4.25rem !important;
+    }
+
+    /* Ministry & SMFCL Logos scaling */
+    nav img[alt*="Ministry"] {
+        height: 2.75rem !important;
+        max-height: 2.75rem !important;
+    }
+
+    nav img[alt*="SMFCL"] {
+        height: 2.25rem !important;
+        max-height: 2.25rem !important;
+    }
+
+    /* LAYOUT SWITCH: Main wrapper takes full width on mobile */
+    .flex.min-h-\[calc\(100vh-5rem\)\] {
+        display: block !important;
+        flex-direction: column !important;
+        min-height: auto !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* -------------------------------------------------------------------------
+       1. PERMANENTLY REMOVE DUPLICATE DESKTOP SIDEBAR ON MOBILE (<= 768px)
+       The desktop sidebar (aside) is completely removed from mobile view to
+       prevent duplicate navigation and prevent it from appearing by default.
+       The dashboard content now displays immediately below the top header.
+       ------------------------------------------------------------------------- */
+    aside,
+    aside.w-\[300px\],
+    aside.bg-\[\#0d2b55\],
+    .flex.min-h-\[calc\(100vh-5rem\)\] > aside {
+        display: none !important;
+        width: 0 !important;
+        min-width: 0 !important;
+        max-width: 0 !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        max-height: 0 !important;
+        position: absolute !important;
+        overflow: hidden !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        opacity: 0 !important;
+    }
+
+    /* -------------------------------------------------------------------------
+       2. RESPONSIVE 3-DOT / HAMBURGER NAVIGATION SYSTEM
+       ------------------------------------------------------------------------- */
+
+    /* Ensure hamburger button container has no background or box shadow */
+    .-me-2.flex.items-center.sm\:hidden {
+        display: flex !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        animation: none !important;
+    }
+
+    /* Style the 3-dot / hamburger trigger button cleanly */
+    .-me-2.flex.items-center.sm\:hidden button,
+    nav button:has(svg.h-6.w-6) {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        color: #0d2b55 !important;
+        background-color: #f1f5f9 !important;
+        border: 1.5px solid #cbd5e1 !important;
+        border-radius: 0.5rem !important;
+        padding: 0.375rem 0.5rem !important;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+        transition: all 0.15s ease-in-out !important;
+        cursor: pointer !important;
+    }
+
+    .-me-2.flex.items-center.sm\:hidden button:hover,
+    .-me-2.flex.items-center.sm\:hidden button:focus,
+    nav button:has(svg.h-6.w-6):hover,
+    nav button:has(svg.h-6.w-6):focus {
+        background-color: #0d2b55 !important;
+        color: #ffffff !important;
+        border-color: #0d2b55 !important;
+        box-shadow: 0 2px 5px rgba(13, 43, 85, 0.25) !important;
+    }
+
+    .-me-2.flex.items-center.sm\:hidden button svg,
+    nav button:has(svg.h-6.w-6) svg {
+        color: inherit !important;
+        stroke: currentColor !important;
+    }
+
+    /* -------------------------------------------------------------------------
+       3. RESPONSIVE DROPDOWN MENU (Top Navbar Mobile Menu)
+       ------------------------------------------------------------------------- */
+
+    /* Force closed when Alpine has hidden class */
+    nav > div.sm\:hidden.hidden,
+    nav > div.hidden.sm\:hidden {
+        display: none !important;
+    }
+
+    /* When hamburger menu is toggled OPEN, smoothly render with SMFCL Dark Blue branding */
+    nav > div.block.sm\:hidden,
+    nav > div.sm\:hidden.block {
+        display: block !important;
+        background-color: #0d2b55 !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+        border-bottom: 2px solid #081d3a !important;
+        padding: 0.875rem 1rem 1.25rem 1rem !important;
+        box-shadow: 0 10px 25px -5px rgba(13, 43, 85, 0.35) !important;
+        animation: navSlideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes navSlideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-6px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Top Dashboard label / section in mobile menu */
+    nav > div.block.sm\:hidden > div:first-child,
+    nav > div.block.sm\:hidden .pt-2.pb-3 {
+        color: #93c5fd !important;
+        font-size: 0.8125rem !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.05em !important;
+        padding: 0.25rem 0.5rem 0.5rem 0.5rem !important;
+    }
+
+    /* User Profile section */
+    nav > div.block.sm\:hidden .border-t {
+        border-color: rgba(255, 255, 255, 0.18) !important;
+        padding-top: 0.75rem !important;
+    }
+
+    nav > div.block.sm\:hidden .text-gray-800 {
+        color: #ffffff !important;
+        font-weight: 600 !important;
+        font-size: 1rem !important;
+    }
+
+    nav > div.block.sm\:hidden .text-gray-500,
+    nav > div.block.sm\:hidden .text-gray-400 {
+        color: #93c5fd !important;
+        font-size: 0.8125rem !important;
+    }
+
+    /* Navigation Portal Links */
+    nav > div.block.sm\:hidden a {
+        display: flex !important;
+        align-items: center !important;
+        width: 100% !important;
+        padding: 0.625rem 0.875rem !important;
+        margin-bottom: 0.25rem !important;
+        color: #ffffff !important;
+        font-size: 0.9375rem !important;
+        font-weight: 500 !important;
+        border-radius: 0.5rem !important;
+        border-left: 3px solid transparent !important;
+        text-decoration: none !important;
+        transition: all 0.15s ease-in-out !important;
+    }
+
+    nav > div.block.sm\:hidden a:hover,
+    nav > div.block.sm\:hidden a:focus {
+        background-color: rgba(255, 255, 255, 0.14) !important;
+        color: #ffffff !important;
+        border-left-color: #38bdf8 !important;
+        padding-left: 1.125rem !important;
+    }
+
+    nav > div.block.sm\:hidden .border-gray-200,
+    nav > div.block.sm\:hidden .border-gray-100 {
+        border-color: rgba(255, 255, 255, 0.18) !important;
+    }
+
+    /* -------------------------------------------------------------------------
+       4. MAIN DASHBOARD CONTENT (Starts cleanly right under header)
+       ------------------------------------------------------------------------- */
+    main,
+    main.w-full,
+    main.flex-1 {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        min-width: 0 !important;
+        padding: 1.25rem 1.5rem 2.5rem 1.5rem !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+        min-height: auto !important;
+    }
+
+    /* Page title header */
+    main h2.text-xl,
+    main h2.font-semibold {
+        font-size: 1.15rem !important;
+    }
+
+    /* KPI Centered Modal on Tablet */
+    .kpi-modal-backdrop {
+        padding: 8px !important;
+    }
+
+    .kpi-modal-container {
+        max-width: 100% !important;
+        max-height: 94vh !important;
+        height: 94vh !important;
+        border-radius: 12px !important;
+    }
+
+    .kpi-modal-container .px-6 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    /* KPI Modal search input full width on mobile/tablet */
+    .kpi-modal-container .relative.w-64,
+    .kpi-modal-container .relative.md\:w-72 {
+        width: 100% !important;
+    }
+
+    /* Quick Review Modal */
+    .review-modal-content {
+        max-width: 96vw !important;
+    }
+}
+
+
+/* ------------------------------------------------------------------------------
+   10.4 SCREEN SIZE: <= 640px (Mobile Phones Standard)
+   ------------------------------------------------------------------------------ */
+@media (max-width: 640px) {
+    /* Navigation Bar */
+    nav .h-20 {
+        height: 3.75rem !important;
+    }
+
+    /* Ensure top navbar padding matches cards margin for unified vertical alignment */
+    nav .px-4,
+    nav .w-full.mx-auto {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Maintain uniform, generous 1.5rem (24px) left & right padding around dashboard cards */
+    main,
+    main.w-full,
+    main.flex-1 {
+        padding: 1.25rem 1.5rem 2.5rem 1.5rem !important;
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
+    }
+
+    /* Logo scaling on small screens */
+    nav img[alt*="Ministry"] {
+        height: 2.25rem !important;
+        max-height: 2.25rem !important;
+    }
+
+    nav img[alt*="SMFCL"] {
+        height: 1.85rem !important;
+        max-height: 1.85rem !important;
+    }
+
+    /* Settings dropdown button compact */
+    nav button.border-gray-300 {
+        padding: 0.25rem 0.5rem !important;
+        font-size: 0.6875rem !important;
+    }
+
+    /* Metric Cards Grid: Centered 2-column spacing with uniform 1.5rem side gutters */
+    .grid.grid-cols-2.lg\:grid-cols-4 {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        gap: 0.75rem !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Metric Card Internal Spacing */
+    .kpi-interactive-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        padding: 0.875rem 0.75rem !important;
+        border-radius: 0.75rem !important;
+        box-sizing: border-box !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03) !important;
+    }
+
+    .kpi-interactive-card .w-10.h-10 {
+        width: 2.25rem !important;
+        height: 2.25rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    .kpi-interactive-card .text-2xl {
+        font-size: 1.25rem !important;
+        line-height: 1.6rem !important;
+    }
+
+    .kpi-interactive-card .text-sm {
+        font-size: 0.75rem !important;
+        line-height: 1rem !important;
+    }
+
+    .kpi-interactive-card .mt-3.pt-2\.5 {
+        margin-top: 0.5rem !important;
+        padding-top: 0.375rem !important;
+        font-size: 0.6875rem !important;
+    }
+
+    /* Charts Container & Card Padding: Generous internal breathing space */
+    .bg-white.rounded-xl.border.border-gray-200.p-5 {
+        padding: 1rem !important;
+        border-radius: 0.75rem !important;
+    }
+
+    /* Ministry Dashboard: Donut Chart fluid scaling on small mobile */
+    div:has(> svg[viewBox="0 0 160 160"]) {
+        width: 100% !important;
+        max-width: 220px !important;
+        height: auto !important;
+        aspect-ratio: 1 / 1 !important;
+        margin: 0 auto !important;
+    }
+
+    /* Donut stat summary card full width */
+    div:has(> .flex.items-center > svg[stroke="#eb5e0c"]) {
+        max-width: 100% !important;
+        padding: 0.75rem !important;
+    }
+
+    /* Chart Dropdown / Header Stacking */
+    .flex.flex-col.sm\:flex-row.sm\:items-center.justify-between {
+        gap: 0.5rem !important;
+    }
+
+    #subventionSelect,
+    #disbursementSelect {
+        width: 100% !important;
+        padding: 0.375rem 0.625rem !important;
+        font-size: 0.75rem !important;
+    }
+
+    /* Quarterly vs Released Table card */
+    #quarterlyTable {
+        min-width: 420px !important;
+        font-size: 0.75rem !important;
+    }
+
+    #quarterlyTable th,
+    #quarterlyTable td {
+        padding: 0.5rem 0.5rem !important;
+    }
+
+    /* Table Footer Subtext */
+    .flex.items-center.justify-between.mt-4.text-xs {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.375rem !important;
+    }
+
+    /* Pending Action Section (Lender & SMFCL) */
+    .pending-item-card {
+        padding: 0.625rem 0.75rem !important;
+    }
+
+    .pending-item-card .card-avatar-box {
+        width: 1.875rem !important;
+        height: 1.875rem !important;
+        font-size: 0.6875rem !important;
+    }
+
+    .pending-item-card .card-company-title {
+        font-size: 0.75rem !important;
+    }
+
+    .pending-item-card .card-action-sub {
+        font-size: 0.6875rem !important;
+    }
+
+    .pending-item-card .card-ref-badge {
+        font-size: 0.625rem !important;
+        padding: 1.5px 5px !important;
+    }
+
+    .pending-item-card .waiting-pill {
+        font-size: 0.625rem !important;
+        padding: 1.5px 6px !important;
+    }
+
+    .btn-card-review {
+        height: 1.625rem !important;
+        padding: 0 0.5rem !important;
+        font-size: 0.6875rem !important;
+    }
+
+    /* KPI Modal Header on Small Mobile */
+    .kpi-modal-container .px-6.py-4 {
+        padding: 0.75rem 0.875rem !important;
+        flex-wrap: wrap !important;
+        gap: 0.5rem !important;
+    }
+
+    #kpiModalTitle {
+        font-size: 0.875rem !important;
+    }
+
+    #kpiModalSubtitle {
+        display: none !important; /* Hide long subtitle to save screen height */
+    }
+
+    #kpiModalIconBox {
+        width: 2rem !important;
+        height: 2rem !important;
+    }
+
+    #kpiModalBadge {
+        font-size: 0.625rem !important;
+        padding: 1px 6px !important;
+    }
+
+    /* Modal Tabs size */
+    .kpi-modal-container .inline-flex.p-1.bg-gray-200\/70 button {
+        padding: 0.375rem 0.625rem !important;
+        font-size: 0.6875rem !important;
+    }
+
+    /* Modal Body padding */
+    .kpi-modal-container .p-6 {
+        padding: 0.625rem !important;
+    }
+
+    /* Quick Review Modal Body Grid */
+    .review-modal-content .grid-cols-2 {
+        grid-template-columns: 1fr !important;
+        gap: 0.5rem !important;
+    }
+
+    /* Footer text responsive alignment */
+    footer.text-center {
+        font-size: 0.6875rem !important;
+        padding: 0.5rem 0 !important;
+        line-height: 1.35 !important;
+    }
+}
+
+
+/* ------------------------------------------------------------------------------
+   10.5 SCREEN SIZE: <= 480px (Compact Mobile Devices)
+   ------------------------------------------------------------------------------ */
+@media (max-width: 480px) {
+    /* Maintain uniform 1.5rem (24px) screen padding around cards on compact phones */
+    main,
+    main.w-full,
+    main.flex-1 {
+        padding: 1rem 1.5rem 2.25rem 1.5rem !important;
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
+    }
+
+    nav .px-4,
+    nav .w-full.mx-auto {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Metric cards 2-column layout with centered alignment */
+    .grid.grid-cols-2.lg\:grid-cols-4 {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 0.625rem !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Card number sizing on ultra-compact screens */
+    .kpi-interactive-card .text-2xl {
+        font-size: 1.1rem !important;
+    }
+
+    /* Borrower Dashboard: submitted/approved numbers */
+    .kpi-interactive-card .flex.items-center.justify-between.mb-0\.5 .text-2xl {
+        font-size: 1rem !important;
+    }
+
+    /* Review card inner layout: Stack company info and review button if needed */
+    .pending-item-card .flex.items-center.justify-between.gap-3 {
+        flex-wrap: wrap !important;
+        gap: 0.5rem !important;
+    }
+
+    .pending-item-card .flex-shrink-0:has(.btn-card-review) {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: flex-end !important;
+    }
+
+    .btn-card-review {
+        width: auto !important;
+    }
+
+    /* Recharts chart container on ultra small screens */
+    .recharts-wrapper {
+        min-width: 290px !important;
+    }
+
+    /* Modals become full-screen sheet on ultra-compact phones */
+    .kpi-modal-backdrop {
+        padding: 0 !important;
+    }
+
+    .kpi-modal-container {
+        height: 100vh !important;
+        max-height: 100vh !important;
+        border-radius: 0 !important;
+        border: none !important;
+    }
+
+    .review-modal-backdrop {
+        padding: 6px !important;
+    }
+
+    .review-modal-content {
+        border-radius: 10px !important;
+    }
+}
+
+
+/* ------------------------------------------------------------------------------
+   10.6 SCREEN SIZE: <= 360px (Ultra-Small Screens e.g. Galaxy Fold / iPhone SE 1st)
+   ------------------------------------------------------------------------------ */
+@media (max-width: 360px) {
+    main,
+    main.w-full,
+    main.flex-1 {
+        padding: 0.875rem 1.25rem 2rem 1.25rem !important;
+        padding-left: 1.25rem !important;
+        padding-right: 1.25rem !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
+    }
+
+    nav .px-4,
+    nav .w-full.mx-auto {
+        padding-left: 1.25rem !important;
+        padding-right: 1.25rem !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Single column for cards if screen is narrower than 360px */
+    .grid.grid-cols-2.lg\:grid-cols-4 {
+        grid-template-columns: 1fr !important;
+    }
+
+    nav .h-20 {
+        height: 3.5rem !important;
+    }
+
+    nav img[alt*="Ministry"] {
+        height: 1.85rem !important;
+    }
+
+    nav img[alt*="SMFCL"] {
+        height: 1.5rem !important;
+    }
+}
+
+
+/* ==============================================================================
+   11. PRINT & ACCESSIBILITY OPTIMIZATIONS
+   ============================================================================== */
+@media print {
+    /* Hide interactive chrome and navigation when printing */
+    nav,
+    aside,
+    #subventionSelect,
+    #disbursementSelect,
+    #exportDropdownWrapper,
+    .btn-card-review,
+    .kpi-modal-backdrop,
+    .review-modal-backdrop {
+        display: none !important;
+    }
+
+    body,
+    .min-h-screen,
+    main {
+        background: #ffffff !important;
+        color: #000000 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .kpi-interactive-card,
+    .bg-white {
+        border: 1px solid #cccccc !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+    }
+}
