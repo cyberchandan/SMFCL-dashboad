@@ -641,7 +641,26 @@
                             <p class="text-gray-500 text-sm mt-1">IIF Portal — Lender View</p>
                         </div>
                         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 px-2">
-                            <!-- Card 1: Pending Application -->
+                            <!-- Card 1: Approved Project -->
+                            <div onclick="openKpiModal('approved')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Approved Applications">
+                                <div>
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110" style="background: rgba(46, 125, 50, 0.125); color: rgb(46, 125, 50);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between mb-0.5">
+                                        <span class="text-2xl font-bold text-gray-900">Approved Project</span>
+                                        <span class="text-2xl font-bold text-gray-900">12</span>
+                                    </div>
+                                </div>
+                                <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-emerald-700 group-hover:text-emerald-800">
+                                    <span>Click for Detail</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                </div>
+                            </div>
+
+                            <!-- Card 2: Pending Application -->
                             <div onclick="openKpiModal('submitted')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Pending Applications">
                                 <div>
                                     <div class="flex items-start justify-between mb-3">
@@ -653,29 +672,8 @@
                                         <span class="text-2xl font-bold text-gray-900">Pending Application</span>
                                         <span class="text-2xl font-bold text-gray-900">8</span>
                                     </div>
-                                    <div class="text-sm font-medium text-gray-700">Review pending list</div>
                                 </div>
                                 <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-[#0d2b55] group-hover:text-blue-700">
-                                    <span>Click for Detail</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                </div>
-                            </div>
-
-                            <!-- Card 2: Approved -->
-                            <div onclick="openKpiModal('approved')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Approved Applications">
-                                <div>
-                                    <div class="flex items-start justify-between mb-3">
-                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110" style="background: rgba(46, 125, 50, 0.125); color: rgb(46, 125, 50);">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center justify-between mb-0.5">
-                                        <span class="text-2xl font-bold text-gray-900">Approved</span>
-                                        <span class="text-2xl font-bold text-gray-900">12</span>
-                                    </div>
-                                    <div class="text-sm font-medium text-gray-700">Application Status</div>
-                                </div>
-                                <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-emerald-700 group-hover:text-emerald-800">
                                     <span>Click for Detail</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
                                 </div>
@@ -698,7 +696,43 @@
                                 </div>
                             </div>
 
-                            <!-- Card 4: Pending Claim -->
+                            <!-- Card 4: Rejected Application -->
+                            <div onclick="openKpiModal('rejected')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Rejected Applications">
+                                <div>
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110" style="background: rgba(220, 38, 38, 0.125); color: rgb(220, 38, 38)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between mb-0.5">
+                                        <span class="text-2xl font-bold text-gray-900">Rejected Application</span>
+                                        <span class="text-2xl font-bold text-gray-900">2</span>
+                                    </div>
+                                </div>
+                                <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-red-700 group-hover:text-red-800">
+                                    <span>Click for Detail</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                </div>
+                            </div>
+
+                            <!-- Card 5: Total Subvention released -->
+                            <div onclick="openKpiModal('released')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Subvention Released">
+                                <div>
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110" style="background: rgba(123, 31, 162, 0.125); color: rgb(123, 31, 162)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path><path d="m21.854 2.147-10.94 10.939"></path></svg>
+                                        </div>
+                                    </div>
+                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">Rs. 375 L</div>
+                                    <div class="text-sm font-medium text-gray-700">Total Subvention released</div>
+                                </div>
+                                <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-purple-700 group-hover:text-purple-800">
+                                    <span>Click for Detail</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                </div>
+                            </div>
+
+                            <!-- Card 6: Pending Claim -->
                             <div onclick="openKpiModal('pending_claim')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Pending Claim">
                                 <div>
                                     <div class="flex items-start justify-between mb-3">
@@ -708,47 +742,8 @@
                                     </div>
                                     <div class="text-2xl font-bold text-gray-900 mb-0.5">Rs. 93.75 L</div>
                                     <div class="text-sm font-medium text-gray-700">Pending Claim</div>
-                                    <div class="text-xs text-gray-400 mt-0.5">Awaiting lender validation</div>
                                 </div>
                                 <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-orange-700 group-hover:text-orange-800">
-                                    <span>Click for Detail</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                </div>
-                            </div>
-
-                            <!-- Card 5: Reject -->
-                            <div onclick="openKpiModal('rejected')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Rejected Applications">
-                                <div>
-                                    <div class="flex items-start justify-between mb-3">
-                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110" style="background: rgba(220, 38, 38, 0.125); color: rgb(220, 38, 38)">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center justify-between mb-0.5">
-                                        <span class="text-2xl font-bold text-gray-900">Reject</span>
-                                        <span class="text-2xl font-bold text-gray-900">2</span>
-                                    </div>
-                                    <div class="text-sm font-medium text-gray-700">Reject Application</div>
-                                </div>
-                                <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-red-700 group-hover:text-red-800">
-                                    <span>Click for Detail</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                </div>
-                            </div>
-
-                            <!-- Card 6: Subvention Released -->
-                            <div onclick="openKpiModal('released')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Subvention Released">
-                                <div>
-                                    <div class="flex items-start justify-between mb-3">
-                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110" style="background: rgba(123, 31, 162, 0.125); color: rgb(123, 31, 162)">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path><path d="m21.854 2.147-10.94 10.939"></path></svg>
-                                        </div>
-                                    </div>
-                                    <div class="text-2xl font-bold text-gray-900 mb-0.5">Rs. 375 L</div>
-                                    <div class="text-sm font-medium text-gray-700">Subvention Released</div>
-                                    <div class="text-xs text-gray-400 mt-0.5">6 claims processed</div>
-                                </div>
-                                <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-purple-700 group-hover:text-purple-800">
                                     <span>Click for Detail</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
                                 </div>
