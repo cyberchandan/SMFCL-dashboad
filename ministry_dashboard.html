@@ -1839,19 +1839,19 @@
                     if (footerEl) footerEl.innerHTML = cfg.footer;
                     if (searchInput) searchInput.value = '';
 
-                    // Toggle tabs buttons UI
+                    // Toggle tabs buttons UI: display ONLY the clicked card's tab as a static indicator, hide all other tab buttons to disable toggling
                     ['borrowers', 'lenders', 'applications', 'projects', 'subvention', 'tagged', 'coverage'].forEach((k) => {
                         const btn = document.getElementById(`kpiTabBtn_${k}`);
                         const content = document.getElementById(`kpiContent_${k}`);
                         if (btn) {
                             if (k === tabKey) {
-                                btn.classList.remove('text-gray-600', 'font-medium', 'hover:text-gray-900');
-                                btn.classList.add('bg-white', 'font-semibold', 'shadow-xs');
+                                btn.style.display = 'inline-flex';
+                                btn.classList.remove('text-gray-600', 'font-medium', 'hover:text-gray-900', 'cursor-pointer');
+                                btn.classList.add('bg-white', 'font-semibold', 'shadow-xs', 'cursor-default');
                                 btn.style.color = '#0D2B55';
+                                btn.style.pointerEvents = 'none';
                             } else {
-                                btn.style.color = '';
-                                btn.classList.remove('bg-white', 'font-semibold', 'shadow-xs');
-                                btn.classList.add('text-gray-600', 'font-medium', 'hover:text-gray-900');
+                                btn.style.display = 'none';
                             }
                         }
                         if (content) {
@@ -2082,25 +2082,25 @@
                 <div class="px-6 py-3 bg-gray-50 border-b border-gray-200 flex flex-wrap items-center justify-between gap-3 flex-shrink-0">
                     <!-- Tabs -->
                     <div class="inline-flex p-1 bg-gray-200/70 rounded-lg text-xs overflow-x-auto max-w-full">
-                        <button id="kpiTabBtn_borrowers" type="button" onclick="window.switchKpiTab('borrowers')" class="px-3 py-1.5 rounded-md font-semibold text-[#0d2b55] bg-white shadow-xs transition-all cursor-pointer whitespace-nowrap">
+                        <button id="kpiTabBtn_borrowers" type="button" class="px-3 py-1.5 rounded-md font-semibold text-[#0d2b55] bg-white shadow-xs transition-all cursor-default pointer-events-none whitespace-nowrap">
                             Borrower onboarded (12)
                         </button>
-                        <button id="kpiTabBtn_lenders" type="button" onclick="window.switchKpiTab('lenders')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer whitespace-nowrap">
+                        <button id="kpiTabBtn_lenders" type="button" style="display: none;" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-default pointer-events-none whitespace-nowrap">
                             Lender onboarded (8)
                         </button>
-                        <button id="kpiTabBtn_applications" type="button" onclick="window.switchKpiTab('applications')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer whitespace-nowrap">
+                        <button id="kpiTabBtn_applications" type="button" style="display: none;" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-default pointer-events-none whitespace-nowrap">
                             Total Application (47)
                         </button>
-                        <button id="kpiTabBtn_projects" type="button" onclick="window.switchKpiTab('projects')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer whitespace-nowrap">
+                        <button id="kpiTabBtn_projects" type="button" style="display: none;" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-default pointer-events-none whitespace-nowrap">
                             Approved Project (31)
                         </button>
-                        <button id="kpiTabBtn_subvention" type="button" onclick="window.switchKpiTab('subvention')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer whitespace-nowrap">
+                        <button id="kpiTabBtn_subvention" type="button" style="display: none;" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-default pointer-events-none whitespace-nowrap">
                             Subvention Released (₹ 1,840 L)
                         </button>
-                        <button id="kpiTabBtn_tagged" type="button" onclick="window.switchKpiTab('tagged')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer whitespace-nowrap">
+                        <button id="kpiTabBtn_tagged" type="button" style="display: none;" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-default pointer-events-none whitespace-nowrap">
                             Total Loan Tagged (31)
                         </button>
-                        <button id="kpiTabBtn_coverage" type="button" onclick="window.switchKpiTab('coverage')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer whitespace-nowrap">
+                        <button id="kpiTabBtn_coverage" type="button" style="display: none;" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-default pointer-events-none whitespace-nowrap">
                             Loan Coverage (₹ 48,500 L)
                         </button>
                     </div>
