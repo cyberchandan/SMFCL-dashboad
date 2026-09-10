@@ -1331,37 +1331,37 @@
                                         <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-2">
                                             <!-- SVG Pie / Donut Chart -->
                                             <div class="relative flex-shrink-0 w-44 h-44 flex items-center justify-center">
-                                                <svg id="claimPieSvg" class="w-full h-full transform -rotate-90 overflow-visible" viewBox="0 0 200 200">
+                                                <svg id="claimPieSvg" class="w-full h-full transform -rotate-90 overflow-visible transition-transform duration-300" viewBox="0 0 200 200">
                                                     <g id="pieSlicesGroup">
-                                                        <path id="sliceWc" d="M 182.00 100.00 A 82 82 0 1 1 27.41 61.87 L 52.19 74.89 A 54 54 0 1 0 154.00 100.00 Z" fill="#1e6bb8" class="cursor-pointer transition-all duration-300 hover:opacity-90 hover:brightness-110" title="Working Capital (WC): ₹ 3,380 L (58.0%)"></path>
-                                                        <path id="sliceTl" d="M 28.78 59.36 A 82 82 0 0 1 181.99 98.57 L 153.99 99.06 A 54 54 0 0 0 53.10 73.23 Z" fill="#f97316" class="cursor-pointer transition-all duration-300 hover:opacity-90 hover:brightness-110" title="Term Loan: ₹ 2,450 L (42.0%)"></path>
+                                                        <path id="sliceWc" d="" fill="#1e6bb8" class="cursor-pointer transition-colors duration-200 hover:opacity-90 hover:brightness-110" title="Working Capital (WC)"></path>
+                                                        <path id="sliceTl" d="" fill="#f97316" class="cursor-pointer transition-colors duration-200 hover:opacity-90 hover:brightness-110" title="Term Loan"></path>
                                                     </g>
                                                 </svg>
                                                 <!-- Center Donut Content -->
-                                                <div class="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none p-2">
+                                                <div class="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none p-2 select-none">
                                                     <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider" id="pieCenterLabel">FY 2026-27</span>
-                                                    <span class="text-base font-extrabold text-gray-900 leading-tight" id="pieCenterTotal">₹ 5,830 L</span>
+                                                    <span class="text-base font-extrabold text-gray-900 leading-tight transition-all" id="pieCenterTotal">₹ 0 L</span>
                                                     <span class="text-[10px] text-gray-500 font-medium" id="pieCenterSub">Total Subvention</span>
                                                 </div>
                                             </div>
 
                                             <!-- Category Stats Side List -->
-                                            <div class="flex-1 w-full space-y-2.5">
+                                            <div class="flex-1 w-full space-y-2.5 select-none">
                                                 <!-- Working Capital Card -->
                                                 <div id="cardWcBox" class="p-2.5 rounded-lg border border-gray-100 bg-gray-50/70 hover:bg-blue-50/50 hover:border-blue-200 transition-all cursor-pointer">
                                                     <div class="flex items-center justify-between text-xs mb-1">
                                                         <span class="font-semibold text-gray-800 flex items-center gap-1.5">
-                                                            <span class="w-2 h-2 rounded-full bg-[#1e6bb8]"></span> Working Capital (WC)
+                                                            <span class="w-2.5 h-2.5 rounded-full bg-[#1e6bb8]"></span> Working Capital (WC)
                                                         </span>
-                                                        <span class="font-bold text-[#1e6bb8]" id="wcPercent">58.0%</span>
+                                                        <span class="font-bold text-[#1e6bb8]" id="wcPercent">0.0%</span>
                                                     </div>
                                                     <div class="flex items-center justify-between text-xs text-gray-500 mb-1.5">
                                                         <span>Subvention Release</span>
-                                                        <span class="font-semibold text-gray-900" id="wcAmount">₹ 3,380.00 L</span>
+                                                        <span class="font-semibold text-gray-900" id="wcAmount">₹ 0.00 L</span>
                                                     </div>
                                                     <!-- Progress Bar -->
                                                     <div class="w-full h-1.5 bg-gray-200 rounded-full overflow-hidden">
-                                                        <div id="wcBar" class="h-full bg-[#1e6bb8] rounded-full transition-all duration-500" style="width: 58%;"></div>
+                                                        <div id="wcBar" class="h-full bg-[#1e6bb8] rounded-full" style="width: 0%;"></div>
                                                     </div>
                                                 </div>
 
@@ -1369,17 +1369,17 @@
                                                 <div id="cardTlBox" class="p-2.5 rounded-lg border border-gray-100 bg-gray-50/70 hover:bg-orange-50/50 hover:border-orange-200 transition-all cursor-pointer">
                                                     <div class="flex items-center justify-between text-xs mb-1">
                                                         <span class="font-semibold text-gray-800 flex items-center gap-1.5">
-                                                            <span class="w-2 h-2 rounded-full bg-[#f97316]"></span> Term Loan
+                                                            <span class="w-2.5 h-2.5 rounded-full bg-[#f97316]"></span> Term Loan
                                                         </span>
-                                                        <span class="font-bold text-[#f97316]" id="tlPercent">42.0%</span>
+                                                        <span class="font-bold text-[#f97316]" id="tlPercent">0.0%</span>
                                                     </div>
                                                     <div class="flex items-center justify-between text-xs text-gray-500 mb-1.5">
                                                         <span>Subvention Release</span>
-                                                        <span class="font-semibold text-gray-900" id="tlAmount">₹ 2,450.00 L</span>
+                                                        <span class="font-semibold text-gray-900" id="tlAmount">₹ 0.00 L</span>
                                                     </div>
                                                     <!-- Progress Bar -->
                                                     <div class="w-full h-1.5 bg-gray-200 rounded-full overflow-hidden">
-                                                        <div id="tlBar" class="h-full bg-[#f97316] rounded-full transition-all duration-500" style="width: 42%;"></div>
+                                                        <div id="tlBar" class="h-full bg-[#f97316] rounded-full" style="width: 0%;"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1502,7 +1502,7 @@
                                     }
                                 });
 
-                                // Claim History Category Pie Chart Controller Script (Fixed FY 2026-27)
+                                // Claim History Category Pie Chart Controller Script (Fixed FY 2026-27 with Dynamic Filling Animation)
                                 (function () {
                                     const d = {
                                         label: 'FY 2026-27',
@@ -1512,6 +1512,7 @@
                                     };
 
                                     const slicesGroup = document.getElementById('pieSlicesGroup');
+                                    const claimPieSvg = document.getElementById('claimPieSvg');
                                     const centerLabel = document.getElementById('pieCenterLabel');
                                     const centerTotal = document.getElementById('pieCenterTotal');
                                     const centerSub = document.getElementById('pieCenterSub');
@@ -1526,10 +1527,13 @@
 
                                     const cardWcBox = document.getElementById('cardWcBox');
                                     const cardTlBox = document.getElementById('cardTlBox');
+                                    const legendWc = document.getElementById('legendWc');
+                                    const legendTl = document.getElementById('legendTl');
 
                                     if (!slicesGroup) return;
 
                                     function getSlicePath(cx, cy, rOut, rIn, startAngle, endAngle) {
+                                        if (endAngle <= startAngle) return '';
                                         if (endAngle - startAngle >= 360) endAngle = startAngle + 359.999;
                                         const rad = Math.PI / 180;
                                         const xo1 = cx + rOut * Math.cos(startAngle * rad);
@@ -1547,57 +1551,177 @@
                                         return `M ${xo1.toFixed(2)} ${yo1.toFixed(2)} A ${rOut} ${rOut} 0 ${largeArc} 1 ${xo2.toFixed(2)} ${yo2.toFixed(2)} L ${xi2.toFixed(2)} ${yi2.toFixed(2)} A ${rIn} ${rIn} 0 ${largeArc} 0 ${xi1.toFixed(2)} ${yi1.toFixed(2)} Z`;
                                     }
 
-                                    function renderPie() {
-                                        const total = d.wc + d.tl;
-                                        const wcPct = ((d.wc / total) * 100).toFixed(1);
-                                        const tlPct = ((d.tl / total) * 100).toFixed(1);
+                                    const total = d.wc + d.tl;
+                                    const wcPct = ((d.wc / total) * 100).toFixed(1);
+                                    const tlPct = ((d.tl / total) * 100).toFixed(1);
 
-                                        if (centerLabel) centerLabel.textContent = d.label;
-                                        if (centerTotal) centerTotal.textContent = `₹ ${Math.round(total).toLocaleString('en-IN')} L`;
-                                        if (centerSub) centerSub.textContent = 'Total Subvention';
+                                    const cx = 100, cy = 100, rOut = 82, rIn = 54;
+                                    const gap = 2; // gap in degrees
 
-                                        if (wcPercent) wcPercent.textContent = `${wcPct}%`;
-                                        if (wcAmount) wcAmount.textContent = `₹ ${d.wc.toLocaleString('en-IN')} L`;
-                                        if (wcBar) wcBar.style.width = `${wcPct}%`;
+                                    const angleWc = (d.wc / total) * 360; // ~208.7°
+                                    const endWcFinal = angleWc - gap / 2;
+                                    const startTlFinal = angleWc + gap / 2;
+                                    const endTlFinal = 360 - gap / 2;
 
-                                        if (tlPercent) tlPercent.textContent = `${tlPct}%`;
-                                        if (tlAmount) tlAmount.textContent = `₹ ${d.tl.toLocaleString('en-IN')} L`;
-                                        if (tlBar) tlBar.style.width = `${tlPct}%`;
+                                    let sliceWcEl = document.getElementById('sliceWc');
+                                    let sliceTlEl = document.getElementById('sliceTl');
 
-                                        // Render Donut Slices
-                                        const cx = 100, cy = 100, rOut = 82, rIn = 54;
-                                        const gap = 2; // gap in degrees
-
-                                        const angleWc = (d.wc / total) * 360;
-
-                                        const pathWc = getSlicePath(cx, cy, rOut, rIn, 0, angleWc - gap / 2);
-                                        const pathTl = getSlicePath(cx, cy, rOut, rIn, angleWc + gap / 2, 360 - gap / 2);
-
+                                    if (!sliceWcEl || !sliceTlEl) {
                                         slicesGroup.innerHTML = `
-                                            <path id="sliceWc" d="${pathWc}" fill="#1e6bb8" class="cursor-pointer transition-all duration-300 hover:opacity-90 hover:brightness-110" title="Working Capital (WC): ₹ ${d.wc.toLocaleString('en-IN')} L (${wcPct}%)"></path>
-                                            <path id="sliceTl" d="${pathTl}" fill="#f97316" class="cursor-pointer transition-all duration-300 hover:opacity-90 hover:brightness-110" title="Term Loan: ₹ ${d.tl.toLocaleString('en-IN')} L (${tlPct}%)"></path>
+                                            <path id="sliceWc" d="" fill="#1e6bb8" class="cursor-pointer transition-colors duration-200 hover:opacity-90 hover:brightness-110" title="Working Capital (WC)"></path>
+                                            <path id="sliceTl" d="" fill="#f97316" class="cursor-pointer transition-colors duration-200 hover:opacity-90 hover:brightness-110" title="Term Loan"></path>
                                         `;
-
-                                        // Interactive Hover Highlights
-                                        const sliceWcEl = document.getElementById('sliceWc');
-                                        const sliceTlEl = document.getElementById('sliceTl');
-
-                                        if (sliceWcEl && cardWcBox) {
-                                            cardWcBox.onmouseenter = () => { sliceWcEl.style.fill = '#165697'; };
-                                            cardWcBox.onmouseleave = () => { sliceWcEl.style.fill = '#1e6bb8'; };
-                                            sliceWcEl.onmouseenter = () => { cardWcBox.classList.add('bg-blue-100/60'); };
-                                            sliceWcEl.onmouseleave = () => { cardWcBox.classList.remove('bg-blue-100/60'); };
-                                        }
-
-                                        if (sliceTlEl && cardTlBox) {
-                                            cardTlBox.onmouseenter = () => { sliceTlEl.style.fill = '#ea580c'; };
-                                            cardTlBox.onmouseleave = () => { sliceTlEl.style.fill = '#f97316'; };
-                                            sliceTlEl.onmouseenter = () => { cardTlBox.classList.add('bg-orange-100/60'); };
-                                            sliceTlEl.onmouseleave = () => { cardTlBox.classList.remove('bg-orange-100/60'); };
-                                        }
+                                        sliceWcEl = document.getElementById('sliceWc');
+                                        sliceTlEl = document.getElementById('sliceTl');
                                     }
 
-                                    renderPie();
+                                    let isAnimating = false;
+                                    let animFrameId = null;
+
+                                    function animatePie(duration = 1200) {
+                                        if (isAnimating && animFrameId) {
+                                            cancelAnimationFrame(animFrameId);
+                                        }
+                                        isAnimating = true;
+
+                                        const startTime = performance.now();
+
+                                        // Natural smooth cubic deceleration
+                                        const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+
+                                        function frame(now) {
+                                            const elapsed = now - startTime;
+                                            const rawProgress = Math.min(1, elapsed / duration);
+                                            const p = easeOut(rawProgress);
+
+                                            // Clockwise radial sweep around circumference: 0° to 360°
+                                            const currentSweep = p * 360;
+
+                                            // 1. Blue Slice (Working Capital: 0° -> 208.7°)
+                                            if (currentSweep < 0.8) {
+                                                sliceWcEl.setAttribute('d', '');
+                                            } else if (currentSweep <= angleWc) {
+                                                sliceWcEl.setAttribute('d', getSlicePath(cx, cy, rOut, rIn, 0, Math.max(0.5, currentSweep - gap / 2)));
+                                            } else {
+                                                sliceWcEl.setAttribute('d', getSlicePath(cx, cy, rOut, rIn, 0, endWcFinal));
+                                            }
+
+                                            // 2. Orange Slice (Term Loan: 209.7° -> 359°)
+                                            if (currentSweep <= startTlFinal) {
+                                                sliceTlEl.setAttribute('d', '');
+                                            } else {
+                                                const curEndTl = Math.min(endTlFinal, currentSweep - gap / 2);
+                                                if (curEndTl > startTlFinal + 0.5) {
+                                                    sliceTlEl.setAttribute('d', getSlicePath(cx, cy, rOut, rIn, startTlFinal, curEndTl));
+                                                } else {
+                                                    sliceTlEl.setAttribute('d', '');
+                                                }
+                                            }
+
+                                            // 3. Center Total & Category Numbers Count-Up
+                                            if (centerLabel) centerLabel.textContent = d.label;
+                                            if (centerSub) centerSub.textContent = 'Total Subvention';
+
+                                            const curTotal = Math.round(p * total);
+                                            if (centerTotal) centerTotal.textContent = `₹ ${curTotal.toLocaleString('en-IN')} L`;
+
+                                            const curWcPct = (p * wcPct).toFixed(1);
+                                            const curTlPct = (p * tlPct).toFixed(1);
+                                            if (wcPercent) wcPercent.textContent = `${curWcPct}%`;
+                                            if (tlPercent) tlPercent.textContent = `${curTlPct}%`;
+
+                                            const curWcVal = Math.round(p * d.wc);
+                                            const curTlVal = Math.round(p * d.tl);
+                                            if (wcAmount) wcAmount.textContent = `₹ ${curWcVal.toLocaleString('en-IN')}.00 L`;
+                                            if (tlAmount) tlAmount.textContent = `₹ ${curTlVal.toLocaleString('en-IN')}.00 L`;
+
+                                            // 4. Progress Bars Sliding in Synchronization
+                                            if (wcBar) wcBar.style.width = `${(p * wcPct).toFixed(1)}%`;
+                                            if (tlBar) tlBar.style.width = `${(p * tlPct).toFixed(1)}%`;
+
+                                            if (rawProgress < 1) {
+                                                animFrameId = requestAnimationFrame(frame);
+                                            } else {
+                                                // Guarantee exact final geometries and values on completion
+                                                sliceWcEl.setAttribute('d', getSlicePath(cx, cy, rOut, rIn, 0, endWcFinal));
+                                                sliceTlEl.setAttribute('d', getSlicePath(cx, cy, rOut, rIn, startTlFinal, endTlFinal));
+                                                sliceWcEl.setAttribute('title', `Working Capital (WC): ₹ ${d.wc.toLocaleString('en-IN')} L (${wcPct}%)`);
+                                                sliceTlEl.setAttribute('title', `Term Loan: ₹ ${d.tl.toLocaleString('en-IN')} L (${tlPct}%)`);
+
+                                                if (centerTotal) centerTotal.textContent = `₹ ${Math.round(total).toLocaleString('en-IN')} L`;
+                                                if (wcPercent) wcPercent.textContent = `${wcPct}%`;
+                                                if (tlPercent) tlPercent.textContent = `${tlPct}%`;
+                                                if (wcAmount) wcAmount.textContent = `₹ ${d.wc.toLocaleString('en-IN')}.00 L`;
+                                                if (tlAmount) tlAmount.textContent = `₹ ${d.tl.toLocaleString('en-IN')}.00 L`;
+                                                if (wcBar) wcBar.style.width = `${wcPct}%`;
+                                                if (tlBar) tlBar.style.width = `${tlPct}%`;
+
+                                                isAnimating = false;
+                                            }
+                                        }
+
+                                        animFrameId = requestAnimationFrame(frame);
+                                    }
+
+                                    // Interactive Hover Highlights
+                                    if (sliceWcEl && cardWcBox) {
+                                        cardWcBox.onmouseenter = () => { sliceWcEl.style.fill = '#165697'; };
+                                        cardWcBox.onmouseleave = () => { sliceWcEl.style.fill = '#1e6bb8'; };
+                                        sliceWcEl.onmouseenter = () => { cardWcBox.classList.add('bg-blue-100/60'); };
+                                        sliceWcEl.onmouseleave = () => { cardWcBox.classList.remove('bg-blue-100/60'); };
+                                    }
+
+                                    if (sliceTlEl && cardTlBox) {
+                                        cardTlBox.onmouseenter = () => { sliceTlEl.style.fill = '#ea580c'; };
+                                        cardTlBox.onmouseleave = () => { sliceTlEl.style.fill = '#f97316'; };
+                                        sliceTlEl.onmouseenter = () => { cardTlBox.classList.add('bg-orange-100/60'); };
+                                        sliceTlEl.onmouseleave = () => { cardTlBox.classList.remove('bg-orange-100/60'); };
+                                    }
+
+                                    if (legendWc && sliceWcEl && cardWcBox) {
+                                        legendWc.onmouseenter = () => { sliceWcEl.style.fill = '#165697'; cardWcBox.classList.add('bg-blue-100/60'); };
+                                        legendWc.onmouseleave = () => { sliceWcEl.style.fill = '#1e6bb8'; cardWcBox.classList.remove('bg-blue-100/60'); };
+                                    }
+
+                                    if (legendTl && sliceTlEl && cardTlBox) {
+                                        legendTl.onmouseenter = () => { sliceTlEl.style.fill = '#ea580c'; cardTlBox.classList.add('bg-orange-100/60'); };
+                                        legendTl.onmouseleave = () => { sliceTlEl.style.fill = '#f97316'; cardTlBox.classList.remove('bg-orange-100/60'); };
+                                    }
+
+                                    // Allow user to click pie chart to replay fill animation
+                                    if (claimPieSvg) {
+                                        claimPieSvg.style.cursor = 'pointer';
+                                        claimPieSvg.setAttribute('title', 'Click to replay filling animation');
+                                        claimPieSvg.addEventListener('click', () => animatePie(1000));
+                                    }
+
+                                    // Trigger Fill on Page Load & Viewport Entry
+                                    let hasAnimated = false;
+                                    const startFill = () => {
+                                        if (hasAnimated) return;
+                                        hasAnimated = true;
+                                        setTimeout(() => animatePie(1200), 120);
+                                    };
+
+                                    if ('IntersectionObserver' in window && claimPieSvg) {
+                                        const observer = new IntersectionObserver((entries) => {
+                                            entries.forEach((entry) => {
+                                                if (entry.isIntersecting) {
+                                                    startFill();
+                                                    observer.disconnect();
+                                                }
+                                            });
+                                        }, { threshold: 0.15 });
+                                        observer.observe(claimPieSvg);
+                                    } else {
+                                        startFill();
+                                    }
+
+                                    if (document.readyState === 'complete') {
+                                        startFill();
+                                    } else {
+                                        window.addEventListener('load', startFill);
+                                    }
                                 })();
                                 </script>
                             </div>
