@@ -216,6 +216,7 @@ main.flex-1 {
     touch-action: manipulation;
     -webkit-user-select: none;
     user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 #chartCustomScrollTrack,
@@ -223,6 +224,7 @@ main.flex-1 {
     touch-action: none;
     -webkit-user-select: none;
     user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 #chartCustomScrollThumb,
@@ -230,6 +232,17 @@ main.flex-1 {
     touch-action: none;
     -webkit-user-select: none;
     user-select: none;
+    position: absolute;
+}
+
+#chartCustomScrollThumb::after,
+#disbursementCustomScrollThumb::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    bottom: -8px;
+    left: -4px;
+    right: -4px;
 }
 
 /* ------------------------------------------------------------------------------

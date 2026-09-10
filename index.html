@@ -764,43 +764,43 @@
                                         </div>
                                     </div>
 
-                                    <!-- Visible Horizontal Scroll Bar with Left/Right Scroll Buttons (ONLY on Mobile Devices for Yearly Basis) -->
-                                    <div id="chartMobileScrollBar" class="md:hidden mt-3 pt-2.5 border-t border-gray-100 flex flex-col gap-2 w-full max-w-full overflow-hidden select-none box-border" style="display: none;">
-                                        <!-- Active Range / Hint Info -->
+                                    <!-- Ultra-Sleek, Compact Premium Mobile Scrubber Controller (ONLY on Mobile Devices for Yearly Basis) -->
+                                    <div id="chartMobileScrollBar" class="md:hidden mt-1.5 pt-1.5 border-t border-gray-100 flex flex-col gap-1.5 w-full max-w-full overflow-hidden select-none box-border" style="display: none;">
+                                        <!-- Active Range / Hint Info (Single-line micro-status) -->
                                         <div class="flex items-center justify-between text-xs px-0.5">
-                                            <span class="inline-flex items-center gap-1.5 font-semibold text-gray-700">
-                                                <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
-                                                <span>Years:</span>
-                                                <span id="chartVisibleRangeBadge" class="px-2 py-0.5 bg-blue-50 text-blue-700 font-bold rounded-md border border-blue-200 text-[11px]">FY 2020-21 – FY 2026-27</span>
-                                            </span>
-                                            <span class="text-[11px] text-gray-400 flex items-center gap-1">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                                            <div class="inline-flex items-center gap-1.5">
+                                                <span class="relative flex h-2 w-2">
+                                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
+                                                </span>
+                                                <span class="text-[11px] font-semibold text-gray-500">Timeline:</span>
+                                                <span id="chartVisibleRangeBadge" class="px-2 py-0.5 bg-blue-50/90 text-blue-700 font-bold rounded-full border border-blue-200/80 text-[10px] tracking-tight shadow-2xs">FY 2020-21 – FY 2026-27</span>
+                                            </div>
+                                            <span class="text-[10px] text-gray-400 font-medium flex items-center gap-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
                                                 <span>Swipe chart</span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                                             </span>
                                         </div>
 
-                                        <!-- Scroll Bar with Left Button [◀], Track + Draggable Thumb, Right Button [▶] -->
-                                        <div class="flex items-center gap-2 w-full max-w-full box-border">
-                                            <!-- Left Scroll Button (Earlier Years) -->
-                                            <button type="button" id="chartScrollPrevBtn" title="Scroll to earlier years (hold for continuous scroll)" aria-label="Scroll to earlier years" class="shrink-0 w-9 h-9 flex items-center justify-center rounded-lg bg-white hover:bg-blue-50 active:bg-blue-100 text-gray-700 hover:text-blue-700 border border-gray-300 active:border-blue-400 shadow-2xs transition-all cursor-pointer">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                                        <!-- Sleek Scrubber Row: [ ‹ ] [ ====== ( pill ) ====== ] [ › ] -->
+                                        <div class="flex items-center gap-1.5 w-full max-w-full box-border">
+                                            <!-- Sleek Circular Left Button -->
+                                            <button type="button" id="chartScrollPrevBtn" title="Scroll to earlier years (hold for continuous scroll)" aria-label="Scroll to earlier years" class="shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-slate-50 hover:bg-blue-50 active:bg-blue-600 active:text-white text-slate-500 border border-slate-200 shadow-2xs transition-all cursor-pointer active:scale-90">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
                                             </button>
 
-                                            <!-- Horizontal Scroll Track with Draggable Thumb -->
-                                            <div id="chartCustomScrollTrack" class="flex-1 min-w-0 h-9 bg-gray-100 hover:bg-gray-200/80 rounded-lg border border-gray-300 relative cursor-pointer overflow-hidden p-0.5 transition-colors" title="Tap anywhere or drag thumb to jump across years">
-                                                <div id="chartCustomScrollThumb" class="h-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 rounded-md absolute top-0.5 left-0.5 transition-all duration-75 shadow-xs cursor-grab flex items-center justify-center text-white" style="width: 50px; left: 2px;">
-                                                    <div class="flex items-center gap-0.5 opacity-80 pointer-events-none">
-                                                        <span class="w-0.5 h-3.5 bg-white rounded-full"></span>
-                                                        <span class="w-0.5 h-3.5 bg-white rounded-full"></span>
-                                                        <span class="w-0.5 h-3.5 bg-white rounded-full"></span>
-                                                    </div>
+                                            <!-- Sleek Capsule Track with Draggable Pill Thumb -->
+                                            <div id="chartCustomScrollTrack" class="flex-1 min-w-0 h-5 bg-slate-100 hover:bg-slate-200/60 rounded-full border border-slate-200/80 relative cursor-pointer overflow-hidden p-0.5 transition-colors" title="Tap anywhere or drag thumb to jump across years">
+                                                <div id="chartCustomScrollThumb" class="h-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 active:brightness-110 rounded-full absolute top-0 left-0 transition-all duration-75 shadow-xs cursor-grab flex items-center justify-center" style="width: 44px; left: 2px;">
+                                                    <!-- Minimalist iOS Pill Grip -->
+                                                    <div class="w-3.5 h-1 bg-white/90 rounded-full pointer-events-none shadow-2xs"></div>
                                                 </div>
                                             </div>
 
-                                            <!-- Right Scroll Button (Recent Years) -->
-                                            <button type="button" id="chartScrollNextBtn" title="Scroll to recent years (hold for continuous scroll)" aria-label="Scroll to recent years" class="shrink-0 w-9 h-9 flex items-center justify-center rounded-lg bg-white hover:bg-blue-50 active:bg-blue-100 text-gray-700 hover:text-blue-700 border border-gray-300 active:border-blue-400 shadow-2xs transition-all cursor-pointer">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                            <!-- Sleek Circular Right Button -->
+                                            <button type="button" id="chartScrollNextBtn" title="Scroll to recent years (hold for continuous scroll)" aria-label="Scroll to recent years" class="shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-slate-50 hover:bg-blue-50 active:bg-blue-600 active:text-white text-slate-500 border border-slate-200 shadow-2xs transition-all cursor-pointer active:scale-90">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                                             </button>
                                         </div>
                                     </div>
@@ -1165,7 +1165,7 @@
 
                     if (maxScroll > 10) {
                         const visibleRatio = Math.min(1, Math.max(0.08, scrollContainer.clientWidth / scrollContainer.scrollWidth));
-                        const thumbWidthPx = Math.max(48, Math.min(trackWidth * 0.45, trackWidth * visibleRatio));
+                        const thumbWidthPx = Math.max(40, Math.min(trackWidth * 0.4, trackWidth * visibleRatio));
                         const availableTrackSpace = Math.max(1, trackWidth - thumbWidthPx - 4);
                         const scrollFraction = Math.max(0, Math.min(1, scrollContainer.scrollLeft / maxScroll));
                         const thumbLeftPx = 2 + scrollFraction * availableTrackSpace;
@@ -1181,7 +1181,7 @@
                             rangeBadge.textContent = `${yearly50Labels[firstIdx]} – ${yearly50Labels[lastIdx]}`;
                         }
                     } else {
-                        scrollThumb.style.width = '60px';
+                        scrollThumb.style.width = '44px';
                         scrollThumb.style.left = '2px';
                     }
                 }
@@ -1429,7 +1429,7 @@
                     scrollTrack.addEventListener('pointerdown', (e) => {
                         if (e.target === scrollThumb || scrollThumb.contains(e.target)) return;
                         const trackRect = scrollTrack.getBoundingClientRect();
-                        const thumbWidth = scrollThumb.offsetWidth || 50;
+                        const thumbWidth = scrollThumb.offsetWidth || 44;
                         const usableTrack = Math.max(1, trackRect.width - thumbWidth - 4);
                         const clickX = Math.max(0, Math.min(usableTrack, e.clientX - trackRect.left - (thumbWidth / 2)));
                         const fraction = clickX / usableTrack;
@@ -1454,7 +1454,7 @@
                     const moveThumbDrag = (e) => {
                         if (!isThumbDragging) return;
                         const trackRect = scrollTrack.getBoundingClientRect();
-                        const thumbWidth = scrollThumb.offsetWidth || 50;
+                        const thumbWidth = scrollThumb.offsetWidth || 44;
                         const usableTrack = Math.max(1, trackRect.width - thumbWidth - 4);
                         const currentX = Math.max(0, Math.min(usableTrack, e.clientX - trackRect.left - (thumbWidth / 2)));
                         const fraction = currentX / usableTrack;
