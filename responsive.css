@@ -145,9 +145,10 @@ main.flex-1 {
    ============================================================================== */
 
 /* ------------------------------------------------------------------------------
-   5.1 Ministry Dashboard - Subvention Disbursement Bar Chart
+   5.1 Ministry & SMFCL Dashboard - Subvention & Disbursement Scrollable Charts
    ------------------------------------------------------------------------------ */
-#chartScrollContainer {
+#chartScrollContainer,
+#disbursementScrollContainer {
     flex: 1 1 0% !important;
     min-width: 0 !important;
     width: 0 !important;
@@ -159,36 +160,42 @@ main.flex-1 {
     overscroll-behavior-x: contain !important;
 }
 
-#subventionChartSvg {
+#subventionChartSvg,
+#disbursementChartSvg {
     display: block !important;
     max-width: none !important;
     touch-action: pan-x pan-y !important;
 }
 
-#chartYAxisSvg {
+#chartYAxisSvg,
+#disbursementYAxisSvg {
     display: block !important;
 }
 
-#subventionTooltip {
+#subventionTooltip,
+#chartTooltip {
     max-width: calc(100vw - 40px) !important;
     pointer-events: none !important;
 }
 
 /* On mobile devices (<= 768px), hide native scrollbar since touch swiping and custom controller are active */
 @media (max-width: 768px) {
-    #chartScrollContainer::-webkit-scrollbar {
+    #chartScrollContainer::-webkit-scrollbar,
+    #disbursementScrollContainer::-webkit-scrollbar {
         display: none !important;
         height: 0 !important;
         width: 0 !important;
     }
-    #chartScrollContainer {
+    #chartScrollContainer,
+    #disbursementScrollContainer {
         scrollbar-width: none !important;
         -ms-overflow-style: none !important;
     }
 }
 
 /* Horizontal Scroll Bar & Buttons ONLY for Mobile Devices (<= 768px) */
-#chartMobileScrollBar {
+#chartMobileScrollBar,
+#disbursementMobileScrollBar {
     display: none !important;
     width: 100% !important;
     max-width: 100% !important;
@@ -196,25 +203,30 @@ main.flex-1 {
 }
 
 @media (max-width: 768px) {
-    #chartMobileScrollBar.yearly-active {
+    #chartMobileScrollBar.yearly-active,
+    #disbursementMobileScrollBar.yearly-active {
         display: flex !important;
     }
 }
 
 #chartScrollPrevBtn,
-#chartScrollNextBtn {
+#chartScrollNextBtn,
+#disbursementScrollPrevBtn,
+#disbursementScrollNextBtn {
     touch-action: manipulation;
     -webkit-user-select: none;
     user-select: none;
 }
 
-#chartCustomScrollTrack {
+#chartCustomScrollTrack,
+#disbursementCustomScrollTrack {
     touch-action: none;
     -webkit-user-select: none;
     user-select: none;
 }
 
-#chartCustomScrollThumb {
+#chartCustomScrollThumb,
+#disbursementCustomScrollThumb {
     touch-action: none;
     -webkit-user-select: none;
     user-select: none;
