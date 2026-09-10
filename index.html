@@ -98,8 +98,7 @@
                 transform: translateY(0) scale(0.99);
             }
         </style>
-                <link rel="stylesheet" href="responsive.css" />
-
+        <link rel="stylesheet" href="responsive.css" />
     </head>
 
     <body class="font-sans antialiased">
@@ -641,15 +640,45 @@
                             </div>
 
                             <!-- Metric Cards Grid -->
-                            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 px-2">
-                                <!-- Card 1: Total Loan Tagged -->
-                                <div onclick="openKpiModal('tagged')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view all Tagged Loans">
+                            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 px-2">
+                                <!-- Card 1: Borrower onboarded -->
+                                <div onclick="openKpiModal('borrowers')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Onboarded Borrowers Directory">
+                                    <div>
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform group-hover:scale-110" style="background: rgba(230, 81, 0, 0.125); color: rgb(230, 81, 0);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building2"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg>
+                                        </div>
+                                        <div class="text-2xl font-bold text-gray-900 mb-0.5">12</div>
+                                        <div class="text-sm font-medium text-gray-700">Borrower onboarded</div>
+                                    </div>
+                                    <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-orange-700 group-hover:text-orange-800">
+                                        <span>Click for Detail</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                    </div>
+                                </div>
+
+                                <!-- Card 2: Lender onboarded -->
+                                <div onclick="openKpiModal('lenders')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Onboarded Lenders Directory">
+                                    <div>
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform group-hover:scale-110" style="background: rgba(37, 99, 235, 0.125); color: rgb(37, 99, 235);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building-2"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg>
+                                        </div>
+                                        <div class="text-2xl font-bold text-gray-900 mb-0.5">8</div>
+                                        <div class="text-sm font-medium text-gray-700">Lender onboarded</div>
+                                    </div>
+                                    <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-blue-700 group-hover:text-blue-800">
+                                        <span>Click for Detail</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                    </div>
+                                </div>
+
+                                <!-- Card 3: Total Application -->
+                                <div onclick="openKpiModal('applications')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view full Applications Register">
                                     <div>
                                         <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform group-hover:scale-110" style="background: rgba(30, 107, 184, 0.125); color: rgb(30, 107, 184);">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>
                                         </div>
-                                        <div class="text-2xl font-bold text-gray-900 mb-0.5">31</div>
-                                        <div class="text-sm font-medium text-gray-700">Total Loan Tagged</div>
+                                        <div class="text-2xl font-bold text-gray-900 mb-0.5">47</div>
+                                        <div class="text-sm font-medium text-gray-700">Total Application</div>
                                     </div>
                                     <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-[#0d2b55] group-hover:text-blue-700">
                                         <span>Click for Detail</span>
@@ -657,14 +686,14 @@
                                     </div>
                                 </div>
 
-                                <!-- Card 2: Total Subvention Released -->
-                                <div onclick="openKpiModal('subvention')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Subvention Released Details">
+                                <!-- Card 4: Approved Project -->
+                                <div onclick="openKpiModal('projects')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Approved Projects Register">
                                     <div>
                                         <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform group-hover:scale-110" style="background: rgba(46, 125, 50, 0.125); color: rgb(46, 125, 50);">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>
                                         </div>
-                                        <div class="text-2xl font-bold text-gray-900 mb-0.5">Rs. 1,840 L</div>
-                                        <div class="text-sm font-medium text-gray-700">Total Subvention Released</div>
+                                        <div class="text-2xl font-bold text-gray-900 mb-0.5">31</div>
+                                        <div class="text-sm font-medium text-gray-700">Approved Project</div>
                                     </div>
                                     <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-emerald-700 group-hover:text-emerald-800">
                                         <span>Click for Detail</span>
@@ -672,31 +701,16 @@
                                     </div>
                                 </div>
 
-                                <!-- Card 3: Total Loan Coverage -->
-                                <div onclick="openKpiModal('coverage')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Total Loan Coverage">
+                                <!-- Card 5: Total Subvention released -->
+                                <div onclick="openKpiModal('subvention')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Subvention Released Details">
                                     <div>
                                         <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform group-hover:scale-110" style="background: rgba(123, 31, 162, 0.125); color: rgb(123, 31, 162);">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-landmark"><line x1="3" x2="21" y1="22" y2="22"></line><line x1="6" x2="6" y1="18" y2="11"></line><line x1="10" x2="10" y1="18" y2="11"></line><line x1="14" x2="14" y1="18" y2="11"></line><line x1="18" x2="18" y1="18" y2="11"></line><polygon points="12 2 20 7 4 7"></polygon></svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
                                         </div>
-                                        <div class="text-2xl font-bold text-gray-900 mb-0.5">Rs. 48,500 L</div>
-                                        <div class="text-sm font-medium text-gray-700">Total Loan Coverage</div>
+                                        <div class="text-2xl font-bold text-gray-900 mb-0.5">Rs. 1,840 L</div>
+                                        <div class="text-sm font-medium text-gray-700">Total Subvention released</div>
                                     </div>
                                     <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-purple-700 group-hover:text-purple-800">
-                                        <span>Click for Detail</span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                    </div>
-                                </div>
-
-                                <!-- Card 4: Borrower Participating -->
-                                <div onclick="openKpiModal('borrowers')" class="kpi-interactive-card bg-white rounded-xl border border-gray-200 p-5 cursor-pointer group select-none flex flex-col justify-between" title="Click to view Participating Borrowers">
-                                    <div>
-                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform group-hover:scale-110" style="background: rgba(230, 81, 0, 0.125); color: rgb(230, 81, 0);">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building2"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg>
-                                        </div>
-                                        <div class="text-2xl font-bold text-gray-900 mb-0.5">12</div>
-                                        <div class="text-sm font-medium text-gray-700">Borrower Participating</div>
-                                    </div>
-                                    <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-orange-700 group-hover:text-orange-800">
                                         <span>Click for Detail</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
                                     </div>
@@ -751,15 +765,14 @@
                                     </div>
                                 </div>
 
-                                 <!-- Card 2: Loan Type & Sanction Amount Distribution -->
+                                <!-- Card 2: Loan Type & Sanction Amount Distribution -->
                                 <div class="bg-white rounded-xl border border-gray-200 p-5 flex flex-col justify-between">
                                     <div>
-                                        <h3 class="font-bold text-gray-900 text-base mb-3.5">Total Subvention Released</h3>
                                         
                                         <div class="flex flex-col sm:flex-row items-center justify-around gap-6 sm:gap-12 w-full py-2 relative" id="donutChartContainer">
                                             <!-- Chart 1: By Loan Volume (Count) -->
                                             <div class="flex flex-col items-center">
-                                                <div class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 text-center">Loan Volume (Count)</div>
+                                                <div class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 text-center">Subvention Released</div>
                                                 <div id="donutChartWrapper" class="relative flex-shrink-0 cursor-pointer" style="width: 210px; height: 210px;">
                                                     <svg id="donutSvg" class="w-full h-full select-none drop-shadow-xs overflow-visible" viewBox="0 0 160 160">
                                                         <!-- Orange Slice: Term Loan (22%) -->
@@ -788,7 +801,7 @@
                                                                     <path d="M4.5 10.5v5c0 1.38 3.36 2.5 7.5 2.5s7.5-1.12 7.5-2.5v-5"></path>
                                                                 </svg>
                                                             </div>
-                                                            <h4 class="font-bold text-xs text-[#eb5e0c] tracking-tight">Loan Volume Breakdown</h4>
+                                                            <h4 class="font-bold text-xs text-[#eb5e0c] tracking-tight">Loan Type Distribution</h4>
                                                         </div>
 
                                                         <!-- Stripes Container -->
@@ -821,7 +834,7 @@
 
                                             <!-- Chart 2: By Sanction Amount (Value) -->
                                             <div class="flex flex-col items-center">
-                                                <div class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 text-center">Sanction Amount</div>
+                                                <div class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 text-center">Loan Tagged</div>
                                                 <div id="donutAmountWrapper" class="relative flex-shrink-0 cursor-pointer" style="width: 210px; height: 210px;">
                                                     <svg id="donutAmountSvg" class="w-full h-full select-none drop-shadow-xs overflow-visible" viewBox="0 0 160 160">
                                                         <!-- Orange Slice: Term Loan (25%) -->
@@ -832,7 +845,7 @@
                                                         </path>
                                                         <!-- Percentage Labels on Slices -->
                                                         <text x="118" y="47" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle" style="pointer-events: none;">25%</text>
-                                                        <text x="60" y="123" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle" style="pointer-events: none;">75%</text>
+                                                        <text x="113" y="123" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle" style="pointer-events: none;">75%</text>
                                                         <!-- Donut Center Hole -->
                                                         <circle cx="80" cy="80" r="39.5" fill="#ffffff" style="pointer-events: none;"></circle>
                                                         <text x="80" y="74" fill="#111827" font-size="15" font-weight="bold" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" style="pointer-events: none;">₹ 343L</text>
@@ -898,7 +911,7 @@
                             <!-- Quarterly Target vs Achieved vs Released (Rs. in lakhs) Table Card -->
                             <div class="bg-white rounded-xl border border-gray-200 p-5">
                                 <div class="flex items-center justify-between mb-4">
-                                    <h3 class="font-bold text-gray-900 text-base">Quarterly vs Released <span class="font-normal text-gray-500 text-sm">(Rs. in Lakhs)</span></h3>
+                                    <h3 class="font-bold text-gray-900 text-base">Release of Subvention <span class="font-normal text-gray-500 text-sm">(Rs. in Lakhs)</span></h3>
                                     <!-- Cool, Compact Dropdown Export Button & Menu -->
                                     <div class="relative inline-block text-left" id="exportDropdownWrapper">
                                         <button id="exportDropdownBtn" type="button" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 active:bg-gray-100 transition-all shadow-2xs cursor-pointer">
@@ -1722,6 +1735,51 @@
         <script>
             (function () {
                 const kpiDataConfigs = {
+                    borrowers: {
+                        title: 'Borrowers Onboarded',
+                        badge: '12 Active Onboarded Enterprises',
+                        subtitle: 'Accredited Shipbuilders, Shiprepairers & Coastal Maritime Infrastructure Operators',
+                        iconBg: 'rgba(230, 81, 0, 0.2)',
+                        iconColor: '#fed7aa',
+                        iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg>',
+                        footer: 'Active Enterprises: <span class="font-bold text-orange-800">12</span> | Maritime Clusters: <span class="font-bold text-gray-900">8 Coastal States</span> | Total Tagged Facilities: <span class="font-bold text-[#0d2b55]">31 Accounts</span> | Compliance Standing: <span class="font-bold text-emerald-700">100% Operational</span>'
+                    },
+                    lenders: {
+                        title: 'Lenders Onboarded',
+                        badge: '8 Empanelled Banks / Financial Institutions',
+                        subtitle: 'Empanelled Commercial Banks, NBFCS & Financial Institutions under SMFCL Scheme',
+                        iconBg: 'rgba(37, 99, 235, 0.2)',
+                        iconColor: '#93c5fd',
+                        iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg>',
+                        footer: 'Total Empanelled Lenders: <span class="font-bold text-blue-900">8</span> | Active Credit Lines: <span class="font-bold text-gray-900">₹ 8,250.00 Cr</span> | Validation Queue: <span class="font-bold text-emerald-700">Clear</span>'
+                    },
+                    applications: {
+                        title: 'Total Applications',
+                        badge: '47 Applications (FY 2026-27)',
+                        subtitle: 'Sagarmala Maritime Development Fund · Infrastructure & Shipbuilding Proposals',
+                        iconBg: 'rgba(30, 107, 184, 0.2)',
+                        iconColor: '#93c5fd',
+                        iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>',
+                        footer: 'Total Applications: <span class="font-bold text-gray-900">47</span> | Project Outlay: <span class="font-bold text-blue-900">₹ 4,280.00 Cr</span> | Requested Subvention: <span class="font-bold text-emerald-700">₹ 918.50 Cr</span>'
+                    },
+                    projects: {
+                        title: 'Approved Projects',
+                        badge: '31 Active Projects',
+                        subtitle: 'Sanctioned Maritime Infrastructure & Modernization Projects Under IIF Scheme',
+                        iconBg: 'rgba(46, 125, 50, 0.2)',
+                        iconColor: '#86efac',
+                        iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>',
+                        footer: 'Active Sanctioned Projects: <span class="font-bold text-emerald-800">31</span> | Total Project Outlay: <span class="font-bold text-gray-900">₹ 2,860.50 Cr</span> | Sanctioned Subvention: <span class="font-bold text-blue-900">₹ 612.40 Cr</span>'
+                    },
+                    subvention: {
+                        title: 'Total Subvention Released',
+                        badge: '₹ 1,840.00 Lakhs Disbursed',
+                        subtitle: 'Interest Subvention Releases across Fiscal Quarters (FY 2026-27 & FY 2025-26)',
+                        iconBg: 'rgba(123, 31, 162, 0.2)',
+                        iconColor: '#d8b4fe',
+                        iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>',
+                        footer: 'Total Subvention Released: <span class="font-bold text-emerald-700">₹ 1,840.00 L</span> | Working Capital Subvention: <span class="font-bold text-[#0d2b55]">₹ 1,280.00 L</span> | Term Loan Subvention: <span class="font-bold text-orange-600">₹ 560.00 L</span> | Disbursed Claims: <span class="font-bold text-gray-900">46 Claims Settled</span>'
+                    },
                     tagged: {
                         title: 'Total Loan Tagged',
                         badge: '31 Tagged Loan Accounts',
@@ -1731,15 +1789,6 @@
                         iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>',
                         footer: 'Total Tagged Facilities: <span class="font-bold text-[#0d2b55]">31 Accounts</span> | Cumulative Tagged Amount: <span class="font-bold text-gray-900">₹ 48,500.00 L</span> | Lending Banks: <span class="font-bold text-blue-800">SBI, PNB, Canara Bank, BoB, HDFC, ICICI</span> | Status: <span class="font-bold text-emerald-700">100% Verified &amp; Active</span>'
                     },
-                    subvention: {
-                        title: 'Total Subvention Released',
-                        badge: '₹ 1,840.00 Lakhs Disbursed',
-                        subtitle: 'Interest Subvention Releases across Fiscal Quarters (FY 2026-27 & FY 2025-26)',
-                        iconBg: 'rgba(46, 125, 50, 0.2)',
-                        iconColor: '#86efac',
-                        iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>',
-                        footer: 'Total Subvention Released: <span class="font-bold text-emerald-700">₹ 1,840.00 L</span> | Working Capital Subvention: <span class="font-bold text-[#0d2b55]">₹ 1,280.00 L</span> | Term Loan Subvention: <span class="font-bold text-orange-600">₹ 560.00 L</span> | Disbursed Claims: <span class="font-bold text-gray-900">46 Claims Settled</span>'
-                    },
                     coverage: {
                         title: 'Total Loan Coverage',
                         badge: '₹ 48,500.00 Lakhs Scheme Exposure',
@@ -1748,26 +1797,17 @@
                         iconColor: '#d8b4fe',
                         iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="22" y2="22"></line><line x1="6" x2="6" y1="18" y2="11"></line><line x1="10" x2="10" y1="18" y2="11"></line><line x1="14" x2="14" y1="18" y2="11"></line><line x1="18" x2="18" y1="18" y2="11"></line><polygon points="12 2 20 7 4 7"></polygon></svg>',
                         footer: 'Scheme Loan Coverage: <span class="font-bold text-purple-900">₹ 48,500.00 L</span> | Disbursed Outstanding: <span class="font-bold text-emerald-700">₹ 38,500.00 L</span> | Undrawn Pipeline: <span class="font-bold text-gray-900">₹ 10,000.00 L</span> | Subvention Cap: <span class="font-bold text-blue-900">3.00% p.a.</span>'
-                    },
-                    borrowers: {
-                        title: 'Borrowers Participating',
-                        badge: '12 Active Onboarded Enterprises',
-                        subtitle: 'Accredited Shipbuilders, Shiprepairers & Coastal Maritime Infrastructure Operators',
-                        iconBg: 'rgba(230, 81, 0, 0.2)',
-                        iconColor: '#fed7aa',
-                        iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg>',
-                        footer: 'Active Enterprises: <span class="font-bold text-orange-800">12</span> | Maritime Clusters: <span class="font-bold text-gray-900">8 Coastal States</span> | Total Tagged Facilities: <span class="font-bold text-[#0d2b55]">31 Accounts</span> | Compliance Standing: <span class="font-bold text-emerald-700">100% Operational</span>'
                     }
                 };
 
-                let currentActiveKpiTab = 'tagged';
+                let currentActiveKpiTab = 'borrowers';
 
                 window.openKpiModal = function (tabKey) {
                     const modal = document.getElementById('kpiDetailsModal');
                     if (!modal) return;
                     modal.style.display = 'flex';
                     document.body.style.overflow = 'hidden';
-                    window.switchKpiTab(tabKey || 'tagged');
+                    window.switchKpiTab(tabKey || 'borrowers');
                 };
 
                 window.closeKpiModal = function () {
@@ -1777,7 +1817,7 @@
                 };
 
                 window.switchKpiTab = function (tabKey) {
-                    if (!kpiDataConfigs[tabKey]) tabKey = 'tagged';
+                    if (!kpiDataConfigs[tabKey]) tabKey = 'borrowers';
                     currentActiveKpiTab = tabKey;
 
                     const cfg = kpiDataConfigs[tabKey];
@@ -1800,7 +1840,7 @@
                     if (searchInput) searchInput.value = '';
 
                     // Toggle tabs buttons UI
-                    ['tagged', 'subvention', 'coverage', 'borrowers'].forEach((k) => {
+                    ['borrowers', 'lenders', 'applications', 'projects', 'subvention', 'tagged', 'coverage'].forEach((k) => {
                         const btn = document.getElementById(`kpiTabBtn_${k}`);
                         const content = document.getElementById(`kpiContent_${k}`);
                         if (btn) {
@@ -1835,37 +1875,126 @@
                     });
                 };
 
-                window.exportKpiTable = function () {
+                window.toggleModalExportMenu = function (show) {
+                    const menu = document.getElementById('modalExportMenu');
+                    const chevron = document.getElementById('modalExportChevron');
+                    if (!menu) return;
+                    const isHidden = menu.classList.contains('hidden');
+                    const shouldShow = typeof show === 'boolean' ? show : isHidden;
+                    if (shouldShow) {
+                        menu.classList.remove('hidden');
+                        if (chevron) chevron.classList.add('rotate-180');
+                    } else {
+                        menu.classList.add('hidden');
+                        if (chevron) chevron.classList.remove('rotate-180');
+                    }
+                };
+
+                document.addEventListener('click', function (e) {
+                    const btn = document.getElementById('modalExportDropdownBtn');
+                    const menu = document.getElementById('modalExportMenu');
+                    if (menu && btn && !menu.contains(e.target) && !btn.contains(e.target)) {
+                        window.toggleModalExportMenu(false);
+                    }
+                });
+
+                window.exportKpiModalFormat = function (format) {
+                    window.toggleModalExportMenu(false);
                     const activeContainer = document.getElementById(`kpiContent_${currentActiveKpiTab}`);
                     if (!activeContainer) return;
                     const table = activeContainer.querySelector('table');
                     if (!table) return;
 
-                    let csv = [];
-                    const rows = table.querySelectorAll('tr');
-                    rows.forEach((row) => {
-                        if (row.style.display === 'none') return;
-                        const cols = row.querySelectorAll('th, td');
-                        let rowData = [];
-                        cols.forEach((col) => {
-                            let text = col.innerText.replace(/(\r\n|\n|\r)/gm, ' ').replace(/"/g, '""').trim();
-                            rowData.push(`"${text}"`);
-                        });
-                        if (rowData.length) csv.push(rowData.join(','));
-                    });
+                    const cfg = kpiDataConfigs[currentActiveKpiTab] || { title: 'Ministry Data Report', subtitle: 'Ministry of Ports, Shipping & Waterways' };
+                    const filename = `ministry_${currentActiveKpiTab}_report`;
 
-                    const csvString = csv.join('\n');
-                    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
-                    const link = document.createElement('a');
-                    link.href = URL.createObjectURL(blob);
-                    link.download = `ministry_${currentActiveKpiTab}_data.csv`;
-                    link.click();
+                    if (format === 'excel') {
+                        let headers = [];
+                        table.querySelectorAll('thead tr th').forEach(th => {
+                            headers.push(th.innerText.replace(/\r?\n/g, ' ').replace(/\s+/g, ' ').trim());
+                        });
+                        let rows = [];
+                        table.querySelectorAll('tbody tr').forEach(tr => {
+                            if (tr.style.display === 'none') return;
+                            let row = [];
+                            tr.querySelectorAll('td').forEach(td => {
+                                row.push(td.innerText.replace(/\r?\n/g, ' ').replace(/\s+/g, ' ').trim());
+                            });
+                            if (row.length) rows.push(row);
+                        });
+                        let footers = [];
+                        table.querySelectorAll('tfoot tr').forEach(tr => {
+                            let row = [];
+                            tr.querySelectorAll('td').forEach(td => {
+                                row.push(td.innerText.replace(/\r?\n/g, ' ').replace(/\s+/g, ' ').trim());
+                            });
+                            if (row.length) footers.push(row);
+                        });
+
+                        if (typeof XLSX !== 'undefined') {
+                            const allData = [headers, ...rows, ...footers];
+                            const ws = XLSX.utils.aoa_to_sheet(allData);
+                            const wb = XLSX.utils.book_new();
+                            XLSX.utils.book_append_sheet(wb, ws, 'Report');
+                            XLSX.writeFile(wb, filename + '.xlsx');
+                        } else {
+                            let csv = [];
+                            [headers, ...rows, ...footers].forEach(r => {
+                                csv.push(r.map(c => `"${c.replace(/"/g, '""')}"`).join(','));
+                            });
+                            const blob = new Blob(['\uFEFF' + csv.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
+                            const link = document.createElement('a');
+                            link.href = URL.createObjectURL(blob);
+                            link.download = filename + '.csv';
+                            link.click();
+                        }
+                    } else if (format === 'doc') {
+                        const wordStyle = '<style>h2 { color: #0d2b55; margin-bottom: 2px; } p.sub { color: #64748b; font-size: 11px; margin-bottom: 15px; } table { border-collapse: collapse; width: 100%; font-size: 11px; } th { background-color: #0d2b55; color: #ffffff; padding: 6px; border: 1px solid #cbd5e1; } td { padding: 6px; border: 1px solid #e2e8f0; text-align: left; } tfoot td { font-weight: bold; background-color: #f8fafc; border-top: 2px solid #0d2b55; }</style>';
+                        const wordContent = '<div style="font-family: Calibri, Arial, sans-serif; padding: 20px;"><h2>' + cfg.title + '</h2><p class="sub">' + cfg.subtitle + ' • Date: ' + new Date().toLocaleDateString('en-IN') + '</p>' + table.outerHTML + '</div>';
+                        const html = wordStyle + wordContent;
+                        const blob = new Blob([html], { type: 'application/msword;charset=utf-8;' });
+                        const link = document.createElement('a');
+                        link.href = URL.createObjectURL(blob);
+                        link.download = filename + '.doc';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    } else if (format === 'pdf') {
+                        if (window.jspdf && window.jspdf.jsPDF) {
+                            const { jsPDF } = window.jspdf;
+                            const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+                            doc.setFillColor(13, 43, 85);
+                            doc.rect(0, 0, 297, 22, 'F');
+                            doc.setTextColor(255, 255, 255);
+                            doc.setFontSize(13);
+                            doc.setFont('helvetica', 'bold');
+                            doc.text(cfg.title, 14, 11);
+                            doc.setFontSize(8.5);
+                            doc.setFont('helvetica', 'normal');
+                            doc.setTextColor(190, 215, 250);
+                            doc.text(cfg.subtitle + ' | Ministry of Ports, Shipping & Waterways', 14, 17);
+
+                            doc.autoTable({
+                                html: table,
+                                startY: 27,
+                                theme: 'grid',
+                                headStyles: { fillColor: [13, 43, 85], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 8 },
+                                bodyStyles: { fontSize: 7.5, textColor: [30, 41, 59] },
+                                footStyles: { fillColor: [241, 245, 249], textColor: [15, 23, 42], fontStyle: 'bold', fontSize: 8 },
+                                styles: { cellPadding: 2.5 }
+                            });
+                            doc.save(filename + '.pdf');
+                        } else {
+                            window.print();
+                        }
+                    }
                 };
 
                 // ESC key closes modal
                 document.addEventListener('keydown', (e) => {
                     if (e.key === 'Escape') {
                         window.closeKpiModal();
+                        window.toggleModalExportMenu(false);
                     }
                 });
             })();
@@ -1889,10 +2018,60 @@
                         </div>
                     </div>
                     <div class="flex items-center gap-3">
-                        <button type="button" onclick="window.exportKpiTable()" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg text-xs font-semibold border border-white/20 transition-colors cursor-pointer shadow-xs">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                            Export CSV
-                        </button>
+                        <!-- Modal Export Dropdown Button & Menu -->
+                        <div class="relative inline-block text-left" id="modalExportDropdownWrapper">
+                            <button id="modalExportDropdownBtn" type="button" onclick="window.toggleModalExportMenu()" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg text-xs font-semibold border border-white/20 transition-all cursor-pointer shadow-xs">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" x2="12" y1="15" y2="3"></line>
+                                </svg>
+                                <span>Export</span>
+                                <svg id="modalExportChevron" xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-white/80 transition-transform duration-200">
+                                    <path d="m6 9 6 6 6-6"></path>
+                                </svg>
+                            </button>
+
+                            <!-- Dropdown Menu -->
+                            <div id="modalExportMenu" class="hidden absolute right-0 mt-1.5 rounded-lg bg-white shadow-xl border border-gray-200 p-1 z-50 ring-1 ring-black/5" style="width: 140px; min-width: 140px;">
+                                <button type="button" onclick="window.exportKpiModalFormat('pdf')" class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium text-gray-700 hover:bg-red-50 hover:text-red-700 transition-colors text-left cursor-pointer group">
+                                    <span class="flex items-center gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-500 flex-shrink-0">
+                                            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                        </svg>
+                                        PDF
+                                    </span>
+                                    <span class="text-[10px] text-gray-400 font-mono group-hover:text-red-600">.pdf</span>
+                                </button>
+                                <button type="button" onclick="window.exportKpiModalFormat('excel')" class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 transition-colors text-left cursor-pointer group">
+                                    <span class="flex items-center gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-600 flex-shrink-0">
+                                            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+                                            <line x1="3" x2="21" y1="9" y2="9"></line>
+                                            <line x1="3" x2="21" y1="15" y2="15"></line>
+                                            <line x1="9" x2="9" y1="3" y2="21"></line>
+                                            <line x1="15" x2="15" y1="3" y2="21"></line>
+                                        </svg>
+                                        Excel
+                                    </span>
+                                    <span class="text-[10px] text-gray-400 font-mono group-hover:text-emerald-600">.xlsx</span>
+                                </button>
+                                <button type="button" onclick="window.exportKpiModalFormat('doc')" class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors text-left cursor-pointer group">
+                                    <span class="flex items-center gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600 flex-shrink-0">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                                            <polyline points="10 9 9 9 8 9"></polyline>
+                                        </svg>
+                                        DOCS
+                                    </span>
+                                    <span class="text-[10px] text-gray-400 font-mono group-hover:text-blue-600">.doc</span>
+                                </button>
+                            </div>
+                        </div>
                         <button type="button" onclick="window.closeKpiModal()" class="text-white/80 hover:text-white p-1.5 rounded-lg hover:bg-white/15 transition-colors cursor-pointer" aria-label="Close modal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                         </button>
@@ -1902,18 +2081,27 @@
                 <!-- Tab Switcher & Search Bar -->
                 <div class="px-6 py-3 bg-gray-50 border-b border-gray-200 flex flex-wrap items-center justify-between gap-3 flex-shrink-0">
                     <!-- Tabs -->
-                    <div class="inline-flex p-1 bg-gray-200/70 rounded-lg text-xs">
-                        <button id="kpiTabBtn_tagged" type="button" onclick="window.switchKpiTab('tagged')" class="px-3 py-1.5 rounded-md font-semibold text-[#0d2b55] bg-white shadow-xs transition-all cursor-pointer">
-                            Total Loan Tagged (31)
+                    <div class="inline-flex p-1 bg-gray-200/70 rounded-lg text-xs overflow-x-auto max-w-full">
+                        <button id="kpiTabBtn_borrowers" type="button" onclick="window.switchKpiTab('borrowers')" class="px-3 py-1.5 rounded-md font-semibold text-[#0d2b55] bg-white shadow-xs transition-all cursor-pointer whitespace-nowrap">
+                            Borrower onboarded (12)
                         </button>
-                        <button id="kpiTabBtn_subvention" type="button" onclick="window.switchKpiTab('subvention')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer">
+                        <button id="kpiTabBtn_lenders" type="button" onclick="window.switchKpiTab('lenders')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer whitespace-nowrap">
+                            Lender onboarded (8)
+                        </button>
+                        <button id="kpiTabBtn_applications" type="button" onclick="window.switchKpiTab('applications')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer whitespace-nowrap">
+                            Total Application (47)
+                        </button>
+                        <button id="kpiTabBtn_projects" type="button" onclick="window.switchKpiTab('projects')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer whitespace-nowrap">
+                            Approved Project (31)
+                        </button>
+                        <button id="kpiTabBtn_subvention" type="button" onclick="window.switchKpiTab('subvention')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer whitespace-nowrap">
                             Subvention Released (₹ 1,840 L)
                         </button>
-                        <button id="kpiTabBtn_coverage" type="button" onclick="window.switchKpiTab('coverage')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer">
-                            Loan Coverage (₹ 48,500 L)
+                        <button id="kpiTabBtn_tagged" type="button" onclick="window.switchKpiTab('tagged')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer whitespace-nowrap">
+                            Total Loan Tagged (31)
                         </button>
-                        <button id="kpiTabBtn_borrowers" type="button" onclick="window.switchKpiTab('borrowers')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer">
-                            Borrowers Participating (12)
+                        <button id="kpiTabBtn_coverage" type="button" onclick="window.switchKpiTab('coverage')" class="px-3 py-1.5 rounded-md font-medium text-gray-600 hover:text-gray-900 transition-all cursor-pointer whitespace-nowrap">
+                            Loan Coverage (₹ 48,500 L)
                         </button>
                     </div>
 
@@ -1928,8 +2116,338 @@
 
                 <!-- Scrollable Table Content Body -->
                 <div class="flex-1 overflow-y-auto overflow-x-auto p-6 bg-white min-h-[360px]">
+                    <!-- Table: Lenders Onboarded (8 Banks) -->
+                    <div id="kpiContent_lenders" style="display: none;">
+                        <div class="overflow-x-auto border border-gray-200 rounded-xl">
+                            <table class="min-w-full divide-y divide-gray-200 text-left text-xs">
+                                <thead class="bg-gray-50 text-gray-600 font-semibold uppercase tracking-wider text-[11px]">
+                                    <tr>
+                                        <th class="px-4 py-3">Lender ID</th>
+                                        <th class="px-4 py-3">Bank / Financial Institution</th>
+                                        <th class="px-4 py-3">Institution Category</th>
+                                        <th class="px-4 py-3">Nodal Branch / Hub</th>
+                                        <th class="px-4 py-3 text-right">Sanctioned Credit Lines</th>
+                                        <th class="px-4 py-3 text-right">Disbursed Loan Outlay</th>
+                                        <th class="px-4 py-3 text-right">Subvention Exposure</th>
+                                        <th class="px-4 py-3 text-center">Empanelment Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100 text-gray-700">
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">LND-SBI-01</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            State Bank of India
+                                            <span class="block text-[11px] font-normal text-gray-500">Corporate Accounts Group (CAG)</span>
+                                        </td>
+                                        <td class="px-4 py-3 text-gray-600">Public Sector Bank</td>
+                                        <td class="px-4 py-3 text-gray-700">BKC, Mumbai</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 3,200.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-blue-900">₹ 2,450.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 512.50 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">15 Jan 2024</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">LND-PNB-02</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            Punjab National Bank
+                                            <span class="block text-[11px] font-normal text-gray-500">Large Corporate Banking Center</span>
+                                        </td>
+                                        <td class="px-4 py-3 text-gray-600">Public Sector Bank</td>
+                                        <td class="px-4 py-3 text-gray-700">Connaught Place, New Delhi</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 1,450.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-blue-900">₹ 1,120.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 240.00 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">20 Feb 2024</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">LND-BOB-03</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            Bank of Baroda
+                                            <span class="block text-[11px] font-normal text-gray-500">Industrial Finance Branch</span>
+                                        </td>
+                                        <td class="px-4 py-3 text-gray-600">Public Sector Bank</td>
+                                        <td class="px-4 py-3 text-gray-700">Fort, Mumbai</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 1,100.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-blue-900">₹ 890.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 185.00 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">10 Mar 2024</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">LND-CAN-04</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            Canara Bank
+                                            <span class="block text-[11px] font-normal text-gray-500">Prime Corporate Branch</span>
+                                        </td>
+                                        <td class="px-4 py-3 text-gray-600">Public Sector Bank</td>
+                                        <td class="px-4 py-3 text-gray-700">MG Road, Bengaluru</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 950.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-blue-900">₹ 720.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 155.00 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">05 May 2024</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">LND-UNION-05</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            Union Bank of India
+                                            <span class="block text-[11px] font-normal text-gray-500">Corporate Credit Division</span>
+                                        </td>
+                                        <td class="px-4 py-3 text-gray-600">Public Sector Bank</td>
+                                        <td class="px-4 py-3 text-gray-700">Nariman Point, Mumbai</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 680.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-blue-900">₹ 510.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 110.00 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">18 Jun 2024</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">LND-HDFC-06</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            HDFC Bank Ltd.
+                                            <span class="block text-[11px] font-normal text-gray-500">Wholesale Banking Group</span>
+                                        </td>
+                                        <td class="px-4 py-3 text-gray-600">Private Commercial Bank</td>
+                                        <td class="px-4 py-3 text-gray-700">Lower Parel, Mumbai</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 420.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-blue-900">₹ 340.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 72.50 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">12 Aug 2024</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">LND-INDIAN-07</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            Indian Bank
+                                            <span class="block text-[11px] font-normal text-gray-500">Industrial Finance Branch</span>
+                                        </td>
+                                        <td class="px-4 py-3 text-gray-600">Public Sector Bank</td>
+                                        <td class="px-4 py-3 text-gray-700">Anna Salai, Chennai</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 250.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-blue-900">₹ 190.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 40.00 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">25 Sep 2024</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">LND-PFC-08</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            Power Finance Corp / REC
+                                            <span class="block text-[11px] font-normal text-gray-500">Infrastructure Financing Group</span>
+                                        </td>
+                                        <td class="px-4 py-3 text-gray-600">Financial Institution</td>
+                                        <td class="px-4 py-3 text-gray-700">Barakhamba, New Delhi</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 200.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-blue-900">₹ 140.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 32.00 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">14 Nov 2024</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot class="bg-gray-50 font-semibold text-gray-800 border-t border-gray-200">
+                                    <tr>
+                                        <td colspan="4" class="px-4 py-3 text-gray-900 font-bold">Consolidated Lenders Registry (8 Empanelled Lenders)</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-950">₹ 8,250.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-blue-950">₹ 5,960.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 1,347.00 Cr</td>
+                                        <td class="px-4 py-3 text-center text-xs text-emerald-700 font-bold">100% Empanelled &amp; Active</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Table: Applications (47 Applications) -->
+                    <div id="kpiContent_applications" style="display: none;">
+                        <div class="overflow-x-auto border border-gray-200 rounded-xl">
+                            <table class="min-w-full divide-y divide-gray-200 text-left text-xs">
+                                <thead class="bg-gray-50 text-gray-600 font-semibold uppercase tracking-wider text-[11px]">
+                                    <tr>
+                                        <th class="px-4 py-3">Application ID</th>
+                                        <th class="px-4 py-3">Applicant / Enterprise</th>
+                                        <th class="px-4 py-3">Project Scheme &amp; Title</th>
+                                        <th class="px-4 py-3 text-right">Project Outlay</th>
+                                        <th class="px-4 py-3 text-right">Requested Subvention</th>
+                                        <th class="px-4 py-3 text-center">Lender Bank</th>
+                                        <th class="px-4 py-3 text-center">Submission Date</th>
+                                        <th class="px-4 py-3 text-center">Appraisal Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100 text-gray-700">
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">APP-2026-0047</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            Cochin Shipyard Limited
+                                            <span class="block text-[11px] font-normal text-gray-500">Kochi Cluster, Kerala</span>
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Drydock Extension &amp; Modernisation</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 340.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 72.50 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">State Bank of India</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">02 Jun 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-100 text-blue-800">Technical Appraisal</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">APP-2026-0046</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            Garden Reach Shipbuilders
+                                            <span class="block text-[11px] font-normal text-gray-500">Kolkata, West Bengal</span>
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Green Tug &amp; Electric Propulsion</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 185.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 39.20 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Punjab National Bank</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">28 May 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-800">Inter-Ministerial Scrutiny</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">APP-2026-0045</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            Mazagon Dock Shipbuilders
+                                            <span class="block text-[11px] font-normal text-gray-500">Mumbai, Maharashtra</span>
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Shiprepair Infrastructure Upgrade</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 290.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 62.00 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Bank of Baroda</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">25 May 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">Sanction In-Principle</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">APP-2026-0044</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            Goa Shipyard Limited
+                                            <span class="block text-[11px] font-normal text-gray-500">Mormugao, Goa</span>
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Slipway Mechanisation &amp; Automation</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 145.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 31.00 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">State Bank of India</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">19 May 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-purple-100 text-purple-800">Lender Due Diligence</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">APP-2026-0043</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">
+                                            Hindustan Shipyard Ltd.
+                                            <span class="block text-[11px] font-normal text-gray-500">Visakhapatnam, Andhra Pradesh</span>
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Floating Drydock Facility (Vizag)</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 410.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 88.00 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-700">Canara Bank</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">14 May 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">SMFCL Board Sanctioned</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot class="bg-gray-50 font-semibold text-gray-800 border-t border-gray-200">
+                                    <tr>
+                                        <td colspan="3" class="px-4 py-3 text-gray-900 font-bold">Total (47 Submitted Proposals)</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 4,280.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 918.50 Cr</td>
+                                        <td colspan="3" class="px-4 py-3 text-center text-xs text-blue-900 font-bold">31 Sanctioned · 16 Under Scrutiny</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Table: Approved Projects (31 Projects) -->
+                    <div id="kpiContent_projects" style="display: none;">
+                        <div class="overflow-x-auto border border-gray-200 rounded-xl">
+                            <table class="min-w-full divide-y divide-gray-200 text-left text-xs">
+                                <thead class="bg-gray-50 text-gray-600 font-semibold uppercase tracking-wider text-[11px]">
+                                    <tr>
+                                        <th class="px-4 py-3">Project Code</th>
+                                        <th class="px-4 py-3">Beneficiary Shipyard</th>
+                                        <th class="px-4 py-3">Project Title</th>
+                                        <th class="px-4 py-3">Location / Port Cluster</th>
+                                        <th class="px-4 py-3 text-right">Approved Outlay</th>
+                                        <th class="px-4 py-3 text-right">Sanctioned Subvention</th>
+                                        <th class="px-4 py-3 text-center">Sanction Date</th>
+                                        <th class="px-4 py-3 text-center">Execution Progress</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100 text-gray-700">
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">IIF-PRJ-2026-01</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Cochin Shipyard Limited</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">International Shiprepair Complex (ISRF)</td>
+                                        <td class="px-4 py-3 text-gray-600">Kochi Port, Kerala</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 450.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 96.00 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">12 Jan 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">82% (Commissioning)</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">IIF-PRJ-2026-02</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Mazagon Dock Shipbuilders</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Green Tug Retrofit &amp; Hydrogen Propulsion</td>
+                                        <td class="px-4 py-3 text-gray-600">Mumbai Harbour, Maharashtra</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 320.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 68.50 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">18 Jan 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-100 text-blue-800">75% (Machinery Install)</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">IIF-PRJ-2026-03</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Garden Reach Shipbuilders</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Modernised Building Berth &amp; Goliath Crane</td>
+                                        <td class="px-4 py-3 text-gray-600">Kolkata Port, West Bengal</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 280.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 60.00 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">05 Feb 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">90% (Trial Runs)</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">IIF-PRJ-2026-04</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Goa Shipyard Limited</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Composite Material Ship Construction Yard</td>
+                                        <td class="px-4 py-3 text-gray-600">Mormugao, Goa</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 195.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 41.50 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">14 Feb 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-100 text-blue-800">68% (Civil Structure)</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/30 transition-colors">
+                                        <td class="px-4 py-3 font-mono font-bold text-[#0d2b55]">IIF-PRJ-2026-05</td>
+                                        <td class="px-4 py-3 font-bold text-gray-900">Hindustan Shipyard Ltd.</td>
+                                        <td class="px-4 py-3 font-medium text-gray-800">Slipway Automation &amp; Outfitting Jetty</td>
+                                        <td class="px-4 py-3 text-gray-600">Visakhapatnam, Andhra Pradesh</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 360.00 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-700">₹ 77.00 Cr</td>
+                                        <td class="px-4 py-3 text-center text-gray-600">22 Feb 2026</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">88% (Testing Phase)</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot class="bg-gray-50 font-semibold text-gray-800 border-t border-gray-200">
+                                    <tr>
+                                        <td colspan="4" class="px-4 py-3 text-gray-900 font-bold">Total Active Projects (31 Projects Sanctioned)</td>
+                                        <td class="px-4 py-3 text-right font-bold text-gray-900">₹ 2,860.50 Cr</td>
+                                        <td class="px-4 py-3 text-right font-bold text-emerald-800">₹ 612.40 Cr</td>
+                                        <td colspan="2" class="px-4 py-3 text-center text-xs text-gray-600">18 Operational · 13 Under Execution</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
                     <!-- Table 1: Tagged Loans (31 Accounts) -->
-                    <div id="kpiContent_tagged">
+                    <div id="kpiContent_tagged" style="display: none;">
                         <div class="overflow-x-auto border border-gray-200 rounded-xl">
                             <table class="min-w-full divide-y divide-gray-200 text-left text-xs">
                                 <thead class="bg-gray-50 text-gray-600 font-semibold uppercase tracking-wider text-[11px]">
